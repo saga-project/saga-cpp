@@ -1,0 +1,158 @@
+
+\subsection{Quick Introduction}
+
+ Various classes (e.g.,  \T{saga::file} and \T{saga::stream}) in the SAGA
+ API expose I/O operations, i.e., chunks of binary data can be written
+ to, or read from these classes.  Other classes (such as \T{saga::rpc})
+ handle binary data as parameters.  In order to unify the application
+ management of these data, SAGA introduces the \T{saga::buffer} class,
+ which is essentially a simple container class for a byte buffer, plus
+ a number of management methods.  Various subclasses of the
+ \T{saga::buffer} exist, and, as described below, users are allowed, and
+ actually encouraged, to build their own ones.
+
+ The C++ rendering of SAGA distinguishes between mutable and
+ non-mutable buffers: non-mutable buffers are used for write-type 
+ operations, and cannot be changed by the SAGA implementation; mutable
+ buffers are for read-type operations, and can be changed (i.e., new
+ data can be added to the buffer).
+
+
+\subsection{Reference}
+
+ \begin{mycode}[label=Prototype: saga::buffer]
+  namespace saga 
+  {
+    class const_buffer
+        : public saga::object
+    {
+      public:
+        const_buffer  (void const  * data, 
+                       saga::ssize_t size);
+        ~const_buffer (void);
+
+        saga::ssize_t  get_size (void) const;
+        void const *   get_data (void) const;
+        void           close    (double timeout = 0.0);
+    };
+
+    class mutable_buffer
+        : public saga::const_buffer
+    {
+      public:
+        typedef void buffer_deleter_ type(void* data);
+
+        typedef TR1::function <buffer_deleter_type> buffer_deleter;
+        static void default_buffer_deleter (void * data);
+
+        mutable_buffer  (saga::ssize_t  size = -1);
+        mutable_buffer  (void * data, 
+                         saga::ssize_t  size);
+        mutable_buffer  (void * data, 
+                         saga::ssize_t  size, 
+                         buffer_deleter cb);
+        ~mutable_buffer (void);
+
+        void   set_size   (saga::ssize_t  size = -1);
+        void   set_data   (void * data, 
+                           saga::ssize_t  size,
+                           buffer_deleter cb = default_buffer_deleter);
+        void * get_data   (void);  // non-const version
+    };
+  }
+\end{mycode}
+
+
+ \subsection{Details}
+ 
+  Although the concept of an I/O buffer is very simple, and the
+  prototype shown above is rather straight forward, the semantic
+  details of the SAGA buffer are relatively rich.  That holds true in
+  particular for the memory management of the buffer data segment.
+  For the interested reader, the |saga::buffer| section in the SAGA
+  Core API specification contains quite some detail on that issue.
+
+  \subsubsection{Buffer Memory Management}
+
+   In general, buffers can operate in two different memory
+   management modes: the data segment can be user-managed (i.e.,
+   application-managed), or SAGA-managed (i.e., implementation-managed).  The constructors allow the application to pass a memory
+   area on buffer creation: if that buffer is given, and not-NULL,
+   then the SAGA implementation will use that buffer, and will never
+   re- nor de-allocate that memory (memory management is left up to
+   the application).  On the other hand, if that memory area is not
+   given, or given as NULL, then the SAGA implementation will
+   internally allocate the required amount of memory, which MUST NOT
+   be re- or de-allocated by the application (memory management is
+   left to the SAGA implementation).
+
+   Although the latter version is certainly convenient for the end
+   user, it comes with a potential performance penalty:  data from the 
+   implementation allocated buffer may sometimes need an additional
+   memcopy into application memory.  If that is the case, it is up to you to decide what  memory management mode works best for your application use
+   case.
+
+   \HINT{The most performant case is most of the time to re-use a
+   single (or a small set of) application allocated memory buffer(s)
+   over and over again.  Note that you can use a larger size memory
+   segment for a small buffer by giving a smaller size parameter to
+   the constructor.}
+
+ \begin{mycode}[label=Example saga::buffer usage]
+  // allocate a 'large' buffer statically
+  char mem[1024];
+
+  // create a saga buffer object for reading (mutable)
+  saga::mutable_buffer buf (mem, 512);
+
+  // open a file
+  saga::url u ("/etc/passwd");
+  saga::filesystem::file f (u);
+
+  // read data into buffer - the first 512 bytes get fill
+  f.read (buf);
+
+  // seek the buffer, so that the next read goes into the
+  // second half of the buffer
+  buf.set_data (mem + 512, 512);
+
+  // now read again
+  f.read (buf);
+
+  // the complete buffer should be filled now
+  // print what we got
+  std::cout << mem << std::endl;
+ \end{mycode}
+
+
+   \subsubsection{Const versus Mutable Buffers}
+
+   On |write|-like operations, the SAGA implementation has no need to
+   change the buffer's data segment in any way: it only needs to read
+   the data, and to copy them to whatever entity the write operations
+   happens upon.  The implementation can thus treat the buffer as
+   |const|, which allows a number of optimizations and memory access
+   safeguards to be employed.  
+
+   On the other hand, |read|-like operations will usually require the
+   SAGA implementation to write, or even to (re-)allocate the buffers
+   memory segment.  In such cases, |const| safeguards cannot be
+   employed.  
+
+   \HINT{It is encouraged the use of \T{const\_buffer} instances for
+   \T{write}-like operations, and of \T{mutable\_buffer} instances for
+   \T{read}-like operations.}
+
+   In order to simplify memory management and to provide optimal
+   memory access safeguards, the SAGA C++ bindings distinguish between
+   |const_buffer| and |mutable_buffer| classes.  Both types can be
+   used for |write|-like operations, but only |mutable_buffer|
+   instances can be used for |read|-like operations.
+   
+   
+   \HINT{It is possible to case \T{mutable\_buffer} instances to
+   \T{const\_buffer}, which allows to re-use buffers for all I/O
+   operations and, at the same time, allows the implementation to use
+   \T{const} checking.\\ 
+
+

@@ -1,0 +1,116 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Class posix_status</title>
+<link rel="stylesheet" href="../../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="../../index.html" title="Boost.Process">
+<link rel="up" href="../../boost_process/reference.html#header.boost.process.posix_status.hpp" title="7.14. Header &lt;boost/process/posix_status.hpp&gt;">
+<link rel="prev" href="posix_launcher.html" title="Class posix_launcher">
+<link rel="next" href="postream.html" title="Class postream">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../.././boost.png"></td></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="posix_launcher.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../boost_process/reference.html#header.boost.process.posix_status.hpp"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="postream.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+<div class="refentry" lang="en">
+<a name="boost.process.posix_status"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2><span class="refentrytitle">Class posix_status</span></h2>
+<p>boost::process::posix_status &#8212; Status returned by a finalized child process on a POSIX system. </p>
+</div>
+<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
+<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis">
+<span class="bold"><strong>class</strong></span> posix_status : <span class="bold"><strong>public</strong></span> boost::process::status {
+<span class="bold"><strong>public</strong></span>:
+  <span class="emphasis"><em>// <a href="posix_status.html#boost.process.posix_statusconstruct-copy-destruct">construct/copy/destruct</a></em></span>
+  <a href="posix_status.html#id2380749-bb">posix_status</a>(<span class="bold"><strong>const</strong></span> <a href="status.html" title="Class status">status</a> &amp;);
+
+  <span class="emphasis"><em>// <a href="posix_status.html#id2380566-bb">public member functions</a></em></span>
+  <span class="type"><span class="bold"><strong>bool</strong></span></span> <a href="posix_status.html#id2380569-bb">signaled</a>(<span class="bold"><strong>void</strong></span>) <span class="bold"><strong>const</strong></span>;
+  <span class="type"><span class="bold"><strong>int</strong></span></span> <a href="posix_status.html#id2380588-bb">term_signal</a>(<span class="bold"><strong>void</strong></span>) <span class="bold"><strong>const</strong></span>;
+  <span class="type"><span class="bold"><strong>bool</strong></span></span> <a href="posix_status.html#id2380681-bb">dumped_core</a>(<span class="bold"><strong>void</strong></span>) <span class="bold"><strong>const</strong></span>;
+  <span class="type"><span class="bold"><strong>bool</strong></span></span> <a href="posix_status.html#id2380706-bb">stopped</a>(<span class="bold"><strong>void</strong></span>) <span class="bold"><strong>const</strong></span>;
+  <span class="type"><span class="bold"><strong>int</strong></span></span> <a href="posix_status.html#id2380725-bb">stop_signal</a>(<span class="bold"><strong>void</strong></span>) <span class="bold"><strong>const</strong></span>;
+};</pre></div>
+<div class="refsect1" lang="en">
+<a name="id2716235"></a><h2>Description</h2>
+<p>This class represents the status returned by a child process after it has terminated. It contains some methods not available in the status class that provide information only available in POSIX systems. </p>
+<div class="refsect2" lang="en">
+<a name="id2716241"></a><h3>
+<a name="boost.process.posix_statusconstruct-copy-destruct"></a><code class="computeroutput">posix_status</code> construct/copy/destruct</h3>
+<div class="orderedlist"><ol type="1"><li>
+<pre class="literallayout"><a name="id2380749-bb"></a>posix_status(<span class="bold"><strong>const</strong></span> <a href="status.html" title="Class status">status</a> &amp; s);</pre>
+<p>Creates a new status object representing the exit status of a child process. The construction is done based on an existing status object which already contains all the available information: this class only provides controlled access to it. </p>
+</li></ol></div>
+</div>
+<div class="refsect2" lang="en">
+<a name="id2716283"></a><h3>
+<a name="id2380566-bb"></a><code class="computeroutput">posix_status</code> public member functions</h3>
+<div class="orderedlist"><ol type="1">
+<li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id2380569-bb"></a>signaled(<span class="bold"><strong>void</strong></span> ) <span class="bold"><strong>const</strong></span>;</pre>
+<p>Returns whether the process exited due to an external signal. The result is always false in Win32 systems. </p>
+</li>
+<li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>int</strong></span></span> <a name="id2380588-bb"></a>term_signal(<span class="bold"><strong>void</strong></span> ) <span class="bold"><strong>const</strong></span>;</pre>
+<p>If the process was signaled, returns the terminating signal code. Cannnot be called under Win32 because the preconditions will not ever be met.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term">Requires:</span></td>
+<td><p>signaled() is true. </p></td>
+</tr></tbody>
+</table></div>
+</li>
+<li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id2380681-bb"></a>dumped_core(<span class="bold"><strong>void</strong></span> ) <span class="bold"><strong>const</strong></span>;</pre>
+<p>If the process was signaled, returns whether the process produced a core dump. Cannnot be called under Win32 because the preconditions will not ever be met.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term">Requires:</span></td>
+<td><p>signaled() is true. </p></td>
+</tr></tbody>
+</table></div>
+</li>
+<li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id2380706-bb"></a>stopped(<span class="bold"><strong>void</strong></span> ) <span class="bold"><strong>const</strong></span>;</pre>
+<p>Returns whether the process was stopped by an external signal. The result is always false in Win32 systems. </p>
+</li>
+<li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>int</strong></span></span> <a name="id2380725-bb"></a>stop_signal(<span class="bold"><strong>void</strong></span> ) <span class="bold"><strong>const</strong></span>;</pre>
+<p>If the process was stopped, returns the stop signal code. Cannnot be called under Win32 because the preconditions will not ever be met.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term">Requires:</span></td>
+<td><p>signaled() is true. </p></td>
+</tr></tbody>
+</table></div>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<table width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2006 Julio M. Merino Vidal</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="posix_launcher.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../boost_process/reference.html#header.boost.process.posix_status.hpp"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="postream.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

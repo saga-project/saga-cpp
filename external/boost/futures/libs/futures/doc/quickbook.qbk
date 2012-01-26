@@ -1,0 +1,179 @@
+[part Boost.Future
+    [version 0.1]
+    [id boost.future]
+    [dirname doc]
+    [copyright 2005 Thorsten Schütt]
+    [purpose Introduction to Boost.Future]
+    [category introduction]
+    [authors [Schütt, Thorsten]]
+    [license The document's license]
+    [last-revision $Id: quickbook.qbk,v 1.1 2005/11/08 16:29:09 hkaiser Exp $]
+    [source-mode c++]
+]
+
+[section:intro Introduction]
+
+Futures are asynchronous function calls. The function starts
+immediately in a separate thread but the construction of the future
+returns immediately as well. The future is used as a handle to this
+function call and can be used later on to retrieve the result of the
+call.
+
+[endsect]
+
+[section:tutorial Tutorial]
+
+In the following example we create a future which will calculate the
+factorial of `15`. The constructor of the future spawns a new thread
+which will evaluate `fac(15)`. During the evaluation of `fac(15)` we
+can use the main thread to do other things, like e.g. printing
+`fac(1)`. On calling the function call operator on the future, the
+future blocks until the other thread finishes.
+
+[c++]
+	
+ #include <iostream>
+ #include <boost/bind.hpp>
+ #include <boost/futures/futures.hpp>
+ 
+ using namespace std;
+ using namespace boost::futures;
+ using namespace boost;
+ 
+ /*
+  * fac function for testing
+  */
+ int fac(int n){
+   if(n == 0)
+     return 0;
+   if(n == 1)
+     return 1;
+   sleep(1);
+   return n * fac(n - 1);
+ }
+
+ int main(int argc, char **argv){
+   // creates future, spawns new thread and returns immediately
+   future<int> f = bind(fac, 15);
+
+   cout << fac(1) << endl;
+   cout << "going to wait for result ..." << endl;
+   //blocking call; waits for fac(15) to finish
+   cout << f() << endl;
+
+   return 1;
+ }
+
+Sometimes we want to execute several different implementations of the
+same function in parallel but are only interested in the result of the
+fastest implementation.
+
+In this example we have a `fast_fac` function which uses the
+traditional implementation of the faculty and a `disk_based_fac`
+function which uses a large table on the hard-disk with pre-calculated
+values. For large values the disk-based version may be faster, but it
+is hard to predict. In this case we start two futures and simply wait
+for the first to finish. To combine both futures we use the `|`
+operator which creates a new future which returns as soon as one of
+the two given futures returns.
+
+[c++]
+	
+ #include <cstdio>
+ #include <iostream>
+ #include <boost/bind.hpp>
+ #include <boost/futures.hpp>
+ 
+ using namespace std;
+ using namespace boost::futures;
+ using namespace boost;
+ 
+ /*
+  * fac function for testing
+  */
+ int fast_fac(int n){
+   if(n == 0)
+     return 0;
+   if(n == 1)
+     return 1;
+   return n * fac(n - 1);
+ }
+
+ int disk_based_fac(int n){
+   int result;
+   FILE *f = fopen("fac_table.dat");
+   int error = fseek(f, n * sizeof(int), SEEK_SET);
+   error = fread(&result, sizeof(int), 1, f);
+   error = fclose(f);
+   return result;
+ }
+
+ int main(int argc, char **argv){
+   // creates future, spawns new thread and returns immediately
+   future<int> f_fast                    = bind(fast_fac, 15);
+   future<int> f_slow                    = bind(slow_fac, 15);
+   composite_future<simple_or_op, int> f = f_fast | f_slow;
+
+   cout << f() << endl;
+
+   return 1;
+ }
+
+For seamless integration with existing code futures provide a second
+syntax for joining:
+
+[c++]
+
+   future<int> f = bind(fac, 15);
+
+   cout << f << endl;
+
+For `future<T>` the cast operator `operator T()` is overloaded to work
+like the function call operator. It is also possible to call `.get()`
+to get the result.
+
+futures currently support two method to combine futures into more complex
+futures: `|` and `&&`. The first operator was already introduced in the last
+example. It is called simple_or because the result type of the two futures
+must be the same. The more powerfull version which supports arbitrary result types
+is not yet implemented. The `&&` operator can be used if the result of both
+futures is needed. The result type of the combined future is a tuple of the
+resultes of the individual futures.
+
+[c++]
+
+   future<int> f1 = bind(fac, 15);
+   future<int> f2 = bind(fac, 16);
+
+   tuple<int, int> fac_15_16 = f1 && f2;
+
+[endsect]
+
+[section:scenarios Scenarios]
+
+* Remote Procedure Calls
+* If there are two implementations with non-predictable and highly different run time behavior.
+* Blocking IO calls.
+* parallel game-tree search
+
+[endsect]
+
+[section:openissues Open Issues]
+
+* What happens to futures which will never be joined?
+
+[endsect]
+
+[section:dependencies Dependencies]
+
+* Boost.Bind
+* Boost.MPL
+* Boost.Preprocessor
+* Boost.Thread
+* Boost.Tuple
+* Boost Type Traits
+* Boost.Variant
+* Fusion
+* Boost smart_ptr
+
+[endsect]

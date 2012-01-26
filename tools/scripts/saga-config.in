@@ -1,0 +1,246 @@
+#! /bin/sh
+
+###########################################################
+#
+# @file: config/saga-config(.in)
+#
+# @description:
+#   saga-config can be used to determine what compile and linker
+#   flags should be used for compiling programs using the SAGA.
+#
+# Copyright (c) 2005-2007 Andre Merzky (andre@merzky.net)
+# This file is part of the SAGA Engine.
+#
+# Contributed by Andre Merzky   <merzky@cs.vu.nl>.
+#
+###########################################################
+
+### LICENSE ###
+
+saga_prefix="@SAGA_LOCATION@"
+
+if ! test "x$SAGA_LOCATION" = "x"; then
+  saga_prefix=$SAGA_LOCATION
+fi
+
+saga_version="@SAGA_VERSION@"
+saga_compiler="@CXX@"
+saga_compiler_version="@CXX_VERSION@"
+saga_syslibs="@SAGA_LDFLAGS_SYS@ @BOOST_LDFLAGS@ @BOOST_LIBS@"
+saga_syscppflags="@SAGA_CPPFLAGS@ -I$saga_prefix/include/saga -I$saga_prefix/include/ @BOOST_CPPFLAGS@"
+saga_syscxxflags="@SAGA_CXXFLAGS@ -I$saga_prefix/include/saga -I$saga_prefix/include/ @BOOST_CPPFLAGS@"
+saga_ostype="@SAGA_OSTYPE@"
+saga_packages=`ls $saga_prefix/lib/libsaga_package_* 2> /dev/null | grep -v -e 'libsaga.*\..*\.' | sed -e 's/^.*libsaga_package_\([^\.]*\)\..*$/\1/' | sort | uniq`
+saga_adaptors=`ls $saga_prefix/lib/libsaga_adaptor_* 2> /dev/null | grep -v -e 'libsaga.*\..*\.' | sed -e 's/^.*libsaga_adaptor_\(.*\)_\([^\.]*\)\..*$/\1 - \2/' | sort | uniq`
+saga_summary="$saga_prefix/share/saga/config.summary"
+
+usage()
+{
+  cat <<EOF
+
+  Usage: saga-config [OPTIONS]
+
+  Options:
+
+    [--prefix]           get install prefix
+    [--version]          get version
+    [--compiler]         get compiler
+    [--compiler-version] get compiler version
+    [--cxxflags]         get compiler flags
+    [--cppflags]         get precompiler flags
+    [--ldflags]          get linker flags
+    [--libs]             get linker flags
+    [--packages]         list installed packages
+    [--adaptors]         list installed adaptors
+    [--summary]          print configuration summary
+
+EOF
+  exit $1
+}
+
+if test $# -eq 0;
+then
+  usage 1 1>&2
+fi
+
+while test $# -gt 0; do
+  case "$1" in
+  -*=*) optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'` ;;
+  *) optarg= ;;
+  esac
+
+  case $1 in
+    --prefix)
+      print_saga_prefix=1
+      ;;
+    --version)
+      print_saga_version=1
+      ;;
+    --cxxflags)
+      print_saga_cxxflags=1
+      ;;
+    --cppflags)
+      print_saga_cppflags=1
+      ;;
+    --ldflags)
+      print_saga_libs=1
+      ;;
+    --libs)
+      print_saga_libs=1
+      ;;
+    --compiler)
+      print_saga_compiler=1
+      ;;
+    --compiler-version)
+      print_saga_compiler_version=1
+      ;;
+    --packages)
+      print_saga_packages=1
+      ;;
+    --adaptors)
+      print_saga_adaptors=1
+      ;;
+    --summary)
+      print_saga_summary=1
+      ;;
+    *)
+      usage 1 1>&2
+      ;;
+  esac
+  shift
+done
+
+if ! test "x$SAGA_LOCATION" = "x" ;
+then
+     saga_prefix=$SAGA_LOCATION
+fi
+
+if test "x$check_packages" = "x" ;
+then
+  check_packages=all
+fi
+
+#####################################################################
+#
+# check saga location
+#
+
+if ! test -f "$saga_prefix/share/saga/config.summary"; then
+  echo "Error: SAGA_LOCATION ($saga_prefix) seems invalid"
+  exit 1
+fi
+
+#####################################################################
+#
+# find package libs
+#
+saga_package_libs=""
+
+SO=so
+if test "x$saga_ostype" = "xSAGA_APPLE"; then
+  SO=dylib
+fi
+
+if test "x$check_packages" = "xall" ;
+then
+
+  # find all packages
+  LIBFILTER="sed 's/\.$SO//g'"
+  arg1="$saga_prefix/lib/libsaga_package_*[a-z].$SO"
+  arg2="s/\.$SO//"
+  arg3="s/.*\///"
+  arg4="s/^lib/-l/"
+  saga_package_libs=`ls $arg1 | sed "$arg2" | sed "$arg3" | sed "$arg4"`
+
+else
+
+  # find individual packages
+  for package in $check_packages
+  do
+  
+      arg1="$saga_prefix/lib/libsaga_package_$package.$SO"
+      arg2="s/\.$SO//"
+      arg3="s/.*\///"
+      arg4="s/^lib/-l/"
+      this_package_lib=`ls $arg1 | sed "$arg2" | sed "$arg3" | sed "$arg4"`
+  
+      if test "x$this_package_lib" = "x" ;
+      then
+        echo "no such package found: $package"
+        exit -1
+      fi
+  
+      saga_package_libs="$saga_package_libs$this_package_lib "
+  
+  done
+
+fi
+
+#####################################################################
+
+saga_cppflags="$saga_syscppflags -I$saga_prefix/include"
+saga_cxxflags="$saga_syscxxflags"
+saga_libs="-L$saga_prefix/lib -lsaga_core $saga_package_libs $saga_syslibs"
+
+#####################################################################
+
+
+if [ x != x"$print_saga_prefix" ] ;
+then
+   echo    $saga_prefix
+fi
+
+if [ x != x"$print_saga_version" ] ;
+then
+   echo    $saga_version
+fi
+
+if [ x != x"$print_saga_cxxflags" ] ;
+then
+   echo    $saga_cxxflags
+fi
+
+if [ x != x"$print_saga_cppflags" ] ;
+then
+   echo    $saga_cppflags
+fi
+
+if [ x != x"$print_saga_libs" ] ;
+then
+  echo $saga_libs
+fi
+
+if [ x != x"$print_saga_compiler" ] ;
+then
+  echo $saga_compiler
+fi
+
+if [ x != x"$print_saga_compiler_version" ] ;
+then
+  echo $saga_compiler_version
+fi
+
+if [ x != x"$print_saga_packages" ] ;
+then
+  echo "$saga_packages"
+fi
+
+if [ x != x"$print_saga_adaptors" ] ;
+then
+  echo "$saga_adaptors"
+fi
+
+if [ x != x"$print_saga_summary" ] ;
+then
+  if [ -f $saga_summary ] ; 
+  then
+    len=`wc -l $saga_summary | cut -f 1 -d ' '`
+    len=`expr $len - 6` 
+    head -n $len $saga_summary
+  else
+    echo "summary not available"
+  fi
+fi
+
+exit 0
+

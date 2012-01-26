@@ -1,0 +1,11 @@
+
+SAGA_HAVE_PACKAGE_CPR = @SAGA_HAVE_PACKAGE_CPR@
+
+ifeq "x$(SAGA_HAVE_PACKAGE_CPR)" "xyes"
+ SAGA_LDFLAGS  += -L$(SAGA_ROOT)/saga/impl/packages/cpr
+ SAGA_LDFLAGS  += -lsaga_package_cpr
+endif
+
+include $(SAGA_ROOT)/make/saga.package.job.i.mk
+include $(SAGA_ROOT)/make/saga.package.namespace.i.mk
+

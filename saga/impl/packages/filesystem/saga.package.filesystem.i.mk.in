@@ -1,0 +1,10 @@
+
+SAGA_HAVE_PACKAGE_FILESYSTEM = @SAGA_HAVE_PACKAGE_FILESYSTEM@
+
+ifeq "x$(SAGA_HAVE_PACKAGE_FILESYSTEM)" "xyes"
+ SAGA_LDFLAGS  += -L$(SAGA_ROOT)/saga/impl/packages/filesystem
+ SAGA_LDFLAGS  += -lsaga_package_filesystem
+endif
+
+include $(SAGA_ROOT)/make/saga.package.namespace.i.mk
+

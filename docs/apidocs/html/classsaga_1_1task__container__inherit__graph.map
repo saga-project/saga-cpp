@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsaga_1_1object.html" title="Brief description starts here." alt="" coords="5,219,125,403"/>
+<area shape="rect" id="node4" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; task_container \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="150,237,455,384"/>
+<area shape="rect" id="node6" href="$structsaga_1_1detail_1_1monitorable.html" title="The SAGA monitorable interface." alt="" coords="172,5,433,152"/>
+</map>

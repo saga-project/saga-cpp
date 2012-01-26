@@ -1,0 +1,29 @@
+#  Copyright (c) 2005-2007 Andre Merzky (andre@merzky.net)
+# 
+#  Distributed under the Boost Software License, Version 1.0. (See accompanying
+#  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+ifndef SAGA_MK_INC_CONF_OPENSSL
+       SAGA_MK_INC_CONF_OPENSSL = yes
+
+############################################################
+# 
+# OPENSSL
+#
+include @CONFDIR@/saga.config.mk
+
+ifeq "$(SAGA_HAVE_OPENSSL)" "yes"
+  SAGA_OPENSSL_LOCATION  = @OPENSSL_LOCATION@
+  SAGA_OPENSSL_INC_FLAGS = @OPENSSL_CPPFLAGS@
+  SAGA_OPENSSL_LIB_FLAGS = @OPENSSL_LDFLAGS@
+  SAGA_OPENSSL_S_LIBS    = @OPENSSL_S_LIBS@
+
+  SAGA_CPPINCS_SYS      += $(SAGA_OPENSSL_INC_FLAGS)
+  SAGA_LDFLAGS_SYS      += $(SAGA_OPENSSL_LIB_FLAGS)
+  SAGA_S_LIBS           += $(SAGA_OPENSSL_S_LIBS)
+endif
+# 
+###########################################################
+
+endif # guard
+

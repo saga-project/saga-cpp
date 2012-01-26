@@ -1,0 +1,215 @@
+
+ What are Grids?  How can you use them?  Why would you need an API for
+ doing so?  What makes SAGA different from other Grid APIs?
+
+ These are some of the questions which we will try to answer in this
+ introduction.  Don't expect a complete treatise on the subject though;
+ in stead, we will refer the interested reader to the literature where
+ appropriate.  Also, this introduction can safely be skipped by
+ readers which are familiar with Grid programming, or even just with
+ using Grids. 
+
+ The text assumes that the reader has some familarity with the concept
+ of distributed computing and programming of distributed
+ applications.
+
+
+ \subsection*{Grid Computing}
+
+  In ``What is a Grid?'' \cite{checklist}, a three point checklist is
+  provided.  Although by no means rigorous or complete, it provides a
+  starting point. Following that, Grids are:
+
+  \begin{shortenum}
+
+   \item coordinated resources that are not subject to centralized
+         control,
+
+   \item use standard, open, general-purpose protocols and interfaces,
+
+   \item deliver non-trivial qualities of service.
+
+  \end{shortenum}
+
+
+
+ \subsection*{Grid Standardization}
+
+  A diverse Grid Computing community has emerged over the past few years; 
+  the Open Grid Forum
+  (OGF)~\cite{ogf} serves as a focus point for the Grid community
+  groups and Grid standardization efforts.  The main topics of 
+  standardization are many fold, and cover, amongst others, 
+
+  \begin{shortlist}
+   \item service architectures
+   \item service interfaces
+   \item wire protocols
+   \item information models
+   \item Grid related markup languages
+   \item user interfaces
+  \end{shortlist}
+
+  For this document, as might be obvious, the last point, which includes
+  Application Programming Interfaces (APIs), is of special interest.
+  It should be noted that OGF's standardization mostly targets Grid
+  middleware developers and Vendors, and that the OGF's API specifications
+  are the top layer of OGF's standards stack.
+
+
+ \subsection*{Grid APIs}
+
+  Traditionally, most distributed (and Grid) middleware systems come
+  with a 'native' API.  Best known for such an API is Globus, a
+  pioneering Grid Middleware project: each version of Globus services was/is
+  accompanied by an extensive API which allows programmers (end-user application 
+  or otherwise), 
+  to make use of these services, and provides access to Globus service client
+  libraries, Globus protocol implementations, Globus security tools,
+  Globus markup languages, etc.
+
+  Despite the success of Globus, its approach exhibits a number of
+  problems: applications written against a specific version of the
+  Globus API are not (easily) portable to other versions of the API,
+  and not portable at all to other Grid middleware, such as
+  Genesis-II, GridSam, or Unicore.  Furthermore, typical middleware
+  APIs expose a specific set of features available in that
+  middleware. These do not necessarily match the Grid
+  abstractions required by the various applications; higher level
+  services which provide these abstractions, are then required
+  to implement their own specific APIs.
+  
+  That situation is, to some extent, comparable to the 80's and
+  90's, where many vendors of parallel computers shipped their
+  specific proprietary communication library along with their
+  product, to enable the end users to make use of the distributed
+  compute power from within a single (distributed) application.  Before
+  the establishment of MPI as a single dominant standard for this
+  inter-node communication, the creation of \I{portable} distributed
+  applications was an extremely difficult and tedious effort.  Only
+  the adoption of MPI by basically all cluster vendors, and the
+  \I{native support} for MPI on most platforms, could finally alleviate
+  that problem\footnote{Note that MPI serves a specific problem space
+  of tightly coupled massive parallel applications.  Loosely coupled
+  parallel applications, for example, are served by a different set of
+  distributed communication concepts, e.g., Peer2Peer systems, or
+  component models, etc.}.
+
+
+ \subsection*{SAGA}
+
+  The Simple API for Grid Applications (SAGA), a proposed OGF
+  standard, is in several ways a comparable effort to MPI: SAGA tries
+  to establish a \I{single} API for Grid application programmers,
+  which is ideally shipped with all Grid middleware, so that the
+  programmer can focus on the application logic, instead of having to
+  deal with tedious and complex middleware details.
+
+  But SAGA tries to go further: instead of defining a fixed single
+  common denominator, SAGA is by definition an extensible and modular
+  effort. By being extensible both horizontally and vertically, SAGA
+  should be able to adapt to a variety of use cases and user
+  communities. Additionally, our SAGA implementation can be extended
+  by additional middleware bindings, to support the widest possible
+  portability for applications.
+
+
+  \subsubsection*{Horizontal Extensibility of SAGA}
+
+   The SAGA approach is extremely modular: a stable and finite core
+   set of SAGA \LF packages is accompanied by a variable set of
+   functional API packages.  That latter set is expected to grow over
+   time, and to cover future emerging Grid programming paradigms.
+
+   \X{graphics goes here}
+
+   At the moment, the SAGA API covers the following functional
+   packages:
+
+   \begin{tabbing}
+    XXXX      \= XXXXXXXXXX \= XXXXXXXXXXXXXXXXXXXXXXXXXXX \kill
+    \> \T{jobs}:    \> job creation and management\\
+    \> \T{files}:   \> interaction with file systems\\
+    \> \T{replica}: \> management of logical files\\
+    \> \T{streams}: \> BSD socket oriented IPC\\
+    \> \T{rpc}:     \> remote procedure calls
+   \end{tabbing}
+
+   All these packages are provided by our SAGA implementation.
+   Additional packages, which are in the process of being defined,
+   include:
+   
+   \begin{tabbing}
+    XXXX      \= XXXXXXXXXX \= XXXXXXXXXXXXXXXXXXXXXXXXXXX \kill
+    \> \T{adverts}:  \> persistent storage of application level information\footnotemark[2]\\
+    \> \T{sd}:       \> service discovery\footnotemark[2]\\
+    \> \T{messages}: \> message based IPC\\
+    \> \T{cpr}:      \> checkpoint and recovery\\
+    \> \T{dais}:     \> database access and integration
+   \end{tabbing}
+
+   \footnotetext[2]{These packages are also provided in our
+   implementation.}
+  
+
+  \subsubsection*{Vertical Extensibility of SAGA}
+
+   The experiences in various OGF user communities show that the
+   Grid programming models used in different application domains vary
+   widely.  In particular, it seems impossible to completely
+   standardize information models, data models, and data formats,
+   without losing the abstractive power of a high level application
+   oriented API.
+
+   \X{graphics goes here}
+
+   For that reason, SAGA tries to stay independent of these issues,
+   and, at the same time, offers (a) the flexibility to natively
+   accommodate a variety of data types and structures, and (b) the
+   ability to additionally define higher level API packages, which
+   address application domain specific services and programming
+   models.  If and how these additional high level packages are 
+   standardized is then up to the community creating these packages.
+   SAGA, however, maintains a uniform and consistent API for a
+   very wide variety of users and use cases, without being too specific
+   and inflexible.
+
+ 
+  \subsubsection*{Implementation Extensibility}
+
+   Any Grid API is only as good and powerful as its underlying
+   middleware is.  How does this statement hold for SAGA, which is by
+   design not bound to a specific Grid middleware?  It holds true in
+   fact: although the syntax and semantics of the SAGA API calls
+   remain stable over the various Grid middlewares SAGA is running on
+   top of, the specific performance characteristics, and in fact the
+   exact set of SAGA calls provided, may vary from case to case.
+
+   That may seem like a serious drawback, and probably is, but an API
+   can do only so much to emulate missing middleware features.  In any
+   case, to simplify the runtime portability of applications, our SAGA
+   implementation allows binding to a variety of Grid middlewares
+   \I{at runtime}, i.e., without the need to even relink your
+   application.
+
+   \X{graphics goes here}
+
+   That functionality is provided by a plugin type mechanism, which
+   loads middleware \I{adaptors} into SAGA as required.  These
+   adaptors translate the SAGA API calls to the specific Grid
+   middleware actions.  For more details on adaptors and their
+   maintenance and configurations, please refer to the installation
+   manual.
+
+
+ \subsection{Getting Started}
+
+  The reader should by now have a fair idea of the target scope of the
+  SAGA API: it is designed to simplify the programming of novel
+  applications which are to be run on a variety of Grid middlewares.
+
+  The next chapter, the 'Quick Start Guide', should be enough to get
+  you going, and to compile and run small SAGA applications.  The
+  chapters after that will discuss the SAGA \LF in more detail, and
+  also dive into the various functional packages we provide.  The chapters are independent, no specific reading order is implied, unless noted otherwise.
+

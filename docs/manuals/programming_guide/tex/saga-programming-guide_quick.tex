@@ -1,0 +1,89 @@
+
+ So, you are one of the impatient readers who dread long dry user
+ manuals?  No problem: read this chapter, and you will have a good
+ starting point to use SAGA.  After all, the \B{S} in \B{S}AGA stands
+ for \B{Simple}!  The remainder of the document provides considerable
+ more details about the API, but you can defer the later chapters until
+ you have indeed the need for more information.
+
+ % \subsection{Structure of the API}
+
+  It is important to understand that the API consists of two parts:
+  the \LF, and the API packages.  The packages are what you are most
+  likely interested in, because they provide the means to interact with the
+  Grid: they start jobs, copy files, perform remote procedure calls, etc.
+  The \LF provides the syntactic and semantic expressiveness to
+  control \I{how} these actions are expressed (syntax) and performed
+  (semantics).  For example, the session management in the \LF part
+  tells you how to specify the security constraints of your actions,
+  while the task model from the \LF determines how you can express
+  syncronous versus asynchronous actions.
+
+  That all sounds rather theoretical: let us dive into some examples!
+  The first one allows you to copy a file\footnote{For the sake of brevity, we leave error and sanity checks out of the examples}:
+
+  \begin{mycode}[label=File copy]
+  #include <saga/saga.hpp>
+
+  int main (int argc, char** argv)
+  {
+    // do a file copy
+    saga::url u(argv[1]);
+    saga::filesystem::file f (u);
+    f.copy (saga::url (argv[2]));
+  }
+  \end{mycode}
+
+  Isn't that simple?  Three lines, and your file is copied!
+  |file.copy()| is provided by the |file| class in the
+  |saga::filesystem| package.  That is a \I{functional} SAGA call.
+  So, how will \I{non-functional} properties of that call enter the
+  picture?  Let's try to have the same call asynchronously:
+
+  \begin{mycode}[label=File copy (async version)]
+  #include <saga/saga.hpp>
+
+  int main (int argc, char** argv)
+  {
+    // run a file copy asynchronously
+    saga::url u(argv[1]);
+    saga::filesystem::file f (u);
+    saga::task t = f.copy <saga::task::Async> (saga::url (argv[2]));
+
+    // do something else
+
+    // wait for the copy task to finish
+    t.wait ();
+  }
+  \end{mycode}
+
+  That is almost the same.  In particular, the signature for the
+  |file.copy()| method is the same.  It is, however, now qualified as
+  |saga::task::Async|, and returns a |saga::task| instance.  That
+  (stateful) task represents the asynchronous call.  You can think of
+  the synchronous qualification as the default, which can be left out.
+
+  Another \LF package deals with monitoring, and allows, for example,
+  to get notifications if the task finishes.  Yet another \LF package
+  allows to specify security credentials for the copy operation, and
+  so on and so forth.
+
+  So, that is the general picture: SAGA packages provide you with means
+  to interact with the Grid environment, and the \LF packages
+  determine how these actions are executed, syntactically and
+  semantically, altering the funtional method's performance.
+
+
+  The remainder of the document will give more details, first about
+  the \LF packages of SAGA, and then about the functional packages. 
+  Each section starts with a quick introduction (which should be enough to
+  get you going in most cases), followed by a reference section, and
+  by a more detailed discussion where appropriate.  Finally, a number
+  of advanced topics are discussed, which are probably not of your interest
+  initially, but they are certainly useful concepts as soon as your application
+  reaches a certain complexity itself.
+
+  Before diving into the API itself, we will shortly describe how to
+  compile and run SAGA applications, so that the reader will be able
+  to actively follow the coding examples and excercises.
+

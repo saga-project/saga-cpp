@@ -1,0 +1,21 @@
+
+try the following:
+
+  # make
+  # ./job_submission
+  # ./job_submission_and_job_io
+  # ./run_job_expanded
+
+
+You should end up with (on a Mac):
+
+  # ./job_submission
+
+  # ./job_submission_and_job_io
+  Thu Jul  3 00:41:20 CEST 2008
+
+  # ./run_job_expanded
+  Thu Jul  3 00:41:21 CEST 2008
+
+
+

@@ -1,0 +1,113 @@
+                            SAGA C++ Core Libraries  
+                    - The Simple API for Grid Applications -
+                          http://www.saga-project.org
+
+
+  o The latest version can be found on the SAGA project website:
+    http://saga-project.org/download
+
+  o For detailed informations on how to install SAGA, please refer to 
+    the documentation section on the SAGA website:
+    http://saga-project.org/documentation/installation
+
+  
+  PREREQUISISTES:
+
+  o C++ compiler (e.g. gcc/g++ >= 3.4)
+
+  o GNU make >= 3.80
+  
+  o Boost C++ Libraries >= 1.33
+    You need to have the Boost C++ libraries installed on your system. Many
+    systems already provide binary packages for them. If your system doesn't 
+    you can download Boost from http://www.boost.org and build it yourself.
+    
+  o SQLite3 / PostgreSQL (Advert/Replica adpaptor ONLY)
+    If you want to build the SQL-based advert and replica adaptors, you will 
+    need the SQLite3 and/or PostgreSQL client side libraries installed on your 
+    system. Most distributions should have binary packages available. 
+
+ 
+  BUILDING AND INSTALLING SAGA CORE
+ 
+   o SAGA has a configure/make-based buildsystem. To build and install SAGA, 
+     run these three commands:
+
+      $> ./configure --prefix=/INSTALL/DIR --with-boost=/BOOST/DIR/ 
+      $> make
+      $> make install
+      
+     Note that 'make install' might require root access, depending on 
+     your 'prefix' path.
+ 
+  o Here's a list of the most important ./configure options:
+
+    --prefix=DIR          Tells configure where to install the SAGA Core headers, 
+                          libraries and command line tools. 
+                          (Default: /usr/local/)
+
+    --with-boost=DIR      Tells configure to look for the Boost C++ libraries in 
+                          a location specified by DIR. If your Boost 
+                          installation is in a non-standard location (i.e. not 
+                          in /usr or /usr/local) or you have multiple Boost 
+                          versions installed on your system, use this option.	
+                          (Default: /usr/ and /usr/local/)
+
+    --with-packages=LIST  A comma-separated list of SAGA packages to build. 
+                          Possible values are job, namespace, filesystem, 
+                          replica, stream, rpc, advert, sd, cpr, messages, isn, 
+                          all. (Default: all)
+
+    --with-libs=LIST      A comma-separated list that defines which library 
+                          types are build. Possible values are static, dynamic, 
+                          all. (Default: all)
+                         
+    --with-postgresql=DIR Tells configure to look for the PostgreSQL libraries 
+                          and headers in the location specified by DIR. This 
+                          option is required if you want to compile the SAGA 
+                          Advert Adaptor with PostgreSQL support and your 
+                          PostgreSQL installation is in a non-standard location.
+                          (Default: /usr/ and /usr/local/)
+
+
+  o For a complete list of configure options, use:
+
+    ./configure --help=recursive
+    
+
+  INSTALLING ADDITIONAL ADAPTORS
+
+  SAGA Core only comes with the default (local) adaptors which allow
+  job execution on the local machine, local file and SQL-based
+  advert and replica handling only. If you want to use additional middleware 
+  adaptors, e.g. Globus, Condor or gLite, you  can download them form the 
+  SAGA website and install them separately:
+
+    http://saga-project.org/download/adaptors
+
+
+  USING SAGA WITH PYTHON
+
+  SAGA Core only comes with the native C++ API, headers and libraries. If you 
+  want to use SAGA with Python, you can download and install the SAGA Python
+  modules: 
+  
+    http://saga-project.org/download/python
+
+  
+  DOCUMENTATION
+  
+  you can find the lates documentation for SAGA and a "getting started" guide
+  on the SAGA website: 
+  
+    http://saga-project.org/documentation
+
+
+  BUG REPORTING
+
+  Please help us to improve the quality of SAGA and file a bug report if you 
+  have encountered any problems or if you have any suggestions for improvement. 
+  Our bug-tracking system can be found at: 
+  
+    http://saga-project.org/developers/bugreporting
+  

@@ -1,0 +1,187 @@
+[/
+ / Boost.Process
+ / Platforms and compilers chapter.
+ /
+ / Copyright (c) 2006 Julio M. Merino Vidal.
+ /
+ / Distributed under the Boost Software License, Version 1.0.
+ / (See accompanying file LICENSE_1_0.txt or copy at
+ / http://www.boost.org/LICENSE_1_0.txt.)
+ /]
+
+[/ ---------------------------------------------------------------------- ]
+
+[section Platforms and compilers]
+
+This chapter describes the operating systems and compilers supported by
+Boost.Process.  It also includes some guidelines on how to port the code
+to a new platform or a different Boost.Build toolset.
+
+[/ ---------------------------------------------------------------------- ]
+
+[section Supported platforms]
+
+Boost.Process supports several different operating systems.  Based on their
+programming API and process management models, they can be classified in
+two major platforms:
+
+[variablelist
+
+    [[POSIX systems]
+     [These systems follow the POSIX process model and use standard APIs to
+      manage child processes.  Simply put all processes are organized based
+      on a parent/child relationship and applications start new processes
+      by using the `fork(2)` and `execve(2)` pair of system calls.  This
+      separation allows the child process to perform extra operations
+      before executing the real target.  Systems in this group include all
+      Unix-like operating systems.]
+    ]
+
+    [[Win32 systems]
+     [Even though these systems support some of the POSIX system calls in
+     the standard C Runtime library (CRT), they have a completely different
+     process management model.  Processes are spawned using a single system
+     call known as `CreateProcess` which receives all the configuration
+     parameters for the new child.  The documentation avoids referring to these
+     operating systems as Windows because there are other implementations that
+     follow the Win32 API out there (e.g. [@http://www.winehq.com/ Wine] or
+     [@http://www.reactos.com/ ReactOS]).]
+    ]
+]
+
+[blurb [*Important]: From now on the documentation will refer to the POSIX
+and Win32 platforms, not specific operating systems.  When specifying a
+platform name, the text refers to its process management model and
+supported features not present in the other models; it is not referring to
+any particular operating system.]
+
+Knowing how to classify the supported operating systems, the following
+table lists all operating systems known to support Boost.Process (according
+to the test suite):
+
+[table
+    [[Operating system name] [API type] [API constant]]
+
+    [[Linux 2.6]
+     [POSIX] [BOOST_PROCESS_POSIX_API]]
+
+    [[[@http://www.apple.com/macosx/ Mac OS X] 10.4.x]
+     [POSIX] [BOOST_PROCESS_POSIX_API]]
+
+    [[[@http://www.NetBSD.org/ NetBSD] 3.x and 4.x]
+     [POSIX] [BOOST_PROCESS_POSIX_API]]
+
+    [[[@http://www.microsoft.com/windows/ Windows] XP]
+     [Win32] [BOOST_PROCESS_WIN32_API]]
+]
+
+The third column in the table above mentions the name of a preprocessor
+constant defined by the [headerref boost/process/config.hpp] header based
+on the platform type.  Code using the library can use that constant to
+determine the platform it is running under.
+
+Please note that the list above is not exhaustive.  It is highly possible
+that Boost.Process works fine under other, unlisted operating systems
+because many of them are just variations of the above.  Shall you try and
+use Boost.Process successfully on any other platform, please [link
+boost_process.acknowledgements tell us] so that it can be added to the
+list.
+
+[endsect]
+
+[/ ---------------------------------------------------------------------- ]
+
+[section Supported compilers]
+
+The Boost.Build compilation system abstracts compilers in what are known as
+['toolset]s.  A toolset interacts with a specific compiler and linker to
+build the library and associated utilities (test suite, documentation and
+examples) in a platform-independent way, freeing the application developer
+from knowing the specific build details of the underlying platform.
+
+Toolsets are specific to the operating systems they run under; e.g. the
+`msvc` toolset (Microsoft Visual C++) is not be available under a GNU/Linux
+system.  Therefore they should not be considered on their own but, for
+simplicity reasons, the table below lists the supported toolsets only.
+
+[table
+    [[Toolset name] [Specific versions]]
+    [[`darwin`] [GCC 3.3 and 4.0 as shipped with XCode 2.3]]
+    [[`gcc`] [GCC 3.x and 4.x]]
+    [[`msvc`] [Microsoft Visual Studio 2005]]
+]
+
+This list might not be exhaustive as concerns the library code, but when
+trying a new toolset, the test suite will not pass cleanly unless some
+minor changes are made to it.  Again, please [link
+boost_process.acknowledgements tell us] if you make Boost.Process work with
+any other toolset so that it can be added to the list.
+
+[endsect]
+
+[/ ---------------------------------------------------------------------- ]
+
+[section How to port to a new platform or compiler]
+
+A very important design goal of Boost.Process was to achieve maximum
+portability.  It is certainly possible to adapt the library to new
+operating systems and compilers, generally with minimum efforts.  However,
+porting to a new platform might be an extremely complex task, specially if
+its process management model differs from that of POSIX and Win32 systems.
+
+Let's start with the easy task: porting to a new compiler.  The library
+itself does not use any compiler-specific construction in its code so it
+should not cause problems.  However, old compilers can raise errors if they
+do not support some of the ANSI C++ features.  If this happens, the problem
+should be worked around in the simplest possible way.
+
+A different issues is the test suite.  The test suite builds a helper
+binary utility used by many other tests.  These tests need to know where
+the helper binary is located and to do so they use some conditionals based
+on the toolset name.  (Ideally Boost.Build could provide the real path to
+the code, but this feature is not available.)  As you can imagine, this
+will surely cause problems when adopting a new toolset because it will not
+be recognized by the path determination machinery.  In order to fix this
+you must adapt the `get_helpers_path` function in
+`libs/process/test/misc.hpp` to recognize the helper's binary location when
+built with the new toolset.
+
+In order to port the library to a new operating system, you must first
+check that [headerref boost/process/config.hpp] is determining the
+appropriate platform type for it.  Once this is done, it should be a matter
+of running the test suite, detecting any build problems that may arise and
+fixing them appropriately.  Remember that if the new operating system
+conforms to one of the supported platforms, it should behave similarly and
+not require big changes to the code.
+
+In a different order of magnitude is the task to port the library to a new
+platform.  The first step is to add a new platform constant to [headerref
+boost/process/config.hpp] to identify the new platform.  Once this is done,
+you will need to modify lots of source files to add support for it,
+including those in the library code, in the examples and in the test suite.
+Files that depend on a platform typically have the following conditional at
+the very beginning:
+
+    #include <boost/process/config.hpp>
+
+    #if defined(BOOST_PROCESS_POSIX_API)
+    // Inclusion of POSIX-specific headers.
+    #elif defined(BOOST_PROCESS_WIN32_API)
+    // Inclusion of Win32-specific headers.
+    #else
+    #   error "Unsupported platform."
+    #endif
+
+    // Inclusion of portable headers.
+
+It is important to note that only the first conditional in a given file
+carries the preprocessor error to ensure that the file is not compilable on
+an unsupported platform.  Similarly the conditionals list all known
+platforms explicitly to denote that they were taken into account when
+writing or porting the code.
+
+[endsect]
+
+[/ ---------------------------------------------------------------------- ]
+
+[endsect]

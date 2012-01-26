@@ -1,0 +1,110 @@
+
+\newcommand{\sagadocument}{SAGA  Manual}
+\newcommand{\sagaversion}{1.0}
+\newcommand{\sagabasename}{saga-programming-guide}
+\newcommand{\sagaemail}{saga-users@cct.lsu.edu}
+
+\input{saga_include}
+
+\newcommand{\name}{\F{SAGA}\xspace}
+\DefineShortVerb{\|}
+
+\begin{document}
+
+ \thispagestyle{empty}
+
+ \sagadocument\hfill  Andre Merzky, LSU\\
+  Version: \sagaversion \hfill {\sagadate}
+
+  \footnotetext[1]{editor}
+
+  \hrulefill\\[2em]
+
+  \B{\large The SAGA C++ API Programmer's Guide}\\[4em]
+
+%  \U{Copyright Notice}
+
+%  Copyright \copyright~Andre Merzky (2008).  All Rights
+%  Reserved.\\
+
+  %\U{Abstract}
+
+   The Simple API for Grid Applications (SAGA) is a collection of C++
+   API packages defined on top of an overall programmatic appearance.
+   The SAGA API packages try to cover the bulk of the requirements
+   needed for grid programming like, for example, job submission,
+   remote file transfer and replica management, to name a few.  This
+   guide aims for the developer who wants to learn the basics of how
+   to use SAGA and C++ to develop applications that can make use of a
+   broad set of existing distributed and grid computing
+   infrastructures.\footnote{In order to understand the intent and also
+   the limitations of the SAGA approach, it is useful to read the
+   Wikipedia entry on "Leaky Abstractions"
+   (\T{http://en.wikipedia.org/wiki/Leaky\_abstraction}), and also
+   Joel Spolsky's column on the same topic
+   (\T{http://www.joelonsoftware.com/articles/LeakyAbstractions.html}).}\\[2em]
+
+
+  \U{Status of This Document}
+
+  This guide is still work in progress.\\
+
+  \newpage
+
+  \tableofcontents
+
+  \newpage
+
+%-----------------------------------------------------------------
+% Intro, structure, disclaimer, ...
+%-----------------------------------------------------------------
+                                        
+  \sagasec {Introduction                         }{intro}
+  \sagasec {Quick Start Guide                    }{quick} 
+  \sagasec {Building and Running your Application}{make}
+
+
+  \sagapart{General SAGA Concepts                }{general}
+  \newpage
+
+  \sagasec {Error Handling                       }{errors}
+  \sagasec {Using Data Buffers                   }{buffers}
+  \sagasec {Using Attributes                     }{attributes}
+  \sagasec {Using URLs                           }{urls}
+
+
+  \sagapart{Using the SAGA-API Packages          }{packages}
+  \newpage
+
+  \sagasec {Using the File Package               }{file}
+  \sagasec {Using the Replica Package            }{replica}
+  \sagasec {Using the Namespace Package          }{namespace}
+  \sagasec {Using the Job Package                }{job}
+  \sagasec {Using the Stream Package             }{stream}
+  \sagasec {Using the RPC Package                }{rpc}
+  \sagasec {Using the Advert Package             }{advert}
+
+
+  \sagapart{Advanced Topics                      }{advanced}
+  \newpage
+
+  \sagasec {Using Asynchronous Operations        }{async}
+  \sagasec {Using Monitorables and Notifications }{monitorables}
+  \sagasec {Specifying Security Details          }{security}
+% \sagasec {Specifying Permissions               }{permissions}
+% \sagasec {Using Callbacks                      }{callbacks}
+% \sagasec {Exploiting Bulk Optimization         }{bulks}
+% \sagasec {Memory Management Issues             }{memory}
+  \sagasec {Miscellaneous Issues                 }{misc}
+%
+% \appendix
+%
+% \section*{Appendix}
+%
+% \sagasec {Complete Code Examples               }{examples}
+
+  \sagabib {saga_manual}
+
+\end{document}
+
+

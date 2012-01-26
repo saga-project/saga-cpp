@@ -1,0 +1,6 @@
+
+Note: 
+
+you need to set SAGA_LOCATION and point it to your SAGA
+installation prefix in order to compile these code examples.
+

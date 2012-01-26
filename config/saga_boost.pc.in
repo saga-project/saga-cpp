@@ -1,0 +1,9 @@
+PREFIX      = @BOOST_LOCATION@
+
+Name:         boost
+Description:  Boost as used by SAGA (Boost does not seem to provide its own pc file)
+Requires:     
+Version:      @BOOST_VERSION@
+Libs:         @BOOST_LDFLAGS@ @BOOST_LIBS@
+Cflags:       @BOOST_CPPFLAGS@ 
+

@@ -1,0 +1,236 @@
+                            SAGA C++ Core Libraries  
+                    - The Simple API for Grid Applications -
+                          http://www.saga-project.org
+
+
+  Changes with SAGA Core Version 1.7                                    T.B.D
+  ---------------------------------------------------------------------------
+  o 
+
+  Changes with SAGA C++ Version 1.6                         1. September 2011
+  ---------------------------------------------------------------------------
+  o Updated logging system
+  o Implemented packaging mechanisms 
+  o Complete list of tickets: http://bit.ly/nBMtep
+
+
+  Changes with SAGA C++ Version 1.5.4                          19. April 2011
+  ---------------------------------------------------------------------------
+  o Fixes compatibility issue with boost::filesystem V3
+    see: http://bit.ly/dFfrYO
+  o http://faust.cct.lsu.edu/trac/saga/ticket/706
+  o Some other minor fixes
+  
+    
+  Changes with SAGA C++ Version 1.5.3                        10. January 2011
+  ---------------------------------------------------------------------------
+  o Lots of improvements in the documentation of the programming 
+    examples and the programming example code itself
+  o Addressed some Boost compatibility issues
+  o Fixed tickets: http://bit.ly/h9XhIw
+
+
+  Changes with SAGA C++ Version 1.5.2                      28. September 2010
+  ---------------------------------------------------------------------------
+  o Added support for Boost >= 1.43 to the build-system
+  o Disabled the engine monitoring thread until the race cond. has been found
+  o Fixed compilation problem with  external boost::asio
+  o Fixed compilation problem with  external boost::filesystem and boost <= 1.35
+  o Fixed problems that were cause by a bug in boost::filesystem 1.44
+  o file.read() fixed in the default file adaptor
+  o Lost of minor improvements and fixes
+
+
+  Changes with SAGA C++ Version 1.5.1                         05. August 2010
+  ---------------------------------------------------------------------------
+  o Bugfix Release - fixes build system issues (include path precedence)
+  o A detailed list of all closed tickets for this release can be 
+    found here: http://tinyurl.com/2g2e8lb
+
+
+  Changes with SAGA C++ Version 1.5                             09. July 2010
+  ---------------------------------------------------------------------------
+  o A detailed list of all closed tickets for this release can be 
+    found here: http://tinyurl.com/2fa6euv
+    
+
+  Changes with SAGA C++ Version 1.4.2                          16. April 2010
+  ---------------------------------------------------------------------------
+  o We have completely restructured our code repositories. We have split up 
+    SAGA into a "Core" (Engine, Packages, Default Adaptors) and into the 
+    middleware adaptors. SAGA Core still lives in the same code repository,
+    but the adaptors have been moved to:
+    
+    https://svn.cct.lsu.edu/repos/saga-adaptors.
+    
+    Beginning with this release, we will release Core, Python Bindings and 
+    Adaptors seperately. This allows us to have individual release cycles
+    for individual adaptors and components. One of the major proeblems we 
+    had in the past was, that e.g. a single bug in the SSH adaptor lead to
+    a completely new saga release. This won't happen anymore: now you will
+    be able to download just the new release of that SSH adaptor and add it
+    to your existing SAGA installation. 
+    
+    What do all these changes and restructuring mean for you? For you it means
+    that you can't install SAGA from one source archive anymore. Yes, it 
+    might have been convenient but it also caused a lot of confusions. If you
+    want to install saga, you have to download and install "SAGA Core" first.
+    After that, you can pick the adaptors you want and maybe the Python 
+    bindings, download and install them. All Core, Adaptor and Bindings 
+    releases can be found on the SAGA C++ download page:
+    
+    http://saga.cct.lsu.edu/software/cpp/download
+    
+  o Besides restructuring our code, we also found enough time to fix some
+    of the bugs that were reported. Here's a list of recently closed tickets:
+    
+    http://tinyurl.com/y63aole
+  
+
+  Changes with SAGA C++ Version 1.4.1                       17. February 2010
+  ---------------------------------------------------------------------------
+   o A list of fixed bugs and added features can be found here:
+     http://tinyurl.com/ycozhef
+
+  Changes with SAGA C++ Version 1.4                         01. December 2009
+  ---------------------------------------------------------------------------
+   o A list of fixed bugs and added features can be found here:
+     http://tinyurl.com/yk3f8yc
+
+  Changes with SAGA C++ Version 1.3.3                        01. October 2009
+  ---------------------------------------------------------------------------
+   o EMERGENCY BUGFIX RELEASE
+     Fixes broken context handling 
+     Some small improvements in the ssh job adaptor
+
+  Changes with SAGA C++ Version 1.3.2                      28. September 2009
+  ---------------------------------------------------------------------------
+   o We have improved our project structures. In order to create higher-
+     quality releases, we agreed upon a set of strict release policies and
+     a new, more conservative release branch. More information can be 
+     found here: http://faust.cct.lsu.edu/trac/saga/wiki/Development
+     This is the FIRST release coming out of this new branch! 
+
+   o A list of fixed bugs and added features can be found here:
+     http://tinyurl.com/ye2qusr
+
+  Changes with SAGA C++ Version 1.3.1                         24. August 2009
+  ---------------------------------------------------------------------------
+  o A list of fixed bugs and added features can be found here:
+    http://tinyurl.com/y8p4jng
+
+  Changes with SAGA C++ Version 1.3                             22. June 2009
+  ---------------------------------------------------------------------------
+  o Added experimental SSH Job & File adaptors
+  o A list of fixed bugs and added features can be found here:
+    http://tinyurl.com/y9dol2q
+
+  Changes with SAGA C++ Version 1.2.1                          17. April 2009
+  ---------------------------------------------------------------------------
+  o BUGFIX RELEASE. (Configure issues on Ubuntu solved)
+
+  Changes with SAGA C++ Version 1.2                            06. April 2009 
+  --------------------------------------------------------------------------- 
+  o NEW! AWS adaptors: interface to cloud services (IaaS) which implement 
+    Amazons AWS interface. They instantiate and tear down Virtual Machines 
+    via those services. Tested on EC2, Eucalyptus, Nimbus. Note that the 
+    lifetime of the VM is configurable via the adaptor's ini file: either 
+    the VM lifes onforever, or is taken down when the saga::job::service
+    instance gets destroyed.
+  o NEW! ssh adaptors: run jobs via ssh, and mount remote file systems 
+      via sshfs. They are internally used by the aws adaptors to communicate 
+      with the virtual machines created by the aws adaptors. Thus, they can 
+      transparently use AWS security contexts (if invoked via AWS), and, of 
+      course, plain ssh contexts.
+  o https://macpro01.cct.lsu.edu/trac/saga/query?group=status&milestone=1.2
+
+  Changes with SAGA C++ Version 1.1.1                       02. February 2009 
+  ---------------------------------------------------------------------------
+    o Default stream adaptor fixed
+    o Minor bugfixes
+    o http://fortytwo.cct.lsu.edu:8000/SAGA/query?status=closed&milestone=1.1
+      .1+%28Edinburgh%29
+ 
+  Changes with SAGA C++ Version 1.1                         08. December 2008
+  ---------------------------------------------------------------------------
+    o New Platform LSF adaptor 
+    o New Amazon Web Services Job Adaptor (AWS) for Clouds
+    o Experimental adaptors for Hadoop and Google KFS (disabled by default)
+    o http://fortytwo.cct.lsu.edu:8000/SAGA/query?status=closed&milestone=1.1
+      +-+SC08
+ 
+  Changes with SAGA C++ Version 1.0                          06. October 2008
+  ---------------------------------------------------------------------------
+    o http://fortytwo.cct.lsu.edu:8000/SAGA/query?status=closed&milestone=1.0
+
+  Changes with SAGA C++ Version 0.9.3                            15. May 2008
+  ---------------------------------------------------------------------------
+    o Fixed default job adaptor
+    o Added context handling to Globus adaptors
+    o Fixed several issues with the Python bindings
+    o Create API documentation and examples for the Python bindings
+    o URL parser fixed
+    o Exception handling across library boarders fixed for OS X
+    o service discovery package is now available if antlr is installed
+
+  Changes with SAGA C++ Version 0.9.2                            05. May 2008
+  ---------------------------------------------------------------------------
+    o Python language bindings ready to use
+    o Buildsystem split up in components. Adaptors and Language bindings can
+      now be configured and built separately
+    o OMII GridSAM Adaptor: bugfixes and cert issues solved
+    o Lots of test cases added to the unit tests
+    o Updated documentation and first version of a "programmer's manual"
+
+  Changes with SAGA C++ Version 0.9.1                          03. March 2008
+  ---------------------------------------------------------------------------
+    o Added command line tools saga-advert, saga-replica, saga-file, saga-job.
+    o Lots of updates to Python bindings.
+    o saga-shell is more complete now, nice application
+    o Lots of build system fixes (really!).
+    o Lots of fixes to Globus adaptors.
+    o Added more tests to test suite.
+    o Fixed SOCI::SOCIError problem on MacOS for default advert and default 
+      logical file adaptors.
+    o GridSAM adaptor now works on Linux and MacOS.
+    o Fixed URL normalization.
+    o Fixed problem related to the registration of the read_link function in 
+      the namespace package.
+    o Added fall back implementations in namespace package for wildcard 
+      functions
+    o Fixed default job adaptor for Linux and MacOS.
+    o Added asynchronous version of job::run(), job::cancel(), and job::wait()
+    o Change CPI prototype of job::cancel() to job::cancel(double timeout)
+    o Changed context and session APIs to conform with the spec.
+    o Default advert and default logicalfile adaptors now support the new 
+      context_cpi.
+
+  Changes with SAGA C++ Version 0.9                          31. January 2008
+  ---------------------------------------------------------------------------
+    o API is now 100%  compliant with GWD-R.90 1.0 FINAL!
+    o OMII/GridSAM job adaptor added
+    o Globus RLS logical_file adaptor added
+    o SAGA Programming Handbook added
+    o API documentation added
+ 
+
+  Changes with SAGA C++ Version 0.7                         12. November 2007
+  ---------------------------------------------------------------------------
+    o Latest SAGA Core API (GWD-R.90) changes implemented
+    o Various minor bugfixes
+    o Improved Globus adatpors
+
+
+  Changes with SAGA C++ Version 0.6                              30. May 2007
+  ---------------------------------------------------------------------------
+    o Various minor bugfixes
+    o Improved build system
+    o Globus (preWS-)GRAM and GridFTP adaptors added
+
+
+  Changes with SAGA C++ Version 0.5                            28. March 2007
+  ---------------------------------------------------------------------------
+    o First public source release. Covers the latest SAGA Spec. 
+    o Set of local test adaptors implemented
+
+

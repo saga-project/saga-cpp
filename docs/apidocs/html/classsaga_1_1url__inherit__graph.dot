@@ -1,0 +1,9 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{saga::url\n||+ url()\l+ url()\l+ url()\l+ url()\l+ url()\l+ ~url()\l+ operator=()\l+ operator=()\l+ operator=()\l+ operator=()\l+ clone()\l+ get_string()\l+ set_string()\l+ get_scheme()\l+ set_scheme()\l+ get_host()\l+ set_host()\l+ get_port()\l+ set_port()\l+ get_fragment()\l+ set_fragment()\l+ get_path()\l+ set_path()\l+ get_userinfo()\l+ set_userinfo()\l+ translate()\l+ translate()\l+ get_url()\l+ set_url()\l+ get_authority()\l+ set_authority()\l+ get_query()\l+ set_query()\l+ set_scheme_specific_part()\l+ get_username()\l+ set_username()\l+ get_password()\l+ set_password()\l+ unescape()\l+ escape()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node2 [label="{saga::object\n||+ object()\l+ get_type()\l+ get_id()\l+ get_session()\l+ get_session()\l+ clone()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1object.html",tooltip="Brief description starts here."];
+}

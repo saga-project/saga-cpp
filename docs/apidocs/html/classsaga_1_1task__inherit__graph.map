@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node11" href="$classsaga_1_1job_1_1job.html" title="The job provides the manageability interface to a job instance submitted to a resource manager..." alt="" coords="197,822,341,1232"/>
+<area shape="rect" id="node2" href="$classsaga_1_1object.html" title="Brief description starts here." alt="" coords="5,219,125,403"/>
+<area shape="rect" id="node4" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; task \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="150,237,388,384"/>
+<area shape="rect" id="node6" href="$structsaga_1_1detail_1_1monitorable.html" title="The SAGA monitorable interface." alt="" coords="139,5,400,152"/>
+<area shape="rect" id="node8" href="$structsaga_1_1task__base.html" title="Brief description starts here." alt="" coords="413,266,536,356"/>
+<area shape="rect" id="node13" title="The job is a saga::job with additional checkpoint and recovery related methods." alt="" coords="115,1292,224,1382"/>
+<area shape="rect" id="node17" href="$classsaga_1_1job_1_1self.html" title="The job_self class is a job which represents the current application." alt="" coords="248,1283,359,1392"/>
+<area shape="rect" id="node15" title="The job_self class is a job which represents the current application." alt="" coords="113,1443,224,1533"/>
+</map>

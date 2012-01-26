@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="classboost_1_1process_1_1win32__launcher" kind="class" prot="public">
+    <compoundname>boost::process::win32_launcher</compoundname>
+    <basecompoundref refid="classboost_1_1process_1_1launcher" prot="public" virt="non-virtual">boost::process::launcher</basecompoundref>
+    <includes refid="win32__launcher_8hpp" local="no">win32_launcher.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1win32__launcher_117c84656743e3b97d8d8d922da194f21" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>boost::process::win32_launcher::win32_launcher</definition>
+        <argsstring>(const STARTUPINFO *si=NULL)</argsstring>
+        <name>win32_launcher</name>
+        <param>
+          <type>const STARTUPINFO *</type>
+          <declname>si</declname>
+          <defval>NULL</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a new launcher. </para>        </briefdescription>
+        <detaileddescription>
+<para>Constructs a new Win32-specific launcher. If <emphasis>si</emphasis> is not a null pointer, the provided information is used to start the new process; otherwise the default settings are used (i.e. an empty STARTUPINFO object).</para><para><simplesect kind="pre"><para>The <emphasis>si</emphasis> object <emphasis>cb</emphasis> field must be equal to or greater than sizeof(STARTUPINFO). </para><para>The <emphasis>si</emphasis> object cannot have the STARTF_USESTDHANDLES flag set in the <emphasis>dwFlags</emphasis> field because the communication handles are initialized by the launcher. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp" line="73" bodyfile="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp" bodystart="96" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1win32__launcher_1712c43306610d91d4df0e28de36900f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class</type>
+            <declname>Command_Line</declname>
+            <defname>Command_Line</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classboost_1_1process_1_1win32__child" kindref="compound">win32_child</ref></type>
+        <definition>win32_child boost::process::win32_launcher::start</definition>
+        <argsstring>(const Command_Line &amp;cl)</argsstring>
+        <name>start</name>
+        <reimplements refid="classboost_1_1process_1_1launcher_1bdde7d5fef9d4c2248f72ecadf1a119a">start</reimplements>
+        <param>
+          <type>const Command_Line &amp;</type>
+          <declname>cl</declname>
+        </param>
+        <briefdescription>
+<para>Starts a new child process. </para>        </briefdescription>
+        <detaileddescription>
+<para>Given a command line <emphasis>cl</emphasis>, starts a new process with all the parameters configured in the launcher. The launcher can be reused afterwards to launch other different command lines.</para><para><simplesect kind="remark"><para><bold>Blocking remarks</bold>: This function may block if the device holding the command line&apos;s executable blocks when loading the image. This might happen if, e.g., the binary is being loaded from a network share.</para></simplesect>
+<simplesect kind="return"><para>A handle to the new child process. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp" line="90" bodyfile="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp" bodystart="117" bodyend="138"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classboost_1_1process_1_1win32__launcher_19231b0f3ce0874a0628f82899feb7bcf" prot="private" static="no" mutable="no">
+        <type>boost::scoped_ptr&lt; STARTUPINFO &gt;</type>
+        <definition>boost::scoped_ptr&lt; STARTUPINFO &gt; boost::process::win32_launcher::m_startupinfo</definition>
+        <argsstring></argsstring>
+        <name>m_startupinfo</name>
+        <briefdescription>
+<para>Win32-specific process startup information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp" line="57" bodyfile="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Generic implementation of the Launcher concept. </para>    </briefdescription>
+    <detaileddescription>
+<para>The launcher class implements the Launcher concept in an operating system agnostic way; it allows spawning new child process using a single and common interface across different systems. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="44">
+        <label>boost::process::win32_launcher</label>
+        <link refid="classboost_1_1process_1_1win32__launcher"/>
+        <childnode refid="45" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>boost::process::launcher</label>
+        <link refid="classboost_1_1process_1_1launcher"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="46">
+        <label>boost::process::win32_launcher</label>
+        <link refid="classboost_1_1process_1_1win32__launcher"/>
+        <childnode refid="47" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>boost::process::launcher</label>
+        <link refid="classboost_1_1process_1_1launcher"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp" line="53" bodyfile="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp" bodystart="51" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classboost_1_1process_1_1win32__launcher_19231b0f3ce0874a0628f82899feb7bcf" prot="private" virt="non-virtual"><scope>boost::process::win32_launcher</scope><name>m_startupinfo</name></member>
+      <member refid="classboost_1_1process_1_1win32__launcher_1712c43306610d91d4df0e28de36900f5" prot="public" virt="non-virtual"><scope>boost::process::win32_launcher</scope><name>start</name></member>
+      <member refid="classboost_1_1process_1_1win32__launcher_117c84656743e3b97d8d8d922da194f21" prot="public" virt="non-virtual"><scope>boost::process::win32_launcher</scope><name>win32_launcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

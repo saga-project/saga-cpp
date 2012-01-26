@@ -1,0 +1,160 @@
+#!/bin/sh
+
+###########################################################
+#
+# @file: config/saga-install.sh(.in)
+#
+# @description:
+#   used to install SAGA components into the target location.
+#   This script actually just forwards the install requests to 
+#   saga-install.pl, which is able to handle lib versioning.
+#   That way, the SAGA makefiles do not need to be touched and 
+#   updated to use the new perl script.
+#
+#   This shell script calls saga-install.pl for each individual 
+#   component.  If performance ever becomes an issue, the perl
+#   script should be changed ot accept multiple components per
+#   command invocation.
+#
+#   For documentation, see the perl source code.
+#
+# Copyright (c) 2009-2010 Andre Merzky (andre@merzky.net)
+# This file is part of the SAGA Engine.
+#
+# Contributed by Andre Merzky   <andre@merzky.net>
+#
+###########################################################
+
+### LICENSE ###
+
+# debug=yes
+
+usage ()
+{
+  cat <<EOF
+
+  Usage:    saga-install.sh           <component> [...] <path/to/dir/>
+            saga-install.sh -f        <component>       <path/to/file>
+            saga-install.sh -c        <component>       <path/to/dir/>
+            saga-install.sh -f -a     <component>       <path/to/file> <alias>
+            saga-install.sh -d        <component>       <path/to/dir>
+            saga-install.sh -f -r     <component>       <path/to/dir>
+            saga-install.sh -f -v 1.2 <component> <path/to/libdir>
+
+  Examples: saga-install.sh       saga.hpp          include/saga/         
+            saga-install.sh -f    saga.hpp          include/saga/saga.hpp 
+            saga-install.sh -c    saga_job.3        share/man/man3/
+            saga-install.sh -f -a  saga-job-run saga-job bin/saga-job
+            saga-install.sh -d    docs/             share/saga/docs/
+
+  The target directory will _always_ be prefixed by 
+  SAGA_LOCATION, i.e. by the installation prefix.
+  <component> can be a file or directory.  If '-f'
+  is specified, it MUST be a file.  if '-d' is 
+  specified, it MUST be a directory.  
+
+  The "-v x.y" option allows to install specific library
+  versions.  Symbolic links to the libs are created according to
+  the usual unix conventions.
+
+  The "-c" option allows to install gzip compressed files, e.g. for 
+  man page installations.
+  
+EOF
+  exit $1
+}
+
+
+# we need arguments to work
+if test $# -lt 2;
+then
+  echo " no args to saga-install.sh";
+  usage 1 1>&2
+fi
+
+a_flag=""
+n_flag=""
+v_flag=""
+c_flag=""
+version=""
+alias=""
+full_tgt=""
+
+while test "x$1" != "x"; do
+
+  case $1 in
+    -f )
+      full_tgt="yes"
+      shift
+      ;;
+  
+    -d )
+      shift
+      ;;
+  
+    -t )
+      full_tgt="yes"
+      shift
+      ;;
+  
+    -c )
+      c_flag="-c"
+      shift
+      ;;
+  
+    -v )
+      v_flag="-v"
+      shift
+      version="$1"
+      shift
+      ;;
+  
+    -a )
+      a_flag="-a"
+      shift
+      alias="$1"
+      shift
+      ;;
+
+    -n )
+      n_flag="-n"
+      shift
+      ;;
+  
+  
+     * )
+       break
+       ;;
+  
+  esac
+done
+
+# after flags, we still need two arguments, at least
+if test $# -lt 2;
+then
+  echo " not enough args to saga-install.sh";
+  usage 1 1>&2
+fi
+
+# get src files and target dir
+src=$1
+shift
+
+while test $# -gt 1; do
+  src="$src $1"
+  shift
+done
+
+tgt=$1
+shift
+
+install_pl=`echo $0 | sed -e 's/saga-install.sh/saga-install.pl/g'`
+
+for s in $src; do
+  if test "x$full_tgt" = "xyes"; then
+    $install_pl $n_flag $v_flag $a_flag $c_flag $alias $version $s $tgt
+  else                 
+    $install_pl $n_flag $v_flag $a_flag $c_flag $alias $version $s $tgt/$s
+  fi
+done
+

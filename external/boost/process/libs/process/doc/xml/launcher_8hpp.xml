@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="launcher_8hpp" kind="file">
+    <compoundname>launcher.hpp</compoundname>
+    <includes refid="config_8hpp" local="no">boost/process/config.hpp</includes>
+    <includes local="no">boost/assert.hpp</includes>
+    <includes refid="child_8hpp" local="no">boost/process/child.hpp</includes>
+    <includes local="no">boost/process/detail/command_line_ops.hpp</includes>
+    <includes local="no">boost/process/detail/factories.hpp</includes>
+    <includes local="no">boost/process/detail/file_handle.hpp</includes>
+    <includes local="no">boost/process/detail/launcher_base.hpp</includes>
+    <includes refid="exceptions_8hpp" local="no">boost/process/exceptions.hpp</includes>
+    <includes local="no">boost/throw_exception.hpp</includes>
+    <includedby refid="process_8hpp" local="no">/tmp/process.016638aa/process/boost/process.hpp</includedby>
+    <includedby refid="posix__launcher_8hpp" local="no">/tmp/process.016638aa/process/boost/process/posix_launcher.hpp</includedby>
+    <includedby refid="win32__launcher_8hpp" local="no">/tmp/process.016638aa/process/boost/process/win32_launcher.hpp</includedby>
+    <incdepgraph>
+      <node id="147">
+        <label>/tmp/process.016638aa/process/boost/process/launcher.hpp</label>
+        <link refid="launcher.hpp"/>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="150" relation="include">
+        </childnode>
+        <childnode refid="151" relation="include">
+        </childnode>
+        <childnode refid="163" relation="include">
+        </childnode>
+        <childnode refid="164" relation="include">
+        </childnode>
+        <childnode refid="157" relation="include">
+        </childnode>
+        <childnode refid="165" relation="include">
+        </childnode>
+        <childnode refid="166" relation="include">
+        </childnode>
+        <childnode refid="169" relation="include">
+        </childnode>
+      </node>
+      <node id="153">
+        <label>boost/process/detail/pipe.hpp</label>
+      </node>
+      <node id="162">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="163">
+        <label>boost/process/detail/command_line_ops.hpp</label>
+      </node>
+      <node id="151">
+        <label>boost/process/child.hpp</label>
+        <link refid="child_8hpp"/>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="152" relation="include">
+        </childnode>
+        <childnode refid="150" relation="include">
+        </childnode>
+        <childnode refid="153" relation="include">
+        </childnode>
+        <childnode refid="154" relation="include">
+        </childnode>
+        <childnode refid="159" relation="include">
+        </childnode>
+        <childnode refid="161" relation="include">
+        </childnode>
+        <childnode refid="162" relation="include">
+        </childnode>
+      </node>
+      <node id="154">
+        <label>boost/process/pistream.hpp</label>
+        <link refid="pistream_8hpp"/>
+        <childnode refid="155" relation="include">
+        </childnode>
+        <childnode refid="156" relation="include">
+        </childnode>
+        <childnode refid="157" relation="include">
+        </childnode>
+        <childnode refid="158" relation="include">
+        </childnode>
+      </node>
+      <node id="167">
+        <label>stdexcept</label>
+      </node>
+      <node id="165">
+        <label>boost/process/detail/launcher_base.hpp</label>
+      </node>
+      <node id="161">
+        <label>boost/process/status.hpp</label>
+        <link refid="status_8hpp"/>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="150" relation="include">
+        </childnode>
+      </node>
+      <node id="169">
+        <label>boost/throw_exception.hpp</label>
+      </node>
+      <node id="168">
+        <label>string</label>
+      </node>
+      <node id="156">
+        <label>boost/noncopyable.hpp</label>
+      </node>
+      <node id="152">
+        <label>map</label>
+      </node>
+      <node id="160">
+        <label>ostream</label>
+      </node>
+      <node id="150">
+        <label>boost/assert.hpp</label>
+      </node>
+      <node id="159">
+        <label>boost/process/postream.hpp</label>
+        <link refid="postream_8hpp"/>
+        <childnode refid="160" relation="include">
+        </childnode>
+        <childnode refid="156" relation="include">
+        </childnode>
+        <childnode refid="157" relation="include">
+        </childnode>
+        <childnode refid="158" relation="include">
+        </childnode>
+      </node>
+      <node id="164">
+        <label>boost/process/detail/factories.hpp</label>
+      </node>
+      <node id="149">
+        <label>boost/config.hpp</label>
+      </node>
+      <node id="166">
+        <label>boost/process/exceptions.hpp</label>
+        <link refid="exceptions_8hpp"/>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="167" relation="include">
+        </childnode>
+        <childnode refid="168" relation="include">
+        </childnode>
+      </node>
+      <node id="157">
+        <label>boost/process/detail/file_handle.hpp</label>
+      </node>
+      <node id="158">
+        <label>boost/process/detail/systembuf.hpp</label>
+      </node>
+      <node id="148">
+        <label>boost/process/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="149" relation="include">
+        </childnode>
+      </node>
+      <node id="155">
+        <label>istream</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="170">
+        <label>/tmp/process.016638aa/process/boost/process/launcher.hpp</label>
+        <link refid="launcher.hpp"/>
+        <childnode refid="171" relation="include">
+        </childnode>
+        <childnode refid="172" relation="include">
+        </childnode>
+        <childnode refid="173" relation="include">
+        </childnode>
+      </node>
+      <node id="171">
+        <label>/tmp/process.016638aa/process/boost/process.hpp</label>
+        <link refid="process_8hpp"/>
+      </node>
+      <node id="172">
+        <label>/tmp/process.016638aa/process/boost/process/posix_launcher.hpp</label>
+        <link refid="posix__launcher_8hpp"/>
+      </node>
+      <node id="173">
+        <label>/tmp/process.016638aa/process/boost/process/win32_launcher.hpp</label>
+        <link refid="win32__launcher_8hpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classboost_1_1process_1_1launcher" prot="public">boost::process::launcher</innerclass>
+    <innernamespace refid="namespaceboost">boost</innernamespace>
+    <innernamespace refid="namespaceboost_1_1process">boost::process</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Includes the declaration of the launcher class. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Boost.Process</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2006<sp/>Julio<sp/>M.<sp/>Merino<sp/>Vidal.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Distributed<sp/>under<sp/>the<sp/>Boost<sp/>Software<sp/>License,<sp/>Version<sp/>1.0.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>(See<sp/>accompanying<sp/>file<sp/>LICENSE_1_0.txt<sp/>or<sp/>copy<sp/>at</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>http://www.boost.org/LICENSE_1_0.txt.)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(BOOST_PROCESS_LAUNCHER_HPP)</highlight></codeline>
+<codeline lineno="18"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor">#define<sp/>BOOST_PROCESS_LAUNCHER_HPP</highlight></codeline>
+<codeline lineno="20"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="config_8hpp" kindref="compound">boost/process/config.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(BOOST_PROCESS_POSIX_API)</highlight></codeline>
+<codeline lineno="25"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/>include<sp/>&lt;boost/process/detail/posix_ops.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(BOOST_PROCESS_WIN32_API)</highlight></codeline>
+<codeline lineno="27"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/>include<sp/>&lt;windows.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/>include<sp/>&lt;boost/process/detail/win32_ops.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/>error<sp/>&quot;Unsupported<sp/>platform.&quot;</highlight></codeline>
+<codeline lineno="31"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="32"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/assert.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="child_8hpp" kindref="compound">boost/process/child.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/process/detail/command_line_ops.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/process/detail/factories.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/process/detail/file_handle.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/process/detail/launcher_base.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="exceptions_8hpp" kindref="compound">boost/process/exceptions.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/throw_exception.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">boost<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">process<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="classboost_1_1process_1_1launcher" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classboost_1_1process_1_1launcher" kindref="compound">launcher</ref><sp/>:</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>detail::launcher_base</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Command_Line<sp/>&gt;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classboost_1_1process_1_1child" kindref="compound">child</ref><sp/><ref refid="classboost_1_1process_1_1launcher_1bdde7d5fef9d4c2248f72ecadf1a119a" kindref="member">start</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Command_Line&amp;<sp/>cl);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Command_Line<sp/>&gt;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><ref refid="classboost_1_1process_1_1child" kindref="compound">child</ref></highlight></codeline>
+<codeline lineno="81" refid="classboost_1_1process_1_1launcher_1bdde7d5fef9d4c2248f72ecadf1a119a" refkind="member"><highlight class="normal"><ref refid="classboost_1_1process_1_1launcher_1bdde7d5fef9d4c2248f72ecadf1a119a" kindref="member">launcher::start</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Command_Line&amp;<sp/>cl)</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classboost_1_1process_1_1child_123c957bf6f18f185a9fd560efa9cb4b9" kindref="member">child::handle_type</ref><sp/>ph;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::file_handle<sp/>fhstdin,<sp/>fhstdout,<sp/>fhstderr;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(BOOST_PROCESS_POSIX_API)</highlight></codeline>
+<codeline lineno="87"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/>detail::info_map<sp/>infoin,<sp/>infoout;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::merge_set<sp/>merges;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>posix_behavior_to_info(get_stdin_behavior(),<sp/><sp/>STDIN_FILENO,<sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>infoin);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>posix_behavior_to_info(get_stdout_behavior(),<sp/>STDOUT_FILENO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>infoout);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>posix_behavior_to_info(get_stderr_behavior(),<sp/>STDERR_FILENO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>infoout);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(get_merge_out_err())</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>merges.insert(std::pair&lt;<sp/>int,<sp/>int<sp/>&gt;(STDERR_FILENO,<sp/>STDOUT_FILENO));</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::posix_setup<sp/>s;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>s.m_work_directory<sp/>=<sp/>get_work_directory();</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>ph<sp/>=<sp/>detail::posix_start(cl,<sp/>get_environment(),<sp/>infoin,<sp/>infoout,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>merges,<sp/>s);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(get_stdin_behavior()<sp/>==<sp/>redirect_stream)</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fhstdin<sp/>=<sp/>posix_info_locate_pipe(infoin,<sp/>STDIN_FILENO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(get_stdout_behavior()<sp/>==<sp/>redirect_stream)</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fhstdout<sp/>=<sp/>posix_info_locate_pipe(infoout,<sp/>STDOUT_FILENO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(get_stderr_behavior()<sp/>==<sp/>redirect_stream)</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fhstderr<sp/>=<sp/>posix_info_locate_pipe(infoout,<sp/>STDERR_FILENO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(BOOST_PROCESS_WIN32_API)</highlight></codeline>
+<codeline lineno="115"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/>detail::stream_info<sp/>behin<sp/>=</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>win32_behavior_to_info(get_stdin_behavior(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>fhstdin);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::stream_info<sp/>behout<sp/>=</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>win32_behavior_to_info(get_stdout_behavior(),<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>fhstdout);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::stream_info<sp/>beherr<sp/>=</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>win32_behavior_to_info(get_stderr_behavior(),<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>fhstderr);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>STARTUPINFO<sp/>si;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>::ZeroMemory(&amp;si,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(si));</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>si.cb<sp/>=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(si);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::win32_setup<sp/>s;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>s.m_work_directory<sp/>=<sp/>get_work_directory();</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>s.m_startupinfo<sp/>=<sp/>&amp;si;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>PROCESS_INFORMATION<sp/>pi<sp/>=<sp/>detail::win32_start(cl,<sp/>get_environment(),</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>behin,<sp/>behout,<sp/>beherr,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_merge_out_err(),<sp/>s);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>ph<sp/>=<sp/>pi.hProcess;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="136"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>detail::factories::create_child(ph,<sp/>fhstdin,<sp/>fhstdout,<sp/>fhstderr);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>process</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>boost</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>!defined(BOOST_PROCESS_LAUNCHER_HPP)</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/process.016638aa/process/boost/process/launcher.hpp"/>
+  </compounddef>
+</doxygen>

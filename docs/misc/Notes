@@ -1,0 +1,57 @@
+
+Relation between APIs and CPIs:
+-------------------------------
+
+  - saga::file
+  
+    - defines the API for the end user
+    - all calls are forwarded to the implementation of type 
+      saga::impl::file (it HAS_A saga::impl::file)
+    
+  - saga::impl::file_cpi defines the API for the adaptor.  It
+    also requires the adaptor to IS_A saga::impl::cpi, so it has
+    metrics attached etc.
+
+  - saga::impl::file
+
+    - happens to implement the same API as saga::file.  This is
+      not neccessarily the case (e.g. it does not implement
+      gat::file).  So, it does NOT inherit from saga::file
+    - also IS_A proxy_base, which means it HAS_A session and
+      adaptor attached.  It forwards all calls to that adaptor.
+
+  - a file adaptor implements the saga::impl::file_cpi.
+
+
+Lifetime of Metrics:
+--------------------
+
+  - when talking about a metric, the following statements mean
+    saga::impl::metric.  saga::metric HAS_A saga::impl::metric in
+    a shared_ptr.
+ 
+  - a metric is created by a task.  However, it can exceed the
+    tasks lifetime (a metric whose parental task is finished is
+    'final').  Example: a metric monitoring the task status has
+    the value 'Finished' even after the task was deleted.
+
+  - to allow a metric to survive a task, and also to survive the
+    adaptor creating the task  and the saga object implemented by
+    that adaptor, all metrics are kept as shared_ptr's in
+    a metric pool in the engine. 
+    
+  - saga might later introduce metrics which are not created by
+    tasks, but by adaptors (e.g. for monitoring remote
+    applications).  These metrics are also added to the engine's
+    metric pool, for the same reason.
+
+  - if a saga::metric gets deleted, it
+    - gets all callbacks removed from the real metric
+    - gets removed from the engine metric pool The latter reduces
+      the refcount of the metric - if its creating task/adaptor
+      are already gone, it will perish.
+    
+  - the parental task/adaptor destructor MUST reduce the
+    refcounters for ALL metrics created by them, to ensure that
+    they are eventually deleted from the engine pool.
+

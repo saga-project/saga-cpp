@@ -1,0 +1,39 @@
+
+ARCHITECTURE
+----------------------------------------------------------------
+
+  This SAGA implementation is designed to be a reference
+  implementation of the SAGA standard.  As such, it strives to
+
+    - follow the SAGA API specification as close as possible
+    - defines the C++ language bindings to SAGA (the SAGA spec
+      itself is language independend)
+    - allows to bind to multiple mittleware backends
+
+  In particular the last point is of importance to the overall
+  architecture:  As SAGA is designed to abstract arbitrary grid
+  middleware, and as this implementation is designed to run on
+  top of arbitrary Grid middleware, we decided to implement an
+  plugin based system (plugins are named adaptors though, as
+  they implement the adaptor pattern from well known the OO
+  patterns).
+
+  This software hence targets two different communities:
+
+    - end useres aka grid application programmers:
+
+      Grid application programmers are priovided with a standard
+      complient SAGA implementation, and can use it to simplify
+      the development process for their applications.
+
+
+    - grid middleware developers:
+
+      For grid middleware developers, this software provides
+      a framework to bind the SAGA C++ reference implementation
+      to their middleware, by using the adaptor system and
+      infrastructure to easily code new adaptors to their
+      specific middleware.  That way, thay can rather easily
+      provide a SAGA complient Grid API to their Grid
+      environment.
+

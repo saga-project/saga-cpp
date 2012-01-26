@@ -1,0 +1,520 @@
+
+ \subsection{Quick Introduction}
+
+
+  For an overwhelming number of use cases, job submission and
+  management is the most important aspect of Grid computing.
+  The |saga::job| package provides the respective functionality.
+  There are four classes:
+
+  \begin{shortlist}
+
+   \item |saga::job::description|\\
+         describes the properties of a job to be submitted, 
+
+   \item |saga::job::service|\\
+         represents a service which accepts job descriptions for
+         submission, 
+
+   \item |saga::job::job|\\
+         represents the submitted job, and
+
+   \item |saga::job::self|\\
+         which represents the application itself.
+
+  \end{shortlist}
+
+
+  The most basic code example is the following:
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{mycode}[label=Job submission]
+  #include <saga/saga.hpp>
+
+  int main (int argc, char** argv)
+  {
+    saga::job::service js;
+    saga::job::job j = js.run_job ("localhost", "/bin/sleep 3");
+    j.wait ();
+  
+    return (0);
+  }
+  \end{mycode}
+
+  Yes, it is that easy.  But what about the job's I/O, can we handle
+  that as well?  And what about job state information \textless F2\textgreater?  Let's see:
+
+  \begin{mycode}[label=Job submission and job I/O]
+  saga::job::service js;
+  saga::job::ostream in;
+  saga::job::istream out;
+  saga::job::istream err;
+  
+  saga::job::job j = js.run_job ("localhost",
+                                 "/bin/date",
+                                 in, out, err);
+
+  saga::job::state state = j.get_state ();
+
+  do 
+  {
+    char buffer[256];
+
+    // get stdin
+    out.read (buffer, sizeof (buffer));
+    if ( out.gcount () > 0 )
+    {
+      std::cout << std::string (buffer, out.gcount ());
+    }
+    
+    if ( out.fail () )
+    {
+      break;
+    }
+
+    usleep (10000);
+    state = j.get_state ();
+
+  } while ( state != saga::job::Done &&
+            state != saga::job::Failed &&
+            state != saga::job::Canceled )
+  \end{mycode}
+
+  That is basically the same as above, but we catch the job's I/O channel
+  as it is getting created.  The remainder of the example code (lines
+  12ff) is just watching the job state and the output stream.
+
+  The |run_job()| method is just a shortcut.  It actually
+  provides exactly the following functionality, just with less code,
+  as the example below:
+
+  \begin{mycode}[label=run\_job() expanded]
+  namespace sa  = saga::attributes;
+  namespace sja = saga::job::attributes;
+
+  std::string exe ("/bin/date");
+
+  std::vector <std::string> hosts;
+  hosts.push_back ("localhost");
+
+  saga::job::description jd;
+
+  jd.set_attribute        (sja::description_interactive, sa::common_true);
+  jd.set_attribute        (sja::description_executable, exe);
+  jd.set_vector_attribute (sja::description_candidatehosts, hosts);
+
+  saga::job::service js;
+
+  saga::job::job j = js.create_job (jd);
+  
+
+  saga::job::ostream in  = j.get_stdin  ();
+  saga::job::istream out = j.get_stdout ();
+  saga::job::istream err = j.get_stderr ();
+  
+  // job is in 'New' state here, we need to run it
+  j.run ();
+  
+  saga::job::state state = j.get_state ();
+
+  do 
+  {
+    char buffer[256];
+
+    // get stdin
+    out.read (buffer, sizeof (buffer));
+    if ( out.gcount () > 0 )
+    {
+      std::cout << std::string (buffer, out.gcount ());
+    }
+    if ( out.fail () )
+    {
+      break;
+    }
+    usleep (10000);
+    state = j.get_state ();
+
+  } while ( state != saga::job::Done &&
+            state != saga::job::Failed &&
+            state != saga::job::Canceled )
+  \end{mycode}
+
+  This long way exposes some additional details:
+
+  \begin{shortlist}
+
+   \item The |job_description| class allows specifying attributes of the
+   job.\footnote{Only the \T{'Executable'} attribute is mandatory.}
+
+   \item The |stdio| channels of a job can be obtained before the job
+   is running, to avoid race conditions.
+
+   \item Only |'Interactive'| jobs will provide |stdio| channels.
+
+  \end{shortlist}
+
+
+  Table~\ref{tab:jdattribs} shows the job description attributes
+  available in SAGA.  Note that these attributes are closely related
+  to the respective keys of the JSDL standard
+  \cite{jsdl-spec,jsdl-spmd}.
+
+  \UndefineShortVerb{\|}
+  
+  \begin{table}[h!]
+   \centering
+   \begin{tabular}{|l|l|l|}
+    \hline
+      Executable          & string          & what executable to run \\
+      Arguments           & list of strings & the job arguments      \\
+      CandidateHosts      & list of strings & where to run           \\
+      SPMDVariation       & string          & MPI type (if any)      \\
+      TotalCPUCount       & int             & \# CPUs, total         \\
+      NumberOfProcesses   & int             & \# processes, total    \\
+      ProcessesPerHost    & int             & \# processes per host  \\
+      ThreadsPerProcess   & int             & \# threads per process \\
+      Environment         & list of strings & environment vars       \\
+      WorkingDirectory    & string          & working directory      \\
+      Interactive         & bool            & usage type             \\
+      Input               & string          & stdin source file      \\
+      Output              & string          & stdout log file        \\
+      Error               & string          & stderr log file        \\
+      FileTransfer        & list of strings & file staging           \\
+      Cleanup             & bool            & cleanup-after-run      \\
+      JobStartTime        & datetime        & when to start job      \\
+      TotalCPUTime        & int             & how long will job run  \\
+      TotalPhysicalMemory & int             & memory the job needs   \\
+      CPUArchitecture     & string          & architecture to run on \\
+      OperatingSystemType & string          & OS to run on           \\
+      Queue               & string          & queue to submit to     \\
+      JobContact          & list of strings & notification contact   \\
+    \hline
+   \end{tabular}
+   \caption{Job description attributes available in SAGA.}
+   \label{tab:jdattribs}
+   \end{table}
+
+  \DefineShortVerb{\|}
+
+  The available |SPMDVariation| values are: |MPI|, |GridMPI|,
+  |IntelMPI| |LAM-MPI|, |MPICH1|, |MPICH2|, |MPICH-GM|, |MPICH-MX|
+  |MVAPICH|, |MVAPICH2|, |OpenMP|, |POE|, |PVM| and |None|.  Other
+  arbitrary values are allowed, and interpreted by the backend.  This
+  attribute indirectly dtermines which |mpirun| executable should be
+  called for starting the application, and which parameters it will
+  accept.
+  
+
+  % FIXME: should enumerate examples!
+  Line 10 in the job I/O example above obtains the job state:
+
+  \shift |saga::job::state state = j.get_state ();|
+
+  That implies that |saga::job| is a stateful object.  The job state
+  model is shown in Figure~\ref{fig:job_states}, which also shows what
+  method calls cause which state transitions.
+
+  \myfig{job_states}{\footnotesize The SAGA job state model.}
+
+
+ \subsection{Reference}
+
+   \begin{mycode}[label=Prototypes: saga::job]
+  namespace saga
+  {
+    namespace job 
+    {
+      typedef char const * char ccc_type;
+  
+      namespace attributes 
+      {
+        // job description atributes
+        ccc_type description_executable          = "Executable";
+        ccc_type description_arguments           = "Arguments";
+        ccc_type description_environment         = "Environment";
+        ccc_type description_workingdirectory    = "WorkingDirectory";
+        ccc_type description_interactive         = "Interactive";
+        ccc_type description_input               = "Input";
+        ccc_type description_output              = "Output";
+        ccc_type description_error               = "Error";
+        ccc_type description_filetransfer        = "FileTransfer";
+        ccc_type description_cleanup             = "Cleanup";
+        ccc_type description_jobstarttime        = "JobStartTime";
+        ccc_type description_totalcputime        = "TotalCPUTime";
+        ccc_type description_totalphysicalmemory = "TotalPhysicalMemory";
+        ccc_type description_cpuarchitecture     = "CPUArchitecture";
+  
+        ccc_type cpuarchitecture_sparc           = "sparc";
+        ccc_type cpuarchitecture_powerpc         = "powerpc";
+        ccc_type cpuarchitecture_x86             = "x86";
+        ccc_type cpuarchitecture_x86_32          = "x86_32";
+        ccc_type cpuarchitecture_x86_64          = "x86_64";
+        ccc_type cpuarchitecture_parisc          = "parisc";
+        ccc_type cpuarchitecture_mips            = "mips";
+        ccc_type cpuarchitecture_ia64            = "ia64";
+        ccc_type cpuarchitecture_arm             = "arm";
+        ccc_type cpuarchitecture_other           = "other";
+  
+        ccc_type description_operatingsystemtype = "OperatingSystemType";
+        ccc_type description_candidatehosts      = "CandidateHosts";
+        ccc_type description_queue               = "Queue";
+        ccc_type description_jobcontact          = "JobContact";
+        ccc_type description_spmdvariation       = "SPMDVariation";
+        ccc_type description_totalcpucount       = "TotalCPUCount";
+        ccc_type description_numberofprocesses   = "NumberOfProcesses";
+        ccc_type description_processesperhost    = "ProcessesPerHost";
+        ccc_type description_threadsperprocess   = "ThreadsPerProcess";
+      }
+  
+      class description 
+          : public saga::object,
+            public saga::attributes
+      {
+        public:
+          description (void);
+         ~description (void);
+      }; 
+  
+  
+      class service 
+          : public saga::object
+      {
+        public:
+          service  (saga::session const & s, 
+                    saga::url             rm = "");
+          service  (saga::url             rm = "");
+         ~service  (void);
+  
+          saga::job::job create_job (description job_desc);
+  
+          saga::job::job run_job    (std::string   hostname,
+                                     std::string   commandline,
+                                     ostream     & stdin_stream, 
+                                     istream     & stdout_stream, 
+                                     istream     & stderr_stream);
+          std::vector <std::string> 
+                          list      (void); 
+          saga::job::job  get_job   (std::string   job_id); 
+          saga::job::self get_self  (void);
+      };
+  
+  
+      namespace attributes 
+      {
+        //  read only job attributes
+        ccc_type jobid            = "JobID";
+        ccc_type executionhosts   = "ExecutionHosts";
+        ccc_type created          = "Created";
+        ccc_type started          = "Started";
+        ccc_type finished         = "Finished";
+        ccc_type workingdirectory = "WorkingDirectory";
+        ccc_type exitcode         = "ExitCode";
+        ccc_type termsig          = "Termsig";
+      }
+  
+      namespace metrics 
+      { 
+        // job metrics
+        ccc_type statedetail      = "job.StateDetail";
+        ccc_type signal           = "job.Signal";
+        ccc_type cputimelimit     = "job.CPUTimeLimit";
+        ccc_type memoryuse        = "job.MemoryUse";
+        ccc_type vmemoryuse       = "job.VmemoryUse";
+        ccc_type performance      = "job.Performance";
+      }
+  
+      enum state 
+      {
+        // job state
+        Unknown   =  saga::task_base::Unknown,   // -1
+        New       =  saga::task_base::New,       //  0
+        Running   =  saga::task_base::Running,   //  1
+        Failed    =  saga::task_base::Failed,    //  2
+        Done      =  saga::task_base::Done,      //  3
+        Canceled  =  saga::task_base::Canceled,  //  4
+        Suspended =  5
+      };    
+  
+      class job : public saga::task,
+                  public saga::attributes,
+                  public saga::permissions,
+                  public saga::sync
+      {
+        public:
+          // no constructor
+          ~job (void);
+
+          job & operator= (saga::object const & o);
+
+          std::string get_job_id      (void);
+          state       get_state       (void);
+          description get_description (void);
+          ostream     get_stdin       (void);
+          istream     get_stdout      (void);
+          istream     get_stderr      (void);
+
+          void        suspend         (void);
+          void        resume          (void);
+
+          void        checkpoint      (void);
+          void        migrate         (description job_desc);
+          void        signal          (int         signal);
+      };
+    }
+  }
+   \end{mycode}
+
+
+ \subsection{Job Details}
+
+  The SAGA Job API covers four classes: |saga::job_description|,
+  \T{saga::job\_-} \T{service}, |saga::job|, and |saga::job_self|.
+  The job description class is nothing more than a container for a
+  well-defined set of attributes, which, using
+  JSDL~\cite{jsdl-spec,jsdl-spmd} based keys, defines the job to be
+  started, and its runtime and resource requirements.  The job server
+  represents a resource management endpoint which allows the starting
+  and insertion of jobs. 
+  
+  The job class itself is central to the API, and represents an
+  application instance running under the management of a
+  resource manager.  The |job_self| class |IS-A| job.  Its
+  purpose is to represent the current SAGA application, which
+  allows for a number of use cases with applications that
+  actively interact with the grid infrastructure, for example, to
+  migrate itself, or to set new job attributes.
+  
+  The job class inherits the |saga::task| class (Sec.~\ref{sec:tasks}),
+  and uses its methods to |run()|, to |wait()| for, and to
+  |cancel()| jobs.  The inheritance also allows for the
+  management of large numbers of jobs in task containers.
+  Additional methods provided by the |saga::job| class relate to
+  the |Suspended| state (which is not available on tasks), and
+  provide access to the job's standard I/O streams, and to more
+  detailed status information.  The |saga::job| iostreams are
+  available as |saga::job::istream| and |saga::job::ostream|
+  instances, which all inherit from |std::stream|.
+
+
+  \subsubsection{Job State Model}
+  
+    The SAGA job state diagram is shown in
+    Figure~\ref{fig:job_states}.  It is an extension of the
+    |saga::task| state diagram (Figure~\ref{fig:task_states}),
+    and extends the state diagram with a |'Suspended'| state, which the
+    job can enter/leave using the |suspend()/resume()| calls.  
+
+    \myfig{job_states}{\footnotesize The SAGA job state model
+    extends the SAGA task state model with 
+    a 'Suspended' state, and additional transitions.}
+
+    SAGA maps the native back-end state
+    model onto the SAGA state model.  The SAGA state model
+    is simple enough to allow a straightforward mapping
+    in most cases.  For some applications, access to the native
+    back-end state model is useful, though---for that reason, an
+    additional metric named |'StateDetail'| allows to query the
+    native job state.  
+
+    State details in SAGA are formatted as follows:
+
+    \shift |'<model>:<state>'|
+
+    with valid models being "BES", "DRMAA", or other
+    implementation specific models.  For example, a state detail
+    for the BES state 'StagingIn' would be rendered as
+    |'BES:StagingIn'|, and would be a substate of
+    \T{Running}.  If no state details are available, the metric
+    is still available, but it has always an empty string value.
+
+
+    
+  \subsubsection{File Transfer Specifications}
+  
+  The syntax of a file transfer directive for the job
+  description is modeled on the LSF syntax (LSF stands for
+  \I{Load Sharing Facility}, a commercial job scheduler by
+  Platform Computing). It has the general syntax:
+
+    \shift |local_file operator remote_file|
+
+    Both the |local_file| and the |remote_file| can be URLs. If
+    they are not URLs, but full or relative pathnames, then the
+    |local_file| is relative to the host where the submission is
+    executed, and the |remote_file| is evaluated on the
+    execution host of the job.
+
+    The operator is one of the following four:
+
+    \begin{tabular}{lp{0.75\textwidth}}
+
+      \shift |'>'| &  copies the local file to the remote file
+      before the job starts. Overwrites the remote file if it
+      exists.\\
+
+      \shift |'>>'| & copies the local file to the remote file
+      before the job starts. Appends to the remote file if it
+      exists.\\
+
+      \shift |'<'| & copies the remote file to the local file
+      after the job finishes. Overwrites the local file if it
+      exists.\\
+
+      \shift |'<<'| & copies the remote file to the local file
+      after the job finishes. Appends to the local file if it
+      exists.\\
+
+    \end{tabular}
+
+  
+  \subsubsection{Command Line Specification}
+
+    The |run_job()| method of the |saga::job_service| class
+    accepts a string parameter which constitutes a command line
+    to be executed on a remote resource.  The parsing of that
+    command line follows the following rules:
+
+    \begin{itemize}
+      \item Elements are either delimited by white space (a space, or a tab), 
+            or are delimited by not-escaped double quotes.
+      \item The escape character for double quotes is the
+            backslash (which is also used to escape the backslash
+            itself).
+      \item The first element is used as the executable name;
+            all other elements are treated as job arguments.
+    \end{itemize}
+
+    The following command line parameter
+
+    \shift |/bin/cp "/tmp/my file with spaces" /data/|
+
+    is thus invoking the executable |/bin/cp|, with two
+    arguments.
+
+
+  
+  \subsubsection{Job Identifiers}
+  
+    The SAGA \T{JobID} is treated as an opaque string in the
+    SAGA API, and is structured as: 
+
+      \shift |'[backend url]-[native id]'|
+
+    For example, a job submitted to the host |remote.host.net|
+    via |ssh| (whose daemon runs on port |22|), and having the
+    POSIX PID |1234|, would get the job id:
+
+      \shift |'[ssh://remote.host.net:22/]-[1234]'|
+
+    The implementation may free the resources used for the job,
+    and hence may invalidate a \T{JobID} after a successful
+    wait on the job, and after the application received the job
+    status information at least once.
+
+    A JobID may be unknown until the job enters the \T{Running}
+    state, as the back-end will often not assign IDs to jobs
+    which are not yet running.  In such cases, the value of the
+    \T{JobID} attribute is empty.  The job will, however,
+    retain its JobID after it enters a final state.
+      
+

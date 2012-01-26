@@ -1,0 +1,175 @@
+
+
+ \subsection{Quick Introduction}
+
+  Another package inheriting the namespace package is the replica
+  management in |saga::replica|.  It introduces logical files,  which
+  are namespace entries that have a number of locations (URLs)
+  attached pointing to identical physical copies of the same file.
+  The replica package is again a very simple extension of the namespace
+  package: the class |logical_file| is a namespace |entry| class with
+  a number of additional methods which allow to manage the list of
+  attached URLs:
+
+  \begin{mycode}[label=Managing replica locations]
+  // open a logical file
+  saga::url u ("/replica_1");
+  saga::replica::logical_file lf (u, saga::replica::Create
+                                  |  saga::replica::ReadWrite);
+
+  // Add a replica location, replicate the file
+  lf.add_location    (saga::url ("file://localhost//etc/passwd"));
+  lf.replicate       (saga::url ("file://localhost//tmp/passwd"),
+                      saga::replica::Overwrite);
+
+  // list all locations 
+  std::vector <saga::url> replicas = lf.list_locations ();
+
+  for ( unsigned int i = 0; i < replicas.size (); i++ )
+  {
+    std::cout << "replica: " << replicas[i] << std::endl;
+  }
+
+  // remove the first location
+  lf.remove_location (replicas[0]);
+  \end{mycode}
+
+  Managing replicas is fairly simple, because it only covers methods to
+  list, add, delete, and update replica locations on logical files.
+  Additionally, logical files and logical directories can have meta
+  data attached, which are sets of string-based key-value
+  pairs\footnote{For brevity, the example does not distinguish between scalar and
+  vector attributes.}:
+
+  \begin{mycode}[label=Managing replica meta data]
+  // open a logical file
+  saga::url u ("/replica_1");
+  saga::replica::logical_file lf (u, saga::replica::Create
+                                  |  saga::replica::ReadWrite);
+  // get all attributes
+  std::vector <std::string> keys = lf.list_attributes ();
+
+  // print the keys and values
+  for ( unsigned int i = 0; i < keys.size (); i++ )
+  {
+    std::string key = keys[i];
+    std::string val;
+
+    if ( lf.attribute_is_vector (key) )
+    {
+      std::vector <std::string> vals = lf.get_vector_attribute (key);
+      val = vals[0] + " ...";
+    }
+    else
+    {
+      val = lf.get_attribute (key);
+    }
+    std::cout << key << " -> " << val << std::endl;
+  }
+  \end{mycode}
+
+  The attentive reader will notice that the attribute management
+  is in accordance with the attribute management part of the SAGA
+  \LF.
+
+ \subsection{Reference}
+
+ \begin{mycode}[label=Prototypes: saga::replica]
+  namespace saga
+  {
+    namespace replica
+    {
+      namespace metrics
+      {
+        char const * const logical_file_modified            
+                   =      "logical_file.Modified";
+        char const * const logical_file_deleted             
+                   =      "logical_file.Deleted";
+        char const * const logical_directory_created_entry  
+                   =      "logical_directory.CreatedEntry";
+        char const * const logical_directory_modified_entry 
+                   =      "logical_directory.ModifiedEntry";
+        char const * const logical_directory_deleted_entry  
+                   =      "logical_directory.DeletedEntry";
+      }
+
+      enum flags
+      {
+        Unknown         = /*  -1, */  saga::name_space::Unknown       ,
+        None            = /*   0, */  saga::name_space::None          ,
+        Overwrite       = /*   1, */  saga::name_space::Overwrite     ,
+        Recursive       = /*   2, */  saga::name_space::Recursive     ,
+        Dereference     = /*   4, */  saga::name_space::Dereference   ,
+        Create          = /*   8, */  saga::name_space::Create        ,
+        Exclusive       = /*  16, */  saga::name_space::Exclusive     ,
+        Lock            = /*  32, */  saga::name_space::Lock          ,
+        CreateParents   = /*  64, */  saga::name_space::CreateParents ,
+                          // 128,          reserved for Truncate
+                          // 256,          reserved for Append
+        Read            =    512,
+        Write           =   1024,
+        ReadWrite       =   1036,
+                         // 2048,          reserved for Binary
+      };
+
+      class logical_file
+          : public saga::name_space::entry,
+            public saga::attributes
+      {
+        public:
+            logical_file (session const      & s,
+                          saga::url            url,
+                          int                  mode = Read);
+            logical_file (saga::url            url,
+                          int                  mode = Read);
+            logical_file (saga::object const & o);
+            logical_file (void);
+           ~logical_file (void);
+
+            logical_file & operator= (saga::object const & o);
+
+            void  add_location    (saga::url url);
+            void  remove_location (saga::url url);
+            void  update_location (saga::url old,
+                                   saga::url new);
+            std::vector<saga::url>
+                  list_locations  (void);
+            void  replicate       (saga::url url,
+                                   int       flags = None);
+      };
+
+      class logical_directory
+          : public saga::name_space::directory,
+            public saga::attributes
+      {
+      public:
+        logical_directory  (saga::session const & s,
+                            saga::url             url,
+                            int                   mode = ReadWrite);
+        logical_directory  (saga::url             url,
+                            int                   mode = ReadWrite);
+        logical_directory  (saga::object const  & o);
+        logical_directory  (void);
+       ~logical_directory  (void);
+
+        logical_directory & operator=(saga::object const& o);
+
+        bool  is_file      (saga::url url);
+        std::vector<saga::url>
+              find         (std::string               name_pattern,
+                            std::vector <std::string> key_pattern,
+                            int                       flags = Recursive);
+
+        saga::replica::logical_file
+              open         (saga::url                 url,
+                            int                       flags = Read);
+        saga::replica::logical_directory
+              open_dir     (saga::url                 url,
+                            int                       flags = None);
+      };
+    }
+  }
+ \end{mycode}
+
+ \subsection{Replica Details}
+

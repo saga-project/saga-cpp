@@ -1,0 +1,59 @@
+
+This is a branch of the tutorial shell, which should develop into a full blown
+SAGA shell over time.  That should allow us to keep the tutorial shell simple
+and focused on, well, tutorialinging.  
+
+Please remember to merge important fixes and new functionality back into the
+tutorial shell (both solution and non-solution!).
+
+-------------------------------------------------------------------------------
+
+The following commands are available:
+
+  // namespace related
+  # pwd
+  # cd            <dir>
+  # ls
+  # cp            <source> <target>
+  # mv            <source> <target>
+  # rm            <file>
+  # ln            <source> <target>
+  # mkdir         <dir>
+  # rmdir         <dir>
+
+  // file related
+  # cat           <file>
+
+  // logical file related
+  # rep_find      <pat> [<key=val> ...]
+  # rep_list
+  # rep_add       <logical file> <url>
+  # rep_remove    <logical file> <url>
+  # rep_update    <logical file> <old> <new>
+  # rep_replicate <logical file> <target>
+
+  // job related
+  # run           <exe>
+  # ps
+  # suspend       <job>
+  # resume        <job>
+  # kill          <job>
+  # status        <job>
+
+  // shell internals
+  # set           <key> <val>
+  # help
+  # exit
+
+The initial values for starting directory and default job
+manager are set as environment variable.  Below are the default:
+
+  setenv SAGA_SHELL_ROOT     file://localhost//tmp
+  setenv SAGA_SHELL_CONTACT  fork://localhost/
+
+The file env_local.csh sets these defaults, the file
+env_globus.csh shows an example of Globus settings.  Sourcing
+these files before running the shell shows nicel that SAGA-A is
+adaptive to the environment.
+
+

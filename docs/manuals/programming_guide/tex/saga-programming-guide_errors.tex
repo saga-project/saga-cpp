@@ -1,0 +1,216 @@
+
+
+\subsection{Quick Introduction}
+
+ SAGA error handling is exception-based: a rather flat hierarchy of 14
+ exception types inherit the properties of the general
+ |saga::exception| class.  That allows to inspect the exception for
+ its exact type, and for the detailed error message(s) associated with
+ this exception.
+
+ \HINT{As our SAGA implementation is adaptor-based, a single API call
+ could actually return more than one exception at the same time.  That
+ is rendered by returning the most specific exception, whose error
+ message then also contains the error messages from all the other
+ exceptions, usually one per adaptor.}
+
+
+\subsection{Reference}
+
+ \begin{mycode}[label=Prototype: saga::exception class and derivates]
+
+  namespace saga 
+  {
+  class exception : public std::exception
+  {
+  public:
+     ~exception() throw() {}
+
+     // Gets the message associated with the exception 
+     char const* get_message() const throw() 
+
+     // an alias for get_message
+     char const* what() const throw() 
+
+     // get type of exception
+     saga::error get_error () const  
+
+     // Gets the SAGA object associated with exception. 
+     saga::object get_object () const throw() 
+  }; 
+
+
+
+  // parameter related exceptions
+  class parameter_exception   : public saga::exception
+  class incorrect_url         : public saga::parameter_exception
+  class bad_parameter         : public saga::parameter_exception
+
+  // state related exceptions
+  class state_exception       : public saga::exception
+  class already_exists        : public saga::state_exception
+  class does_not_exist        : public saga::state_exception
+  class incorrect_state       : public saga::state_exception
+  class timeout               : public saga::state_exception
+
+  // security related exceptions
+  class security_exception    : public saga::exception
+  class permission_denied     : public saga::security_exception
+  class authorization_failed  : public saga::security_exception
+  class authentication_failed : public saga::security_exception
+
+  // general exceptions
+  class no_success            : public saga::exception
+  class not_implemented       : public saga::exception
+  
+ \end{mycode}
+
+
+\subsection{Details}
+
+ Error handling in SAGA is completely exception-based\footnote{The
+ SAGA specification allows for an additional \T{error\_handler}
+ interface to be implemented by SAGA objects---that seemed
+ unnecessary for object-oriented languages such as C++.}.  The
+ following exceptions exist (note that the exception class names and
+ the |saga::error| enums, returned by |exception.get_error()| have
+ identical names):
+
+ \begin{description}
+
+  \item{\B{NotImplemented}}
+  
+    A method is specified in the SAGA API, but is not provided
+    by this specific SAGA implementation\footnote{In particular,
+    the method is not provided by any of the available adaptors,
+    see Section~\ref{sec:design}.}.
+    
+
+  \item{\B{IncorrectURL}}
+  
+   This exception indicates that a URL argument could not be
+   handled.  For example, this implementation may be unable to
+   handle the specified protocol, or the access to the specified
+   entity, via the given protocol, is impossible.
+
+
+  \item{\B{BadParameter}}
+
+   This exception indicates that at least one of the parameters
+   of the method call is ill-formed, invalid, out of bounds or,
+   otherwise, not usable.  The error message gives specific
+   information on what parameter caused the exception, and why.
+
+
+  \item{\B{AlreadyExists}}
+
+   This exception indicates that an operation cannot succeed
+   because an entity to be created already exists, and cannot be
+   overwritten.  Explicit flags on the method invocation may
+   allow the operation to succeed, e.g., if they indicate that
+   Overwrite is allowed.
+
+
+  \item{\B{DoesNotExist}}
+
+   This exception indicates that an operation cannot succeed
+   because a required entity is missing.  Explicit flags on the
+   method invocation may allow the operation to succeed, e.g.,
+   if they indicate that Create is allowed.
+
+
+  \item{\B{IncorrectState}}
+
+   This exception indicates that the object a method was called
+   upon is in a state where that method cannot possibly succeed.
+   A change of state might allow the method to succeed with the
+   same set of parameters.
+
+
+  \item{\B{PermissionDenied}}
+
+   An operation failed because the identity used for the
+   operation did not have sufficient permissions to successfully
+   perform the operation.
+   
+
+  \item{\B{AuthorizationFailed}}
+
+   An operation failed because none of the available contexts of
+   the used session could be used to access the given resource.
+   In contrast to the \T{PermissionDenied}, this exception
+   usually indicates an error on the administrative level, which
+   usually cannot be fixed by the end user.
+
+
+  \item{\B{AuthenticationFailed}}
+  
+   An operation failed because none of the available session
+   contexts could successfully be used for authentication.  That
+   exception usually indicates invalid or outdated security
+   credentials.
+
+
+  \item{\B{Timeout}}
+
+   This exception indicates that a remote operation was not
+   completed successfully, because the network communication or
+   the remote service timed out.  This exception is never thrown
+   if a timed \T{wait()} or similar method times out, as that is
+   not an error condition.
+
+
+  \item{\B{NoSuccess}}
+
+   This exception indicates that an operation failed for any
+   other reason.  The exception message may, or may not, contain
+   some more details about the cause of the error.
+
+ \end{description}
+
+ Even for simple SAGA operations, the implied Grid interactions
+ can be fairly complex and may invoke multiple remote
+ operations.  It may thus happen that multiple exceptions apply
+ during the execution of the method.  In such cases, the \B{most
+ specific exception} is thrown (the list of exceptions above is
+ ordered, with the most specific exception up front).  
+ 
+ Also, as the above Reference section shows, the exceptions are
+ ordered in an exception hierarchy.  The application can thus
+ try to catch whole classes of exceptions, e.g., all security
+ related exceptions, or all state related exceptions.  The code
+ example below shows, however, how the lower level exceptions
+ can be accessed for debugging purposes:
+
+ \begin{mycode}
+  try
+  {
+    saga::url u ("/path/which/does/not/exist");
+    saga::filesystem::file f (u);
+  }
+  catch ( saga::state_exception const & e )
+  {
+    switch ( e.get_error () )
+    {
+      // handle does not exist
+      case saga::DoesNotExist:
+      {
+        std::cout << "file does not exist"
+                  << std::endl;
+        exit (-1);
+        break;
+      }
+
+      // generic handler for state related problems
+      default:
+      {
+        std::cout << "some other saga state exception caught: "
+                  << std::string (e.what ())
+                  << std::endl;
+        exit (0);
+        break;
+      }
+    }
+  }
+\end{mycode}
+

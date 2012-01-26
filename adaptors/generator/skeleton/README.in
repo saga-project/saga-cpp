@@ -1,0 +1,68 @@
+
+::SAGA DOCUMENTATION FILE::
+
+:ADAPTOR NAME:
+
+   ###Suite### ###Name### ###Type### Adaptor
+
+
+:AUTHORS:
+
+  Copyright (c) 20xx-20yy You Name <your.mail@domain.net>
+
+
+:LICENSE:
+
+  ...
+
+
+:ADAPTOR LIBRARY NAME:
+  
+   saga_adaptor_###suite###_###type###.so (dylib)
+
+
+:IMPLEMENTS PACKAGE:
+ 
+  - saga_package_###type###
+
+
+:DESCRIPTION:
+
+  The adaptor provides ...
+
+
+:URL SCHEMES:
+
+  supported URL schemes are:
+
+    any://
+    ###name###://
+
+
+:REQUIRES:
+
+  In order to build and use the adaptor, the following components must be
+  available:
+
+  ###suite###_###name###.h
+  lib###suite###_###name###.so
+
+
+
+:CONFIGURE OPTIONS:
+
+
+
+:INI FILE:
+
+  saga_adaptor_###suite###_###type###.ini
+
+
+:INI OPTIONS:
+
+  none
+
+
+:KNOWN ISSUES:
+
+ 

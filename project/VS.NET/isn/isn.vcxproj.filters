@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Implementation Source Files">
+      <UniqueIdentifier>{2ee692f1-fd6c-4073-b384-9f4a224f4ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Implementation Header Files">
+      <UniqueIdentifier>{06802792-6a8b-44b3-b180-eddfad1bc2db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\saga\saga\packages\isn\entity_data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\isn\entity_data_set.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\isn\navigator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\isn\task_get_result.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\isn\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\isn\entity_data.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\isn\entity_data_set.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\isn\navigator.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\saga\saga\packages\isn\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\isn\entity_data.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\isn\entity_data_set.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\isn\entity_types.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\isn\navigator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\isn\version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\isn\entity_data.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\isn\entity_data_set.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\isn\navigator.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\isn\navigator_cpi.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

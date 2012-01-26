@@ -1,0 +1,37 @@
+
+PACKAGE:  saga-core
+VERSION:  1.6.1
+REVISION: $Revision: 5625 $
+LICENSE:  Boost Software License 1.0
+
+DEPENDENCIES:
+  boost
+  g++
+
+OPT_DEPENDENCIES:
+  postgresql
+  sqlite
+  xmlrpc
+
+DIRS:
+  adaptors/
+  config/
+  docs/
+  examples/
+  external/
+  make/
+  project/
+  saga/
+  test/
+  tools/
+
+FILES:
+  CHANGES
+  INSTALL
+  LICENSE
+  PACKAGE
+  Makefile
+  README
+  configure
+  configure.in
+

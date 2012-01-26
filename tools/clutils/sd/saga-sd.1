@@ -1,0 +1,73 @@
+.\" Man page for SAGA Service Discovery CLI
+.TH SAGA-SD "1" "November 2009" "SAGA-SD " "User Commands"
+.SH NAME
+saga-sd \- performs Service Discovery queries via SAGA
+.SH SYNOPSIS
+.B saga-sd
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+.\" Add any additional description here
+.PP
+Perform a Service Discovery query using three optional filters. Each filter should be enclosed in double quotes to avoid shell expansion.
+
+Each of the filter strings uses a SQL92 syntax
+as if it were part of a WHERE clause acting to select from a single table.
+Multi-valued attributes are treated as a set of values.
+
+Only the following operators are permitted in expressions:
+
+IN, LIKE, AND, OR, NOT, =, >=, >, <=, <, <>
+
+In addition: Column names,
+             parentheses,
+             column values as single quoted strings,
+             numeric values
+             and comma are permitted.
+
+.PP
+For a multi-valued attribute, the name of the attribute MUST be preceded
+by the keyword ALL or ANY unless comparison with a set literal is intended.
+For each part of the expression,
+the attribute name MUST precede the literal value.
+
+Results will be returned in a random order.
+
+.SH OPTIONS
+.TP
+\fB\-\-context\fR \fICONTEXT\fR
+specify the context. The keyord may be specified more than once to allow multiple contexts. 
+Attributes may be specified for the context by adding a parenthesised, comma separated list of 
+attribute value pairs, where the attribute and value are separated by an equals sign. Leading 
+and trailing spaces are ignored. 
+.TP
+\fB\-\-sf\fR \fIFILTER\fR
+only services matching this service FILTER will be returned. The default is no filtering on service attributes.
+.TP
+\fB\-\-df\fR \fIFILTER\fR
+only services with a data section matching this data FILTER will be returned. The default is no filtering on service data.
+.TP
+\fB\-\-af\fR \fIFILTER\fR
+only services matching this authorization FILTER will be returned. The default is derived from the user's SAGA context.
+.TP
+\fB\-n\fR \fINUM\fB \-\-count\fR \fINUM\fR
+the NUM of services to display. The default is unlimited.
+.TP
+\fB\-\-sa\fR
+display service attributes
+.TP
+\fB\-\-da\fR
+display data attributes
+.TP
+\fB\-\-url\fR \fIURL\fR
+the URL of the information system to use. This overrides any environment variables.
+.TP
+\fB\-h, --help\fR
+display this help and exit
+.SH Examples
+.TP
+saga-sd --context glite --sf "Site='RAL'" -n 1
+Return the URL of the first service matching from the site RAL, where you have authorization to access the service using the glite context.
+.TP
+saga-sd --sf "Site IN ('INFN-CNAF', 'RAL-LCG2')" --af "" --sa
+Return details of all services at INFN-CNAF and RAL-LCG2
+

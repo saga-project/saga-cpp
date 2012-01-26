@@ -1,0 +1,19 @@
+#  Copyright (c) 2005-2009 Hartmut Kaiser
+# 
+#  Distributed under the Boost Software License, Version 1.0. (See accompanying
+#  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+# The general purpose of this file is to list the adaptors to link statically 
+# with the SAGA core to simplify maintenance and deployment. The structure is 
+# to list one adaptor on a line, followed by a comma-separated list of SAGA 
+# packages the adaptor relies on.
+
+# default adaptors (uncomment the adaptors you want to be statically linked)
+default_file,filesystem,namespace
+default_job,job
+default_replica,replica,namespace
+default_advert,advert,namespace
+default_sd,sd
+default_stream,stream
+default_rpc,rpc
+

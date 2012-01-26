@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.4.7">
+  <compound refid="classboost_1_1process_1_1basic__pipeline" kind="class"><name>boost::process::basic_pipeline</name>
+    <member refid="classboost_1_1process_1_1basic__pipeline_164228af446ded778742ed3a277b3378a" kind="function"><name>add</name></member>
+    <member refid="classboost_1_1process_1_1basic__pipeline_119b3a16217f8350dcede3df85ffb7878" kind="function"><name>start</name></member>
+    <member refid="classboost_1_1process_1_1basic__pipeline_116c6403cf66d86e5642270812f5c6672" kind="variable"><name>m_entries</name></member>
+  </compound>
+  <compound refid="structboost_1_1process_1_1basic__pipeline_1_1entry" kind="struct"><name>boost::process::basic_pipeline::entry</name>
+    <member refid="structboost_1_1process_1_1basic__pipeline_1_1entry_1b61cb982028330485c404f179ff4fcc3" kind="function"><name>entry</name></member>
+    <member refid="structboost_1_1process_1_1basic__pipeline_1_1entry_131a699b24926da74bb2b4f4ea6dbca12" kind="variable"><name>m_cl</name></member>
+    <member refid="structboost_1_1process_1_1basic__pipeline_1_1entry_1f5acd66ac40c246ff903baa431b5f83d" kind="variable"><name>m_merge_out_err</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1child" kind="class"><name>boost::process::child</name>
+    <member refid="classboost_1_1process_1_1child_123c957bf6f18f185a9fd560efa9cb4b9" kind="typedef"><name>handle_type</name></member>
+    <member refid="classboost_1_1process_1_1child_1f5aa0a4c094e51d4d2736472acec6893" kind="function"><name>get_handle</name></member>
+    <member refid="classboost_1_1process_1_1child_198668ffd20b860848b2dba06bf7238a0" kind="function"><name>get_stdin</name></member>
+    <member refid="classboost_1_1process_1_1child_119f67d7222fbd06d0b5bed36a8bbf615" kind="function"><name>get_stdout</name></member>
+    <member refid="classboost_1_1process_1_1child_1e21a8cc758c37037723aab198a0cbe65" kind="function"><name>get_stderr</name></member>
+    <member refid="classboost_1_1process_1_1child_1c792e2fe261eb08b1a43e6fa7da408a4" kind="function"><name>wait</name></member>
+    <member refid="classboost_1_1process_1_1child_1a899830c825cc53ecc422f2915959fc7" kind="function"><name>child</name></member>
+    <member refid="classboost_1_1process_1_1child_1fbb8c0510896927b8393a13157965dc3" kind="variable"><name>m_handle</name></member>
+    <member refid="classboost_1_1process_1_1child_1efa6f61ead03129bc6add4c84c652919" kind="variable"><name>m_sstdin</name></member>
+    <member refid="classboost_1_1process_1_1child_132b81b41cc2e9f59a198a50a2c8fa2bb" kind="variable"><name>m_sstdout</name></member>
+    <member refid="classboost_1_1process_1_1child_18c4697b7795f4315a8a57b2608fc5ec0" kind="variable"><name>m_sstderr</name></member>
+    <member refid="classboost_1_1process_1_1child_1af0c8a49488c2645b5dbabee439d5fac" kind="friend"><name>detail::factories</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1children" kind="class"><name>boost::process::children</name>
+    <member refid="classboost_1_1process_1_1children_1e7c24caf69b3a9df827e6193a16e5f21" kind="function"><name>get_stdin</name></member>
+    <member refid="classboost_1_1process_1_1children_17d04b816c9d91a3a9cc4122c12e6e720" kind="function"><name>get_stdout</name></member>
+    <member refid="classboost_1_1process_1_1children_183f4161a12135048bdaf4393d8e6e2db" kind="function"><name>get_stderr</name></member>
+    <member refid="classboost_1_1process_1_1children_1df89bcd65fde3339e6af82d556e215ce" kind="function"><name>wait</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1command__line" kind="class"><name>boost::process::command_line</name>
+    <member refid="classboost_1_1process_1_1command__line_1e276013e23b7cabdaba4fb65339fcf0b" kind="typedef"><name>arguments_vector</name></member>
+    <member refid="classboost_1_1process_1_1command__line_195528095d591a1499e0af3a07df613f3" kind="function"><name>command_line</name></member>
+    <member refid="classboost_1_1process_1_1command__line_19377181d21e090bd7f3913dccc2c95b2" kind="function"><name>argument</name></member>
+    <member refid="classboost_1_1process_1_1command__line_1c5992bd7376ff7ed35b0f892342e9560" kind="function"><name>get_arguments</name></member>
+    <member refid="classboost_1_1process_1_1command__line_10a4b60959233722f65b75ee63f06959e" kind="function"><name>get_executable</name></member>
+    <member refid="classboost_1_1process_1_1command__line_11395f0e0fb25c732ad8eee595029d8bb" kind="function"><name>shell</name></member>
+    <member refid="classboost_1_1process_1_1command__line_1d73cb2ae76ecd4343444cac34f1c703d" kind="variable"><name>m_executable</name></member>
+    <member refid="classboost_1_1process_1_1command__line_1e589a90125983f2c74866fe1efb176b9" kind="variable"><name>m_arguments</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1launcher" kind="class"><name>boost::process::launcher</name>
+    <member refid="classboost_1_1process_1_1launcher_1bdde7d5fef9d4c2248f72ecadf1a119a" kind="function"><name>start</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1not__found__error" kind="class"><name>boost::process::not_found_error</name>
+    <member refid="classboost_1_1process_1_1not__found__error_156da8cc1533d15b67c1804fdf29b10b9" kind="function"><name>not_found_error</name></member>
+    <member refid="classboost_1_1process_1_1not__found__error_184a7c95b1a1e42e2126330601ef5b9f9" kind="function"><name>~not_found_error</name></member>
+    <member refid="classboost_1_1process_1_1not__found__error_1cab0d06c866b238c527af963cf288cde" kind="function"><name>get_value</name></member>
+    <member refid="classboost_1_1process_1_1not__found__error_12484411bbf02d939648082d9dcd7974a" kind="variable"><name>m_value</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1pistream" kind="class"><name>boost::process::pistream</name>
+    <member refid="classboost_1_1process_1_1pistream_1d4c694a4dce0bf4c27d32309425149dc" kind="function"><name>pistream</name></member>
+    <member refid="classboost_1_1process_1_1pistream_1caf04323abe8c52d4f14a270ff8227f0" kind="function"><name>close</name></member>
+    <member refid="classboost_1_1process_1_1pistream_17dd79aee9af0f0ca8ada94fcba945d0d" kind="variable"><name>m_handle</name></member>
+    <member refid="classboost_1_1process_1_1pistream_1d2189cd2d2a5aab8312978201f78f057" kind="variable"><name>m_systembuf</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1posix__child" kind="class"><name>boost::process::posix_child</name>
+    <member refid="classboost_1_1process_1_1posix__child_1b1345d2e5fee4777707c959c324a184f" kind="function"><name>get_input</name></member>
+    <member refid="classboost_1_1process_1_1posix__child_11e5b99598124ebe4ee3c338d38120a94" kind="function"><name>get_output</name></member>
+    <member refid="classboost_1_1process_1_1posix__child_10be743fa6dda2b4f80a6563016ef4a9e" kind="function"><name>posix_child</name></member>
+    <member refid="classboost_1_1process_1_1posix__child_1bbb503e1d756455d777a7afa06a6d54d" kind="typedef"><name>input_map</name></member>
+    <member refid="classboost_1_1process_1_1posix__child_189f0aa92c4c356b2c81dfa41160d9575" kind="typedef"><name>output_map</name></member>
+    <member refid="classboost_1_1process_1_1posix__child_1385a38e929367d63bc93dcff509cad48" kind="variable"><name>m_input_map</name></member>
+    <member refid="classboost_1_1process_1_1posix__child_1ea983b6e5498b08ea68c419835c0ed34" kind="variable"><name>m_output_map</name></member>
+    <member refid="classboost_1_1process_1_1posix__child_1af0c8a49488c2645b5dbabee439d5fac" kind="friend"><name>detail::factories</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1posix__launcher" kind="class"><name>boost::process::posix_launcher</name>
+    <member refid="classboost_1_1process_1_1posix__launcher_1ab7af573ae8fe5bef490ab061e6cc4aa" kind="function"><name>set_input_behavior</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_131f7c9d4213de4de0b93c52bdc141376" kind="function"><name>set_output_behavior</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_185a513b4f0d0d83de27ac7b4db0d9d45" kind="function"><name>merge_outputs</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_1e01380a1665deb5ca188f674ecff9872" kind="function"><name>get_uid</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_188fe5431d98f0151c1fbf65803bb1ee5" kind="function"><name>set_uid</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_1c103d2a9e0455c98eef2d22b9fca068c" kind="function"><name>get_euid</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_1e76ea2d8b1c78f5b734cecea54a32d5e" kind="function"><name>set_euid</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_1a96c3e381f0849520f733c8e3ec16ef6" kind="function"><name>get_gid</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_18bdec716875a6e52ba9dd07cd98c9834" kind="function"><name>set_gid</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_187c24a4e343399177df7d9d46d2792a2" kind="function"><name>get_egid</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_16fc001c80697b11f0d81d0ae4d93d793" kind="function"><name>set_egid</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_1c4c4f7e7ca8468850db640da35f4c428" kind="function"><name>get_chroot</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_166f8dd679205e2743a2d6030a4ed2360" kind="function"><name>set_chroot</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_10793b9bb9cc65d7f0c87b5761efdd6c4" kind="function"><name>start</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_10c780b9021e9f734bcb51f5db2e20edf" kind="variable"><name>m_merge_set</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_1f5b07c3d8264abbf689badc325fa734b" kind="variable"><name>m_input_info</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_149c017e29633f7660e8c2e21f08d87e3" kind="variable"><name>m_output_info</name></member>
+    <member refid="classboost_1_1process_1_1posix__launcher_16c1869e14794ff03c7375be9c2a75547" kind="variable"><name>m_setup</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1posix__status" kind="class"><name>boost::process::posix_status</name>
+    <member refid="classboost_1_1process_1_1posix__status_1e31b35ae7cb922309339a0b6416e33c2" kind="function"><name>posix_status</name></member>
+    <member refid="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" kind="function"><name>signaled</name></member>
+    <member refid="classboost_1_1process_1_1posix__status_1106011e5818f96594e935de2de939385" kind="function"><name>term_signal</name></member>
+    <member refid="classboost_1_1process_1_1posix__status_1f6984a9532b581af03a70856c8f05fd7" kind="function"><name>dumped_core</name></member>
+    <member refid="classboost_1_1process_1_1posix__status_10ec78e5370b07a512725b1dcb582f082" kind="function"><name>stopped</name></member>
+    <member refid="classboost_1_1process_1_1posix__status_1b572b351fc6ef019ea00b935a03e366d" kind="function"><name>stop_signal</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1postream" kind="class"><name>boost::process::postream</name>
+    <member refid="classboost_1_1process_1_1postream_192fe6bcf42c2837672adcdd028a77455" kind="function"><name>postream</name></member>
+    <member refid="classboost_1_1process_1_1postream_16ea486fc09d27030488302f3d8380f67" kind="function"><name>close</name></member>
+    <member refid="classboost_1_1process_1_1postream_1c0a4402244fb239de0ccfd757acb2d2a" kind="variable"><name>m_handle</name></member>
+    <member refid="classboost_1_1process_1_1postream_13fcafd023c87ee480f07c386b8477e1a" kind="variable"><name>m_systembuf</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1status" kind="class"><name>boost::process::status</name>
+    <member refid="classboost_1_1process_1_1status_1546ba42f669e05e573b70f6d29d31584" kind="function"><name>exited</name></member>
+    <member refid="classboost_1_1process_1_1status_19db0b1ba1cbe99905af826182bf410ee" kind="function"><name>exit_status</name></member>
+    <member refid="classboost_1_1process_1_1status_1bf6cb3003da3a88b72a8baaf6630d909" kind="function"><name>status</name></member>
+    <member refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" kind="variable"><name>m_flags</name></member>
+    <member refid="classboost_1_1process_1_1status_1828a451198ad7eae745d6a46def47f77" kind="friend"><name>create_status</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1system__error" kind="class"><name>boost::process::system_error</name>
+    <member refid="classboost_1_1process_1_1system__error_15e7309b1225055b5007654937f048e4f" kind="typedef"><name>code_type</name></member>
+    <member refid="classboost_1_1process_1_1system__error_14d68fcf9db75ea2072ef395d857f7e8e" kind="function"><name>system_error</name></member>
+    <member refid="classboost_1_1process_1_1system__error_11c110bdb769d9725a8a6f9162a1f5935" kind="function"><name>~system_error</name></member>
+    <member refid="classboost_1_1process_1_1system__error_18e84aa2d663b46cf31cfb178f8d06097" kind="function"><name>code</name></member>
+    <member refid="classboost_1_1process_1_1system__error_156851629004cada9c87ccb116b1a9237" kind="function"><name>what</name></member>
+    <member refid="classboost_1_1process_1_1system__error_1dffeecd2afa6eb6c09a5fc8f1ba338d1" kind="variable"><name>m_sys_err</name></member>
+    <member refid="classboost_1_1process_1_1system__error_1a938dc531f6bab8313f668f4ca155d74" kind="variable"><name>m_message</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1win32__child" kind="class"><name>boost::process::win32_child</name>
+    <member refid="classboost_1_1process_1_1win32__child_1c2521bc844c4c8f008269b1ef921daeb" kind="function"><name>get_id</name></member>
+    <member refid="classboost_1_1process_1_1win32__child_1ded488b0e5c4a2140768388716f27e51" kind="function"><name>get_primary_thread_handle</name></member>
+    <member refid="classboost_1_1process_1_1win32__child_112fc7acb5cf601dd497a6b7d45b341f8" kind="function"><name>get_primary_thread_id</name></member>
+    <member refid="classboost_1_1process_1_1win32__child_19628f18c01b1922f66fe212fb1f80bb9" kind="function"><name>win32_child</name></member>
+    <member refid="classboost_1_1process_1_1win32__child_18d45342c43dbb8bfc9138c11dc69d273" kind="variable"><name>m_process_information</name></member>
+    <member refid="classboost_1_1process_1_1win32__child_1af0c8a49488c2645b5dbabee439d5fac" kind="friend"><name>detail::factories</name></member>
+  </compound>
+  <compound refid="classboost_1_1process_1_1win32__launcher" kind="class"><name>boost::process::win32_launcher</name>
+    <member refid="classboost_1_1process_1_1win32__launcher_117c84656743e3b97d8d8d922da194f21" kind="function"><name>win32_launcher</name></member>
+    <member refid="classboost_1_1process_1_1win32__launcher_1712c43306610d91d4df0e28de36900f5" kind="function"><name>start</name></member>
+    <member refid="classboost_1_1process_1_1win32__launcher_19231b0f3ce0874a0628f82899feb7bcf" kind="variable"><name>m_startupinfo</name></member>
+  </compound>
+  <compound refid="namespaceboost" kind="namespace"><name>boost</name>
+  </compound>
+  <compound refid="namespaceboost_1_1process" kind="namespace"><name>boost::process</name>
+    <member refid="namespaceboost_1_1process_1505e53ae6c9577aa0ad7027fae6ee2de" kind="typedef"><name>pipeline</name></member>
+    <member refid="namespaceboost_1_1process_196ecbb2d19eb08dc6f89d652901ecb3d" kind="enum"><name>stream_behavior</name></member>
+    <member refid="namespaceboost_1_1process_196ecbb2d19eb08dc6f89d652901ecb3d17fc673a4c7e4959cf2d0bb99245fc8f" kind="enumvalue"><name>close_stream</name></member>
+    <member refid="namespaceboost_1_1process_196ecbb2d19eb08dc6f89d652901ecb3d525a2e4b8e2fc3251bdf7d4fbda229d7" kind="enumvalue"><name>inherit_stream</name></member>
+    <member refid="namespaceboost_1_1process_196ecbb2d19eb08dc6f89d652901ecb3db3c13925591be5d0262cb8eb37e15519" kind="enumvalue"><name>redirect_stream</name></member>
+    <member refid="namespaceboost_1_1process_196ecbb2d19eb08dc6f89d652901ecb3d1486f0d6c65a322918bc93161bb0cbd0" kind="enumvalue"><name>silent_stream</name></member>
+    <member refid="namespaceboost_1_1process_163de582de0fc98af4eb45f2a9c0d1ebf" kind="function"><name>create_status</name></member>
+  </compound>
+  <compound refid="namespaceboost_1_1process_1_1detail" kind="namespace"><name>boost::process::detail</name>
+  </compound>
+  <compound refid="process_8hpp" kind="file"><name>process.hpp</name>
+  </compound>
+  <compound refid="basic__pipeline_8hpp" kind="file"><name>basic_pipeline.hpp</name>
+  </compound>
+  <compound refid="child_8hpp" kind="file"><name>child.hpp</name>
+  </compound>
+  <compound refid="children_8hpp" kind="file"><name>children.hpp</name>
+  </compound>
+  <compound refid="command__line_8hpp" kind="file"><name>command_line.hpp</name>
+  </compound>
+  <compound refid="config_8hpp" kind="file"><name>config.hpp</name>
+    <member refid="config_8hpp_1ab775a2584b4361e608281811544a614" kind="define"><name>BOOST_PROCESS_WIN32_API</name></member>
+    <member refid="config_8hpp_108fc09db249e39b5272102da68544335" kind="define"><name>BOOST_PROCESS_POSIX_API</name></member>
+  </compound>
+  <compound refid="exceptions_8hpp" kind="file"><name>exceptions.hpp</name>
+  </compound>
+  <compound refid="forward__decls_8hpp" kind="file"><name>forward_decls.hpp</name>
+  </compound>
+  <compound refid="launcher_8hpp" kind="file"><name>launcher.hpp</name>
+  </compound>
+  <compound refid="pipeline_8hpp" kind="file"><name>pipeline.hpp</name>
+  </compound>
+  <compound refid="pistream_8hpp" kind="file"><name>pistream.hpp</name>
+  </compound>
+  <compound refid="posix__child_8hpp" kind="file"><name>posix_child.hpp</name>
+  </compound>
+  <compound refid="posix__launcher_8hpp" kind="file"><name>posix_launcher.hpp</name>
+  </compound>
+  <compound refid="posix__status_8hpp" kind="file"><name>posix_status.hpp</name>
+  </compound>
+  <compound refid="postream_8hpp" kind="file"><name>postream.hpp</name>
+  </compound>
+  <compound refid="status_8hpp" kind="file"><name>status.hpp</name>
+  </compound>
+  <compound refid="stream__behavior_8hpp" kind="file"><name>stream_behavior.hpp</name>
+  </compound>
+  <compound refid="win32__child_8hpp" kind="file"><name>win32_child.hpp</name>
+  </compound>
+  <compound refid="win32__launcher_8hpp" kind="file"><name>win32_launcher.hpp</name>
+  </compound>
+  <compound refid="dir_000000" kind="dir"><name>/tmp/process.016638aa/process/boost/</name>
+  </compound>
+  <compound refid="dir_000001" kind="dir"><name>/tmp/process.016638aa/process/boost/process/</name>
+  </compound>
+</doxygenindex>

@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node15" href="$classsaga_1_1advert_1_1directory.html" title="The directory class represents a directory within a meta data directory with a hierarchical namespace..." alt="" coords="5,2087,171,2385"/>
+<area shape="rect" id="node17" title="A checkpoint directory contains, you guess it, checkpoints." alt="" coords="195,2191,340,2281"/>
+<area shape="rect" id="node19" href="$classsaga_1_1filesystem_1_1directory.html" title="The SAGA file package directory API." alt="" coords="365,2078,555,2394"/>
+<area shape="rect" id="node21" href="$classsaga_1_1replica_1_1logical__directory.html" title="A logical directory represents a directory entry in the name space of logical files." alt="" coords="579,2078,796,2394"/>
+<area shape="rect" id="node2" href="$classsaga_1_1name__space_1_1entry.html" title="An RNS entry that interconnects a reference to an existing resource into the hierarchical name space..." alt="" coords="274,645,453,1150"/>
+<area shape="rect" id="node4" href="$classsaga_1_1object.html" title="Brief description starts here." alt="" coords="97,372,217,556"/>
+<area shape="rect" id="node6" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; entry \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="241,391,485,537"/>
+<area shape="rect" id="node8" href="$structsaga_1_1detail_1_1monitorable.html" title="The SAGA monitorable interface." alt="" coords="229,63,491,209"/>
+<area shape="rect" id="node10" href="$structsaga_1_1detail_1_1permissions.html" title="{saga::detail::permissions\&lt; entry \&gt;\n||+ permissions_allow()\l+ permissions_deny()\l+ permissions_check()\l+ get_owner()\l+ get_group()\l&#45; permissions_allowpriv()\l&#45; permissions_denypriv()\l&#45; permissions_checkpriv()\l&#45; get_ownerpriv()\l&#45; get_grouppriv()\l}" alt="" coords="519,334,763,594"/>
+<area shape="rect" id="node12" href="$structsaga_1_1detail_1_1permissions.html" title="The SAGA permissions interface." alt="" coords="515,6,775,266"/>
+</map>

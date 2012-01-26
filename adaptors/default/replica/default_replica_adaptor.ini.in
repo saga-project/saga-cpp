@@ -1,0 +1,28 @@
+ 
+[saga.adaptors.default_replica]
+  name      = default_replica
+#  path      = $[saga.location]/lib
+
+[saga.adaptors.default_replica.preferences]
+  # adaptor configuration
+
+  # specify what backend to use
+  dbtype    = @SAGA_DBTYPE@
+
+
+[saga.adaptors.default_replica.preferences.sqlite3]
+  # specify a file name where sqlite3 can store its data.
+  # relative and absolute paths are both supported.  Relative paths are 
+  # relative to the applications cwd.
+
+  dbconnect = ${HOME}/.saga_replica.db
+
+
+#[saga.adaptors.default_replica.preferences.postgresql]
+  # The set of parameters used in the dbconnect string 
+  # for PostgreSQL is the same as accepted by the PQconnectdb 
+  # function from the libpq library (see here: 
+  # http://www.postgresql.org/docs/8.1/interactive/libpq.html#LIBPQ-CONNECT)
+  
+#  dbconnect = dbname=replicadb;host=<your hostname here>;port=5432;user=<username>;password=<password>
+  

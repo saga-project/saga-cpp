@@ -1,0 +1,13 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{saga::isn::entity_data\n||+ entity_data()\l+ entity_data()\l+ ~entity_data()\l+ operator=()\l# entity_data()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node2 [label="{saga::object\n||+ object()\l+ get_type()\l+ get_id()\l+ get_session()\l+ get_session()\l+ clone()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1object.html",tooltip="Brief description starts here."];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node3 [label="{saga::detail::attribute\< entity_data \>\n||+ get_attribute()\l+ set_attribute()\l+ get_vector_attribute()\l+ set_vector_attribute()\l+ remove_attribute()\l+ list_attributes()\l+ find_attributes()\l+ attribute_exists()\l+ attribute_is_readonly()\l+ attribute_is_writable()\l+ attribute_is_vector()\l+ attribute_is_removable()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1attribute.html"];
+  Node4 -> Node3 [dir="back",color="orange",fontsize="10",style="solid",label=" \< entity_data \>" ,fontname="FreeSans"];
+  Node4 [label="{saga::detail::attribute\< Derived \>\n||+ get_attribute()\l+ set_attribute()\l+ get_vector_attribute()\l+ set_vector_attribute()\l+ remove_attribute()\l+ list_attributes()\l+ find_attributes()\l+ attribute_exists()\l+ attribute_is_readonly()\l+ attribute_is_writable()\l+ attribute_is_vector()\l+ attribute_is_removable()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1attribute.html",tooltip="The SAGA attribute interface."];
+}

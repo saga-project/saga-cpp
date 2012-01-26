@@ -1,0 +1,1172 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>4. Usage</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="../index.html" title="Boost.Process">
+<link rel="up" href="../index.html" title="Boost.Process">
+<link rel="prev" href="platforms_and_compilers.html" title="3. Platforms and compilers">
+<link rel="next" href="platform_specific_usage.html" title="5. Platform-specific
+    usage">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src=".././boost.png"></td></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="platforms_and_compilers.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="platform_specific_usage.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="boost_process.usage"></a>4. <a href="usage.html" title="4. Usage">Usage</a></h2></div></div></div>
+<div class="toc"><dl>
+<dt><span class="section"><a href="usage.html#boost_process.usage.quick_tutorials">4.1. Quick tutorials</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.the_command_line">4.2. The command line</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.interprocess_communication">4.3. Interprocess
+      communication</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.environment_variables">4.4. Environment
+      variables</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.the_startup_work_directory">4.5. The startup
+      work directory</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.single_process_startup_and_termination">4.6. Single
+      process startup and termination</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.pipeline_startup_and_termination">4.7. Pipeline
+      startup and termination</a></span></dt>
+</dl></div>
+<p>
+      This chapter describes all the portable features in Boost.Process that will
+      let you achieve the most common tasks. The chapter starts presenting a couple
+      of quick tutorials for the lazy reader, outlining the general structure of
+      a program using the library. It later dives into details concerning each part
+      of the tutorial.
+    </p>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_process.usage.quick_tutorials"></a>4.1. <a href="usage.html#boost_process.usage.quick_tutorials" title="4.1. Quick tutorials">Quick tutorials</a></h3></div></div></div>
+<div class="toc"><dl>
+<dt><span class="section"><a href="usage.html#boost_process.usage.quick_tutorials.single_process_tutorial">4.1.1. Single
+        process tutorial</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.quick_tutorials.pipeline_tutorial">4.1.2. Pipeline
+        tutorial</a></span></dt>
+</dl></div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="boost_process.usage.quick_tutorials.single_process_tutorial"></a>4.1.1. <a href="usage.html#boost_process.usage.quick_tutorials.single_process_tutorial" title="4.1.1. Single
+        process tutorial">Single
+        process tutorial</a></h4></div></div></div>
+<p>
+          The single process tutorial outlines all the steps necessary to prepare,
+          launch, manage and terminate a single child process. It also illustrates
+          interprocess communication by capturing the child's output messages and
+          printing them in a different format. Each step is accompanied with a snippet
+          to aid in the explanations which, if joined together, produce a complete
+          example application. Let's get started.
+        </p>
+<p>
+          As happens with any C++ library, the very first step to use Boost.Process
+          is to include some header file that pulls in the necessary class and function
+          definitions. To make things simple, we include the <code class="computeroutput"><a href="reference.html#header.boost.process.hpp" title="7.1. Header &lt;boost/process.hpp&gt;">boost/process.hpp</a></code>
+          all-in-one header file and define an alias for its main name space. However,
+          a bigger application will want to include the more finer grained headers
+          to avoid unnecessary rebuilds shall the library's code change.
+        </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">process</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="keyword">namespace</span> <span class="identifier">bp</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">;</span>
+</pre>
+<p>
+          Getting into the child process startup area, the first thing to do is to
+          tell the library which application has to be started and which arguments
+          shall be passed to it. In an attempt to choose a sample child program that
+          works on all supported platforms, we use the <a href="http://subversion.tigris.org" target="_top">Subversion</a>
+          command line client whose binary is named <code class="computeroutput"><span class="identifier">svn</span></code>
+          (<code class="computeroutput"><span class="identifier">svn</span><span class="special">.</span><span class="identifier">exe</span></code> under Windows, but this difference
+          is not important).
+        </p>
+<p>
+          Our sample command line uses the provided <a href="concepts.html#boost_process.concepts.command_line" title="2.3. Command line">command_line</a>
+          class, tells it to locate the binary in the path and asks the program to
+          update the current directory. We could specify additional arguments if
+          we wanted to.
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl</span><span class="special">(</span><span class="string">"svn"</span><span class="special">);</span>
+<span class="identifier">cl</span><span class="special">.</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"update"</span><span class="special">);</span>
+</pre>
+<p>
+          Following the definition of the command line, we define the execution context
+          of the new process; this is done by creating a <code class="computeroutput"><a href="../boost/process/launcher.html" title="Class launcher">launcher</a></code>
+          object. As Subversion <code class="computeroutput"><span class="identifier">update</span></code>
+          command updates the "current directory", we will want the child
+          process to start in another location (that specified in the <code class="computeroutput"><span class="identifier">dir</span></code> variable) so that it updates the
+          desired directory. We do this by asking the launcher to use a different
+          work directory than the current one. Furthermore, as outlined above, we
+          also want to capture the standard output and error channels for later processing,
+          so we end up with the following:
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">redirect_stream</span><span class="special">);</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_merge_out_err</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_work_directory</span><span class="special">(</span><span class="identifier">dir</span><span class="special">);</span>
+</pre>
+<p>
+          Once we have the command line and the launcher configured, we start the
+          new child process by mixing them together. (Yes, we could reuse the same
+          launcher to start different command lines if we wanted to.)
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">child</span> <span class="identifier">c</span> <span class="special">=</span> <span class="identifier">l</span><span class="special">.</span><span class="identifier">start</span><span class="special">(</span><span class="identifier">cl</span><span class="special">);</span>
+</pre>
+<p>
+          At this point the <code class="computeroutput"><span class="identifier">c</span></code> <code class="computeroutput"><a href="../boost/process/child.html" title="Class child">child</a></code> instance represents a running
+          process. We can use this object to interact with the child, which in our
+          example means reading its output messages. We do this by obtaining a C++
+          input stream that is connected to the child's standard output and error
+          channels. From there on, it is a simple matter of reading data and processing
+          them as we want:
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">pistream</span><span class="special">&amp;</span> <span class="identifier">is</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">get_stdout</span><span class="special">();</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">line</span><span class="special">;</span>
+<span class="keyword">while</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">getline</span><span class="special">(</span><span class="identifier">is</span><span class="special">,</span> <span class="identifier">line</span><span class="special">))</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Got line from child: "</span> <span class="special">&lt;&lt;</span> <span class="identifier">line</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+</pre>
+<p>
+          After parsing the output generated by the child process, we wait until
+          it terminates execution to retrieve its exit status, which is later stored
+          in the <code class="computeroutput"><span class="identifier">s</span></code> <code class="computeroutput"><a href="../boost/process/status.html" title="Class status">status</a></code> object for further treatment.
+          (Strictly speaking we get to this call because the process has already
+          terminated; otherwise the previous loop could not have finished.)
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">wait</span><span class="special">();</span>
+</pre>
+<p>
+          At last we parse the process' output status stored in <code class="computeroutput"><span class="identifier">s</span></code>
+          to see if everything was successful:
+        </p>
+<pre class="programlisting"><span class="keyword">if</span> <span class="special">(</span><span class="identifier">s</span><span class="special">.</span><span class="identifier">exited</span><span class="special">()</span> <span class="special">&amp;&amp;</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">exit_status</span><span class="special">()</span> <span class="special">==</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">)</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Directory updated successfully."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="keyword">else</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Update failed."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+</pre>
+<p>
+          To sum it up, the complete example code is:
+        </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">cstdlib</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">string</span><span class="special">&gt;</span>
+
+<span class="comment">// quickbook:begin(include-headers)
+</span><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">process</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="keyword">namespace</span> <span class="identifier">bp</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">;</span>
+<span class="comment">// quickbook:end(include-headers)
+</span>
+<span class="keyword">int</span>
+<span class="identifier">main</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">argc</span><span class="special">,</span> <span class="keyword">char</span><span class="special">*</span> <span class="identifier">argv</span><span class="special">[])</span>
+<span class="special">{</span>
+
+<span class="keyword">if</span> <span class="special">(</span><span class="identifier">argc</span> <span class="special">&lt;</span> <span class="number">2</span><span class="special">)</span> <span class="special">{</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cerr</span> <span class="special">&lt;&lt;</span> <span class="string">"Please specify a directory."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="keyword">return</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
+<span class="special">}</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">dir</span> <span class="special">=</span> <span class="identifier">argv</span><span class="special">[</span><span class="number">1</span><span class="special">];</span>
+
+<span class="comment">// quickbook:begin(command-line)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl</span><span class="special">(</span><span class="string">"svn"</span><span class="special">);</span>
+<span class="identifier">cl</span><span class="special">.</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"update"</span><span class="special">);</span>
+<span class="comment">// quickbook:end(command-line)
+</span>
+<span class="comment">// quickbook:begin(launcher)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">redirect_stream</span><span class="special">);</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_merge_out_err</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_work_directory</span><span class="special">(</span><span class="identifier">dir</span><span class="special">);</span>
+<span class="comment">// quickbook:end(launcher)
+</span>
+<span class="comment">// quickbook:begin(child-start)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">child</span> <span class="identifier">c</span> <span class="special">=</span> <span class="identifier">l</span><span class="special">.</span><span class="identifier">start</span><span class="special">(</span><span class="identifier">cl</span><span class="special">);</span>
+<span class="comment">// quickbook:end(child-start)
+</span>
+<span class="comment">// quickbook:begin(get-output)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">pistream</span><span class="special">&amp;</span> <span class="identifier">is</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">get_stdout</span><span class="special">();</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">line</span><span class="special">;</span>
+<span class="keyword">while</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">getline</span><span class="special">(</span><span class="identifier">is</span><span class="special">,</span> <span class="identifier">line</span><span class="special">))</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Got line from child: "</span> <span class="special">&lt;&lt;</span> <span class="identifier">line</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="comment">// quickbook:end(get-output)
+</span>
+<span class="comment">// quickbook:begin(wait)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">wait</span><span class="special">();</span>
+<span class="comment">// quickbook:end(wait)
+</span>
+<span class="comment">// quickbook:begin(parse-status)
+</span><span class="keyword">if</span> <span class="special">(</span><span class="identifier">s</span><span class="special">.</span><span class="identifier">exited</span><span class="special">()</span> <span class="special">&amp;&amp;</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">exit_status</span><span class="special">()</span> <span class="special">==</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">)</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Directory updated successfully."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="keyword">else</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Update failed."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="comment">// quickbook:end(parse-status)
+</span>
+<span class="keyword">return</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">;</span>
+
+<span class="special">}</span>
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="boost_process.usage.quick_tutorials.pipeline_tutorial"></a>4.1.2. <a href="usage.html#boost_process.usage.quick_tutorials.pipeline_tutorial" title="4.1.2. Pipeline
+        tutorial">Pipeline
+        tutorial</a></h4></div></div></div>
+<p>
+          Boost.Process integrates mechanisms to spawn and control process groups
+          using a construction known as a pipeline. This tutorial outlines the procedure
+          to prepare, spawn, control and terminate several commands that are interconnected
+          in a unidimensional chain. It is recommended to first read the <a href="usage.html#boost_process.usage.quick_tutorials.single_process_tutorial" title="4.1.1. Single
+        process tutorial">single
+          process tutorial</a> because it illustrates simpler concepts than this
+          one; you should spot the minor differences to really understand how pipeline
+          management works.
+        </p>
+<p>
+          First of all, a simple program that manages pipelines includes the general
+          Boost.Process header. Of course, we could include the more fine grained
+          headers, but for our demonstration purposes we need not to:
+        </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">process</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="keyword">namespace</span> <span class="identifier">bp</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">;</span>
+</pre>
+<p>
+          As described earlier, processes are started using a launcher. When it comes
+          to pipelines, the concept is the same but differs slightly in its usage:
+          the <code class="computeroutput">pipeline</code> specialized
+          launcher is the single process' <code class="computeroutput"><a href="../boost/process/launcher.html" title="Class launcher">launcher</a></code>
+          homogeneous class but it differs in that it spawns and interconnects multiple
+          processes. Both launchers share most of their public interface, so the
+          code below will look very familiar.
+        </p>
+<p>
+          To demonstrate the launcher's construction, we capture the pipeline's standard
+          input (which is the same as the first process' standard input); this will
+          allow us to feed it some data for further processing. On the other hand
+          we tell the launcher to inherit the parent's standard output so that the
+          results are printed to the expected stream (typically the screen):
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">pipeline</span> <span class="identifier">p</span><span class="special">;</span>
+<span class="identifier">p</span><span class="special">.</span><span class="identifier">set_stdin_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">redirect_stream</span><span class="special">);</span>
+<span class="identifier">p</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">inherit_stream</span><span class="special">);</span>
+</pre>
+<p>
+          Next, we tell the library which programs form the pipeline. Each component
+          is described by a regular <code class="computeroutput"><a href="../boost/process/command_line.html" title="Class command_line">command
+          line</a></code>, much like we did before in the simple tutorial. However
+          this example uses the <code class="computeroutput"><a href="../boost/process/command_line.html#id2378995-bb">shell</a></code>
+          constructor to simplify argument passing (and to illustrate a different
+          way of doing things).
+        </p>
+<p>
+          Please be aware that the utilities used in these command lines are specific
+          to Unix systems. This does not mean in any way that pipelines are restricted
+          to the POSIX platform; the code could use equivalent programs under Windows
+          and behave equally well:
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl1</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"cut -d ' ' -f 2-5"</span><span class="special">);</span>
+<span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl2</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"sed 's,^,line: &gt;&gt;&gt;,'"</span><span class="special">);</span>
+<span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl3</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"sed 's,$,&lt;&lt;&lt;,'"</span><span class="special">);</span>
+</pre>
+<p>
+          Once all the pipeline components are defined, we add them to the launcher,
+          really constructing the pipeline. The order in which we add them is important:
+        </p>
+<pre class="programlisting"><span class="identifier">p</span><span class="special">.</span><span class="identifier">add</span><span class="special">(</span><span class="identifier">cl1</span><span class="special">).</span><span class="identifier">add</span><span class="special">(</span><span class="identifier">cl2</span><span class="special">).</span><span class="identifier">add</span><span class="special">(</span><span class="identifier">cl3</span><span class="special">);</span>
+</pre>
+<p>
+          Just after that we can spawn the whole process group, which is not any
+          different than starting a single process. Note that this time we get a
+          <code class="computeroutput"><a href="../boost/process/children.html" title="Class children">children</a></code> object instead
+          of a regular child because we need to keep track of multiple processes.
+          We could be interested in directly interacting with each child and not
+          with the pipeline black box concept:
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">children</span> <span class="identifier">cs</span> <span class="special">=</span> <span class="identifier">p</span><span class="special">.</span><span class="identifier">start</span><span class="special">();</span>
+</pre>
+<p>
+          At this point the pipeline is running. The <code class="computeroutput"><span class="identifier">children</span></code>
+          class offers us an interface that hides the fact that there are multiple
+          processes running; we can simply treat it as if it were an instance of
+          <code class="computeroutput"><span class="identifier">child</span></code>. So, similar to what
+          we did in the previous tutorial, we obtain the pipeline's standard input
+          and feed it some data:
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">postream</span><span class="special">&amp;</span> <span class="identifier">os</span> <span class="special">=</span> <span class="identifier">cs</span><span class="special">.</span><span class="identifier">get_stdin</span><span class="special">();</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">line</span><span class="special">;</span>
+<span class="keyword">while</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">getline</span><span class="special">(</span><span class="identifier">file</span><span class="special">,</span> <span class="identifier">line</span><span class="special">))</span>
+    <span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="identifier">line</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="identifier">os</span><span class="special">.</span><span class="identifier">close</span><span class="special">();</span>
+</pre>
+<p>
+          Once done, we wait until all processes stop execution and collect their
+          exit status:
+        </p>
+<pre class="programlisting"><span class="identifier">bp</span><span class="special">::</span><span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">cs</span><span class="special">.</span><span class="identifier">wait</span><span class="special">();</span>
+</pre>
+<p>
+          At last we process the returned status in <code class="computeroutput"><span class="identifier">s</span></code>
+          to determine if everything went correctly:
+        </p>
+<pre class="programlisting"><span class="keyword">return</span> <span class="special">(</span><span class="identifier">s</span><span class="special">.</span><span class="identifier">exited</span><span class="special">()</span> <span class="special">&amp;&amp;</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">exit_status</span><span class="special">()</span> <span class="special">==</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">)</span> <span class="special">?</span>
+    <span class="identifier">EXIT_SUCCESS</span> <span class="special">:</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
+</pre>
+<p>
+          To sum it up, the complete example code is:
+        </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">cstdlib</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">fstream</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">string</span><span class="special">&gt;</span>
+
+<span class="comment">// quickbook:begin(include-headers)
+</span><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">process</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="keyword">namespace</span> <span class="identifier">bp</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">;</span>
+<span class="comment">// quickbook:end(include-headers)
+</span>
+<span class="keyword">int</span>
+<span class="identifier">main</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">argc</span><span class="special">,</span> <span class="keyword">char</span><span class="special">*</span> <span class="identifier">argv</span><span class="special">[])</span>
+<span class="special">{</span>
+
+<span class="keyword">if</span> <span class="special">(</span><span class="identifier">argc</span> <span class="special">&lt;</span> <span class="number">2</span><span class="special">)</span> <span class="special">{</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cerr</span> <span class="special">&lt;&lt;</span> <span class="string">"Please specify a file name."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="keyword">return</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
+<span class="special">}</span>
+
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">ifstream</span> <span class="identifier">file</span><span class="special">(</span><span class="identifier">argv</span><span class="special">[</span><span class="number">1</span><span class="special">]);</span>
+<span class="keyword">if</span> <span class="special">(!</span><span class="identifier">file</span><span class="special">)</span> <span class="special">{</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cerr</span> <span class="special">&lt;&lt;</span> <span class="string">"Cannot open file."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="keyword">return</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
+<span class="special">}</span>
+
+<span class="comment">// quickbook:begin(pipeline)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">pipeline</span> <span class="identifier">p</span><span class="special">;</span>
+<span class="identifier">p</span><span class="special">.</span><span class="identifier">set_stdin_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">redirect_stream</span><span class="special">);</span>
+<span class="identifier">p</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">inherit_stream</span><span class="special">);</span>
+<span class="comment">// quickbook:end(pipeline)
+</span>
+<span class="comment">// quickbook:begin(command-lines)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl1</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"cut -d ' ' -f 2-5"</span><span class="special">);</span>
+<span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl2</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"sed 's,^,line: &gt;&gt;&gt;,'"</span><span class="special">);</span>
+<span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl3</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"sed 's,$,&lt;&lt;&lt;,'"</span><span class="special">);</span>
+<span class="comment">// quickbook:end(command-lines)
+</span>
+<span class="comment">// quickbook:begin(addition)
+</span><span class="identifier">p</span><span class="special">.</span><span class="identifier">add</span><span class="special">(</span><span class="identifier">cl1</span><span class="special">).</span><span class="identifier">add</span><span class="special">(</span><span class="identifier">cl2</span><span class="special">).</span><span class="identifier">add</span><span class="special">(</span><span class="identifier">cl3</span><span class="special">);</span>
+<span class="comment">// quickbook:end(addition)
+</span>
+<span class="comment">// quickbook:begin(children)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">children</span> <span class="identifier">cs</span> <span class="special">=</span> <span class="identifier">p</span><span class="special">.</span><span class="identifier">start</span><span class="special">();</span>
+<span class="comment">// quickbook:end(children)
+</span>
+<span class="comment">// quickbook:begin(feed-stdin)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">postream</span><span class="special">&amp;</span> <span class="identifier">os</span> <span class="special">=</span> <span class="identifier">cs</span><span class="special">.</span><span class="identifier">get_stdin</span><span class="special">();</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">line</span><span class="special">;</span>
+<span class="keyword">while</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">getline</span><span class="special">(</span><span class="identifier">file</span><span class="special">,</span> <span class="identifier">line</span><span class="special">))</span>
+    <span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="identifier">line</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="identifier">os</span><span class="special">.</span><span class="identifier">close</span><span class="special">();</span>
+<span class="comment">// quickbook:end(feed-stdin)
+</span>
+<span class="comment">// quickbook:begin(wait)
+</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">cs</span><span class="special">.</span><span class="identifier">wait</span><span class="special">();</span>
+<span class="comment">// quickbook:end(wait)
+</span>
+<span class="comment">// quickbook:begin(parse-status)
+</span><span class="keyword">return</span> <span class="special">(</span><span class="identifier">s</span><span class="special">.</span><span class="identifier">exited</span><span class="special">()</span> <span class="special">&amp;&amp;</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">exit_status</span><span class="special">()</span> <span class="special">==</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">)</span> <span class="special">?</span>
+    <span class="identifier">EXIT_SUCCESS</span> <span class="special">:</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
+<span class="comment">// quickbook:end(parse-status)
+</span>
+<span class="special">}</span>
+</pre>
+</div>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_process.usage.the_command_line"></a>4.2. <a href="usage.html#boost_process.usage.the_command_line" title="4.2. The command line">The command line</a></h3></div></div></div>
+<div class="toc"><dl>
+<dt><span class="section"><a href="usage.html#boost_process.usage.the_command_line.creation_from_individual_arguments">4.2.1. Creation
+        from individual arguments</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.the_command_line.creation_from_a_single_string">4.2.2. Creation
+        from a single string</a></span></dt>
+<dt><span class="section"><a href="usage.html#boost_process.usage.the_command_line.examples">4.2.3. Examples</a></span></dt>
+</dl></div>
+<p>
+        The command line is an entity that describes a call to an executable program.
+        It is composed of the following components:
+      </p>
+<div class="variablelist">
+<p class="title"><b></b></p>
+<dl>
+<dt><span class="term">The executable</span></dt>
+<dd>
+          This is the path name to the file on disk that will be executed. This can
+          be a full path name, a relative path name or a base name without any component.
+        </dd>
+<dt><span class="term">The program name</span></dt>
+<dd>
+          The program name is a string passed as the executable's first argument
+          (e.g. <code class="computeroutput"><span class="identifier">argv</span><span class="special">[</span><span class="number">0</span><span class="special">]</span></code>). This
+          typically matches the executable's base name but can be changed at will
+          in case the program behaves differently depending on the value passed in
+          that parameter.
+        </dd>
+<dt><span class="term">The arguments list</span></dt>
+<dd>
+          Aside from the first argument carrying the program's name, an executable
+          may receive a set of extra arguments, similar to function parameters. These
+          are stored in the arguments list.
+        </dd>
+</dl>
+</div>
+<p>
+        All the functions or classes in the library that use a command line are parametrized
+        on the <a href="concepts.html#boost_process.concepts.command_line" title="2.3. Command line">Command_Line</a>
+        concept. This allows the developer to provide a custom implementation, shall
+        we need to.
+      </p>
+<p>
+        For convenience, the library includes a reference implementation class named
+        <code class="computeroutput"><a href="../boost/process/command_line.html" title="Class command_line">command_line</a></code>. It
+        should be enough in most cases. The instructions below may only apply to
+        this implementation.
+      </p>
+<p>
+        There are two main ways to construct a command line as we shall see below.
+      </p>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="boost_process.usage.the_command_line.creation_from_individual_arguments"></a>4.2.1. <a href="usage.html#boost_process.usage.the_command_line.creation_from_individual_arguments" title="4.2.1. Creation
+        from individual arguments">Creation
+        from individual arguments</a></h4></div></div></div>
+<p>
+          The traditional entry point of a C or C++ program looks like:
+        </p>
+<pre class="programlisting">
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">argc</span><span class="special">,</span> <span class="keyword">char</span><span class="special">*</span> <span class="identifier">argv</span><span class="special">[]);</span>
+</pre>
+<p>
+          Programs receive an <span class="emphasis"><em>array of strings</em></span> in <code class="computeroutput"><span class="identifier">argv</span></code> that contains all the arguments
+          passed to them. The reference command line implementation provides an interface
+          to construct calls to applications based on the exact contents of the
+          <code class="computeroutput"><span class="identifier">argv</span></code> array. If at all possible,
+          the new process will receive a verbatim copy of the arguments provided
+          by the caller.
+        </p>
+<p>
+          Executing programs using this syntax is safe to quotation issues because
+          the library ensures that the values provided by the user end up in the
+          child process without modifications. Furthermore, no other process &#8212; not
+          even the shell &#8212; is involved in the execution procedure.
+        </p>
+<p>
+          Constructing command lines on a parameter basis is the recommended usage,
+          specially if user input is involved in the construction. However it might
+          not be appropriate in all scenarios, as we will see later on.
+        </p>
+<p>
+          In order to construct a command line parameter by parameter, we first tell
+          it which is the executable to launch and, optionally, its program name.
+          If the latter is not provided, it is automatically guessed:
+        </p>
+<pre class="programlisting">
+<span class="identifier">command_line</span> <span class="identifier">cl</span><span class="special">(</span><span class="string">"/path/to/executable"</span><span class="special">,</span> <span class="string">"program_name"</span><span class="special">);</span>
+</pre>
+<p>
+          The <code class="computeroutput"><a href="../boost/process/command_line.html" title="Class command_line">class</a></code>' constructor
+          takes two parameters: the path to the executable and its program name.
+          If the path does not contain any component path (no slashes nor backslashes),
+          the executable will be searched in the system's path; could the application
+          not be found, a <code class="computeroutput"><a href="../boost/process/not_found_error.html" title="Class template not_found_error">not_found_error&lt;
+          std::string &gt;</a></code> exception is raised as shown below:
+        </p>
+<pre class="programlisting">
+<span class="keyword">try</span> <span class="special">{</span>
+    <span class="identifier">command_line</span> <span class="identifier">cl</span><span class="special">(</span><span class="string">"unknownbinary"</span><span class="special">);</span>
+    <span class="special">...</span>
+<span class="special">}</span> <span class="keyword">catch</span> <span class="special">(</span><span class="keyword">const</span> <span class="identifier">not_found_error</span><span class="special">&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&gt;&amp;</span> <span class="identifier">e</span><span class="special">)</span> <span class="special">{</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cerr</span> <span class="special">&lt;&lt;</span> <span class="identifier">e</span><span class="special">.</span><span class="identifier">get_value</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">" could not be found"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="special">}</span>
+</pre>
+<p>
+          Once the command line is constructed, additional arguments can be appended
+          to it by using the <code class="computeroutput"><a href="../boost/process/command_line.html#id2298320-bb">command_line::argument</a></code>
+          method. This function is parametrized on the argument type to allow dealing
+          with any data type (provided it can be inserted in an output stream). Its
+          usage is as follows:
+        </p>
+<pre class="programlisting">
+<span class="identifier">cl</span><span class="special">.</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"first-parameter"</span><span class="special">).</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"second-parameter"</span><span class="special">);</span>
+<span class="identifier">cl</span><span class="special">.</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"..."</span><span class="special">).</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"nth-parameter"</span><span class="special">);</span>
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="boost_process.usage.the_command_line.creation_from_a_single_string"></a>4.2.2. <a href="usage.html#boost_process.usage.the_command_line.creation_from_a_single_string" title="4.2.2. Creation
+        from a single string">Creation
+        from a single string</a></h4></div></div></div>
+<p>
+          Another way to construct a command line is to define it in terms of the
+          shell using the <code class="computeroutput"><a href="../boost/process/command_line.html#id2378995-bb">command_line::shell
+          static method</a></code>. You create a <span class="emphasis"><em>single string</em></span>
+          that represents the whole command line, which is then passed to the default
+          system shell for later processing.
+        </p>
+<p>
+          As the shell is involved, the command line is affected by its parsing rules
+          such as variable and wildcard expansion, construction of pipelines, redirections
+          of streams or even execution of built-in commands.
+        </p>
+<p>
+          The general syntax is as follows:
+        </p>
+<pre class="programlisting">
+<span class="identifier">command_line</span> <span class="identifier">cl</span> <span class="special">=</span> <span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span>
+    <span class="special">(</span><span class="string">"the-program first-parameter ... nth-parameter"</span><span class="special">);</span>
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="boost_process.usage.the_command_line.examples"></a>4.2.3. <a href="usage.html#boost_process.usage.the_command_line.examples" title="4.2.3. Examples">Examples</a></h4></div></div></div>
+<p>
+          The following example program shows multiple command lines from their construction
+          until their execution:
+        </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">cstdlib</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">process</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">bp</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">;</span>
+
+<span class="comment">//
+</span><span class="comment">// Helper function to print a command line's contents on a stream.
+</span><span class="comment">// We can see here the interface exported by the command_line class and
+</span><span class="comment">// how the user can use it to inspect a command_line's contents.
+</span><span class="comment">//
+</span><span class="keyword">static</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">ostream</span><span class="special">&amp;</span>
+<span class="keyword">operator</span><span class="special">&lt;&lt;(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">ostream</span><span class="special">&amp;</span> <span class="identifier">os</span><span class="special">,</span> <span class="keyword">const</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">&amp;</span> <span class="identifier">cl</span><span class="special">)</span>
+<span class="special">{</span>
+    <span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="string">"===&gt; Binary:       "</span> <span class="special">&lt;&lt;</span> <span class="identifier">cl</span><span class="special">.</span><span class="identifier">get_executable</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+
+    <span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="string">"===&gt; Command line: "</span><span class="special">;</span>
+    <span class="keyword">const</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">arguments_vector</span><span class="special">&amp;</span> <span class="identifier">args</span> <span class="special">=</span> <span class="identifier">cl</span><span class="special">.</span><span class="identifier">get_arguments</span><span class="special">();</span>
+    <span class="keyword">for</span> <span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">arguments_vector</span><span class="special">::</span><span class="identifier">size_type</span> <span class="identifier">i</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span>
+         <span class="identifier">i</span> <span class="special">&lt;</span> <span class="identifier">args</span><span class="special">.</span><span class="identifier">size</span><span class="special">();</span> <span class="identifier">i</span><span class="special">++)</span> <span class="special">{</span>
+        <span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="identifier">args</span><span class="special">[</span><span class="identifier">i</span><span class="special">];</span>
+        <span class="keyword">if</span> <span class="special">(</span><span class="identifier">i</span> <span class="special">&lt;</span> <span class="identifier">args</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">-</span> <span class="number">1</span><span class="special">)</span>
+            <span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="char">' '</span><span class="special">;</span>
+    <span class="special">}</span>
+    <span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+
+    <span class="keyword">return</span> <span class="identifier">os</span><span class="special">;</span>
+<span class="special">}</span>
+
+<span class="comment">//
+</span><span class="comment">// Helper function that executes the given command line.
+</span><span class="comment">//
+</span><span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">class</span> <span class="identifier">Command_Line</span> <span class="special">&gt;</span>
+<span class="keyword">static</span>
+<span class="keyword">void</span>
+<span class="identifier">run_it</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">Command_Line</span><span class="special">&amp;</span> <span class="identifier">cl</span><span class="special">)</span>
+<span class="special">{</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">cl</span><span class="special">;</span>
+
+    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+    <span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">inherit_stream</span><span class="special">);</span>
+    <span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stderr_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">inherit_stream</span><span class="special">);</span>
+    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">l</span><span class="special">.</span><span class="identifier">start</span><span class="special">(</span><span class="identifier">cl</span><span class="special">).</span><span class="identifier">wait</span><span class="special">();</span>
+    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">s</span><span class="special">.</span><span class="identifier">exited</span><span class="special">()</span> <span class="special">&amp;&amp;</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">exit_status</span><span class="special">()</span> <span class="special">==</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">)</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"     *** SUCCESS ***"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="keyword">else</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"     *** FAILURE ***"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="special">}</span>
+
+<span class="keyword">int</span>
+<span class="identifier">main</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">argc</span><span class="special">,</span> <span class="keyword">char</span><span class="special">*</span> <span class="identifier">argv</span><span class="special">[])</span>
+<span class="special">{</span>
+    <span class="comment">//
+</span>    <span class="comment">// Constructs a simple command line that executes the 'ls' binary to
+</span>    <span class="comment">// list the contents of the current directory.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl1</span><span class="special">(</span><span class="string">"/bin/ls"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="identifier">cl1</span><span class="special">);</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// Constructs a command line similar to the previous one but passes
+</span>    <span class="comment">// an argument to the 'ls' binary telling it which directory to list.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl2</span><span class="special">(</span><span class="string">"/bin/ls"</span><span class="special">);</span>
+    <span class="identifier">cl2</span><span class="special">.</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"/tmp"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="identifier">cl2</span><span class="special">);</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// Yet another command line that calls a system binary, but this time
+</span>    <span class="comment">// with three arguments.  Note that when calling '/bin/test' with its
+</span>    <span class="comment">// default program name 'test', the closing square bracket is not
+</span>    <span class="comment">// allowed.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl3</span><span class="special">(</span><span class="string">"/bin/test"</span><span class="special">);</span>
+    <span class="identifier">cl3</span><span class="special">.</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"foo"</span><span class="special">).</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"="</span><span class="special">).</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"foo"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="identifier">cl3</span><span class="special">);</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// Exactly the same command as the previous one but this one changes
+</span>    <span class="comment">// the program name at execution.  Here, '/bin/test' is executed with
+</span>    <span class="comment">// a program name of '[' (i.e. argv[0]'s value is "[").  Hence, it
+</span>    <span class="comment">// requires a closing square bracket as an extra argument to execute
+</span>    <span class="comment">// properly.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl4</span><span class="special">(</span><span class="string">"/bin/test"</span><span class="special">,</span> <span class="string">"["</span><span class="special">);</span>
+    <span class="identifier">cl4</span><span class="special">.</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"foo"</span><span class="special">).</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"="</span><span class="special">).</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"foo"</span><span class="special">).</span><span class="identifier">argument</span><span class="special">(</span><span class="string">"]"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="identifier">cl4</span><span class="special">);</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// Constructs a command line that is executed through the system
+</span>    <span class="comment">// shell, much like the ::system(3) function does.  As shown here,
+</span>    <span class="comment">// these calls are much simpler to write and read because the command
+</span>    <span class="comment">// line is provided as a single string.  However, they may be subject
+</span>    <span class="comment">// to quoting problems because they need to be run through the shell.
+</span>    <span class="comment">// Also note that there is no need to give the full path to the binary
+</span>    <span class="comment">// because the shell will resolve it for us.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl5</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"ls -l /var"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="identifier">cl5</span><span class="special">);</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// Another shell command line construction used to demonstrate that
+</span>    <span class="comment">// the command is really executed through the system shell.  Otherwise
+</span>    <span class="comment">// the stdout redirection could not work.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl6</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"echo foo &gt; /dev/null"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="identifier">cl6</span><span class="special">);</span>
+
+    <span class="keyword">return</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">;</span>
+<span class="special">}</span>
+</pre>
+</div>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_process.usage.interprocess_communication"></a>4.3. <a href="usage.html#boost_process.usage.interprocess_communication" title="4.3. Interprocess
+      communication">Interprocess
+      communication</a></h3></div></div></div>
+<p>
+        Every process has three standard communication channels that allow easy communication
+        between either a parent process and a child process or among different child
+        processes. Thanks to these <span class="emphasis"><em>standard channels</em></span>, a program
+        can easily implement a transformation of the input data without knowing where
+        it is located and print it to an output channel whose real location is unknown;
+        additionally it can print error messages that will end up stored where the
+        caller decided.
+      </p>
+<p>
+        There are lots of programs that process an input and produce an input, all
+        using the standard channels previously described. These are known as <span class="emphasis"><em>filters</em></span>
+        and are very common in the Unix work. Of course there are many other programs
+        that do not implement a data conversion, yet they use the standard channels
+        to communicate with the user and/or <span class="emphasis"><em>with other processes</em></span>.
+      </p>
+<p>
+        The three standard communication channels are reviewed below. We can assume
+        that they are supported by <a href="platforms_and_compilers.html#boost_process.platforms_and_compilers.supported_platforms" title="3.1. Supported
+      platforms">all
+        platforms</a> recognized by the library.
+      </p>
+<div class="variablelist">
+<p class="title"><b></b></p>
+<dl>
+<dt><span class="term">Standard input channel or <code class="varname">stdin</code> </span></dt>
+<dd>
+          This is used by the process to read input data, typically fed in by the
+          user or another running process (e.g. its parent).
+        </dd>
+<dt><span class="term">Standard output channel or <code class="varname">stdout</code> </span></dt>
+<dd>
+          This is used by the process to print output messages or data. The channel
+          is typically configured to be buffered and its output is generally dumped
+          to the console; of course it can be redirected to another process or file.
+        </dd>
+<dt><span class="term">Standard error channel or <code class="varname">stderr</code> </span></dt>
+<dd>
+          This is used by the process to print error messages and sometimes to simply
+          separate them from the output data. The channel is typically configured
+          to be unbuffered and its output is generally dumped to the console; of
+          course it can be redirected to another process or file.
+        </dd>
+</dl>
+</div>
+<p>
+        What concerns us is the ability to interact with these standard streams from
+        the process spawning a child &#8212; that is, the one using Boost.Process. The parent
+        must tell the new child process how its standard channels shall behave; this
+        is done by modifying the execution context of the new process by means of
+        one of the multiple <a href="concepts.html#boost_process.concepts.launcher" title="2.4. Launcher">launcher</a>
+        implementations.
+      </p>
+<p>
+        Each communication channel can be configured according to different predefined
+        behaviors by using the <code class="computeroutput">launcher::set_stdin_behavior</code>,
+        <code class="computeroutput">launcher::set_stdout_behavior</code>
+        and <code class="computeroutput">launcher::set_stderr_behavior</code>
+        methods. These take a value that specifies how they shall behave, as made
+        explicit by the <code class="computeroutput"><a href="../boost/process/stream_behavior.html" title="Type stream_behavior">stream_behavior</a></code>
+        enumeration; its documentation details all the possible values (not repeated
+        here to avoid inconsistencies).
+      </p>
+<p>
+        Boost.Process also provides a feature known as <span class="emphasis"><em>channel merging</em></span>.
+        Merging two communication channels means that the output of the child's source
+        channel is redirected to the target channel (be it an input flow or an output
+        one). The key idea is that this redirection is done at the lowest possible
+        level: the child process continues to see multiple streams but as concerns
+        the operating system, some of them point to the same internal object. This
+        feature is used intensively in the library to allow for efficient retrieval
+        of a process' <code class="varname">stdout</code> and <code class="varname">stderr</code> flows; check out the <code class="computeroutput">launcher::set_merge_out_err</code>
+        method.
+      </p>
+<p>
+        Given the above consider the following code snippet. It configures a launcher
+        for a child process that will have an infinite blank input and which will
+        send both of its <code class="varname">stdout</code> and <code class="varname">stderr</code> to the parent's <code class="varname">stdout</code> :
+      </p>
+<pre class="programlisting">
+<span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stdin_behavior</span><span class="special">(</span><span class="identifier">silent_stream</span><span class="special">);</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">inherit_stream</span><span class="special">);</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stderr_behavior</span><span class="special">(</span><span class="identifier">close_stream</span><span class="special">);</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_merge_out_err</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
+</pre>
+<p>
+        Setting a channel to <code class="computeroutput"><span class="identifier">redirect_stream</span></code>
+        has some special consequences. The channel affected by this flag will be
+        later available to the parent process through the class representing the
+        child process. Depending on the redirected channel, it can be retrieved using
+        one of the <code class="computeroutput"><a href="../boost/process/child.html#id2297945-bb">child::get_stdin</a></code>,
+        <code class="computeroutput"><a href="../boost/process/child.html#id2297966-bb">child::get_stdout</a></code>
+        and <code class="computeroutput"><a href="../boost/process/child.html#id2297988-bb">child::get_stderr</a></code>
+        methods. These calls return C++ streams as described next. An input stream
+        for a child process is seen as an output data flow by the parent; therefore
+        it is modelled through the <code class="computeroutput"><a href="../boost/process/postream.html" title="Class postream">postream</a></code>
+        class. On the opposite side, an output stream for a child process is seen
+        as an input data flow by the parent, hence it is represented by the <code class="computeroutput"><a href="../boost/process/pistream.html" title="Class pistream">pistream</a></code> class. These two classes
+        are regular C++ streams but provide an extra method (<code class="computeroutput"><span class="identifier">close</span></code>)
+        to allow the explicit shutdown of a communication channel. This is required,
+        for example, to let the child know that the parent is not willing to send
+        any more data through its <code class="varname">stdin</code> . (Typically the child will close output channels
+        on exit and the parent will close input ones.)
+      </p>
+<p>
+        The following example illustrates how to some data to a process:
+      </p>
+<pre class="programlisting">
+<span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stdin_behavior</span><span class="special">(</span><span class="identifier">redirect_stream</span><span class="special">);</span>
+<span class="special">...</span> <span class="identifier">spawn</span> <span class="identifier">the</span> <span class="identifier">process</span> <span class="special">...</span>
+<span class="identifier">postream</span> <span class="identifier">os</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">get_stdin</span><span class="special">();</span>
+<span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="string">"some-string"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="identifier">os</span> <span class="special">&lt;&lt;</span> <span class="number">200</span> <span class="special">&lt;&lt;</span> <span class="number">1024</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="identifier">os</span><span class="special">.</span><span class="identifier">close</span><span class="special">();</span>
+</pre>
+<p>
+        Similary, the following shows how to retrieve the child's data, line by line:
+      </p>
+<pre class="programlisting">
+<span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">redirect_stream</span><span class="special">);</span>
+<span class="special">...</span> <span class="identifier">spawn</span> <span class="identifier">the</span> <span class="identifier">process</span> <span class="special">...</span>
+<span class="identifier">pistream</span> <span class="identifier">is</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">get_stdout</span><span class="special">();</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">line</span><span class="special">;</span>
+<span class="keyword">while</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">getline</span><span class="special">(</span><span class="identifier">is</span><span class="special">,</span> <span class="identifier">line</span><span class="special">))</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Got a line: "</span> <span class="special">&lt;&lt;</span> <span class="identifier">line</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_process.usage.environment_variables"></a>4.4. <a href="usage.html#boost_process.usage.environment_variables" title="4.4. Environment
+      variables">Environment
+      variables</a></h3></div></div></div>
+<p>
+        Every process has a map of variable/value pairs that forms part of its execution
+        context; these variables are generally known as <span class="emphasis"><em>environment variables</em></span>
+        and their values are always represented as text strings. The process can
+        query these variables at will to retrieve information passed in by the parent
+        process; in fact, they can be seen as kind of interprocess communication
+        mechanism. Therefore, it is the parent's responsibility to configure the
+        environment variables that its child receives.
+      </p>
+<p>
+        New variables can be added and existing ones can be modified using the <code class="computeroutput">launcher::set_environment</code>
+        method. Similarly, existing variables can be removed by using the <code class="computeroutput">launcher::unset_environment</code>
+        method. At last, the <code class="computeroutput">launcher::clear_environment</code>
+        method provides a way to zap all existing environment variables. Care should
+        be taken when using this method because the new process may expect some standard
+        variables to be defined for proper operation (e.g. <code class="computeroutput"><span class="identifier">PATH</span></code>).
+        After using this call you are responsible for appropriately setting up the
+        minimum required variables.
+      </p>
+<p>
+        For quick reference, consider:
+      </p>
+<pre class="programlisting">
+<span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+<span class="special">...</span> <span class="identifier">l</span> <span class="identifier">now</span> <span class="identifier">carries</span> <span class="identifier">a</span> <span class="identifier">snapshot</span> <span class="identifier">of</span> <span class="identifier">the</span> <span class="identifier">current</span> <span class="identifier">environment</span> <span class="special">...</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">clear_environment</span><span class="special">();</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_environment</span><span class="special">(</span><span class="string">"variable-name"</span><span class="special">,</span> <span class="string">"variable-value"</span><span class="special">);</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">unset_environment</span><span class="special">(</span><span class="string">"variable-name"</span><span class="special">);</span>
+</pre>
+<p>
+        And also check out the following example program:
+      </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">cstdlib</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">string</span><span class="special">&gt;</span>
+
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">process</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">bp</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">;</span>
+
+<span class="comment">//
+</span><span class="comment">// Helper function that forks a new process that shows the contents of
+</span><span class="comment">// the environment configured by the given launcher.
+</span><span class="comment">//
+</span><span class="keyword">static</span>
+<span class="keyword">void</span>
+<span class="identifier">run_it</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">&amp;</span> <span class="identifier">msg</span><span class="special">,</span> <span class="keyword">const</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span><span class="special">&amp;</span> <span class="identifier">l</span><span class="special">)</span>
+<span class="special">{</span>
+<span class="preprocessor">#if</span> <span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_PROCESS_POSIX_API</span><span class="special">)</span>
+    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl</span><span class="special">(</span><span class="string">"env"</span><span class="special">);</span>
+<span class="preprocessor">#elif</span> <span class="identifier">defined</span><span class="special">(</span><span class="identifier">BOOST_PROCESS_WIN32_API</span><span class="special">)</span>
+    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"set"</span><span class="special">);</span>
+<span class="preprocessor">#endif</span>
+
+    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l2</span><span class="special">(</span><span class="identifier">l</span><span class="special">);</span>
+    <span class="identifier">l2</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">inherit_stream</span><span class="special">);</span>
+
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"===&gt; "</span> <span class="special">&lt;&lt;</span> <span class="identifier">msg</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">l2</span><span class="special">.</span><span class="identifier">start</span><span class="special">(</span><span class="identifier">cl</span><span class="special">).</span><span class="identifier">wait</span><span class="special">();</span>
+    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">s</span><span class="special">.</span><span class="identifier">exited</span><span class="special">()</span> <span class="special">&amp;&amp;</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">exit_status</span><span class="special">()</span> <span class="special">==</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">)</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"     *** SUCCESS ***"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="keyword">else</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"     *** FAILURE ***"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="special">}</span>
+
+<span class="keyword">int</span>
+<span class="identifier">main</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">argc</span><span class="special">,</span> <span class="keyword">char</span><span class="special">*</span> <span class="identifier">argv</span><span class="special">[])</span>
+<span class="special">{</span>
+    <span class="comment">//
+</span>    <span class="comment">// This first launcher does not touch the environment so the child
+</span>    <span class="comment">// will receive a snapshot of our current table.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l1</span><span class="special">;</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="string">"Inherited environment"</span><span class="special">,</span> <span class="identifier">l1</span><span class="special">);</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// This second example clears the child's environment prior
+</span>    <span class="comment">// execution so it will not receive any variable.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l2</span><span class="special">;</span>
+    <span class="identifier">l2</span><span class="special">.</span><span class="identifier">clear_environment</span><span class="special">();</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="string">"Clean environment"</span><span class="special">,</span> <span class="identifier">l2</span><span class="special">);</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// This example adds an extra variable to the environment.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l3</span><span class="special">;</span>
+    <span class="identifier">l3</span><span class="special">.</span><span class="identifier">set_environment</span><span class="special">(</span><span class="string">"NEW_VARIABLE"</span><span class="special">,</span> <span class="string">"Hello, world!"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="string">"Environment with the NEW_VARIABLE extra variable"</span><span class="special">,</span> <span class="identifier">l3</span><span class="special">);</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// This example removes a standard variable from the environment.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l4</span><span class="special">;</span>
+    <span class="identifier">l4</span><span class="special">.</span><span class="identifier">unset_environment</span><span class="special">(</span><span class="string">"PATH"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="string">"Environment without the standard PATH variable"</span><span class="special">,</span> <span class="identifier">l4</span><span class="special">);</span>
+
+
+    <span class="comment">//
+</span>    <span class="comment">// This last example illustrates how to start up a new child process
+</span>    <span class="comment">// with a completely controlled environment table that is not subject
+</span>    <span class="comment">// to existing variables at all.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l5</span><span class="special">;</span>
+    <span class="identifier">l5</span><span class="special">.</span><span class="identifier">clear_environment</span><span class="special">();</span>
+    <span class="identifier">l5</span><span class="special">.</span><span class="identifier">set_environment</span><span class="special">(</span><span class="string">"HOME"</span><span class="special">,</span> <span class="string">"Known value for HOME"</span><span class="special">);</span>
+    <span class="identifier">l5</span><span class="special">.</span><span class="identifier">set_environment</span><span class="special">(</span><span class="string">"PATH"</span><span class="special">,</span> <span class="string">"Known value for PATH"</span><span class="special">);</span>
+    <span class="identifier">run_it</span><span class="special">(</span><span class="string">"Completely controlled environment"</span><span class="special">,</span> <span class="identifier">l5</span><span class="special">);</span>
+
+    <span class="keyword">return</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">;</span>
+<span class="special">}</span>
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_process.usage.the_startup_work_directory"></a>4.5. <a href="usage.html#boost_process.usage.the_startup_work_directory" title="4.5. The startup
+      work directory">The startup
+      work directory</a></h3></div></div></div>
+<p>
+        Every process has a property in its execution context that denotes the <span class="emphasis"><em>current
+        working directory</em></span>. This location is used by the operating system
+        to resolve relative path names. Because this property is part of the execution
+        context, it shall be configured prior process spawning by the process launcher.
+        The value set is known as the <span class="emphasis"><em>startup work directory</em></span>
+        because it is where the application will start processing; the process is
+        later free to change it to whichever other directory it wishes.
+      </p>
+<p>
+        A child's startup work directory can be configured through the launcher by
+        using the <code class="computeroutput">launcher::set_work_directory</code>
+        method. If not specified, the process is started in the same directory the
+        parent was located when it created the <code class="computeroutput"><a href="../boost/process/launcher.html" title="Class launcher">launcher</a></code>
+        object.
+      </p>
+<p>
+        For instance:
+      </p>
+<pre class="programlisting">
+<span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+<span class="special">...</span> <span class="identifier">l</span> <span class="identifier">now</span> <span class="identifier">points</span> <span class="identifier">to</span> <span class="identifier">the</span> <span class="identifier">parent</span>#<span class="identifier">s</span> <span class="identifier">current</span> <span class="identifier">working</span> <span class="identifier">directory</span> <span class="special">...</span>
+<span class="identifier">l</span><span class="special">.</span><span class="identifier">set_work_directory</span><span class="special">(</span><span class="identifier">tmp_dir_location</span><span class="special">);</span>
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_process.usage.single_process_startup_and_termination"></a>4.6. <a href="usage.html#boost_process.usage.single_process_startup_and_termination" title="4.6. Single
+      process startup and termination">Single
+      process startup and termination</a></h3></div></div></div>
+<p>
+        A new process is defined by a <a href="usage.html#boost_process.usage.the_command_line" title="4.2. The command line">command
+        line</a> and a <a href="concepts.html#boost_process.concepts.launcher" title="2.4. Launcher">launcher</a>.
+        Once these two items are configured, the child process can be spawned by
+        a call to the <code class="computeroutput"><a href="../boost/process/launcher.html#id2379267-bb">launcher::start</a></code>
+        method which receives the command line to be executed. For example:
+      </p>
+<pre class="programlisting">
+<span class="identifier">command_line</span> <span class="identifier">cl</span><span class="special">(...);</span>
+<span class="special">...</span> <span class="identifier">add</span> <span class="identifier">arguments</span> <span class="identifier">to</span> <span class="identifier">cl</span> <span class="special">...</span>
+<span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">(...);</span>
+<span class="special">...</span> <span class="identifier">configure</span> <span class="identifier">the</span> <span class="identifier">execution</span> <span class="identifier">environment</span> <span class="identifier">through</span> <span class="identifier">l</span> <span class="special">...</span>
+
+<span class="identifier">child</span> <span class="identifier">c</span> <span class="special">=</span> <span class="identifier">l</span><span class="special">.</span><span class="identifier">start</span><span class="special">(</span><span class="identifier">cl</span><span class="special">);</span>
+<span class="special">...</span> <span class="identifier">c</span> <span class="identifier">now</span> <span class="identifier">represents</span> <span class="identifier">the</span> <span class="identifier">newborn</span> <span class="identifier">child</span> <span class="identifier">process</span> <span class="special">...</span>
+</pre>
+<p>
+        If needed a launcher can be reused to spawn multiple child processes, possibly
+        with different command lines. Similarly, a single command line can be passed
+        to different launchers to start processes with different properties.
+      </p>
+<p>
+        When the child process terminates execution, its parent collects its <a href="concepts.html#boost_process.concepts.exit_status" title="2.5. Exit status">exit status</a> to check
+        whether the process ran fine or not. Furthermore, collecting this information
+        is required in order to free the operating system data structures used to
+        store it. The termination information includes the specific reason for this
+        event as well as any additional details associated to it.
+      </p>
+<p>
+        All this information is accessible through the <code class="computeroutput"><a href="../boost/process/status.html" title="Class status">status</a></code>
+        class, an instance of which is returned by the <code class="computeroutput"><a href="../boost/process/child.html#id2298009-bb">child::wait</a></code>
+        method. Through this instance, the parent inspects the reasons behind the
+        child process finalization. For example:
+      </p>
+<pre class="programlisting">
+<span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">wait</span><span class="special">();</span>
+<span class="keyword">if</span> <span class="special">(</span><span class="identifier">s</span><span class="special">.</span><span class="identifier">exited</span><span class="special">())</span> <span class="special">{</span>
+    <span class="comment">// The process terminated by itself.
+</span>    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"The exit code was: "</span> <span class="special">&lt;&lt;</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">exit_status</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+<span class="special">}</span> <span class="keyword">else</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Abnormal program termination."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+</pre>
+<p>
+        Of special interest are the values returned by <code class="computeroutput"><a href="../boost/process/status.html#id2380898-bb">status::exit_status</a></code>',
+        a method that can only be called when <code class="computeroutput"><a href="../boost/process/status.html#id2380877-bb">status::exited</a></code>
+        is <code class="computeroutput"><span class="keyword">true</span></code>. As the name states,
+        this call returns the integer that the child program gave the operating system
+        during exit. For readability and portability reasons you should check the
+        returned value against the standard macros defined in the <code class="computeroutput"><span class="identifier">cstdlib</span></code>
+        header, shown in the table:
+      </p>
+<div class="informaltable">
+<h5>
+<a name="id2700517"></a>
+        </h5>
+<table class="table">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>Exit status</th>
+<th>Symbolic constant</th>
+<th>Typical
+              value</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Success.</td>
+<td><code class="computeroutput"><span class="identifier">EXIT_SUCCESS</span></code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>Failure. Many applications will use multiple values to denote
+              denote different error conditions though, so do not assume that this
+              value alone is used to report a failed execution.</td>
+<td><code class="computeroutput"><span class="identifier">EXIT_FAILURE</span></code></td>
+<td>Not 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+        Aside regular exit, some platforms allow retrieving more fine-grained information
+        on the termination cause. This information is available though non-portable
+        classes, as is described later on.
+      </p>
+<p>
+        The following complete code example illustrates how to start and stop multiple
+        processes:
+      </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">cstdlib</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">string</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">vector</span><span class="special">&gt;</span>
+
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">process</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">bp</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">process</span><span class="special">;</span>
+
+<span class="keyword">int</span>
+<span class="identifier">main</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">argc</span><span class="special">,</span> <span class="keyword">char</span><span class="special">*</span> <span class="identifier">argv</span><span class="special">[])</span>
+<span class="special">{</span>
+    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">argc</span> <span class="special">&lt;</span> <span class="number">2</span><span class="special">)</span> <span class="special">{</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cerr</span> <span class="special">&lt;&lt;</span> <span class="string">"Please specify some directories."</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+        <span class="keyword">return</span> <span class="identifier">EXIT_FAILURE</span><span class="special">;</span>
+    <span class="special">}</span>
+
+    <span class="comment">//
+</span>    <span class="comment">// Constructs a shell-based command line.
+</span>    <span class="comment">//
+</span>    <span class="comment">// This command line executes a CVS process passing it an update
+</span>    <span class="comment">// command.  Note that it will be executed through the standard system
+</span>    <span class="comment">// shell so that we do not have to know where the binary is located.
+</span>    <span class="comment">//
+</span>    <span class="comment">// In this case we have a command line that will work both on POSIX
+</span>    <span class="comment">// systems and under Windows.
+</span>    <span class="comment">//
+</span>    <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span> <span class="identifier">cl</span> <span class="special">=</span> <span class="identifier">bp</span><span class="special">::</span><span class="identifier">command_line</span><span class="special">::</span><span class="identifier">shell</span><span class="special">(</span><span class="string">"cvs -z3 update -dP"</span><span class="special">);</span>
+
+    <span class="keyword">for</span> <span class="special">(</span><span class="keyword">int</span> <span class="identifier">i</span> <span class="special">=</span> <span class="number">1</span><span class="special">;</span> <span class="identifier">i</span> <span class="special">&lt;</span> <span class="identifier">argc</span><span class="special">;</span> <span class="identifier">i</span><span class="special">++)</span> <span class="special">{</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"===&gt; Updating directory "</span> <span class="special">&lt;&lt;</span> <span class="identifier">argv</span><span class="special">[</span><span class="identifier">i</span><span class="special">]</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+
+        <span class="comment">//
+</span>        <span class="comment">// Constructs the launcher.
+</span>        <span class="comment">//
+</span>        <span class="comment">// This launcher will redirect us CVS' stdout and stderr data flows
+</span>        <span class="comment">// through its stdout stream.  This will allow us to print the
+</span>        <span class="comment">// output in a fancy way.
+</span>        <span class="comment">//
+</span>        <span class="comment">// The launcher also forces the CVS client to use the Secure Shell
+</span>        <span class="comment">// to connect to servers and unsets the CVSROOT environment
+</span>        <span class="comment">// variable to avoid side-effects.
+</span>        <span class="comment">//
+</span>        <span class="identifier">bp</span><span class="special">::</span><span class="identifier">launcher</span> <span class="identifier">l</span><span class="special">;</span>
+        <span class="identifier">l</span><span class="special">.</span><span class="identifier">set_stdout_behavior</span><span class="special">(</span><span class="identifier">bp</span><span class="special">::</span><span class="identifier">inherit_stream</span><span class="special">);</span>
+        <span class="identifier">l</span><span class="special">.</span><span class="identifier">set_merge_out_err</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
+        <span class="identifier">l</span><span class="special">.</span><span class="identifier">set_work_directory</span><span class="special">(</span><span class="identifier">argv</span><span class="special">[</span><span class="identifier">i</span><span class="special">]);</span>
+        <span class="identifier">l</span><span class="special">.</span><span class="identifier">set_environment</span><span class="special">(</span><span class="string">"CVS_RSH"</span><span class="special">,</span> <span class="string">"ssh"</span><span class="special">);</span>
+        <span class="identifier">l</span><span class="special">.</span><span class="identifier">unset_environment</span><span class="special">(</span><span class="string">"CVSROOT"</span><span class="special">);</span>
+
+        <span class="comment">//
+</span>        <span class="comment">// Spawns the CVS child process.
+</span>        <span class="comment">//
+</span>        <span class="identifier">bp</span><span class="special">::</span><span class="identifier">child</span> <span class="identifier">c</span> <span class="special">=</span> <span class="identifier">l</span><span class="special">.</span><span class="identifier">start</span><span class="special">(</span><span class="identifier">cl</span><span class="special">);</span>
+
+        <span class="comment">//
+</span>        <span class="comment">// Gets CVS' stdout stream.  As we asked for a merge of stdout and
+</span>        <span class="comment">// stderr, this stream gets both outputs at once.
+</span>        <span class="comment">//
+</span>        <span class="identifier">bp</span><span class="special">::</span><span class="identifier">pistream</span><span class="special">&amp;</span> <span class="identifier">is</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">get_stdout</span><span class="special">();</span>
+
+        <span class="comment">//
+</span>        <span class="comment">// Reads the child's output.
+</span>        <span class="comment">//
+</span>        <span class="comment">// As long as the child process (CVS) does not terminate, its
+</span>        <span class="comment">// stdout will remain open and we will be able to retrieve data
+</span>        <span class="comment">// from it.  Once it is closed, the 'is' stream will become invalid
+</span>        <span class="comment">// and it will not return more data.
+</span>        <span class="comment">//
+</span>        <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="identifier">line</span><span class="special">;</span>
+        <span class="keyword">while</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">getline</span><span class="special">(</span><span class="identifier">is</span><span class="special">,</span> <span class="identifier">line</span><span class="special">))</span>
+            <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"=&gt; "</span> <span class="special">&lt;&lt;</span> <span class="identifier">line</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+
+        <span class="comment">//
+</span>        <span class="comment">// Waits for the process to terminate and parses its exit status to
+</span>        <span class="comment">// give the user feedback on the final results.
+</span>        <span class="comment">//
+</span>        <span class="identifier">bp</span><span class="special">::</span><span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">c</span><span class="special">.</span><span class="identifier">wait</span><span class="special">();</span>
+        <span class="keyword">if</span> <span class="special">(</span><span class="identifier">s</span><span class="special">.</span><span class="identifier">exited</span><span class="special">()</span> <span class="special">&amp;&amp;</span> <span class="identifier">s</span><span class="special">.</span><span class="identifier">exit_status</span><span class="special">()</span> <span class="special">==</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">)</span>
+            <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"     *** SUCCESSFUL UPDATE ***"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+        <span class="keyword">else</span>
+            <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"     *** FAILED UPDATE ***"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+    <span class="special">}</span>
+
+    <span class="keyword">return</span> <span class="identifier">EXIT_SUCCESS</span><span class="special">;</span>
+<span class="special">}</span>
+</pre>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="boost_process.usage.pipeline_startup_and_termination"></a>4.7. <a href="usage.html#boost_process.usage.pipeline_startup_and_termination" title="4.7. Pipeline
+      startup and termination">Pipeline
+      startup and termination</a></h3></div></div></div>
+<p>
+        As we saw in the <a href="usage.html#boost_process.usage.quick_tutorials.pipeline_tutorial" title="4.1.2. Pipeline
+        tutorial">tutorial</a>,
+        managing a pipeline is very similar to controlling a single child process
+        because the whole pipeline is treated by the library's most external API
+        as a single unit. There are some differences though, as we shall see below:
+      </p>
+<p>
+        Instead of using the regular launcher, pipelines are spawned by the specialized
+        <code class="computeroutput"><a href="../boost/process/basic_pipeline.html" title="Class template basic_pipeline">basic_pipeline</a></code>
+        class. Similarly, pipelines are represented by a <code class="computeroutput"><a href="../boost/process/children.html" title="Class children">children</a></code>
+        object instead of a regular child to illustrate the fact that they really
+        are a group of processes. Despite these notational changes, the external
+        interface of these pipeline-specific classes is very similar to that used
+        in their homologous single process management objects.
+      </p>
+<p>
+        The following example outlines how to prepare, start and wait for a pipeline's
+        termination:
+      </p>
+<pre class="programlisting">
+<span class="identifier">command_line</span> <span class="identifier">cl1</span><span class="special">(...);</span>
+<span class="special">...</span> <span class="identifier">add</span> <span class="identifier">arguments</span> <span class="identifier">to</span> <span class="identifier">cl1</span> <span class="special">...</span>
+<span class="identifier">command_line</span> <span class="identifier">cl2</span><span class="special">(...);</span>
+<span class="special">...</span> <span class="identifier">add</span> <span class="identifier">arguments</span> <span class="identifier">to</span> <span class="identifier">cl2</span> <span class="special">...</span>
+
+<span class="identifier">pipeline</span> <span class="identifier">p</span><span class="special">;</span>
+<span class="special">...</span> <span class="identifier">configure</span> <span class="identifier">the</span> <span class="identifier">execution</span> <span class="identifier">environment</span> <span class="identifier">through</span> <span class="identifier">p</span> <span class="special">...</span>
+<span class="identifier">p</span><span class="special">.</span><span class="identifier">add</span><span class="special">(</span><span class="identifier">cl1</span><span class="special">).</span><span class="identifier">add</span><span class="special">(</span><span class="identifier">cl2</span><span class="special">);</span>
+
+<span class="identifier">children</span> <span class="identifier">cs</span> <span class="special">=</span> <span class="identifier">p</span><span class="special">.</span><span class="identifier">start</span><span class="special">();</span>
+<span class="special">...</span> <span class="identifier">cs</span> <span class="identifier">now</span> <span class="identifier">represents</span> <span class="identifier">the</span> <span class="identifier">newborn</span> <span class="identifier">process</span> <span class="identifier">group</span> <span class="special">...</span>
+
+<span class="identifier">status</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">cs</span><span class="special">.</span><span class="identifier">wait</span><span class="special">();</span>
+</pre>
+</div>
+</div>
+<table width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2006 Julio M. Merino Vidal</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="platforms_and_compilers.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="platform_specific_usage.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

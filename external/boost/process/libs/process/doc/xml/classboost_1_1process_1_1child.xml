@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="classboost_1_1process_1_1child" kind="class" prot="public">
+    <compoundname>boost::process::child</compoundname>
+    <derivedcompoundref refid="classboost_1_1process_1_1posix__child" prot="public" virt="non-virtual">boost::process::posix_child</derivedcompoundref>
+    <derivedcompoundref refid="classboost_1_1process_1_1win32__child" prot="public" virt="non-virtual">boost::process::win32_child</derivedcompoundref>
+    <includes refid="child_8hpp" local="no">child.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classboost_1_1process_1_1child_123c957bf6f18f185a9fd560efa9cb4b9" prot="public" static="no">
+        <type>NativeSystemHandle</type>
+        <definition>typedef NativeSystemHandle boost::process::child::handle_type</definition>
+        <argsstring></argsstring>
+        <name>handle_type</name>
+        <briefdescription>
+<para>Opaque name for the native process&apos; handle type. </para>        </briefdescription>
+        <detaileddescription>
+<para>Each operating system identifies processes using a specific type. The <emphasis>handle_type</emphasis> type is used to transparently refer to a process regarless of the operating system in which this class is used.</para><para>If this class is used in a POSIX system, <emphasis>NativeSystemHandle</emphasis> is an integer type while it is a <emphasis>HANDLE</emphasis> in a Win32 system. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="76" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1child_1f5aa0a4c094e51d4d2736472acec6893" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1child_123c957bf6f18f185a9fd560efa9cb4b9" kindref="member">handle_type</ref></type>
+        <definition>child::handle_type boost::process::child::get_handle</definition>
+        <argsstring>(void) const </argsstring>
+        <name>get_handle</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns the system handle that identifies the process. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns the system handle that identifies the process. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="88" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="208" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1child_198668ffd20b860848b2dba06bf7238a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1postream" kindref="compound">postream</ref> &amp;</type>
+        <definition>postream &amp; boost::process::child::get_stdin</definition>
+        <argsstring>(void) const </argsstring>
+        <name>get_stdin</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Gets a reference to the child&apos;s standard input stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns a reference to a postream object that represents the standard input communication channel with the child process. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="96" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="218" bodyend="223"/>
+        <referencedby refid="classboost_1_1process_1_1posix__child_1b1345d2e5fee4777707c959c324a184f" compoundref="posix__child_8hpp" startline="185" endline="195">boost::process::posix_child::get_input</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1child_119f67d7222fbd06d0b5bed36a8bbf615" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1pistream" kindref="compound">pistream</ref> &amp;</type>
+        <definition>pistream &amp; boost::process::child::get_stdout</definition>
+        <argsstring>(void) const </argsstring>
+        <name>get_stdout</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Gets a reference to the child&apos;s standard output stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns a reference to a pistream object that represents the standard output communication channel with the child process. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="104" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="229" bodyend="234"/>
+        <referencedby refid="classboost_1_1process_1_1posix__child_11e5b99598124ebe4ee3c338d38120a94" compoundref="posix__child_8hpp" startline="201" endline="213">boost::process::posix_child::get_output</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1child_1e21a8cc758c37037723aab198a0cbe65" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1pistream" kindref="compound">pistream</ref> &amp;</type>
+        <definition>pistream &amp; boost::process::child::get_stderr</definition>
+        <argsstring>(void) const </argsstring>
+        <name>get_stderr</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Gets a reference to the child&apos;s standard error stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns a reference to a pistream object that represents the standard error communication channel with the child process. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="112" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="240" bodyend="245"/>
+        <referencedby refid="classboost_1_1process_1_1posix__child_11e5b99598124ebe4ee3c338d38120a94" compoundref="posix__child_8hpp" startline="201" endline="213">boost::process::posix_child::get_output</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1child_1c792e2fe261eb08b1a43e6fa7da408a4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1status" kindref="compound">status</ref></type>
+        <definition>status boost::process::child::wait</definition>
+        <argsstring>(void)</argsstring>
+        <name>wait</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Blocks and waits for the child process to terminate. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns a status object that represents the child process&apos; finalization condition. The child process object ceases to be valid after this call.</para><para><simplesect kind="remark"><para><bold>Blocking remarks</bold>: This call blocks if the child process has not finalized execution and waits until it terminates. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="124" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="251" bodyend="270"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1child_1a899830c825cc53ecc422f2915959fc7" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>boost::process::child::child</definition>
+        <argsstring>(handle_type h, detail::file_handle fhstdin, detail::file_handle fhstdout, detail::file_handle fhstderr)</argsstring>
+        <name>child</name>
+        <param>
+          <type><ref refid="classboost_1_1process_1_1child_123c957bf6f18f185a9fd560efa9cb4b9" kindref="member">handle_type</ref></type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>detail::file_handle</type>
+          <declname>fhstdin</declname>
+        </param>
+        <param>
+          <type>detail::file_handle</type>
+          <declname>fhstdout</declname>
+        </param>
+        <param>
+          <type>detail::file_handle</type>
+          <declname>fhstderr</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a new child object representing a just spawned child process. </para>        </briefdescription>
+        <detaileddescription>
+<para>Creates a new child object that represents the just spawned process <emphasis>h</emphasis>.</para><para>The <emphasis>fhstdin</emphasis>, <emphasis>fhstdout</emphasis> and <emphasis>fhstderr</emphasis> file handles represent the parent&apos;s handles used to communicate with the corresponding data streams. They needn&apos;t be valid but their availability must match the redirections configured by the launcher that spawned this process.</para><para>This constructor is protected because the library user has no business in creating representations of live processes himself; the library takes care of that in all cases. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="183" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="190" bodyend="202"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classboost_1_1process_1_1child_1fbb8c0510896927b8393a13157965dc3" prot="private" static="no" mutable="no">
+        <type><ref refid="classboost_1_1process_1_1child_123c957bf6f18f185a9fd560efa9cb4b9" kindref="member">handle_type</ref></type>
+        <definition>handle_type boost::process::child::m_handle</definition>
+        <argsstring></argsstring>
+        <name>m_handle</name>
+        <briefdescription>
+<para>The handle that identifies the process. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="130" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classboost_1_1process_1_1child_1efa6f61ead03129bc6add4c84c652919" prot="private" static="no" mutable="no">
+        <type>boost::shared_ptr&lt; <ref refid="classboost_1_1process_1_1postream" kindref="compound">postream</ref> &gt;</type>
+        <definition>boost::shared_ptr&lt; postream &gt; boost::process::child::m_sstdin</definition>
+        <argsstring></argsstring>
+        <name>m_sstdin</name>
+        <briefdescription>
+<para>The standard input stream attached to the child process. </para>        </briefdescription>
+        <detaileddescription>
+<para>This postream object holds the communication channel with the child&apos;s process standard input. It is stored in a pointer because this field is only valid when the user requested to redirect this data stream. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="140" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classboost_1_1process_1_1child_132b81b41cc2e9f59a198a50a2c8fa2bb" prot="private" static="no" mutable="no">
+        <type>boost::shared_ptr&lt; <ref refid="classboost_1_1process_1_1pistream" kindref="compound">pistream</ref> &gt;</type>
+        <definition>boost::shared_ptr&lt; pistream &gt; boost::process::child::m_sstdout</definition>
+        <argsstring></argsstring>
+        <name>m_sstdout</name>
+        <briefdescription>
+<para>The standard output stream attached to the child process. </para>        </briefdescription>
+        <detaileddescription>
+<para>This postream object holds the communication channel with the child&apos;s process standard output. It is stored in a pointer because this field is only valid when the user requested to redirect this data stream. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="150" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classboost_1_1process_1_1child_18c4697b7795f4315a8a57b2608fc5ec0" prot="private" static="no" mutable="no">
+        <type>boost::shared_ptr&lt; <ref refid="classboost_1_1process_1_1pistream" kindref="compound">pistream</ref> &gt;</type>
+        <definition>boost::shared_ptr&lt; pistream &gt; boost::process::child::m_sstderr</definition>
+        <argsstring></argsstring>
+        <name>m_sstderr</name>
+        <briefdescription>
+<para>The standard error stream attached to the child process. </para>        </briefdescription>
+        <detaileddescription>
+<para>This postream object holds the communication channel with the child&apos;s process standard error. It is stored in a pointer because this field is only valid when the user requested to redirect this data stream. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="160" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classboost_1_1process_1_1child_1af0c8a49488c2645b5dbabee439d5fac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend struct</type>
+        <definition>friend struct detail::factories</definition>
+        <argsstring></argsstring>
+        <name>detail::factories</name>
+        <reimplementedby refid="classboost_1_1process_1_1win32__child_1af0c8a49488c2645b5dbabee439d5fac">detail::factories</reimplementedby>
+        <reimplementedby refid="classboost_1_1process_1_1posix__child_1af0c8a49488c2645b5dbabee439d5fac">detail::factories</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="184" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Generic implementation of the Child concept. </para>    </briefdescription>
+    <detaileddescription>
+<para>The child class implements the Child concept in an operating system agnostic way. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>boost::process::child</label>
+        <link refid="classboost_1_1process_1_1child"/>
+      </node>
+      <node id="5">
+        <label>boost::process::posix_child</label>
+        <link refid="classboost_1_1process_1_1posix__child"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>boost::process::win32_child</label>
+        <link refid="classboost_1_1process_1_1win32__child"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/tmp/process.016638aa/process/boost/process/child.hpp" line="63" bodyfile="/tmp/process.016638aa/process/boost/process/child.hpp" bodystart="62" bodyend="185"/>
+    <listofallmembers>
+      <member refid="classboost_1_1process_1_1child_1a899830c825cc53ecc422f2915959fc7" prot="protected" virt="non-virtual"><scope>boost::process::child</scope><name>child</name></member>
+      <member refid="classboost_1_1process_1_1child_1af0c8a49488c2645b5dbabee439d5fac" prot="public" virt="non-virtual"><scope>boost::process::child</scope><name>detail::factories</name></member>
+      <member refid="classboost_1_1process_1_1child_1f5aa0a4c094e51d4d2736472acec6893" prot="public" virt="non-virtual"><scope>boost::process::child</scope><name>get_handle</name></member>
+      <member refid="classboost_1_1process_1_1child_1e21a8cc758c37037723aab198a0cbe65" prot="public" virt="non-virtual"><scope>boost::process::child</scope><name>get_stderr</name></member>
+      <member refid="classboost_1_1process_1_1child_198668ffd20b860848b2dba06bf7238a0" prot="public" virt="non-virtual"><scope>boost::process::child</scope><name>get_stdin</name></member>
+      <member refid="classboost_1_1process_1_1child_119f67d7222fbd06d0b5bed36a8bbf615" prot="public" virt="non-virtual"><scope>boost::process::child</scope><name>get_stdout</name></member>
+      <member refid="classboost_1_1process_1_1child_123c957bf6f18f185a9fd560efa9cb4b9" prot="public" virt="non-virtual"><scope>boost::process::child</scope><name>handle_type</name></member>
+      <member refid="classboost_1_1process_1_1child_1fbb8c0510896927b8393a13157965dc3" prot="private" virt="non-virtual"><scope>boost::process::child</scope><name>m_handle</name></member>
+      <member refid="classboost_1_1process_1_1child_18c4697b7795f4315a8a57b2608fc5ec0" prot="private" virt="non-virtual"><scope>boost::process::child</scope><name>m_sstderr</name></member>
+      <member refid="classboost_1_1process_1_1child_1efa6f61ead03129bc6add4c84c652919" prot="private" virt="non-virtual"><scope>boost::process::child</scope><name>m_sstdin</name></member>
+      <member refid="classboost_1_1process_1_1child_132b81b41cc2e9f59a198a50a2c8fa2bb" prot="private" virt="non-virtual"><scope>boost::process::child</scope><name>m_sstdout</name></member>
+      <member refid="classboost_1_1process_1_1child_1c792e2fe261eb08b1a43e6fa7da408a4" prot="public" virt="non-virtual"><scope>boost::process::child</scope><name>wait</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

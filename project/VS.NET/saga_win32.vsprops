@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="saga_win32"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="&quot;$(SAGA_SRC_ROOT)\src&quot;;&quot;$(SAGA_SRC_ROOT)\external\boost&quot;;&quot;$(SAGA_BOOST_ROOT)&quot;;&quot;$(SAGA_BOOST_TR1_ROOT)&quot;"
+		PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINDOWS=0x0410;SAGA_USE_TR1_NAMESPACE"
+		DisableSpecificWarnings="4103"
+	/>
+	<Tool
+		Name="VCCustomBuildTool"
+		CommandLine="xcopy /Y/F &quot;$(TargetPath)&quot; &quot;$(SAGA_LOCATION)&quot;&#x0D;&#x0A;xcopy /Y/F &quot;$(TargetDir)\$(TargetName).pdb&quot; &quot;$(SAGA_LOCATION)&quot;&#x0D;&#x0A;"
+		Outputs="&quot;$(SAGA_LOCATION)\$(TargetFileName)&quot;"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalLibraryDirectories="$(SAGA_BOOST_LIB_DIR)"
+	/>
+	<UserMacro
+		Name="SAGA_LOCATION"
+		Value="C:\CVS\saga\bin"
+		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="SAGA_BOOST_ROOT"
+		Value="C:\CVS\Boost_1_34\boost"
+		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="SAGA_BOOST_TR1_ROOT"
+		Value="$(SAGA_BOOST_ROOT)\boost\tr1\tr1"
+	/>
+	<UserMacro
+		Name="SAGA_SRC_ROOT"
+		Value="C:\CVS\saga\trunk"
+		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="SAGA_BOOST_LIB_DIR"
+		Value="$(SAGA_BOOST_ROOT)\stage\lib"
+		PerformEnvironmentSet="true"
+	/>
+</VisualStudioPropertySheet>

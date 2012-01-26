@@ -1,0 +1,433 @@
+#!/usr/bin/perl -w
+
+###########################################################
+#
+# @file: config/saga-install.pl(.in)
+#
+# @description:
+#   used to install SAGA components into the target location.
+#   The target location is either specified at configure time, 
+#   via --prefix, or at runtime, via the SAGA_LOCATION 
+#   environment variable, which overrides the configure prefix.
+#
+# Copyright (c) 2010 Andre Merzky (andre@merzky.net)
+# This file is part of the SAGA Engine.
+#
+###########################################################
+
+### LICENSE ###
+
+BEGIN {
+  use strict;
+
+  # don't use any additional modules like getopt to increase portability
+
+  # FIXME - needed?
+  use Fcntl ':flock'; # import LOCK_* constants
+
+  sub usage    ( ;$);
+  sub my_mkdir ($;$);
+}
+
+
+my $do_symlinks = 1;
+my $debug   = 0;
+my @cleanup = (); # tmp files to be removed when done
+
+if ( exists $ENV{'SAGA_NO_SYMLINKS'} )
+{
+  $do_symlinks = 0;
+}
+
+
+sub usage (;$)
+{
+  my $msg = shift || undef;
+
+  if ( defined ($msg) )
+  {
+    print <<EOT1;
+
+  Error:    $msg
+
+EOT1
+  }
+
+  print <<EOT2;
+
+  Usage:    $0 [opts] <component> <path/to/dir/>
+
+  Options:  -vx.y     component obtains a version postfix, and a symlink
+                      original component name 
+            -n        do nothing, only print commands to be run
+            -c        gzip the installation file
+            -a alias  after install, link the src to the name 'alias' in 
+                      the same directory
+
+  Examples: saga-install.sh saga_main.hpp include/saga/saga.hpp 
+                                 --> include/saga
+              saga_main.hpp      --> include/saga/saga.hpp
+
+            saga-install.sh doc/ share/saga/doc/
+                                 --> share/saga/doc/
+              docs/README        --> share/saga/doc/README
+              docs/INSTALL       --> share/saga/doc/INSTALL
+              docs/...           --> share/saga/doc/...
+
+            saga-install.sh -v1.2 libsaga_job.so lib/libsaga_job.so
+                                 --> lib
+              libsaga_job.so     --> lib/libsaga_job.1.2.so
+
+              # additionally, there will be symlinks like
+              #   ln -s lib libsaga_job.1.2.so lib/libsaga_job.1.so
+              #   ln -s lib libsaga_job.1.so   lib/libsaga_job.so
+
+            saga-install.sh -a saga-job-run saga_job bin/saga-job
+                                 --> bin
+              saga-job           --> bin/saga-job
+
+              # additionally, there will be a symlink
+              #   ln -s saga-job saga-job-run
+              # in the targed dir
+
+            saga-install.sh -c saga_shell.1 share/man/man3/
+                                 --> share/man/man3/
+              saga_shell.1       --> share/man/man3/saga_sheel.1.gz
+
+  The target directory will _always_ be prefixed by
+  SAGA_LOCATION, i.e. by the installation prefix.  <component>
+  can be a file or directory.
+
+  The versioning flag -v is only supported for libraries,
+  i.e. for .a, .so and .dylib extensions.  The environment 
+  variable SAGA_NO_SYMLINKS disables the effect of -v.
+
+
+  KNOWN PROBLEMS: 
+    - installing older versions with '-v' will remove 
+      newer versions of the lib
+
+EOT2
+  exit 1;
+}
+
+# main
+{
+# check flags and args
+  my $ver    = 0;
+  my $zip    = 0;
+  my $alias  = 0;
+  my $i      = 0; # arg index
+
+  foreach my $arg ( @ARGV )
+  {
+    if    ( $ARGV[$i] eq "-n" ) { $debug  = 1;                }
+    elsif ( $ARGV[$i] eq "-c" ) { $zip    = 1;                }
+    elsif ( $ARGV[$i] eq "-a" ) { $alias  = $ARGV[++$i] || 0; }
+    elsif ( $ARGV[$i] eq "-v" ) { $ver    = $ARGV[++$i] || 0; }
+    else                        { last;                       }
+
+    $i++;
+  }
+
+  my $src = $ARGV[$i++] || usage ("no source specified!");
+  my $tgt = $ARGV[$i++] || usage ("no target specified!");
+
+  # we honor GNU conventions, and silently prepend the DESTDIR variable to the
+  # installation prefix, if it exists
+  if ( exists ($ENV{'DESTDIR'}) )
+  {
+    $tgt = "$ENV{'DESTDIR'}/$tgt";
+  }
+
+  # complain if tgt has trailing slashes for non-directories
+  if ( $tgt =~ /\/$/ && ! -d $src )
+  {
+    die "Target should be the full file name, not a directory.\n";
+  }
+
+  # strip trailing slashes and double slashes
+  $tgt =~ s/\/+$//g;
+  $tgt =~ s/\/\//\//g;
+
+  # for gzip mode, targets get a .gz ending
+  if ( $zip )
+  {
+    $tgt = "$tgt.gz";
+  }
+
+  if ( $debug )
+  {
+    print <<EOT3;
+    src  : $src
+    tgt  : $tgt
+    ver  : $ver
+    zip  : $zip
+    alias: $alias
+EOT3
+  }
+
+
+# for the version mode, make sure the component is a lib.  Also, replace the
+# target name with the full expanded versioned name, and add the link targets.
+# TODO
+
+  my $tgt_dir;
+  my $tgt_name;
+
+  if ( $tgt =~ /^(.+?)\/([^\/]+)$/io )
+  {
+    $tgt_dir  = $1;
+    $tgt_name = $2;
+  }
+
+  if ( ! $alias )
+  {
+    # handle gzip requests
+    if ( $zip )
+    {
+      if ( ! -f $src )
+      {
+        die "-c only works for files, not directories ($src)\n";
+      }
+
+      system ("gzip -c $src > $src.gz");
+
+      if ( ! -f "$src.gz" )
+      {
+        die "gzip failed\n";
+      }
+
+      $src = "$src.gz";
+      push (@cleanup, $src);
+    }
+
+
+    # if needed, we create the tgt' parent dir
+    if ( ! -e $tgt_dir )
+    {
+      my_mkdir ($tgt_dir);
+    }
+    else
+    {
+      if ( ! -d $tgt_dir )
+      {
+        die "Target's parent dir ($tgt - $tgt_dir) exists and is not a directory\n";
+      }
+    }
+
+
+    # copy src to target
+    if ( $debug )
+    {
+      print "cp -rf $src $tgt\n";
+    }
+    else
+    {
+      if ( -e $tgt )
+      {
+        unlink ($tgt);
+      }
+
+      system ("cp -rf $src $tgt") == 0 || die "Cannot copy '$src'  to '$tgt': $!\n";
+
+      if ( -d $tgt )
+      {
+        system ("find $tgt/ -name .svn -exec rm -rf {} \\\; 2>/dev/null");
+      }
+    }
+  }
+
+
+
+  # now, for versioned libraries we need to do something more special.
+  # First, move the installed file to a fully versioned one, link that to the
+  # next major version, until we have a link chain to the original target
+
+  if ( $do_symlinks && $ver )
+  {
+    my $lib_base;
+    my $lib_ext;
+
+    if ( $tgt_name =~ /^(.+)\.(so|dylib|a|dll)$/io )
+    {
+      $lib_base = $1;
+      $lib_ext  = $2;
+
+      # we only support versioing for files
+      if ( -d $tgt )
+      {
+        die "versioning of directories is not supported\n";
+      }
+
+      # get list of valid version strings
+      my @ver;  
+      my $sub_ver = $ver;
+
+      while ( 1 )
+      {
+        push (@ver, $sub_ver);
+
+        if ( $sub_ver =~ /^(.+)\.([^\.]+)$/io )
+        {
+          $sub_ver =  $1;
+        }
+        elsif ( $sub_ver =~ /^([^\.]+)$/io )
+        {
+          last;
+        }
+        else
+        {
+          usage ("Can't parse version argument '$ver'");
+        }
+      }
+
+      # do we have a useful version
+      if ( scalar (@ver) > 0 )
+      {
+        # move the real target to the first (longest) version string
+        my $this_ver  = shift (@ver);
+        my $new_tgt   = "$tgt_dir/$lib_base.$lib_ext.$this_ver";
+        my $new_tgt_s =          "$lib_base.$lib_ext.$this_ver";
+
+
+        # move the new target
+        if ( $debug )
+        {
+          print "mv -f $tgt $new_tgt\n";
+        }
+        else
+        {
+          system ("mv -f $tgt $new_tgt") == 0 || die "Cannot move '$tgt' to '$new_tgt'\n";
+        }
+
+
+        # create the link chain
+        while ( scalar (@ver) > 0 ) 
+        {
+          my $next_ver   = shift (@ver);
+          my $link_tgt   = "$tgt_dir/$lib_base.$lib_ext.$next_ver";
+          my $link_tgt_s =          "$lib_base.$lib_ext.$next_ver";
+
+          # link targets need to be removed when preexisting
+          if ( -e $link_tgt )
+          {
+            if ( $debug )
+            {
+              print "unlink $link_tgt\n";
+            }
+            else
+            {
+              unlink ($link_tgt);
+            }
+          }
+
+          # link the new target
+          if ( $debug )
+          {
+            print   "cd $tgt_dir && ln -s $new_tgt_s $link_tgt_s\n";
+          }
+          else
+          {
+            system ("cd $tgt_dir && ln -s $new_tgt_s $link_tgt_s");
+          }
+
+          $new_tgt = $link_tgt;
+        }
+
+
+        # link the last new target
+        if ( $debug )
+        {
+          print   "cd $tgt_dir && ln -s $new_tgt_s $tgt\n";
+        }
+        else
+        {
+          system ("cd $tgt_dir && ln -s $new_tgt_s $tgt");
+        }
+      }
+    }
+    else
+    {
+      usage ("-v can only be used with libraries");
+    }
+  }
+  
+  if ( $alias )
+  {
+    my $link_tgt = "$tgt_dir/$alias";
+
+    if ( ! -e $tgt )
+    {
+      die "Cannot create alias $alias for $tgt: target is not installed\n";
+    }
+
+    # link targets need to be removed when preexisting
+    if ( -l $link_tgt )
+    {
+      if ( $debug )
+      {
+        print "unlink $link_tgt\n";
+      }
+      else
+      {
+        unlink ($link_tgt);
+      }
+    }
+
+    # link the last new target
+    if ( $debug )
+    {
+      print "symlink $tgt, $link_tgt\n";
+    }
+    else
+    {
+      symlink ($tgt_name, $link_tgt) || die "Cannot link '$tgt' to '$link_tgt'\n";
+    }
+  }
+}
+
+############################################################
+#
+# "mkdir -p"
+#
+sub my_mkdir ($;$)
+{
+  my $tmp  = shift;
+  my @tree = ();
+
+  $tmp =~ s/\/$//og;
+
+  push (@tree, $tmp);
+
+  while ( $tmp =~ /^(.+)\/([^\/]+)$/io )
+  {
+    $tmp  = $1;
+    push (@tree, $tmp);
+  }
+
+  foreach my $branch ( reverse @tree )
+  {
+    if ( ! -d $branch )
+    {
+      if ( $debug )
+      {
+        print "mkdir  $branch\n";
+      }
+      else
+      {
+        mkdir ($branch) || die "Cannot create dir $branch: $!\n";
+      }
+    }
+  }
+}
+
+END 
+{
+  # cleanup
+  foreach my $f ( @cleanup )
+  {
+    unlink ($f) || warn "Cannot cleanup tmp file '$f': $!\n";
+  }
+}
+

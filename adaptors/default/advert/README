@@ -1,0 +1,164 @@
+Default advert adaptor
+
+The default advert adaptor implements the advert::entry and 
+advert::directory CPI's on top of conventional databases. Currently we support
+the following database backends:
+  - SQLite (V3)
+  - Postgresql V8.x upwards.
+
+The database backend has to be configured in the adaptor initialization file
+(I just provide my ini file contents to convey the idea):
+
+#--- <start of ini file> ---
+[saga.adaptors.default_advert]
+  name      = default_advert
+  path      = ${SAGA_LOCATION}/lib
+
+[saga.adaptors.default_advert.preferences]
+  # adaptor configuration
+
+  # specify what (default) backend to use
+  dbtype    = sqlite3
+
+
+[saga.adaptors.default_advert.preferences.sqlite3]
+  # specify a file name where sqlite3 can store its data.
+  # relative and absolute paths are both supported.  Relative paths are 
+  # relative to the applications cwd.
+
+  dbconnect = saga_advert.db
+
+
+[saga.adaptors.default_advert.preferences.postgresql]
+  # The set of parameters used in the dbconnect string 
+  # for PostgreSQL is the same as accepted by the PQconnectdb 
+  # function from the libpq library (see here: 
+  # http://www.postgresql.org/docs/8.1/interactive/libpq.html#LIBPQ-CONNECT)
+  
+  dbconnect = dbname=advertdb;host=hostname.org;port=5432;user=USERNAME;password=PASSWD
+#--- <end of ini file> ---
+
+Generally the parameters specified in the dbconnect string are used as defaults,
+which may be overwritten by different means.
+
+Using SQlite3
+
+For SQLite3 the dbtype should be set to 'sqlite3' (case sensitive!). The only 
+parameter which may be specified is the name of the database file to use. If no
+name is given, 'saga_advert.db' will be used.
+
+Using PostgreSQL
+
+For PostgreSQL the dbtype has to be set to 'postgresql' (case sensitive!).
+
+The set of parameters (and their defaults) used in the dbconnect string for 
+PostgreSQL is the same as accepted by the PQconnectdb function from the libpq 
+library (see here: 
+http://www.postgresql.org/docs/8.1/interactive/libpq.html#LIBPQ-CONNECT).
+
+The host, port, username and password parameters given in the connect string 
+may be overwritten either by providing a corresponding saga::context or by
+specifying these in the URL referring to the replica to access.
+
+If no dbname parameter is given in the dbconnect string, advertdb is used.
+If no host is given, localhost is used. The default port number is 5432. The
+user credentials default to anonymous/anon.
+
+
+All parameters in the .ini file can be overriden using the following URL scheme:
+advert://user:passwd@hostname:port/advertpath?dbname=advertdb;dbtype=postgresql
+
+
+The file advertdb.sql contains a script usable to initialze an empty advert
+database. There are two preconditions for this script to run: a) it needs to 
+find an empty Postgresql database, and b) you need to have installed the Python 
+query language extension (plpythonu). 
+
+Alternatively for a), you can remove the comments around lines 13-20, which 
+will create the Postgresql database for you before initializing the advert 
+tables (it will use the name advertdb in this case). See the README in the 
+same directory for more information. 
+
+Note: this script sets up the default username/password SAGA/SAGA_client 
+(lines 34-40) and grants rights for all operations on the database for 
+this user (lines 270-280). You'll need to do some manual credential tweaking 
+using the usual Postgresql tools afterwards.
+
+
+A session transcript for installing, configuring and testing postgresql is
+included below:
+
+  ######################################################################################
+  # create a database storage, and configure it
+  cd install/
+  bin/initdb -D ./data -U postgres -W
+  cd data/
+  cp pg_hba.conf pg_hba.conf.bak
+  cp postgresql.conf postgresql.conf.bak
+  vim postgresql.conf
+  #   change port: 5432 -> 54321
+  vim pg_hba.conf
+  #   change auth: trust -> password
+  cd ..
+  ######################################################################################
+
+  ######################################################################################
+  # start the server, as user 'postgres'; create a database 'advertdb'
+  bin/pg_ctl -D ./data -l data/logfile start
+  ./bin/createdb -h localhost -p 54321 -U postgres -O postgres -W advertdb
+  ######################################################################################
+
+  ######################################################################################
+  # run the initialization script described above
+  ./bin/psql -h localhost -p 54321 -U postgres -W -f ~/saga-core-trunk/adaptors/default/advert/advertdb.sql advertdb
+  ######################################################################################
+
+  ######################################################################################
+  # at that point, the database is good for use.  
+  #
+  # to get the advert adaptor compiled with postgresql, either set
+  # POSTGRESQL_LOCATION to the postgresql prefix before running configure in
+  # SAGA, or add the config flag '--with-postgresql=...'
+  #
+  # The following advert adaptor
+  # ini section configures the advert adaptor to use that database by default
+  [saga.adaptors.default_advert]
+    name      = default_advert
+  
+  [saga.adaptors.default_advert.preferences]
+    dbtype    = postgresql
+  
+  [saga.adaptors.default_advert.preferences.postgresql]
+    dbconnect = dbname=advertdb;host=localhost;port=54321;user=SAGA;password=SAGA_client
+
+  # run a simple example
+  export LD_LIBRARY_PATH=$SAGA_LOCATION/lib:$HOME/postgresql-8.4.1/install/lib:$LD_LIBRARY_PATH
+  $SAGA_LOCATION/bin/saga-advert dump_directory / 
+    /
+      ctime       : 2010-11-17 20:59:21.752349+01
+      utime       : 2010-11-17 20:59:21.752349+01
+  ######################################################################################
+
+
+The advertdb.sql initialization script contains the username and password for
+the advert db.  To generate the paassword hash, you can use the following perl
+script:
+
+  ######################################################################################
+  #!/usr/bin/perl -w
+
+  use strict;
+  use Digest::MD5;
+  
+  my $user = shift || die "\n\tusage: $0 <user> <pass>\n\n";
+  my $pass = shift || die "\n\tusage: $0 <user> <pass>\n\n";
+  
+  my $md5  = Digest::MD5->new;
+  
+  $md5->add ($pass. $user);
+  
+  print "md5" . $md5->hexdigest . "\n";
+  ######################################################################################
+  
+
+

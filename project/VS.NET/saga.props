@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="saga_version.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros">
+    <SAGA_BOOST_ROOT>C:\CVS\Boost</SAGA_BOOST_ROOT>
+    <SAGA_LOCATION>$(SAGA_SRC_ROOT)\bin</SAGA_LOCATION>
+    <SAGA_BOOST_TR1_ROOT>$(SAGA_BOOST_ROOT)\boost\tr1\tr1</SAGA_BOOST_TR1_ROOT>
+    <SAGA_BOOST_LIB_DIR>$(SAGA_BOOST_ROOT)\stage32\lib</SAGA_BOOST_LIB_DIR>
+    <PLATFORM_IS_X64>$(SAGA_PLATFORM_IS_X64)</PLATFORM_IS_X64>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30128.1</_ProjectFileVersion>
+    <OutDir>$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SAGA_SRC_ROOT)\external\boost\futures;$(SAGA_SRC_ROOT);$(SAGA_SRC_ROOT)\external\boost\plugin;$(SAGA_SRC_ROOT)\external\boost\process;$(SAGA_SRC_ROOT)\external\boost\spirit;$(SAGA_BOOST_ROOT);$(SAGA_BOOST_TR1_ROOT);$(SAGA_SRC_ROOT)\external\boost\asio;$(SAGA_SRC_ROOT)\external\boost\system;$(SAGA_SRC_ROOT)\external\boost\logging;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SAGA_LOCATION=".";SAGA_PREFIX=SAGA_LOCATION;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_WIN32_WINDOWS=0x0410;_WIN32_WINNT=0x0410;SAGA_USE_TR1_NAMESPACE;SAGA_SKIP_CONFIG_HPP;SAGA_HAVE_PACKAGE_JOB;SAGA_HAVE_PACKAGE_NAMESPACE;SAGA_HAVE_PACKAGE_FILESYSTEM;SAGA_HAVE_PACKAGE_ADVERT;SAGA_HAVE_PACKAGE_REPLICA;SAGA_HAVE_PACKAGE_SD;SAGA_HAVE_PACKAGE_RPC;SAGA_HAVE_PACKAGE_STREAM;SAGA_HAVE_PACKAGE_CPR;BOOST_SPIRIT_USE_OLD_NAMESPACE;PLATFORM_IS_X64=$(PLATFORM_IS_X64);BOOST_FS_HARD_LINK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4103;4267;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+      <Outputs>%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <Link>
+      <AdditionalLibraryDirectories>$(SAGA_LOCATION)\libs;$(SAGA_BOOST_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EnableUAC>
+      </EnableUAC>
+      <UACExecutionLevel>
+      </UACExecutionLevel>
+      <UACUIAccess>
+      </UACUIAccess>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SAGA_LOCATION)" mkdir "$(SAGA_LOCATION)"
+if not exist "$(SAGA_LOCATION)\libs" mkdir "$(SAGA_LOCATION)\libs"
+xcopy /Y/F "$(TargetPath)" "$(SAGA_LOCATION)"
+xcopy /Y/F "$(TargetDir)\$(TargetName).pdb" "$(SAGA_LOCATION)"
+xcopy /Y/F "$(TargetDir)\$(TargetName).lib" "$(SAGA_LOCATION)\libs"
+</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Performing Custom Build Step</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="SAGA_BOOST_ROOT">
+      <Value>$(SAGA_BOOST_ROOT)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="SAGA_LOCATION">
+      <Value>$(SAGA_LOCATION)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SAGA_BOOST_TR1_ROOT">
+      <Value>$(SAGA_BOOST_TR1_ROOT)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SAGA_BOOST_LIB_DIR">
+      <Value>$(SAGA_BOOST_LIB_DIR)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="PLATFORM_IS_X64">
+      <Value>$(PLATFORM_IS_X64)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

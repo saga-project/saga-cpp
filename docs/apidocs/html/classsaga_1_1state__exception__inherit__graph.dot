@@ -1,0 +1,19 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{saga::state_exception\n||# state_exception()\l# state_exception()\l# state_exception()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node2 [label="{saga::exception\n|+ m\l+ e\l+ l\l|+ ~exception()\l+ what()\l+ get_message()\l+ get_error()\l+ get_object()\l+ get_all_exceptions()\l+ get_all_messages()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1exception.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node3 [label="{std::exception\n||}",height=0.2,width=0.4,color="grey75",tooltip="STL class."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node4 [label="{saga::already_exists\n||+ already_exists()\l+ already_exists()\l+ already_exists()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1already__exists.html"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node5 [label="{saga::does_not_exist\n||+ does_not_exist()\l+ does_not_exist()\l+ does_not_exist()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1does__not__exist.html"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node6 [label="{saga::incorrect_state\n||+ incorrect_state()\l+ incorrect_state()\l+ incorrect_state()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1incorrect__state.html"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node7 [label="{saga::timeout\n||+ timeout()\l+ timeout()\l+ timeout()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1timeout.html"];
+}

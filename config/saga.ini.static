@@ -1,0 +1,33 @@
+
+[saga]
+  # saga install root, points to what is set in the environment, as
+  # SAGA_LOCATION.
+  location = ${SAGA_LOCATION}
+
+  # where to find adaptor ini files
+  ini_path = $[saga.location]/share/saga/
+
+[saga.logging]
+
+  # 'level' (env variable SAGA_VERBOSE) is the same as before and should be a
+  # number in between 0 (no logging) and 6 (max logging). The default is '0' 
+  # (no logging).
+  level = ${SAGA_VERBOSE:0}
+  
+  # 'destination' (env variable SAGA_LOGDESTINATION) can be one or more of:
+  #  * file(<name>): logs to file <name>, file2(<name2>): writes to a second file
+  #  * cout: logs to stdout 
+  #  * cerr: logs to stderr
+  #  * rol_file(<name>): writes to a rolling file (rol_file2 is possible as well)
+  #
+  destination = ${SAGA_LOGDESTINATION:file(saga.$[saga.pid].log)}
+ 
+  # 'format' (env variable SAGA_LOGFORMAT) allows to specify the required format
+  # of the log messages. The actual log message is inserted at the point where 
+  # the '|' placeholder is specified. Possible other placeholders are:
+  #  * "%idx%" - writes the index of the message
+  #  * "%time%" - writes the time (time format variable, see example above) 
+  #  * "%thread_id%" - writes the thread id 
+  #  * a single '%' needs to be written as '%%', backslash '\' needs to be
+  #    written as '\\'
+  format = ${SAGA_LOGFORMAT:%time%($hh:$mm.$ss) [%idx%] |\n}

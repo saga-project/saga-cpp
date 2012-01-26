@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="win32__launcher_8hpp" kind="file">
+    <compoundname>win32_launcher.hpp</compoundname>
+    <includes refid="config_8hpp" local="no">boost/process/config.hpp</includes>
+    <includes local="no">windows.h</includes>
+    <includes local="no">boost/assert.hpp</includes>
+    <includes local="no">boost/process/detail/factories.hpp</includes>
+    <includes local="no">boost/process/detail/file_handle.hpp</includes>
+    <includes refid="launcher_8hpp" local="no">boost/process/launcher.hpp</includes>
+    <includes refid="win32__child_8hpp" local="no">boost/process/win32_child.hpp</includes>
+    <includes local="no">boost/scoped_ptr.hpp</includes>
+    <incdepgraph>
+      <node id="338">
+        <label>boost/process/launcher.hpp</label>
+        <link refid="launcher_8hpp"/>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="335" relation="include">
+        </childnode>
+        <childnode refid="339" relation="include">
+        </childnode>
+        <childnode refid="350" relation="include">
+        </childnode>
+        <childnode refid="336" relation="include">
+        </childnode>
+        <childnode refid="337" relation="include">
+        </childnode>
+        <childnode refid="351" relation="include">
+        </childnode>
+        <childnode refid="352" relation="include">
+        </childnode>
+        <childnode refid="355" relation="include">
+        </childnode>
+      </node>
+      <node id="341">
+        <label>boost/process/detail/pipe.hpp</label>
+      </node>
+      <node id="349">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="334">
+        <label>windows.h</label>
+      </node>
+      <node id="350">
+        <label>boost/process/detail/command_line_ops.hpp</label>
+      </node>
+      <node id="339">
+        <label>boost/process/child.hpp</label>
+        <link refid="child_8hpp"/>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="340" relation="include">
+        </childnode>
+        <childnode refid="335" relation="include">
+        </childnode>
+        <childnode refid="341" relation="include">
+        </childnode>
+        <childnode refid="342" relation="include">
+        </childnode>
+        <childnode refid="346" relation="include">
+        </childnode>
+        <childnode refid="348" relation="include">
+        </childnode>
+        <childnode refid="349" relation="include">
+        </childnode>
+      </node>
+      <node id="342">
+        <label>boost/process/pistream.hpp</label>
+        <link refid="pistream_8hpp"/>
+        <childnode refid="343" relation="include">
+        </childnode>
+        <childnode refid="344" relation="include">
+        </childnode>
+        <childnode refid="337" relation="include">
+        </childnode>
+        <childnode refid="345" relation="include">
+        </childnode>
+      </node>
+      <node id="353">
+        <label>stdexcept</label>
+      </node>
+      <node id="351">
+        <label>boost/process/detail/launcher_base.hpp</label>
+      </node>
+      <node id="348">
+        <label>boost/process/status.hpp</label>
+        <link refid="status_8hpp"/>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="335" relation="include">
+        </childnode>
+      </node>
+      <node id="355">
+        <label>boost/throw_exception.hpp</label>
+      </node>
+      <node id="354">
+        <label>string</label>
+      </node>
+      <node id="344">
+        <label>boost/noncopyable.hpp</label>
+      </node>
+      <node id="340">
+        <label>map</label>
+      </node>
+      <node id="347">
+        <label>ostream</label>
+      </node>
+      <node id="335">
+        <label>boost/assert.hpp</label>
+      </node>
+      <node id="346">
+        <label>boost/process/postream.hpp</label>
+        <link refid="postream_8hpp"/>
+        <childnode refid="347" relation="include">
+        </childnode>
+        <childnode refid="344" relation="include">
+        </childnode>
+        <childnode refid="337" relation="include">
+        </childnode>
+        <childnode refid="345" relation="include">
+        </childnode>
+      </node>
+      <node id="331">
+        <label>/tmp/process.016638aa/process/boost/process/win32_launcher.hpp</label>
+        <link refid="win32_launcher.hpp"/>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="334" relation="include">
+        </childnode>
+        <childnode refid="335" relation="include">
+        </childnode>
+        <childnode refid="336" relation="include">
+        </childnode>
+        <childnode refid="337" relation="include">
+        </childnode>
+        <childnode refid="338" relation="include">
+        </childnode>
+        <childnode refid="356" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+      </node>
+      <node id="357">
+        <label>boost/scoped_ptr.hpp</label>
+      </node>
+      <node id="336">
+        <label>boost/process/detail/factories.hpp</label>
+      </node>
+      <node id="333">
+        <label>boost/config.hpp</label>
+      </node>
+      <node id="352">
+        <label>boost/process/exceptions.hpp</label>
+        <link refid="exceptions_8hpp"/>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="353" relation="include">
+        </childnode>
+        <childnode refid="354" relation="include">
+        </childnode>
+      </node>
+      <node id="337">
+        <label>boost/process/detail/file_handle.hpp</label>
+      </node>
+      <node id="356">
+        <label>boost/process/win32_child.hpp</label>
+        <link refid="win32__child_8hpp"/>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="334" relation="include">
+        </childnode>
+        <childnode refid="339" relation="include">
+        </childnode>
+      </node>
+      <node id="345">
+        <label>boost/process/detail/systembuf.hpp</label>
+      </node>
+      <node id="332">
+        <label>boost/process/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="333" relation="include">
+        </childnode>
+      </node>
+      <node id="343">
+        <label>istream</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classboost_1_1process_1_1win32__launcher" prot="public">boost::process::win32_launcher</innerclass>
+    <innernamespace refid="namespaceboost">boost</innernamespace>
+    <innernamespace refid="namespaceboost_1_1process">boost::process</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Includes the declaration of the win32_launcher class. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Boost.Process</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2006<sp/>Julio<sp/>M.<sp/>Merino<sp/>Vidal.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Distributed<sp/>under<sp/>the<sp/>Boost<sp/>Software<sp/>License,<sp/>Version<sp/>1.0.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>(See<sp/>accompanying<sp/>file<sp/>LICENSE_1_0.txt<sp/>or<sp/>copy<sp/>at</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>http://www.boost.org/LICENSE_1_0.txt.)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(BOOST_PROCESS_WIN32_LAUNCHER_HPP)</highlight></codeline>
+<codeline lineno="18"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor">#define<sp/>BOOST_PROCESS_WIN32_LAUNCHER_HPP</highlight></codeline>
+<codeline lineno="20"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="config_8hpp" kindref="compound">boost/process/config.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(BOOST_PROCESS_WIN32_API)</highlight></codeline>
+<codeline lineno="25"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/>error<sp/>&quot;Unsupported<sp/>platform.&quot;</highlight></codeline>
+<codeline lineno="26"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="27"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;windows.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/assert.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/process/detail/factories.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/process/detail/file_handle.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="launcher_8hpp" kindref="compound">boost/process/launcher.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="win32__child_8hpp" kindref="compound">boost/process/win32_child.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/scoped_ptr.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">boost<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">process<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="classboost_1_1process_1_1win32__launcher" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classboost_1_1process_1_1win32__launcher" kindref="compound">win32_launcher</ref><sp/>:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classboost_1_1process_1_1launcher" kindref="compound">launcher</ref></highlight></codeline>
+<codeline lineno="53"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>boost::scoped_ptr&lt;<sp/>STARTUPINFO<sp/>&gt;<sp/>m_startupinfo;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classboost_1_1process_1_1win32__launcher_117c84656743e3b97d8d8d922da194f21" kindref="member">win32_launcher</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>STARTUPINFO*<sp/>si<sp/>=<sp/>NULL);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Command_Line<sp/>&gt;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classboost_1_1process_1_1win32__child" kindref="compound">win32_child</ref><sp/><ref refid="classboost_1_1process_1_1win32__launcher_1712c43306610d91d4df0e28de36900f5" kindref="member">start</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Command_Line&amp;<sp/>cl);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="classboost_1_1process_1_1win32__launcher_117c84656743e3b97d8d8d922da194f21" refkind="member"><highlight class="normal"><ref refid="classboost_1_1process_1_1win32__launcher_117c84656743e3b97d8d8d922da194f21" kindref="member">win32_launcher::win32_launcher</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>STARTUPINFO*<sp/>si)</highlight></codeline>
+<codeline lineno="97"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(si<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BOOST_ASSERT(si-&gt;cb<sp/>&gt;=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(STARTUPINFO));</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BOOST_ASSERT(!(si-&gt;dwFlags<sp/>&amp;<sp/>STARTF_USESTDHANDLES));</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>XXX<sp/>I&apos;m<sp/>not<sp/>sure<sp/>this<sp/>usage<sp/>of<sp/>scoped_ptr<sp/>is<sp/>correct...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_startupinfo.reset((STARTUPINFO*)</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">[si-&gt;cb]);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::CopyMemory(m_startupinfo.get(),<sp/>si,<sp/>si-&gt;cb);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_startupinfo.reset(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>STARTUPINFO);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::ZeroMemory(m_startupinfo.get(),<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(STARTUPINFO));</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_startupinfo-&gt;cb<sp/>=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(STARTUPINFO);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Command_Line<sp/>&gt;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><ref refid="classboost_1_1process_1_1win32__child" kindref="compound">win32_child</ref></highlight></codeline>
+<codeline lineno="117" refid="classboost_1_1process_1_1win32__launcher_1712c43306610d91d4df0e28de36900f5" refkind="member"><highlight class="normal"><ref refid="classboost_1_1process_1_1win32__launcher_1712c43306610d91d4df0e28de36900f5" kindref="member">win32_launcher::start</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Command_Line&amp;<sp/>cl)</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::file_handle<sp/>fhstdin,<sp/>fhstdout,<sp/>fhstderr;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::stream_info<sp/>behin<sp/>=</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>win32_behavior_to_info(get_stdin_behavior(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>fhstdin);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::stream_info<sp/>behout<sp/>=</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>win32_behavior_to_info(get_stdout_behavior(),<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>fhstdout);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::stream_info<sp/>beherr<sp/>=</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>win32_behavior_to_info(get_stderr_behavior(),<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>fhstderr);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::win32_setup<sp/>s;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>s.m_work_directory<sp/>=<sp/>get_work_directory();</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>s.m_startupinfo<sp/>=<sp/>m_startupinfo.get();</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>PROCESS_INFORMATION<sp/>pi<sp/>=<sp/>detail::win32_start(cl,<sp/>get_environment(),</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>behin,<sp/>behout,<sp/>beherr,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_merge_out_err(),<sp/>s);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>detail::factories::create_win32_child(pi,<sp/>fhstdin,<sp/>fhstdout,</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fhstderr);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>process</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>boost</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>!defined(BOOST_PROCESS_WIN32_LAUNCHER_HPP)</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/process.016638aa/process/boost/process/win32_launcher.hpp"/>
+  </compounddef>
+</doxygen>

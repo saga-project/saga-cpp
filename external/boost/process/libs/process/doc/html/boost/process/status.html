@@ -1,0 +1,101 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Class status</title>
+<link rel="stylesheet" href="../../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="../../index.html" title="Boost.Process">
+<link rel="up" href="../../boost_process/reference.html#header.boost.process.status.hpp" title="7.16. Header &lt;boost/process/status.hpp&gt;">
+<link rel="prev" href="postream.html" title="Class postream">
+<link rel="next" href="create_status.html" title="Function create_status">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../.././boost.png"></td></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="postream.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../boost_process/reference.html#header.boost.process.status.hpp"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="create_status.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+<div class="refentry" lang="en">
+<a name="boost.process.status"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2><span class="refentrytitle">Class status</span></h2>
+<p>boost::process::status &#8212; Status returned by a finalized child process. </p>
+</div>
+<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
+<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis">
+<span class="bold"><strong>class</strong></span> status {
+<span class="bold"><strong>public</strong></span>:
+  <span class="emphasis"><em>// <a href="status.html#boost.process.statusconstruct-copy-destruct">construct/copy/destruct</a></em></span>
+  <a href="status.html#id2380926-bb">status</a>(<span class="bold"><strong>int</strong></span>);
+
+  <span class="emphasis"><em>// <a href="status.html#id2380874-bb">public member functions</a></em></span>
+  <span class="type"><span class="bold"><strong>bool</strong></span></span> <a href="status.html#id2380877-bb">exited</a>(<span class="bold"><strong>void</strong></span>) <span class="bold"><strong>const</strong></span>;
+  <span class="type"><span class="bold"><strong>int</strong></span></span> <a href="status.html#id2380898-bb">exit_status</a>(<span class="bold"><strong>void</strong></span>) <span class="bold"><strong>const</strong></span>;
+};</pre></div>
+<div class="refsect1" lang="en">
+<a name="id2717093"></a><h2>Description</h2>
+<p>This class represents the status returned by a child process after it has terminated. It only provides that information available under all supported platforms.</p>
+<p>posix_status </p>
+<p>
+</p>
+<div class="refsect2" lang="en">
+<a name="id2717102"></a><h3>
+<a name="boost.process.statusconstruct-copy-destruct"></a><code class="computeroutput">status</code> construct/copy/destruct</h3>
+<div class="orderedlist"><ol type="1"><li>
+<pre class="literallayout"><a name="id2380926-bb"></a>status(<span class="bold"><strong>int</strong></span> flags);</pre>
+<p>Creates a new status object representing the exit status of a child process.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term">Parameters:</span></td>
+<td><div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><code class="computeroutput">flags</code></span></td>
+<td><p>In a POSIX system this parameter contains the flags returned by the waitpid() call. In a Win32 system it contains the exit code only. </p></td>
+</tr></tbody>
+</table></div></td>
+</tr></tbody>
+</table></div>
+</li></ol></div>
+</div>
+<div class="refsect2" lang="en">
+<a name="id2717166"></a><h3>
+<a name="id2380874-bb"></a><code class="computeroutput">status</code> public member functions</h3>
+<div class="orderedlist"><ol type="1">
+<li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>bool</strong></span></span> <a name="id2380877-bb"></a>exited(<span class="bold"><strong>void</strong></span> ) <span class="bold"><strong>const</strong></span>;</pre>
+<p>Returns whether the process exited gracefully or not. </p>
+</li>
+<li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>int</strong></span></span> <a name="id2380898-bb"></a>exit_status(<span class="bold"><strong>void</strong></span> ) <span class="bold"><strong>const</strong></span>;</pre>
+<p>If the process exited, returns the exit code it returned.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term">Requires:</span></td>
+<td><p>exited() is true. </p></td>
+</tr></tbody>
+</table></div>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<table width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2006 Julio M. Merino Vidal</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="postream.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../boost_process/reference.html#header.boost.process.status.hpp"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="create_status.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

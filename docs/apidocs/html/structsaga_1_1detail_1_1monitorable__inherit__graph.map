@@ -1,0 +1,25 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; entry \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="352,219,596,365"/>
+<area shape="rect" id="node25" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; server \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="621,219,872,365"/>
+<area shape="rect" id="node29" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; task_container \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="896,219,1201,365"/>
+<area shape="rect" id="node33" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; task \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="1226,219,1464,365"/>
+<area shape="rect" id="node45" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; stream \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="1489,219,1745,365"/>
+<area shape="rect" id="node5" href="$classsaga_1_1name__space_1_1entry.html" title="An RNS entry that interconnects a reference to an existing resource into the hierarchical name space..." alt="" coords="385,416,564,920"/>
+<area shape="rect" id="node7" href="$classsaga_1_1advert_1_1entry.html" title="The advert class represents an entry in a saga::advert::directory. An advert directory is a meta data..." alt="" coords="4,1188,189,1580"/>
+<area shape="rect" id="node9" title="The saga::replica class implements the saga::attributes interface." alt="" coords="215,1339,373,1429"/>
+<area shape="rect" id="node11" href="$classsaga_1_1filesystem_1_1file.html" title="The SAGA file package file API." alt="" coords="398,1141,551,1627"/>
+<area shape="rect" id="node13" href="$classsaga_1_1name__space_1_1directory.html" title="A &quot;Virtual Directory&quot;, an RNS entry that is represented as a non&#45;leaf node in the hierarchical name s..." alt="" coords="575,972,779,1796"/>
+<area shape="rect" id="node23" href="$classsaga_1_1replica_1_1logical__file.html" title="The saga::replica class implements the saga::attributes interface." alt="" coords="803,1217,983,1551"/>
+<area shape="rect" id="node15" href="$classsaga_1_1advert_1_1directory.html" title="The directory class represents a directory within a meta data directory with a hierarchical namespace..." alt="" coords="314,1858,480,2155"/>
+<area shape="rect" id="node17" title="A checkpoint directory contains, you guess it, checkpoints." alt="" coords="504,1962,649,2052"/>
+<area shape="rect" id="node19" href="$classsaga_1_1filesystem_1_1directory.html" title="The SAGA file package directory API." alt="" coords="674,1849,864,2165"/>
+<area shape="rect" id="node21" href="$classsaga_1_1replica_1_1logical__directory.html" title="A logical directory represents a directory entry in the name space of logical files." alt="" coords="888,1849,1105,2165"/>
+<area shape="rect" id="node27" href="$classsaga_1_1stream_1_1server.html" title="The stream_server object establishes a listening/server object that waits for client connections..." alt="" coords="671,501,821,835"/>
+<area shape="rect" id="node31" href="$classsaga_1_1task__container.html" title="Handles a large number of asynchronous operations." alt="" coords="972,548,1125,788"/>
+<area shape="rect" id="node35" href="$classsaga_1_1task.html" title="Brief description starts here." alt="" coords="1289,510,1401,826"/>
+<area shape="rect" id="node37" href="$classsaga_1_1job_1_1job.html" title="The job provides the manageability interface to a job instance submitted to a resource manager..." alt="" coords="1273,1179,1417,1589"/>
+<area shape="rect" id="node39" title="The job is a saga::job with additional checkpoint and recovery related methods." alt="" coords="1223,1962,1332,2052"/>
+<area shape="rect" id="node43" href="$classsaga_1_1job_1_1self.html" title="The job_self class is a job which represents the current application." alt="" coords="1356,1952,1467,2061"/>
+<area shape="rect" id="node41" title="The job_self class is a job which represents the current application." alt="" coords="1221,2216,1332,2306"/>
+<area shape="rect" id="node47" href="$classsaga_1_1stream_1_1stream.html" title="This is the ob ject that encapsulates all client stream ob jects." alt="" coords="1539,463,1695,873"/>
+</map>

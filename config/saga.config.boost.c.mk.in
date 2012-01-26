@@ -1,0 +1,104 @@
+#  Copyright (c) 2005-2007 Andre Merzky (andre@merzky.net)
+#
+#  Distributed under the Boost Software License, Version 1.0. (See accompanying
+#  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+ifndef SAGA_MK_INC_CONF_BOOST
+       SAGA_MK_INC_CONF_BOOST = yes
+
+
+###########################################################
+#
+# Boost
+#
+SAGA_HAVE_BOOST                 = @HAVE_BOOST@
+SAGA_BOOST_LOCATION             = @BOOST_LOCATION@
+SAGA_BOOST_HAVE_ASIO            = @BOOST_HAVE_ASIO@
+SAGA_BOOST_HAVE_TEST            = @BOOST_HAVE_TEST@
+SAGA_BOOST_HAVE_UUID            = @BOOST_HAVE_UUID@
+SAGA_BOOST_HAVE_LOG             = @BOOST_HAVE_LOG@
+SAGA_BOOST_HAVE_SYSTEM          = @BOOST_HAVE_SYSTEM@
+SAGA_BOOST_HAVE_FILESYSTEM      = @BOOST_HAVE_FILESYSTEM@
+SAGA_BOOST_HAVE_IOSTREAMS       = @BOOST_HAVE_IOSTREAMS@
+SAGA_BOOST_HAVE_PROGRAM_OPTIONS = @BOOST_HAVE_PROGRAM_OPTIONS@
+
+SAGA_BOOST_VERSION              = @BOOST_VERSION_NATIVE@
+SAGA_BOOST_VERSION_MAJ          = @BOOST_VERSION_MAJ@
+SAGA_BOOST_VERSION_MIN          = @BOOST_VERSION_MIN@
+SAGA_BOOST_VERSION_SUB          = @BOOST_VERSION_SUB@
+
+SAGA_BOOST_IOSTREAM_VERSION     = @BOOST_IOSTREAM_VERSION@
+
+# always add our local boost include paths, before the system boost
+# installation.  For some libs, we also need to link the static boost libs we
+# build in external - we do that only when linking within SAGA_ROOT though.
+ifdef SAGA_ROOT
+
+  BOOST_EXT_DIRS           = futures plugin process spirit uuid serialization logging
+
+  ifneq "x$(SAGA_BOOST_HAVE_ASIO)" "xyes"
+    BOOST_EXT_DIRS        += asio
+  endif
+
+  ifneq "x$(SAGA_BOOST_HAVE_UUID)" "xyes"
+    BOOST_EXT_DIRS        += uuid
+  endif
+
+  ifneq "x$(SAGA_BOOST_HAVE_IOSTREAMS)" "xyes"
+    BOOST_EXT_DIRS        += iostreams
+    ifdef SAGA_ROOT
+      SAGA_LDFLAGS_EXT    += $(SAGA_ROOT)/external/boost/iostreams/boost/libs/iostreams/src/libboost_iostreams.a
+    endif
+  endif
+
+  #ifneq "x$(SAGA_BOOST_HAVE_LOG)" "xyes"
+  #  BOOST_EXT_DIRS        += log
+  #  ifdef SAGA_ROOT
+  #    SAGA_LDFLAGS_EXT    += $(SAGA_ROOT)/external/boost/log/libs/log/src/libboost_log.a
+  #  endif
+  #endif
+
+  ifneq "x$(SAGA_BOOST_HAVE_SYSTEM)" "xyes"
+    BOOST_EXT_DIRS        += system
+    ifdef SAGA_ROOT
+      SAGA_LDFLAGS_EXT    += $(SAGA_ROOT)/external/boost/system/libs/system/src/libboost_system.a
+    endif
+  endif
+
+  ifneq "x$(SAGA_BOOST_HAVE_FILESYSTEM)" "xyes"
+    BOOST_EXT_DIRS        += filesystem
+    ifdef SAGA_ROOT
+      SAGA_LDFLAGS_EXT    += $(SAGA_ROOT)/external/boost/filesystem/libs/filesystem/src/libboost_filesystem.a
+    endif
+  endif
+
+  BOOST_EXT_INCLUDES       = $(foreach dir,$(BOOST_EXT_DIRS),-I$(SAGA_ROOT)/external/boost/$(dir))
+endif
+
+
+
+ifeq "x$(SAGA_HAVE_BOOST)" "xyes"
+
+  ifdef SAGA_LOCATION
+   BOOST_EXT_INCLUDES    += -I$(SAGA_LOCATION)/include/saga/
+  endif
+
+  SAGA_BOOST_INC_FLAGS    += @BOOST_CPPFLAGS@
+  SAGA_BOOST_LDFLAGS      += @BOOST_LDFLAGS@ @BOOST_LIBS@
+  SAGA_BOOST_S_LIBS       += @BOOST_S_LIBS@
+
+  SAGA_CPPINCS_SYS        += $(SAGA_BOOST_INC_FLAGS)
+  SAGA_LDFLAGS_SYS        += $(SAGA_BOOST_LDFLAGS)
+  SAGA_S_LIBS             += $(SAGA_BOOST_S_LIBS)
+endif
+
+  # we include our own patched boost headers before anything else
+SAGA_CPPINCS_EXT          += $(BOOST_EXT_INCLUDES)
+
+SAGA_BOOST_TEST_LDFLAGS    = @BOOST_UNIT_TEST_FRAMEWORK_LIBS@
+SAGA_BOOST_OPTIONS_LDFLAGS = @BOOST_PROGRAM_OPTIONS_LIBS@
+#
+###########################################################
+
+endif # guard
+

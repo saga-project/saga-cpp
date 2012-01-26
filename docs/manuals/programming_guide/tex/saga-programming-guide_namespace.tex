@@ -1,0 +1,227 @@
+
+ \subsection{Quick Introduction}
+
+  Namespaces are used for a wide variety of computer
+  subsystems: they are used to organize files, to manage domain
+  names, web content, etc.  Hierarchical namespaces are
+  prevalent for managing files (indeed, most file systems provide
+  a hierarchical namespace, the directory tree).  SAGA provides
+  the |saga::name_space| package to navigate and manipulate such
+  namespaces:
+
+  \begin{mycode}[label=Navigating a name space]
+  #include <saga/saga.hpp>
+
+  int main (int argc, char** argv)
+  {
+    // open a namespace directory
+    saga::url u (std::string ("file://localhost/") + getenv ("PWD"));
+    saga::name_space::directory d (u);
+
+    // list the contents
+    std::vector <saga::url> entries = d.list ();
+
+    // print the entries, and their type
+    for ( unsigned int i = 0; i < entries.size (); i++ )
+    {
+      std::string type;
+      // get some details for the entry
+      if ( d.is_dir (entries[i]) )
+      {
+        type = "/";
+      }
+      // if a link (symbolic)
+      else if ( d.is_link (entries[i]) )
+      {
+        type = " -> " + d.read_link (entries[i]).get_string();
+      }
+      // print the info
+      std::cout << entries[i] << type << std::endl;
+    }
+
+  return (0);
+  }
+  \end{mycode}
+   
+  This is a poor man's ls!  It needs only five SAGA calls, which
+  are all very simple.  Note that a directory has a `cwd', a
+  Current Working Directory.  Calling |cd()| on a directory
+  changes that.  Relative file names are always interpreted with
+  respect to that cwd.
+
+  So, the |saga::name_space| package provides two classes:
+  |directory| and |entry| (note that directory inherits entry).
+  On entries, you can perform |copy()|, |link()|, |move()|, and
+  |remove()|.  You can also inspect entries, with |is_dir()|,
+  |is_entry()|, |is_link()| and |read_link()|.  
+
+  Directories provide the same operations, but with an additional
+  |source| argument, as shown below:
+
+  \shift |entry.copy (target);          // copy entry      to target|\\
+  \shift |  dir.copy (target);          // copy dir        to target|\\
+  \shift |  dir.copy (source, target);  // copy dir/source to target|
+
+  But the directory copy should be recursive, of course:
+
+  \shift |  dir.copy (target, saga::name_space::Recursive);|
+
+  Additionally, the directory has two open methods:
+  
+  \shift |saga::entry     e = dir.open     (saga::url (entry_name));|\\
+  \shift |saga::directory d = dir.open_dir (saga::url (dir_name)  );|
+
+
+ \subsection{Reference}
+ 
+  \begin{mycode}[label=Prototype: saga::namespace::flags]
+   namespace saga
+   {
+     namespace name_space 
+     {
+       enum flags
+       {
+         Unknown         =  -1,
+         None            =   0,
+         Overwrite       =   1, 
+         Recursive       =   2,
+         Dereference     =   4,
+         Create          =   8,
+         Exclusive       =  16,
+         Lock            =  32,
+         CreateParents   =  64
+       };
+    }
+  }
+  \end{mycode}
+ 
+ 
+  \begin{mycode}[label=Prototype: saga::namespace::entry]
+   namespace saga
+   {
+     namespace name_space 
+     {
+       class entry
+           : public saga::object,
+             public saga::monitorable,
+             public saga::permissions
+       {
+         entry  (session const & s, 
+                 saga::url       url, 
+                 int             mode = None);
+         entry  (saga::url       url, 
+                 int             mode = None);
+         entry  (void);
+         ~entry (void);
+   
+         // inspection methods
+         saga::url get_url   (void) const;
+         saga::url get_cwd   (void) const;
+         saga::url get_name  (void) const;
+         saga::url read_link (void) const;
+ 
+         bool      is_dir    (void) const;
+         bool      is_entry  (void) const;
+         bool      is_link   (void) const;
+ 
+         // management methods
+         void      copy      (saga::url target, 
+                              int flags = saga::name_space::None);
+         void      link      (saga::url target, 
+                              int flags = saga::name_space::None);
+         void      move      (saga::url target, 
+                              int flags = saga::name_space::None);
+         void      remove    (int flags = saga::name_space::None);
+         void      close     (double timeout = 0.0);
+       };
+     }
+   } 
+ 
+ \end{mycode}
+ 
+  \begin{mycode}[label=Prototype: saga::namespace::directory]
+   namespace saga
+   {
+     namespace name_space 
+     {
+       class directory 
+           : public saga::name_space::entry
+       {
+         public:
+           directory  (session const & s, 
+                       saga::url       url, 
+                       int             mode = None);
+           directory  (saga::url       url, 
+                       int             mode = None);
+           directory  (void);
+           ~directory (void);
+ 
+           void        change_dir (saga::url    target)
+           std::vector <saga::url> 
+                       list       (std::string  pattern = "*", 
+                                   int          flags   = None) const;
+           std::vector <saga::url> 
+                       find       (std::string  pattern, 
+                                   int          flags   = Recursive) const;
+ 
+           saga::url   read_link  (saga::url    url) const;
+           bool        exists     (saga::url    url) const;
+           bool        is_dir     (saga::url    url) const;
+           bool        is_entry   (saga::url    url) const;
+           bool        is_link    (saga::url    url) const;
+           unsigned    int get_num_entries 
+                                  (void) const;
+           saga::url   get_entry  (unsigned int entry) const;
+           void        copy       (saga::url    source_url, 
+                                   saga::url    dest_url, 
+                                   int          flags = None);
+           void        link       (saga::url    source_url, 
+                                   saga::url    dest_url, 
+                                   int          flags = None);
+           void        move       (saga::url    source_url, 
+                                   saga::url    dest_url, 
+                                   int          flags = None);
+           void        remove     (saga::url    url, 
+                                   int          flags = None);
+           void        make_dir   (saga::url    url, 
+                                   int          flags = None);
+           entry       open       (saga::url    url, 
+                                   int          flags = None);
+           directory   open_dir   (saga::url    url, 
+                                   int          flags = None);
+       };
+     } // namespace_dir
+   } // namespace saga
+ 
+ \end{mycode}
+
+
+ \subsection{Details}
+
+  The notion of a namespace is shared by several SAGA packages: the
+  file, the replica and the advert packages. All allow to manage
+  entities which are organized in a hierarchical namespace.  The
+  namespace package is abstracting the management of that hierarchy,
+  and leaves only the entity specific operations (File-IO, Replica
+  Management, Advert Creation) to the various packages.
+
+  \HINT{Namespace operations handle namespace entries as opaque, and
+  are never able to look 'inside'.  To do that, use one of the
+  derived packages, which add exactly that functionality, specific to
+  the type of namespace they represent.}
+  
+  The namespace package introduces two classes:
+  |saga::namespace::entry| and |saga::namespace::directory| (which is
+  an entry, i.e., inherits from |entry|).  Both classes refer to
+  entities which are specified by a pathname, typically a URL.
+  Several calls additionally allow to refer to entries with wildcards,
+  similar to the shell wildcards known by POSIX (see |glob(7)|)
+  \footnote{Namespace entries can also have permissions, just as
+  in most file systems.  For details on permissions, see
+  Section~\ref{sec:permissions}.}.
+
+  The namespace package allows to create and delete entries, to copy,
+  move or link entries, and to inspect entries and directories.
+
+  % \X{add infos about available attributes and metrics}
+

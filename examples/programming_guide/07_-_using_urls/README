@@ -1,0 +1,20 @@
+
+try the following:
+
+  # make
+  # ./example_1
+  # ./example_2
+
+You should end up with:
+
+  # ./example_1
+  url: ftp://remote.host.net:1234/data/old.dat
+  SAGA(BadParameter): invalid host (url re-parse gives inconsistent result): ftp://local.host/net:1234/data/old.dat
+  url: ftp://remote.host.net:1234/data/new.dat
+  
+  # ./example_2
+  terminate called after throwing an instance of 'saga::not_implemented'
+    what():  SAGA(NotImplemented): saga::url::translate is not implemented.
+  Abort
+
+

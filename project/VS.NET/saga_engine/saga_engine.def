@@ -1,0 +1,15 @@
+EXPORTS
+    Downhill_File_Stat
+    Downhill_Getenv
+    Downhill_Putenv
+    Downhill_Directory_Make
+    Downhill_Get_CWD
+    Downhill_getppid
+    Downhill_dup
+    uname
+    sleep
+    usleep
+    waitpid
+    setenv
+    unsetenv
+    gettimeofday

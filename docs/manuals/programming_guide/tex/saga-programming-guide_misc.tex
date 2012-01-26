@@ -1,0 +1,62 @@
+
+\subsection{Primitive Data Types}
+
+ Alas, the C++ standard does not define all data types needed within
+ SAGA.  For that reason, we provide these types also in the \T{saga}
+ namespace.  Although these types should usually map to the native
+ types on the respective platform the SAGA application is running on,
+ we can only guarantee portability when using the SAGA provided types.
+
+ The types provided by SAGA are:
+
+ \begin{mycode}[label=Primitive types in the saga namespace]
+  namespace saga
+  {
+    typedef  ...   char_t;
+
+    typedef  ...   int8_t;             
+    typedef  ...   uint8_t;            
+
+    typedef  ...   int16_t;            
+    typedef  ...   uint16_t;           
+
+    typedef  ...   int32_t;            
+    typedef  ...   uint32_t;           
+
+    typedef  ...   int64_t;            
+    typedef  ...   uint64_t;           
+
+    typedef  ...   intmax_t;      
+    typedef  ...   uintmax_t;     
+
+    typedef  ...   long_long_t;
+
+    typedef  ...   size_t;
+    typedef  ...   ssize_t;
+    typedef  ...   off_t;
+  
+  } // namespace saga
+ \end{mycode}
+
+ Note that the |int64_t| and |unit64_t| are only defined on those
+ platforms which support 64 bit integers.  How the individual types
+ are defined is platform-dependent, and should not be relied upon.
+ However, they will often be mapped to the respective Boost
+ types.
+
+
+\subsection{Boost, and C++/TR1}
+ 
+ Our implementation relies heavily on Boost \cite{boost}.  Boost is
+ an open source collection of state-of-the-art C++ libraries, is
+ highly portable, and is actually thought to be the playground for
+ upcoming versions of the C++ standard.  In fact, all Boost features
+ visible on the surface of our SAGA implementation (i.e., visible to
+ the user of SAGA), are features which can already be found in the
+ 'C++ Technical Recommendation 1' \cite{tr1}, a recent extension of the
+ C++ standard.  However, if your compiler does not support the TR1
+ extensions yet, Boost is required to use SAGA.  Please refer to the
+ installation manual for details on Boost.
+
+ \X{correct?}
+

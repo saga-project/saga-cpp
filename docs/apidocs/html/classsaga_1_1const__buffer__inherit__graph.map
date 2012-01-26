@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$classsaga_1_1filesystem_1_1const__iovec.html" title="Brief description starts here." alt="" coords="5,479,213,625"/>
+<area shape="rect" id="node7" href="$classsaga_1_1mutable__buffer.html" title="Brief description starts here." alt="" coords="237,451,395,653"/>
+<area shape="rect" id="node2" href="$classsaga_1_1object.html" title="Brief description starts here." alt="" coords="152,5,272,189"/>
+<area shape="rect" id="node9" href="$classsaga_1_1filesystem_1_1iovec.html" title="The iovec class inherits the saga::buffer class, and three additional state attributes: offset..." alt="" coords="141,701,307,867"/>
+<area shape="rect" id="node11" href="$classsaga_1_1rpc_1_1parameter.html" title="The parameter class inherits the saga::buffer class." alt="" coords="332,720,487,848"/>
+</map>

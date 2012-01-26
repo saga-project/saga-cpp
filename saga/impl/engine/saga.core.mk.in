@@ -1,0 +1,11 @@
+
+include $(SAGA_LOCATION)/share/saga/make/saga.config.c.mk
+include $(SAGA_LOCATION)/share/saga/make/saga.config.check.c.mk
+include $(SAGA_LOCATION)/share/saga/make/saga.config.boost.c.mk
+
+# set in saga.mk
+# SAGA_CPPINCS  += -I$(SAGA_LOCATION)/include
+
+SAGA_LDFLAGS  += -L$(SAGA_LOCATION)/lib
+SAGA_LDFLAGS  += -lsaga_core $(SAGA_LDFLAGS_SYS)
+

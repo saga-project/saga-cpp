@@ -1,0 +1,18 @@
+
+PACKAGE: saga-adaptor-###suite###-###type###
+VERSION: 0.1
+
+DEPENDENCIES:
+  saga-core
+  # add external dependencies here
+
+DIRS:
+
+FILES:
+  PACKAGE
+  README
+  LICENSE
+  CHANGES
+  Makefile
+  ###packagefiles###
+

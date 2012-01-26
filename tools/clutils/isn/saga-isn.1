@@ -1,0 +1,79 @@
+.\" Man page for SAGA Information System Navigator CLI
+.TH SAGA-ISN "1" "January 2010" "SAGA-ISN " "User Commands"
+.SH NAME
+saga-isn \- navigates the information system via a SAGA API
+.SH SYNOPSIS
+.B saga-isn \fR
+[options] <model> <entity type> ([filter] <entity type>) [attributes]
+.SH DESCRIPTION
+.\" Add any additional description here
+.PP
+Navigate from a starting entity set (defined by all members of some entity type that match a filter) via a chain of related entity types to 
+a final one. At each hop a filter may be used to restrict the size of the set. 
+.\" The special keywords "up" and "down" may be used to navigate a self relationship. 
+A filter must be enclosed in square brackets to distinguish it from an entity type. For most 
+shells filter arguments will need to be quoted. Finally a list of attributes may be given to display only the values of those attributes. 
+Otherwise all attributes are displayed for each member of the set at the end of the chain. The attribute list must be enclosed in 
+parentheses and attributes should be separated by commas and/or spaces.  
+
+.SH PARAMETERS
+.TP
+<model>
+The name of the information model to use
+.TP
+<entity type>
+The name of the type of an entity to start from or navigate to
+.TP
+<filter>
+A filter to restrict the number of entities in the set. 
+The filter string uses SQL92 
+syntax as if it were part of a WHERE clause acting to select from a single table. It must be enclosed in square brackets. Multi-valued attributes are 
+treated as a set of values.
+
+Only the following operators are permitted in expressions not involving multi-valued attributes: IN, 
+LIKE, AND, OR, NOT, =, >=, >, <=, <, <> in addition to column names, parentheses, column values 
+as single quoted strings, numeric values and the comma. For a multi-valued attribute, the name of the 
+attribute MUST have the keyword ALL or ANY immediately before it, unless comparison with a set 
+literal is intended. For each part of the expression, the attribute name MUST precede the literal value.
+The LIKE operator matches string patterns:
+
+'%xyz' matches all entries with trailing xyz
+
+'xyz%' matches all entries with leading xyz
+
+'%xyz%' matches all entries with xyz being a substring
+
+The ESCAPE keyword can be used with LIKE in the normal way.
+Column names are not case sensitive but values are.
+
+The operators >=, >, <= and < are not supported when applied to strings.
+Column names in the the filter string are matched against the attribute names of the entity.
+If values are specified as numeric values and not in single quotes, the values will be converted from 
+string to numeric for comparison.
+
+Attributes may be multi-valued. If a filter string does not have the correct syntax to accept multi-
+valued attributes, and an entity has more than one value for an attribute mentioned in the filter, that  
+entity MUST be rejected.
+
+.TP
+<attributes>
+This may be used to restrict the set of displayed attributes. It is a space and/or comma separated list enclosed in parentheses
+
+.SH OPTIONS
+.TP
+\fB\-t, --trace\fR
+display count after each hop and list the related entity sets
+.TP
+\fB\-\-url\fR \fIURL\fR
+the URL of the information system to use. This overrides any environment variables.
+.TP
+\fB\-h, --help\fR
+display help and exit
+.TP
+\fB\-n\fR \fINUM\fB \-\-count\fR \fINUM\fR
+the NUM of services to display. The default is unlimited.
+.SH Examples
+.TP
+saga-isn  -n 10 -t glue1 Service "[Type = 'org.glite.RTEPublisher']" Site Cluster ComputingElement  "(FreeCPUs)"
+.TP
+saga-isn  -n 5 -t glue1 Service "[Type = 'org.glite.RTEPublisher']" Site "(Name, Latitude)"

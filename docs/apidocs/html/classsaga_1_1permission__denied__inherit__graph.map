@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsaga_1_1security__exception.html" title="{saga::security_exception\n||# security_exception()\l# security_exception()\l# security_exception()\l}" alt="" coords="6,432,185,560"/>
+<area shape="rect" id="node4" href="$classsaga_1_1exception.html" title="{saga::exception\n|+ m\l+ e\l+ l\l|+ ~exception()\l+ what()\l+ get_message()\l+ get_error()\l+ get_object()\l+ get_all_exceptions()\l+ get_all_messages()\l}" alt="" coords="14,144,177,384"/>
+<area shape="rect" id="node6" title="STL class." alt="" coords="39,6,152,96"/>
+</map>

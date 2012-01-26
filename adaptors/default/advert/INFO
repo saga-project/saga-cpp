@@ -1,0 +1,52 @@
+
+::SAGA DOCUMENTATION FILE::
+
+:ADAPTOR NAME:
+
+  Default Advert Adaptor
+  
+:AUTHORS:
+
+  Copyright (c) 2006-2009 Hartmut Kaiser (hkaiser@cct.lsu.edu)
+ 
+:LICENSE:
+
+  Distributed under the Boost Software License, Version 1.0.
+  
+:ADAPTOR LIBRARY NAME:
+  
+  libsaga_adaptor_default_advert.so (dylib)
+
+:IMPLEMENTS PACKAGE:
+ 
+  - saga_package_advert_service
+  - saga_package_namespace
+
+:DESCRIPTION:
+
+  The adaptor allows access to database systems.  Currently supports SQLite (V3), and Postgresql V8.x upwards.
+
+:URL SCHEMES:
+
+  - advert://
+
+:REQUIRES:
+
+  An installation of PostgreSQL or SQLite
+
+:CONFIGURE OPTIONS:
+
+  | 
+  | --with-postgresql-location=<dir>  use postgresql at <dir> (default=auto)    |\\
+  | --with-sqlite3-location=<dir>     use sqlite3 at <dir> (default=auto)       |\\
+  |                                                                             |\\
+  |  SQLITE3_LOCATION             Location of SQLite installation directory     |
+  |  POSTGRESQL_LOCATION          Location of postgreSQL installation directory |
+
+:INI OPTIONS:
+
+  none
+
+:KNOWN ISSUES:
+
+  See https://macpro01.cct.lsu.edu/trac/saga/query?status=assigned&status=new&component=Default+Advert+Adaptor&order=priority&col=id&col=summary&col=type&col=status&col=priority&col=milestone

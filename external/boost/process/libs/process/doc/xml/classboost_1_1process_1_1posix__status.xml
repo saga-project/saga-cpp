@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="classboost_1_1process_1_1posix__status" kind="class" prot="public">
+    <compoundname>boost::process::posix_status</compoundname>
+    <basecompoundref refid="classboost_1_1process_1_1status" prot="public" virt="non-virtual">boost::process::status</basecompoundref>
+    <includes refid="posix__status_8hpp" local="no">posix_status.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1posix__status_1e31b35ae7cb922309339a0b6416e33c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>boost::process::posix_status::posix_status</definition>
+        <argsstring>(const status &amp;s)</argsstring>
+        <name>posix_status</name>
+        <param>
+          <type>const <ref refid="classboost_1_1process_1_1status" kindref="compound">status</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Creates a <ref refid="classboost_1_1process_1_1posix__status" kindref="compound">posix_status</ref> object from an existing status object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Creates a new status object representing the exit status of a child process. The construction is done based on an existing status object which already contains all the available information: this class only provides controlled access to it. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/posix_status.hpp" line="55" bodyfile="/tmp/process.016638aa/process/boost/process/posix_status.hpp" bodystart="113" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool boost::process::posix_status::signaled</definition>
+        <argsstring>(void) const </argsstring>
+        <name>signaled</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns whether the process exited due to an external signal. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns whether the process exited due to an external signal. The result is always false in Win32 systems. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/posix_status.hpp" line="64" bodyfile="/tmp/process.016638aa/process/boost/process/posix_status.hpp" bodystart="122" bodyend="126"/>
+        <references refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" compoundref="status_8hpp" startline="55">boost::process::status::m_flags</references>
+        <referencedby refid="classboost_1_1process_1_1posix__status_1f6984a9532b581af03a70856c8f05fd7" compoundref="posix__status_8hpp" startline="143" endline="148">dumped_core</referencedby>
+        <referencedby refid="classboost_1_1process_1_1posix__status_1106011e5818f96594e935de2de939385" compoundref="posix__status_8hpp" startline="132" endline="137">term_signal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1posix__status_1106011e5818f96594e935de2de939385" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int boost::process::posix_status::term_signal</definition>
+        <argsstring>(void) const </argsstring>
+        <name>term_signal</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>If signaled, returns the terminating signal code. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the process was signaled, returns the terminating signal code. Cannnot be called under Win32 because the preconditions will not ever be met.</para><para><simplesect kind="pre"><para><ref refid="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" kindref="member">signaled()</ref> is true. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/posix_status.hpp" line="75" bodyfile="/tmp/process.016638aa/process/boost/process/posix_status.hpp" bodystart="132" bodyend="137"/>
+        <references refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" compoundref="status_8hpp" startline="55">boost::process::status::m_flags</references>
+        <references refid="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" compoundref="posix__status_8hpp" startline="122" endline="126">signaled</references>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1posix__status_1f6984a9532b581af03a70856c8f05fd7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool boost::process::posix_status::dumped_core</definition>
+        <argsstring>(void) const </argsstring>
+        <name>dumped_core</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>If signaled, returns whether the process dumped core. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the process was signaled, returns whether the process produced a core dump. Cannnot be called under Win32 because the preconditions will not ever be met.</para><para><simplesect kind="pre"><para><ref refid="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" kindref="member">signaled()</ref> is true. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/posix_status.hpp" line="87" bodyfile="/tmp/process.016638aa/process/boost/process/posix_status.hpp" bodystart="143" bodyend="148"/>
+        <references refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" compoundref="status_8hpp" startline="55">boost::process::status::m_flags</references>
+        <references refid="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" compoundref="posix__status_8hpp" startline="122" endline="126">signaled</references>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1posix__status_10ec78e5370b07a512725b1dcb582f082" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool boost::process::posix_status::stopped</definition>
+        <argsstring>(void) const </argsstring>
+        <name>stopped</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns whether the process was stopped by an external signal. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns whether the process was stopped by an external signal. The result is always false in Win32 systems. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/posix_status.hpp" line="96" bodyfile="/tmp/process.016638aa/process/boost/process/posix_status.hpp" bodystart="154" bodyend="158"/>
+        <references refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" compoundref="status_8hpp" startline="55">boost::process::status::m_flags</references>
+        <referencedby refid="classboost_1_1process_1_1posix__status_1b572b351fc6ef019ea00b935a03e366d" compoundref="posix__status_8hpp" startline="164" endline="169">stop_signal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1posix__status_1b572b351fc6ef019ea00b935a03e366d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int boost::process::posix_status::stop_signal</definition>
+        <argsstring>(void) const </argsstring>
+        <name>stop_signal</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>If stpped, returns the stop signal code. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the process was stopped, returns the stop signal code. Cannnot be called under Win32 because the preconditions will not ever be met.</para><para><simplesect kind="pre"><para><ref refid="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" kindref="member">signaled()</ref> is true. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/posix_status.hpp" line="107" bodyfile="/tmp/process.016638aa/process/boost/process/posix_status.hpp" bodystart="164" bodyend="169"/>
+        <references refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" compoundref="status_8hpp" startline="55">boost::process::status::m_flags</references>
+        <references refid="classboost_1_1process_1_1posix__status_10ec78e5370b07a512725b1dcb582f082" compoundref="posix__status_8hpp" startline="154" endline="158">stopped</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Status returned by a finalized child process on a POSIX system. </para>    </briefdescription>
+    <detaileddescription>
+<para>This class represents the status returned by a child process after it has terminated. It contains some methods not available in the status class that provide information only available in POSIX systems. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="30">
+        <label>boost::process::status</label>
+        <link refid="classboost_1_1process_1_1status"/>
+      </node>
+      <node id="29">
+        <label>boost::process::posix_status</label>
+        <link refid="classboost_1_1process_1_1posix__status"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="32">
+        <label>boost::process::status</label>
+        <link refid="classboost_1_1process_1_1status"/>
+      </node>
+      <node id="31">
+        <label>boost::process::posix_status</label>
+        <link refid="classboost_1_1process_1_1posix__status"/>
+        <childnode refid="32" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/process.016638aa/process/boost/process/posix_status.hpp" line="44" bodyfile="/tmp/process.016638aa/process/boost/process/posix_status.hpp" bodystart="42" bodyend="108"/>
+    <listofallmembers>
+      <member refid="classboost_1_1process_1_1status_1828a451198ad7eae745d6a46def47f77" prot="protected" virt="non-virtual"><scope>boost::process::posix_status</scope><name>create_status</name></member>
+      <member refid="classboost_1_1process_1_1posix__status_1f6984a9532b581af03a70856c8f05fd7" prot="public" virt="non-virtual"><scope>boost::process::posix_status</scope><name>dumped_core</name></member>
+      <member refid="classboost_1_1process_1_1status_19db0b1ba1cbe99905af826182bf410ee" prot="public" virt="non-virtual"><scope>boost::process::posix_status</scope><name>exit_status</name></member>
+      <member refid="classboost_1_1process_1_1status_1546ba42f669e05e573b70f6d29d31584" prot="public" virt="non-virtual"><scope>boost::process::posix_status</scope><name>exited</name></member>
+      <member refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" prot="protected" virt="non-virtual"><scope>boost::process::posix_status</scope><name>m_flags</name></member>
+      <member refid="classboost_1_1process_1_1posix__status_1e31b35ae7cb922309339a0b6416e33c2" prot="public" virt="non-virtual"><scope>boost::process::posix_status</scope><name>posix_status</name></member>
+      <member refid="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" prot="public" virt="non-virtual"><scope>boost::process::posix_status</scope><name>signaled</name></member>
+      <member refid="classboost_1_1process_1_1status_1bf6cb3003da3a88b72a8baaf6630d909" prot="protected" virt="non-virtual"><scope>boost::process::posix_status</scope><name>status</name></member>
+      <member refid="classboost_1_1process_1_1posix__status_1b572b351fc6ef019ea00b935a03e366d" prot="public" virt="non-virtual"><scope>boost::process::posix_status</scope><name>stop_signal</name></member>
+      <member refid="classboost_1_1process_1_1posix__status_10ec78e5370b07a512725b1dcb582f082" prot="public" virt="non-virtual"><scope>boost::process::posix_status</scope><name>stopped</name></member>
+      <member refid="classboost_1_1process_1_1posix__status_1106011e5818f96594e935de2de939385" prot="public" virt="non-virtual"><scope>boost::process::posix_status</scope><name>term_signal</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,46 @@
+
+::SAGA DOCUMENTATION FILE::
+
+:ADAPTOR NAME:
+
+  Default Stream Adaptor
+  
+:AUTHORS:
+
+  Copyright (c) 2006-2009 Hartmut Kaiser (hkaiser@cct.lsu.edu)
+ 
+:LICENSE:
+
+  Distributed under the Boost Software License, Version 1.0.
+  
+:ADAPTOR LIBRARY NAME:
+  
+  libsaga_adaptor_default_stream.so (dylib)
+
+:IMPLEMENTS PACKAGE:
+ 
+  - saga_package_steram
+
+:DESCRIPTION:
+
+  The adaptor allows access to network resources. 
+
+:URL SCHEMES:
+
+  - tcp://
+
+:REQUIRES:
+
+  An installation of boost asio
+
+:CONFIGURE OPTIONS:
+
+  none
+
+:INI OPTIONS:
+
+  none
+
+:KNOWN ISSUES:
+
+  See https://macpro01.cct.lsu.edu/trac/saga/query?status=assigned&status=new&status=reopened&component=Default+Stream+Adaptor&order=priority&col=id&col=summary&col=status&col=type&col=priority&col=milestone

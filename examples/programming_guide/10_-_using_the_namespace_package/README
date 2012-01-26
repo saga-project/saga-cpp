@@ -1,0 +1,19 @@
+
+try the following:
+
+  # make
+  # ln -s Makefile link_target
+  # ./navigating_a_namespace
+
+
+You should end up with something like:
+
+  #  ~.../10_-_using_the_namespace_package : ./navigating_a_namespace 
+  .depend/
+  link_target -> Makefile
+  Makefile
+  navigating_a_namespace
+  navigating_a_namespace.cpp
+  navigating_a_namespace.o
+  README
+

@@ -1,0 +1,127 @@
+//  Copyright (c) 2008 Ole Weidner
+// 
+//  Distributed under the Boost Software License, Version 1.0. (See accompanying 
+//  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+#include <iostream>
+#include <vector>
+
+#include <saga/saga.hpp>
+#include "saga-job.hpp"
+#include <saga/saga/adaptors/utils/high_resolution_timer.hpp>
+
+#include <boost/lexical_cast.hpp>
+#include <boost/version.hpp>
+
+#if BOOST_VERSION >= 104000
+#include <boost/accumulators/accumulators.hpp>
+#include <boost/accumulators/statistics/stats.hpp>
+#include <boost/accumulators/statistics/mean.hpp>
+#include <boost/accumulators/statistics/error_of.hpp>
+#include <boost/accumulators/statistics/error_of_mean.hpp>
+#endif
+
+#define ITERATIONS 100
+
+///////////////////////////////////////////////////////////////////////////////
+#if defined(SAGA_HAVE_PACKAGE_JOB)
+
+void run_benchmarks (std::string rmURL)
+{
+#if BOOST_VERSION >= 104000
+  using namespace boost::accumulators;
+  using namespace saga::attributes;
+  using namespace saga::adaptors::utils;
+  
+  time_t start, current, diff;
+  
+  accumulator_set<double,  stats<tag::mean, tag::error_of<tag::mean> > > acc_sync;
+  accumulator_set<double,  stats<tag::mean, tag::error_of<tag::mean> > > acc_async;
+  
+  SAGA_GUARDED_EXEC
+  (
+   
+   for(int i=0; i < ITERATIONS; ++i) 
+   {
+     saga::job::service js1("gram://queenbee.loni-lsu.teragrid.org:2119/jobmanager-fork"); //std::cout << "js1 " << std::flush;
+     saga::job::service js2("gram://gatekeeper.ranger.tacc.teragrid.org:2119/jobmanager-fork");// std::cout << "js2 " << std::flush;
+     saga::job::service js3("gram://gatekeeper.bigred.iu.teragrid.org:2119/jobmanager-fork"); //std::cout << "js3 " << std::flush;
+     saga::job::service js4("gram://gatekeeper.lonestar.tacc.teragrid.org:2119/jobmanager-fork"); //std::cout << "js4 " << std::flush;
+     //saga::job::service js5("gram://tg-grid.uc.teragrid.org:2119/jobmanager-fork"); std::cout << "js5 " << std::flush;
+     
+     saga::job::service a_js1("gram://queenbee.loni-lsu.teragrid.org:2119/jobmanager-fork"); //std::cout << "a_js1 " << std::flush;
+     saga::job::service a_js2("gram://gatekeeper.ranger.tacc.teragrid.org:2119/jobmanager-fork");// std::cout << "a_js2 " << std::flush;
+     saga::job::service a_js3("gram://gatekeeper.bigred.iu.teragrid.org:2119/jobmanager-fork"); //std::cout << "a_js3 " << std::flush;
+     saga::job::service a_js4("gram://gatekeeper.lonestar.tacc.teragrid.org:2119/jobmanager-fork"); //std::cout << "a_js4 " << std::flush;
+     //saga::job::service a_js5("gram://tg-grid.uc.teragrid.org:2119/jobmanager-fork "); //std::cout << "a_js5 " << std::flush;
+   
+     saga::job::description jd;
+     jd.set_attribute("Executable", "/bin/date");
+     
+     /////////////////////////
+     // SYNC SYNC SYNC SYNC //
+     /////////////////////////
+     //
+     time(&start);
+     //
+     std::cout << "\n* Submitting five jobs to five hosts synchronously : " << std::flush;
+     saga::job::job j1 = js1.create_job(jd);
+     saga::job::job j2 = js2.create_job(jd);
+     saga::job::job j3 = js3.create_job(jd);
+     saga::job::job j4 = js4.create_job(jd);
+     //saga::job::job j5 = js5.create_job(jd);
+     j1.run(); std::cout << "j1 " << std::flush;
+     j2.run(); std::cout << "j2 " << std::flush;
+     j3.run(); std::cout << "j3 " << std::flush;
+     j4.run(); std::cout << "j4 " << std::flush;
+     //j5.run(); std::cout << "j5 " << std::flush;
+     //
+     time(&current);
+     diff = difftime(current, start);
+     std::cout << "[" << diff << " sec.]" << std::endl;
+     acc_sync(diff);
+   
+     /////////////////////////////
+     // ASYNC ASYNC ASYNC ASYNC //
+     /////////////////////////////
+     //
+     time(&start);
+     //
+     std::cout << "* Submitting five jobs to five hosts asynchronously: " << std::flush;
+     saga::job::job a_j1 = a_js1.create_job(jd);
+     saga::job::job a_j2 = a_js2.create_job(jd);
+     saga::job::job a_j3 = a_js3.create_job(jd);
+     saga::job::job a_j4 = a_js4.create_job(jd);
+     //saga::job::job a_j5 = a_js5.create_job(jd);
+     //
+     saga::task_container tc;
+     saga::task st1 = a_j1.run<saga::task_base::Async>();// std::cout << "j1 " << std::flush;
+     tc.add_task(st1);
+     saga::task st2 = a_j2.run<saga::task_base::Async>();// std::cout << "j2 " << std::flush;
+     tc.add_task(st2);
+     saga::task st3 = a_j3.run<saga::task_base::Async>();// std::cout << "j3 " << std::flush;
+     tc.add_task(st3);
+     saga::task st4 = a_j4.run<saga::task_base::Async>();// std::cout << "j4 " << std::flush;
+     tc.add_task(st4);
+     //saga::task st5 = a_j5.run<saga::task_base::Async>();// std::cout << "j5 " << std::flush;
+     //tc.add_task(st5);
+     //
+     tc.wait ();
+     //
+     time(&current);
+     diff = difftime(current, start);
+     std::cout << "[" << diff << " sec.]" << std::endl;
+     acc_async(diff);
+   
+   }
+  )
+  
+  std::cout << "\n* SYNC  AVG: " << mean(acc_sync) << " ERROR: " << error_of<tag::mean>(acc_sync) << std::endl;
+  std::cout << "* ASYNC AVG: " << mean(acc_async) << " ERROR: " << error_of<tag::mean>(acc_async) << std::endl << std::endl;
+#else
+  std::cout << "run benchmarks is not available on this platform (Boost V1.40 required)" << std::endl;
+#endif
+
+#endif
+
+}

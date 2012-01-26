@@ -1,0 +1,765 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Saga">
+      <UniqueIdentifier>{d0f223bc-bbde-4e1d-b994-99cbc3b68ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Saga\Detail">
+      <UniqueIdentifier>{8cb932a9-0c65-46d8-a006-5875611e5a1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Saga\Adaptors">
+      <UniqueIdentifier>{c092e1ad-485a-4f82-96ab-f54b885a796e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Saga\Adaptors\Packages">
+      <UniqueIdentifier>{f0d9aadc-e0af-4780-977d-eea7cc822bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Saga\Adaptors\Utils">
+      <UniqueIdentifier>{e983da1c-9d49-4a68-b633-bef9d462d23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Saga\Adaptors\Utils\Ini">
+      <UniqueIdentifier>{a7c70a93-2b20-4108-961e-6bca45e006fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Saga\Adaptors\Process">
+      <UniqueIdentifier>{ac739816-6072-439e-9045-b69083a7b5de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Impl">
+      <UniqueIdentifier>{6368dec8-8f64-4d29-afea-8075eed2b558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Impl\Engine">
+      <UniqueIdentifier>{4ff2d6c6-5633-4c4e-9e4d-7f968fc2eb13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Impl\Engine\Ini">
+      <UniqueIdentifier>{41c40f3f-ac83-4934-9dab-1094d2728d57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auxiliary Files">
+      <UniqueIdentifier>{eafe53ce-3f19-4f46-ac45-76b21859fa76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Saga">
+      <UniqueIdentifier>{5af95e82-9f90-4af6-a5b9-450f547fd1b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Saga\Adaptors">
+      <UniqueIdentifier>{1ce3cbed-ed89-4792-955e-b675e5f64d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Saga\Adaptors\Utils">
+      <UniqueIdentifier>{11f25683-af86-4172-8e05-3c82135531ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Saga\Adaptors\Utils\Ini">
+      <UniqueIdentifier>{05d2e088-086a-4666-90cc-727db148c85d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Saga\Adaptors\Utils\Process">
+      <UniqueIdentifier>{328f4ff9-a589-4ec5-994a-6295c0362f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Impl">
+      <UniqueIdentifier>{02951ffc-f3cb-45f6-bf2f-ef75fcde35e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Impl\Engine">
+      <UniqueIdentifier>{fb830d60-0a18-411a-baaf-302430ead73a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Impl\Engine\Ini">
+      <UniqueIdentifier>{d10682dd-1e3c-428e-93d1-c4558ed00170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Saga\Detail">
+      <UniqueIdentifier>{d43fdb12-67f8-46d3-b61b-fdb45f31454f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\saga\saga-defaults.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga-defs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\advert.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\async.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\attribute.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\autolink.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\base.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\buffer.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\call.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\context.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\error.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\exception.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\export_definitions.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\impl_base.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\job.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\logicalfile.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\metric.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\monitorable.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\namespace.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\object.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\path_leaf.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\permissions.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\replica.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\rpc.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\sd.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\session.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\stream.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\task.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\task_base.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\task_container.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\types.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\url.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\util.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\uuid.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\version.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\attribute.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\attribute_impl.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\call.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\dispatch_priv.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\hold_any.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\monitorable.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\monitorable_impl.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\permissions.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\permissions_impl.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\preferences.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\steerable.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\steerable_impl.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\task_get_result_impl.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\adaptor.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\adaptor_data.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\attribute.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\attribute_cache_cpi.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\attribute_cpi.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\attribute_cpi_wrapper.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_container.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_container_base.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_container_impl.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_strategy_base.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_strategy_simple_sort.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_strategy_try_exec.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\config.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\context_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\file_transfer_spec.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\instance_data_base.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\manage_threads.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\metric.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\permissions_cpi.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\serialization.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\task.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\task_declaration.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\task_declaration_impl.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\task_impl.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\url.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\url_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\advert_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\advert_directory_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\cpr_checkpoint_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\cpr_directory_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\cpr_job_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\cpr_job_service_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\directory_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\file_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\job_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\job_service_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\logical_directory_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\logical_file_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\namespace_dir_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\namespace_entry_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\rpc_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\stream_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\stream_server_cpi_instance_data.hpp">
+      <Filter>Header Files\Saga\Adaptors\Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\is_local_address.hpp">
+      <Filter>Header Files\Saga\Adaptors\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\utils.hpp">
+      <Filter>Header Files\Saga\Adaptors\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\ini\ini.hpp">
+      <Filter>Header Files\Saga\Adaptors\Utils\Ini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\process\process.hpp">
+      <Filter>Header Files\Saga\Adaptors\Process</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\advert.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\attribute.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\buffer.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\call.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\config.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\context.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\context_cpi.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\context_serialization.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\exception.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\exception_list.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\job.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\metric.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\namespace.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\object.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\replica.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\rpc.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\runtime.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\sd.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\session.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\stream.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\task.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\url.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\url_cpi.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\adaptor_selector.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\adaptor_selector_state.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\attribute.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\attribute_cache.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\attribute_interface.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\buffer.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\bulk_analyser.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\bulk_analyser_impr.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\context_base.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\cpi.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\cpi_info.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\cpi_list.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\dummy_task.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\engine.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\init_ini_data.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\metric.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\monitorable.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\object.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\permissions.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\permissions_interface.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\preferences.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\proxy.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\register_members.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\run_mode_wrapper.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\run_mode_wrapper_impl.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\session.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\static_adaptor_data.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\sync_async.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\sync_async_impl.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\task.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\task_base.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\task_container.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\task_fwd.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\task_impl.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\task_interface.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\url.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\url_grammar.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\url_proxy.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\uuid.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\wrapper_task.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\wrapper_task_impl.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\ini\ini.hpp">
+      <Filter>Header Files\Impl\Engine\Ini</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\filesystem.hpp">
+      <Filter>Header Files\Saga</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\filesystem.hpp">
+      <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\register_workitem.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\manage_workitems.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\io_service_pool.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\engine\workitem.hpp">
+      <Filter>Header Files\Impl\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\module_needs_logging.hpp">
+      <Filter>Header Files\Saga\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\detail\module_needs_logging.hpp">
+      <Filter>Header Files\Saga\Detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="saga_engine.def">
+      <Filter>Auxiliary Files</Filter>
+    </None>
+    <None Include="..\..\..\config\static_adaptor.list">
+      <Filter>Auxiliary Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\saga\saga\attribute.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\buffer.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\context.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\exception.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\metric.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\monitorable.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\object.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\permissions.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\session.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\task.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\task_container.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\url.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\uuid.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\version.cpp">
+      <Filter>Source Files\Saga</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\attribute.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\bulk_strategy_base.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\bulk_strategy_simple_sort.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\bulk_strategy_try_exec.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\file_transfer_spec.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\metric.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\serialization.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\url.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\utils\is_local_address.cpp">
+      <Filter>Source Files\Saga\Adaptors\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\utils\utils.cpp">
+      <Filter>Source Files\Saga\Adaptors\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\utils\ini\ini.cpp">
+      <Filter>Source Files\Saga\Adaptors\Utils\Ini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\utils\process\process.cpp">
+      <Filter>Source Files\Saga\Adaptors\Utils\Process</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\exception.cpp">
+      <Filter>Source Files\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\exception_list.cpp">
+      <Filter>Source Files\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\runtime.cpp">
+      <Filter>Source Files\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\adaptor_selector.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\attribute.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\attribute_cache.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\buffer.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\bulk_analyser.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\bulk_analyser_impr.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\context_base.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\cpi.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\engine.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\monitorable.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\object.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\permissions.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\proxy.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\serialization.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\session.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\task_base.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\task_container.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\url.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\url_proxy.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\ini\ini.cpp">
+      <Filter>Source Files\Impl\Engine\Ini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\detail\safe_getenv.cpp">
+      <Filter>Source Files\Saga\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\register_workitem.cpp">
+      <Filter>Source Files\Saga\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\manage_workitems.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\io_service_pool.cpp">
+      <Filter>Source Files\Impl\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\logging.cpp">
+      <Filter>Source Files\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\detail\module_needs_logging.cpp">
+      <Filter>Source Files\Saga\Detail</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\lite\static_adaptor_data.hpp.in">
+      <Filter>Auxiliary Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

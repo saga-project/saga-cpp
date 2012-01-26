@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node9" title="This object encapsulates all the attributes which define a job to be run." alt="" coords="46,1366,207,1456"/>
+<area shape="rect" id="node2" href="$classsaga_1_1object.html" title="Brief description starts here." alt="" coords="5,764,125,948"/>
+<area shape="rect" id="node4" href="$structsaga_1_1detail_1_1attribute.html" title="{saga::detail::attribute\&lt; description \&gt;\n||+ get_attribute()\l+ set_attribute()\l+ get_vector_attribute()\l+ set_vector_attribute()\l+ remove_attribute()\l+ list_attributes()\l+ find_attributes()\l+ attribute_exists()\l+ attribute_is_readonly()\l+ attribute_is_writable()\l+ attribute_is_vector()\l+ attribute_is_removable()\l&#45; get_attributepriv()\l&#45; set_attributepriv()\l&#45; get_vector_attributepriv()\l&#45; set_vector_attributepriv()\l&#45; remove_attributepriv()\l&#45; list_attributespriv()\l&#45; find_attributespriv()\l&#45; attribute_existspriv()\l&#45; attribute_is_readonlypriv()\l&#45; attribute_is_writablepriv()\l&#45; attribute_is_vectorpriv()\l&#45; attribute_is_removablepriv()\l}" alt="" coords="149,594,411,1118"/>
+<area shape="rect" id="node6" href="$structsaga_1_1detail_1_1attribute.html" title="The SAGA attribute interface." alt="" coords="161,5,399,528"/>
+</map>

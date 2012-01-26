@@ -1,0 +1,13 @@
+
+    #1 The ANTLR_HOME in grammar.mk is to be set
+       to the home directory where ANTLR is installed.
+
+    #2 make grammar
+
+       before running 'make' to create the SD package
+       library. The above make will create the ANTLR
+       lexer/parser source code from the SD grammar
+       file sd_grammar.g. 
+       The ANTLR generated classes can/will be used by 
+       the information providers part of the SD adaptors.
+

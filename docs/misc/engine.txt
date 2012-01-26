@@ -1,0 +1,496 @@
+
+Introduction
+------------
+
+  This document describes the internals of the SAGA engine, and in
+  particular describes the mechanism how SAGA API calls end up in the
+  respecive adaptor(s).  Note that all code citations focus on the
+  relevant part, and leave out major elements neccessary to obtain
+  functional code.  For a full code reference, you need to check out
+  the referenced source files.
+  
+  Lets have a look at the rpc constructor, and the rpc.call method.
+  The SAGA spec defines those as (in IDL):
+  
+  --------------------------------------------------------------
+    class rpc : implements saga::object 
+                implements saga::async 
+                implements saga::permissions 
+            // from object saga::error_handler 
+    { 
+      CONSTRUCTOR (in  session   s, 
+                   in  saga::url url = "", 
+                   out rpc       obj); 
+      
+      call (inout array <parameter> parameters); 
+    }
+  --------------------------------------------------------------
+  
+  
+  On API level, defined in saga/saga/packages/rpc, the rpc class
+  definition looks like:
+  
+  --------------------------------------------------------------
+    // rpc.hpp
+    class rpc : public saga::object,
+                public saga::detail::permissions <rpc>
+    {
+      private:
+        SAGA_CALL_PRIV_1 (call, std::vector<parameter>&)
+    
+      public:
+          rpc (session const& s, saga::url name = saga::url());
+    
+          void call (std::vector <parameter> parameters) 
+          {
+            callpriv(parameters, saga::task_base::Sync()); 
+          }
+          SAGA_CALL_PUB_1_DEF_0(call, std::vector<parameter>&)
+    }
+  --------------------------------------------------------------
+  
+  Note that error_handler is not implemented in the C++ bindings, and
+  the async interface is explicitely implemented, not inherited.
+  Apart from that, the class looks pretty much like the IDL.  But
+  you'll see that function definitions ar mostly done by Macros.
+  
+
+Macros in SAGA
+--------------
+  
+  Macros are used throughout the engine to define function prototypes
+  and also implementations.  The advantages are:
+ 
+   - complex and very repetetetetetive code is avoided
+   - the API package code is very readable and maintainable
+   - the API packages look very much like the IDL specification of the
+     SAGA standard
+   - the macros allow a single line of code for specifying all
+     synchronous and asynchronous versions of the respective method
+     (see saga api specification for details on async methods).
+ 
+  The disadvantages are:
+ 
+   - Macros make debugging difficult
+   - Macros make understanding the code difficult, as they hide magic
+
+  This document does not intent to justify the use of macros any
+  further, but rather documents HOW they are used.
+
+
+  The macros used in SAGA packages have the folling forms
+  
+  --------------------------------------------------------------
+    SAGA_CALL_PUB_x_DEF_y     (                         method, par_1, par_2, def_2, ...)
+    SAGA_CALL_PRIV_x          (                         method, par_1, par_2, ...)
+    SAGA_CALL_IMP_x           (class,                   method, par_1, par_2, ...)
+    SAGA_CALL_IMPL_DECL_x     (                         method, par_1, par_2, ...)
+    SAGA_CALL_IMPL_IMPL_x     (class, cpi_class,        method, par_1, par_2, ...)
+    SAGA_CALL_CPI_DECL_VIRT_x (       cpi_class, rtype, method, par_1, par_2, ...)
+  --------------------------------------------------------------
+  
+  
+  The first macro is used to specify the API level method, the second
+  and third one are private equivalents which forward the call to the
+  implementation class.  The third fourth and fifth version are used
+  to specify the implementation classes (*).  Finally, the sixth form
+  specifies the virtual method in the cpi class, which is then
+  implemented by the adaptor (**)
+  
+  <x> specifies the number of parameters to the method, and should be
+  identical for all 5 macros refering to the same method.  <y>
+  specifies the numbers of default parameters, and is only used on the
+  first macro.
+
+
+Defining the API packages
+-------------------------
+
+ Public methods
+ --------------
+
+  As said above: SAGA_CALL_PUB_x_DEF_y is used to actually define the
+  class methods on API level.  Note that SAGA_CALL_PUB_x_DEF_y is
+  usually accompanied by an explicit version for the default
+  synchronous method call, like:
+  
+  --------------------------------------------------------------
+    rtype method (par_1, par_2 = def_3, ...)
+    {
+      saga::task t = methodpriv (par_1, par_2, ..., saga::task_base::Sync ()); 
+      return t.get_result <rtype> ();
+    }
+  --------------------------------------------------------------
+
+  in the case of void functions, that simplifies to
+  
+  --------------------------------------------------------------
+    void method (par_1, par_2 = def_3, ...)
+    {
+      methodpriv (par_1, par_2, ..., saga::task_base::Sync ()); 
+    }
+  --------------------------------------------------------------
+  
+  This mechanism, as can bee seen from the non-void example above,
+  translates synchronous calls of the standard type, like for a
+  saga::file
+
+  --------------------------------------------------------------
+    size_t s = f.get_size ();
+  --------------------------------------------------------------
+
+  into the synchronous task version of the same call, which returns a
+  task in a final state, like again for saga::file
+
+  --------------------------------------------------------------
+    saga::task t = f.get_size   <saga::task::Sync> ();
+    size_t     s = t.get_result <size_t> ()
+  --------------------------------------------------------------
+
+  From here on, all macros handle only the task versions, i.e. the
+  following method types:
+
+  --------------------------------------------------------------
+    saga::task t = methodpriv <saga::task::Sync>  ();
+    saga::task t = methodpriv <saga::task::Async> ();
+    saga::task t = methodpriv <saga::task::Task>  ();
+  --------------------------------------------------------------
+
+
+
+ Private Methods
+ ---------------
+
+  'methodpriv' is defined by SAGA_CALL_PRIV_x (in the private part of
+  the class), and is implemented by SAGA_CALL_IMP_x.  SAGA_CALL_IMP_x
+  basically calls the method on the class's impl pointer, i.e. does:
+  
+  --------------------------------------------------------------
+    return impl->methodpriv (par_1, par_2, ..., saga::task_base::Sync ())
+  --------------------------------------------------------------
+  
+  Thus, the API package level call is handed of to the impl class.
+  There, the SAGA_CALL_IMPL_DECL_x defines the public method, and
+  SAGA_CALL_IMPL_IMPL_x implements it.  SAGA_CALL_IMPL_IMPL_x is where
+  the call is in fact handed off to the cpi.  Before discussing that
+  in detail, lets see what the CPI classes look like.
+
+  Note that methodpriv has, as last parameter, a flag which specifies
+  what method version is to be invoked, i.e. is it a synchronous or
+  asynchronous call.  Three flags exist: Sync, Async, and Task.
+  Please refer to section 3.10 of the SAGA Core API specification for
+  details - that will greatly help to understand what happens in the
+  implementation classes (see below).
+
+
+The CPI classes
+---------------
+
+  As described elsewhere, the CPI classes have only virtual method
+  definitions.  A SAGA adaptor implements these virtual methods.
+  That way, the engine can manage a list of cpi class pointers, and by
+  calling them it actually calls the derived/overloaded adaptor
+  methods.
+
+  The virtual method defined by SAGA_CALL_CPI_DECL_VIRT_x are, in
+  fact, two different virtual methods: one for synchronous calls, and
+  one for asynchronous calls:
+
+  --------------------------------------------------------------
+    SAGA_CALL_CPI_DECL_VIRT_1 (cpi_class, rtype, method, par_1, par_2, ....)
+  --------------------------------------------------------------
+   
+  expands to
+
+  --------------------------------------------------------------
+    virtual void sync_method (rtype & ret, par_1 par1, par_2 par2, ...)
+    { 
+      throw saga::NotImplemented (": sync_method is not implemented");
+    }
+
+    virtual saga::task async_method (par_1 par1, par_2 par2, ...)
+    { 
+      throw  saga::NotImplemented ("async_method is not implemented");
+      return saga::task (saga::task::Done); 
+    }
+  --------------------------------------------------------------
+
+  So, if the adaptor chooses not to implement that specific (sync or
+  async) method, a 'NotImplemented' exception is automatically thrown.
+
+
+Handing calls to the CPI class
+------------------------------
+
+  Calling the CPI methods is the task of the implementation classes,
+  and that is where the core functionality of the SAGA call switching
+  recides.  So, lets have a look at SAGA_CALL_IMPL_DECL_x and
+  SAGA_CALL_IMPL_IMPL_x.
+
+  SAGA_CALL_IMPL_DECL_x simply expands to:
+
+  --------------------------------------------------------------
+    saga::task method (par_1 par1, par_2 par2, ..., bool is_sync = false);
+  --------------------------------------------------------------
+
+  SAGA_CALL_IMPL_IMPL_x implements this, as
+
+  --------------------------------------------------------------
+    SAGA_CALL_IMPL_IMPL_x     (class, cpi_class,        method, par_1, par_2, ...)
+    #define SAGA_CALL_IMPL_IMPL_1_EX(ns, cpi, name_impl, name, p1) 
+    saga::task class::method (par_1 par1, par_2, ..., bool is_sync)
+    {
+      return saga::impl::execute_sync_async (
+            this,                 // calling impl class instance
+            "cpi_class",          // name of cpi to be called
+            "method",             // method name to be provided by cpi
+            "class::method",      // api level method name fully resolved
+            is_sync,              // sync/async call flag
+            &cpi::sync_method,    // ref to the synchronous cpi method
+            &cpi::async_method,   // ref to the asynchronous cpi method
+
+                                  // references to the parameters:
+                                  // from here on, all parameters are
+                                  // handled as references.  
+                                  // Boost magic...
+            make_reference <par1, TR1::is_reference <par1>::value>::eval (par1), 
+            make_reference <par2, TR1::is_reference <par2>::value>::eval (par2), 
+            ...
+            );
+    }
+  --------------------------------------------------------------
+
+  So, all information about the call is handed to the
+  execute_sync_async() method, which is defined in
+  impl/engine/run_more_wrapper.hpp (and run_mode_wrapper_impl.hpp for
+  the versions with multiple parameters).  
+  
+  The execute_sync_async() method simply switches between sync and
+  async call requests, and, dependent on that, calls execute_sync() or
+  execute_async(), defined in the same file:
+
+  --------------------------------------------------------------
+    saga::task execute_sync_async (...)
+    {
+      return is_sync ? execute_sync  (...)
+                     : execute_async (...);
+    }
+  --------------------------------------------------------------
+
+  Those calls both return a task object: in the case of the sync call,
+  it is ensured that the task is in a final state, and that all
+  exception are caught, and stored in the task, if needed.  The
+  actuall calls (sync or async) are dispatched to the adaptor, by
+  forwarding them to the adaptor selector.  In the async version, this
+  looks like (simplified):
+
+  --------------------------------------------------------------
+    template <typename Base, typename RetVal>
+    saga::task execute_async (...)
+    {
+        // create an adaptor selector
+        adaptor_selector_state state (proxy, "cpi_class", "method", "class::method", prefs);
+
+        // dispatch call to adaptor selector, which dispatches further
+        // to the adaptors.  Return whatever task the dispatched call returns.
+        return dispatch_async (proxy, state, sync, async);
+    }
+  --------------------------------------------------------------
+
+  The sync version (execute_sync) is slightly more complex, as it not
+  simply tries to dispatch the call to the first available adaptor,
+  but instead loops over all available (i.e. matching) adaptors, and
+  tries them one after the other until one succeeds.  That is
+  discussed in the next section, 'Sync Execution'. 
+  
+  execute_async() is, at the moment, not doing anything similar.  We
+  return to dispatch_async() after the following section.
+
+
+Sync Execution
+--------------
+
+  Lets have a closer look at execute_sync(), which will help us to
+  understand how the SAGA method call finally ends up in a specific
+  adaptor.
+
+  execute_sync(), defined in impl/engine/run_more_wrapper.hpp, looks
+  as follows (much simplified):
+
+  --------------------------------------------------------------
+    while ( true )
+    {
+      try 
+      {
+        // this call fills the proxy->cpis_ list with matching cpi instances
+        // adaptors on the nono_list are not considered.
+        current_mode = proxy->select_run_mode (cpi_class, method, prefs,
+                                               nono_list, ...);
+ 
+        // get the next adaptor from this list
+        current_cpi  = proxy->cpis_[0];
+        adaptor_info = current_cpi->get_adaptor_info ();
+
+        // try to dispatch the call to this adaptor
+        adaptor_found = true;
+        return dispatch_sync (current_mode, current_cpi, method, par_1, ...);
+      }
+      catch ( saga::exception e )
+      {
+        // this adaptor failed from some reason.  Store the exception,
+        // and add adaptor to nono_list
+        exceptions.push_back (e);
+        nono_list.push_back  (info);
+      }
+    }
+  --------------------------------------------------------------
+
+  Interesting here are proxy->select_run_mode() and dispatch_sync().
+
+  select_run_mode() in impl/engine/proxy.cpp searches the list of
+  known cpis (so basically the list of known adaptors providing cpis)
+  for thise cpis which match the requested one, and have the requesed
+  method registered.
+
+  dispatch_sync() is  discussed in the next section.
+
+  
+Call Dispatching
+----------------
+
+  So, finally, we determined (a) the type of call we want to make
+  (either dispatch_sync() or dispatch_async() were called), and we
+  have a cpi instance which provides the specific method call (***).
+  The adaptor may provide that call as synchronous, or as asynchronous
+  method.
+
+  There are now for cases, which are switched into by dispatch_sync()
+  and dispatch_async():
+
+    Application wants  sync call, adaptor provides  sync call:
+
+      The adaptor method is simply called, in sync_sync() defined in
+      impl/engine/sync_async.hpp +45.
+
+    Application wants  sync call, adaptor provides async call:
+
+      The async call is called, the created task is then run and
+      waited for - so, basically the engine blocks until the async
+      call is finished, and thus transforms the async call into a sync
+      one.  That is done in sync_async() defind in
+      impl/engine/sync_async.hpp +90.
+
+    Application wants async call, adaptor provides async call:
+
+       That matches again, and the async call is called, and the
+       resulting task is returned.
+
+    Application wants async call, adaptor provides  sync call:
+
+       The most complicated case: Here the engine creates a task
+       object, and binds it to the sync method call.  That method is
+       then executed *in a thread*, thus effectively transforming the
+       synchronous call into a asynchronous one(****).
+
+    So, whatever version the adaptor implements, sync or async, can be
+    mapped to whatever the application requests (sync or async).
+
+
+
+  TODO: continue 'til we reach the adaptor...
+
+
+
+Footnotes
+---------
+
+  (*) This SAGA implementation follows the PIMPL paradigm.  For
+      details, see our paper at [FIXME]
+
+  (**) The CPI (Capability Provider Interface) is an abstract base
+      class which is implemented by SAGA adaptors.  Thus, if we say
+      a method is called on a CPI, we actually mean that a method
+      implementation by a adaptor is called.
+
+  (***) Our description so far left out (a) how that cpi got created,
+      and (b) how we test the adaptor if it can be used.
+
+  (****) Note that asynchronous call and threaded method execution are
+      *not* synonymous - see the discussion in section 3.10, "Tasks 
+      versus Threads", on page 152 of the SAGA Core API specification.
+
+
+
+Random Notes:
+-------------------
+ 
+  * dispatch_async() throws and returns
+
+    See for example impl/engine/sync_async.hpp line 192
+    That construct pacifies compilers which otherwise assume
+    that the non-void function reached end-of-control w/o return
+    statement.
+
+
+  * async-async does not do late binding
+
+    In the case of synchronous cpi calls, the engine is able to
+    catch any exception, and simply retry the call then with the
+    next available cpi.  Only if all cpis fail, the exception is
+    forwarded to the application.
+
+    For async cpi calls, this is not the case: control is given
+    to the cpi completely, and the engine does not attempt to
+    recover on failed remote ops.
+
+
+  * execute_sync() looks strange
+
+    It does
+
+    --------------------------------------------------------------
+    while (true)
+    { 
+      create adaptor list, but ignore adaptors from no-list
+      get adaptor from adaptor list
+      if ( ! try that adaptor )
+        add that adaptor to the no-list
+    }
+    --------------------------------------------------------------
+
+    Why is that not
+
+    --------------------------------------------------------------
+    create adaptor list
+
+    foreach adaptor in adaptor list
+    { 
+      try that adaptor
+    }
+    --------------------------------------------------------------
+
+
+    Answer: proxy holds list of active cpi instance (which
+    succeeded at some point).  If a call fails on all of those,
+    a new cpi instance is required - the nonolist tells the
+    adaptor selector which cpi instance ar already known to the
+    proxy, so that a really new one gets created.
+
+    But that list of cpis can be re-ordered - so one needs to
+    check oit from the beginning.  The nono-list allows to avoid
+    to pick cpi's which have been tried before.  BTW: that is
+    why cpi_list is actuall a class wrapping std::list: to
+    simplify splicing and re-ordering.
+      
+
+  * there are two places where adaptors (cpis) get pushed on the
+    nono-list: in execute_sync(), if the call fails; and in
+    proxy->select_run_mode(), if adaptor cannot handle the call.
+    What is the difference?  
+
+    Answer: select_run_mode first iterates over the live
+    adaptors, and exceptions get raised when the select_run_mode
+    loop is done (when the found cpi operation is onvoked), not
+    earlier.  Exception falling through would kill the loop too
+    early.
+

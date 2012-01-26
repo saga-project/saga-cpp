@@ -1,0 +1,37 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{saga::exception\n|+ m\l+ e\l+ l\l|+ ~exception()\l+ what()\l+ get_message()\l+ get_error()\l+ get_object()\l+ get_all_exceptions()\l+ get_all_messages()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node2 [label="{std::exception\n||}",height=0.2,width=0.4,color="grey75",tooltip="STL class."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node3 [label="{saga::no_success\n||+ no_success()\l+ no_success()\l+ no_success()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1no__success.html"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node4 [label="{saga::not_implemented\n||+ not_implemented()\l+ not_implemented()\l+ not_implemented()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1not__implemented.html"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node5 [label="{saga::parameter_exception\n||# parameter_exception()\l# parameter_exception()\l# parameter_exception()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1parameter__exception.html"];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node6 [label="{saga::bad_parameter\n||+ bad_parameter()\l+ bad_parameter()\l+ bad_parameter()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1bad__parameter.html"];
+  Node5 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node7 [label="{saga::incorrect_url\n||+ incorrect_url()\l+ incorrect_url()\l+ incorrect_url()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1incorrect__url.html"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node8 [label="{saga::security_exception\n||# security_exception()\l# security_exception()\l# security_exception()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1security__exception.html"];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node9 [label="{saga::authentication_failed\n||+ authentication_failed()\l+ authentication_failed()\l+ authentication_failed()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1authentication__failed.html"];
+  Node8 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node10 [label="{saga::authorization_failed\n||+ authorization_failed()\l+ authorization_failed()\l+ authorization_failed()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1authorization__failed.html"];
+  Node8 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node11 [label="{saga::permission_denied\n||+ permission_denied()\l+ permission_denied()\l+ permission_denied()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1permission__denied.html"];
+  Node1 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node12 [label="{saga::state_exception\n||# state_exception()\l# state_exception()\l# state_exception()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1state__exception.html"];
+  Node12 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node13 [label="{saga::already_exists\n||+ already_exists()\l+ already_exists()\l+ already_exists()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1already__exists.html"];
+  Node12 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node14 [label="{saga::does_not_exist\n||+ does_not_exist()\l+ does_not_exist()\l+ does_not_exist()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1does__not__exist.html"];
+  Node12 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node15 [label="{saga::incorrect_state\n||+ incorrect_state()\l+ incorrect_state()\l+ incorrect_state()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1incorrect__state.html"];
+  Node12 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node16 [label="{saga::timeout\n||+ timeout()\l+ timeout()\l+ timeout()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1timeout.html"];
+}

@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node13" href="$classsaga_1_1advert_1_1entry.html" title="The advert class represents an entry in a saga::advert::directory. An advert directory is a meta data..." alt="" coords="4,1418,189,1809"/>
+<area shape="rect" id="node15" title="The saga::replica class implements the saga::attributes interface." alt="" coords="215,1568,373,1658"/>
+<area shape="rect" id="node17" href="$classsaga_1_1filesystem_1_1file.html" title="The SAGA file package file API." alt="" coords="398,1371,551,1856"/>
+<area shape="rect" id="node19" href="$classsaga_1_1name__space_1_1directory.html" title="A &quot;Virtual Directory&quot;, an RNS entry that is represented as a non&#45;leaf node in the hierarchical name s..." alt="" coords="575,1201,779,2026"/>
+<area shape="rect" id="node29" href="$classsaga_1_1replica_1_1logical__file.html" title="The saga::replica class implements the saga::attributes interface." alt="" coords="803,1446,983,1781"/>
+<area shape="rect" id="node2" href="$classsaga_1_1object.html" title="Brief description starts here." alt="" coords="208,372,328,556"/>
+<area shape="rect" id="node4" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; entry \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="352,391,596,537"/>
+<area shape="rect" id="node6" href="$structsaga_1_1detail_1_1monitorable.html" title="The SAGA monitorable interface." alt="" coords="340,63,601,209"/>
+<area shape="rect" id="node8" href="$structsaga_1_1detail_1_1permissions.html" title="{saga::detail::permissions\&lt; entry \&gt;\n||+ permissions_allow()\l+ permissions_deny()\l+ permissions_check()\l+ get_owner()\l+ get_group()\l&#45; permissions_allowpriv()\l&#45; permissions_denypriv()\l&#45; permissions_checkpriv()\l&#45; get_ownerpriv()\l&#45; get_grouppriv()\l}" alt="" coords="630,334,873,594"/>
+<area shape="rect" id="node10" href="$structsaga_1_1detail_1_1permissions.html" title="The SAGA permissions interface." alt="" coords="625,6,885,266"/>
+<area shape="rect" id="node21" href="$classsaga_1_1advert_1_1directory.html" title="The directory class represents a directory within a meta data directory with a hierarchical namespace..." alt="" coords="318,2087,484,2385"/>
+<area shape="rect" id="node23" title="A checkpoint directory contains, you guess it, checkpoints." alt="" coords="508,2191,653,2281"/>
+<area shape="rect" id="node25" href="$classsaga_1_1filesystem_1_1directory.html" title="The SAGA file package directory API." alt="" coords="678,2078,868,2394"/>
+<area shape="rect" id="node27" href="$classsaga_1_1replica_1_1logical__directory.html" title="A logical directory represents a directory entry in the name space of logical files." alt="" coords="892,2078,1109,2394"/>
+</map>

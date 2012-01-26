@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Implementation Source Files">
+      <UniqueIdentifier>{65eb8603-223f-4dab-a1da-446669287fb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Implementation Header Files">
+      <UniqueIdentifier>{90978ca2-4a0d-44c5-9e7f-eb34e68ded11}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\saga\saga\packages\namespace\namespace_dir.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\namespace\namespace_entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\namespace\task_get_result.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\namespace\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\namespace\namespace_dir.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\namespace\namespace_entry.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\namespace\namespace_serialization.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\saga\saga\packages\namespace\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\namespace\namespace_dir.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\namespace\namespace_entry.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\namespace\version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\namespace\namespace_dir.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\namespace\namespace_dir_cpi.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\namespace\namespace_entry.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\namespace\namespace_entry_cpi.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\namespace\namespace_serialization.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="classboost_1_1process_1_1postream" kind="class" prot="public">
+    <compoundname>boost::process::postream</compoundname>
+    <includes refid="postream_8hpp" local="no">postream.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1postream_192fe6bcf42c2837672adcdd028a77455" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>boost::process::postream::postream</definition>
+        <argsstring>(detail::file_handle &amp;fh)</argsstring>
+        <name>postream</name>
+        <param>
+          <type>detail::file_handle &amp;</type>
+          <declname>fh</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new process&apos; input stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Given a file handle, this constructor creates a new postream object that owns the given file handle <emphasis>fh</emphasis>. Ownership of <emphasis>fh</emphasis> is transferred to the created postream object.</para><para><simplesect kind="pre"><para><emphasis>fh</emphasis> is valid. </para></simplesect>
+<simplesect kind="post"><para><emphasis>fh</emphasis> is invalid. </para><para>The new postream object owns <emphasis>fh</emphasis>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/postream.hpp" line="84" bodyfile="/tmp/process.016638aa/process/boost/process/postream.hpp" bodystart="99" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1postream_16ea486fc09d27030488302f3d8380f67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void boost::process::postream::close</definition>
+        <argsstring>(void)</argsstring>
+        <name>close</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Closes the file handle managed by this stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Explicitly closes the file handle managed by this stream. This function can be used by the user to tell the child process there is no more data to send. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/postream.hpp" line="93" bodyfile="/tmp/process.016638aa/process/boost/process/postream.hpp" bodystart="111" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classboost_1_1process_1_1postream_1c0a4402244fb239de0ccfd757acb2d2a" prot="private" static="no" mutable="no">
+        <type>detail::file_handle</type>
+        <definition>detail::file_handle boost::process::postream::m_handle</definition>
+        <argsstring></argsstring>
+        <name>m_handle</name>
+        <briefdescription>
+<para>The file handle managed by this stream. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/postream.hpp" line="65" bodyfile="/tmp/process.016638aa/process/boost/process/postream.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classboost_1_1process_1_1postream_13fcafd023c87ee480f07c386b8477e1a" prot="private" static="no" mutable="no">
+        <type>detail::systembuf</type>
+        <definition>detail::systembuf boost::process::postream::m_systembuf</definition>
+        <argsstring></argsstring>
+        <name>m_systembuf</name>
+        <briefdescription>
+<para>The systembuf object used to manage this stream&apos;s data. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/postream.hpp" line="70" bodyfile="/tmp/process.016638aa/process/boost/process/postream.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Child process&apos; input stream. </para>    </briefdescription>
+    <detaileddescription>
+<para>The postream class represents an input communication channel with the child process. The child process reads data from this stream and the parent process can write to it through the postream object. In other words, from the child&apos;s point of view, the communication channel is an input one, but from the parent&apos;s point of view it is an output one; hence the confusing postream name.</para><para>postream objects cannot be copied because they own the file handle they use to communicate with the child and because they buffer data that flows through the communication channel.</para><para>A postream object behaves as a std::ostream stream in all senses. The class is only provided because it must provide a method to let the caller explicitly close the communication channel.</para><para><simplesect kind="remark"><para><bold>Blocking remarks</bold>: Functions that write data to this stream can block if the associated file handle blocks during the write. As this class is used to communicate with child processes through anonymous pipes, the most typical blocking condition happens when the child is not processing the data in the pipe&apos;s system buffer. When this happens, the buffer eventually fills up and the system blocks until the reader consumes some data, leaving some new room. </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/tmp/process.016638aa/process/boost/process/postream.hpp" line="61" bodyfile="/tmp/process.016638aa/process/boost/process/postream.hpp" bodystart="59" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classboost_1_1process_1_1postream_16ea486fc09d27030488302f3d8380f67" prot="public" virt="non-virtual"><scope>boost::process::postream</scope><name>close</name></member>
+      <member refid="classboost_1_1process_1_1postream_1c0a4402244fb239de0ccfd757acb2d2a" prot="private" virt="non-virtual"><scope>boost::process::postream</scope><name>m_handle</name></member>
+      <member refid="classboost_1_1process_1_1postream_13fcafd023c87ee480f07c386b8477e1a" prot="private" virt="non-virtual"><scope>boost::process::postream</scope><name>m_systembuf</name></member>
+      <member refid="classboost_1_1process_1_1postream_192fe6bcf42c2837672adcdd028a77455" prot="public" virt="non-virtual"><scope>boost::process::postream</scope><name>postream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

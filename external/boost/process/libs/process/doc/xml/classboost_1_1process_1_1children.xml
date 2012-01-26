@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="classboost_1_1process_1_1children" kind="class" prot="public">
+    <compoundname>boost::process::children</compoundname>
+    <includes refid="children_8hpp" local="no">children.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1children_1e7c24caf69b3a9df827e6193a16e5f21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1postream" kindref="compound">postream</ref> &amp;</type>
+        <definition>postream &amp; boost::process::children::get_stdin</definition>
+        <argsstring>(void) const </argsstring>
+        <name>get_stdin</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns the pipeline&apos;s input stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns the pipeline&apos;s input stream, which is connected to the stdin of the first process in the chain.</para><para><simplesect kind="pre"><para>The pipeline launcher (pipeline) must have configured the first process&apos; stdin to the redirect_stream behavior. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/children.hpp" line="55" bodyfile="/tmp/process.016638aa/process/boost/process/children.hpp" bodystart="98" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1children_17d04b816c9d91a3a9cc4122c12e6e720" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1pistream" kindref="compound">pistream</ref> &amp;</type>
+        <definition>pistream &amp; boost::process::children::get_stdout</definition>
+        <argsstring>(void) const </argsstring>
+        <name>get_stdout</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns the pipeline&apos;s output stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns the pipeline&apos;s output stream, which is connected to the stdout of the last process in the chain.</para><para><simplesect kind="pre"><para>The pipeline launcher (pipeline) must have configured the last process&apos; stdout to the redirect_stream behavior. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/children.hpp" line="66" bodyfile="/tmp/process.016638aa/process/boost/process/children.hpp" bodystart="109" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1children_183f4161a12135048bdaf4393d8e6e2db" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1pistream" kindref="compound">pistream</ref> &amp;</type>
+        <definition>pistream &amp; boost::process::children::get_stderr</definition>
+        <argsstring>(void) const </argsstring>
+        <name>get_stderr</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns the pipeline&apos;s error stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns the pipeline&apos;s error stream, which is connected to the stderr of the last process in the chain.</para><para><simplesect kind="pre"><para>The pipeline launcher (pipeline) must have configured the last process&apos; stderr to the redirect_stream behavior. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/children.hpp" line="77" bodyfile="/tmp/process.016638aa/process/boost/process/children.hpp" bodystart="120" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1children_1df89bcd65fde3339e6af82d556e215ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1status" kindref="compound">status</ref></type>
+        <definition>status boost::process::children::wait</definition>
+        <argsstring>(void)</argsstring>
+        <name>wait</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Waits for children finalization. </para>        </briefdescription>
+        <detaileddescription>
+<para>Waits until all the processes in the pipeline have finalized execution.</para><para><simplesect kind="return"><para>The exit status of the first failed process or, if all was successful, the exit status of the last process.</para></simplesect>
+<simplesect kind="remark"><para><bold>Blocking remarks</bold>: This call blocks if any of the child processes have not finalized execution and waits until they terminate. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/children.hpp" line="92" bodyfile="/tmp/process.016638aa/process/boost/process/children.hpp" bodystart="131" bodyend="150"/>
+        <references refid="classboost_1_1process_1_1status_19db0b1ba1cbe99905af826182bf410ee" compoundref="status_8hpp" startline="134" endline="143">boost::process::status::exit_status</references>
+        <references refid="classboost_1_1process_1_1status_1546ba42f669e05e573b70f6d29d31584" compoundref="status_8hpp" startline="120" endline="128">boost::process::status::exited</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Representation of a pipelined group of child processes. </para>    </briefdescription>
+    <detaileddescription>
+<para>Represents a group of child process whose standard data streams are connected to form a pipeline. This higher order structure allows for easy access to the pipeline endpoints and termination synchronization. </para>    </detaileddescription>
+    <location file="/tmp/process.016638aa/process/boost/process/children.hpp" line="44" bodyfile="/tmp/process.016638aa/process/boost/process/children.hpp" bodystart="42" bodyend="93"/>
+    <listofallmembers>
+      <member refid="classboost_1_1process_1_1children_183f4161a12135048bdaf4393d8e6e2db" prot="public" virt="non-virtual"><scope>boost::process::children</scope><name>get_stderr</name></member>
+      <member refid="classboost_1_1process_1_1children_1e7c24caf69b3a9df827e6193a16e5f21" prot="public" virt="non-virtual"><scope>boost::process::children</scope><name>get_stdin</name></member>
+      <member refid="classboost_1_1process_1_1children_17d04b816c9d91a3a9cc4122c12e6e720" prot="public" virt="non-virtual"><scope>boost::process::children</scope><name>get_stdout</name></member>
+      <member refid="classboost_1_1process_1_1children_1df89bcd65fde3339e6af82d556e215ce" prot="public" virt="non-virtual"><scope>boost::process::children</scope><name>wait</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

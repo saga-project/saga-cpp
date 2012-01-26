@@ -1,0 +1,65 @@
+#
+# Boost.Process
+# Build script for documentation.
+#
+# Copyright (c) 2006 Julio M. Merino Vidal.
+#
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at
+# http://www.boost.org/LICENSE_1_0.txt.)
+#
+
+using doxygen ;
+using quickbook ;
+
+if ! $(BOOST_ROOT)
+{
+    BOOST_ROOT = [ modules.peek : BOOST_ROOT ] ;
+}
+
+doxygen autodoc
+    :
+        ../../../boost/process.hpp
+        [ glob ../../../boost/process/*.hpp ]
+
+        # Enable the following to include documentation for the code
+        # in the detail namespace.
+        #[ glob ../../../boost/process/detail/*.hpp ]
+    :
+        <doxygen:param>"PREDEFINED=\"BOOST_PROCESS_DOXYGEN\""
+
+        # Enable the following to include documentation for the code
+        # in the detail namespace.
+        #<xsl:param>boost.doxygen.detailns=documenteverything
+    ;
+
+xml process
+    :
+        process.qbk
+    ;
+
+boostbook standalone
+    :
+        process
+    :
+        <dependency>autodoc
+        <xsl:param>boost.libraries=$(BOOST_ROOT)/libs/libraries.htm
+        <xsl:param>boost.root=.
+        <xsl:param>doc.standalone=1
+        <xsl:param>nav.layout=none
+        <xsl:param>toc.section.depth=2
+        <xsl:param>section.autolabel=1
+        <xsl:param>section.autolabel.max.depth=3
+        <xsl:param>chapter.autolabel=0
+    ;
+
+stage html
+    :
+        $(BOOST_ROOT)/boost.png
+        $(BOOST_ROOT)/doc/html/boostbook.css
+    ;
+
+stage html/images
+    :
+        [ path.glob $(BOOST_ROOT)/doc/html/images : *.png ]
+    ;

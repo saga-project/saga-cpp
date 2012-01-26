@@ -1,0 +1,95 @@
+
+ \subsection{Quick Introduction}
+
+  Tight security is arguably one of the most required features of Grid
+  environments.  On the other hand, for the average end user, it is also one of the most
+  annoying features.  That is mostly caused
+  by the confusion about how security credentials are to be
+  maintained, when and where they are valid, how to choose between
+  them, etc.
+
+  SAGA can alleviate only some of these problems---more standardization work outside of SAGA is required to be able to
+  simplify credential management further.
+
+  To understand SAGA's security model, one needs to consider two
+  concepts: \I{sessions} and \I{contexts};  a |saga::context| simply
+  represents one specific security credential; a |saga::session| can
+  have multiple of these contexts attached, and is defined by the
+  lifetime of the objects and operations using these credentials.
+
+  By default, both |saga::session|s and |saga::context|s are
+  invisible: a default session is always implicitly created on the
+  SAGA call, and picks up all the default security credentials your
+  SAGA implementation knows about, such as your default ssh keys, your
+  default globus proxy (if it was initialized before), your default
+  Unicore keyring, etc.  In most cases, that should allow writting
+  applications which have no single line of code
+  addressing security explicitly, which are still secure, as these
+  credentials are used on adaptor level, as needed:
+
+  \begin{mycode}[label=Secure gsiftp file copy]
+  #include <saga/saga.hpp>
+
+  int main ()
+  {
+    saga::url src ("ssh://remote.host.net/tmp/one.dat");
+    saga::url tgt ("ssh://remote.host.net/tmp/two.dat");
+
+    // do a file copy, using the default globus X509 proxy, in the
+    // default session
+    saga::filesystem::file f (src);
+    f.copy (tgt);
+  }
+  \end{mycode}
+
+  On the other hand, it allows simple means of control on which
+  credentials are to be used for a given operation, as in the following
+  example:
+ 
+  \begin{mycode}[label=Secure gsiftp file copy]
+  #include <saga/saga.hpp>
+
+  int main ()
+  {
+    saga::url src ("ssh://remote.host.net/tmp/one.dat");
+    saga::url tgt ("ssh://remote.host.net/tmp/two.dat");
+
+    // create a new session, no default contexts are attached
+    saga::session my_session;
+
+    // create a new ssh context
+    saga::context my_context ("ssh");
+
+    // point ssh context to a specific ssh key
+    my_context.set_attribute ("UserCert", 
+                              "/home/username/.ssh/id_dsa.special");
+
+    // add that context to my session.  The session will then 
+    // contain *only* that explicitely added context.
+    my_session.add_context (my_context);
+
+    // create a new file object, in that session
+    saga::filesystem::file f (my_session, src);
+
+    // do a file copy, using the specified ssh key
+    f.copy (tgt);
+  }
+  \end{mycode}
+
+  \HINT{In most cases, the default session is what you want to use;
+  if that does not work, try to convince your system administrator to
+  configure SAGA so that the default session works!}
+
+  Objects created from other objects inherit their session.
+  Asynchronous operations are living in the session of their spawning
+  objects.  A session does not die when going out of scope, but only
+  when all associated objects and operations die/finish.
+
+
+ \subsection{Reference}
+
+
+ \subsection{Security Details}
+
+
+

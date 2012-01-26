@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="structboost_1_1process_1_1basic__pipeline_1_1entry" kind="struct" prot="private">
+    <compoundname>boost::process::basic_pipeline::entry</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structboost_1_1process_1_1basic__pipeline_1_1entry_1b61cb982028330485c404f179ff4fcc3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>boost::process::basic_pipeline&lt; Command_Line &gt;::entry::entry</definition>
+        <argsstring>(Command_Line cl, bool merge_out_err)</argsstring>
+        <name>entry</name>
+        <param>
+          <type>Command_Line</type>
+          <declname>cl</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>merge_out_err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="69" bodyfile="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" bodystart="66" bodyend="70"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structboost_1_1process_1_1basic__pipeline_1_1entry_131a699b24926da74bb2b4f4ea6dbca12" prot="public" static="no" mutable="no">
+        <type>Command_Line</type>
+        <definition>Command_Line boost::process::basic_pipeline&lt; Command_Line &gt;::entry::m_cl</definition>
+        <argsstring></argsstring>
+        <name>m_cl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="63" bodyfile="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structboost_1_1process_1_1basic__pipeline_1_1entry_1f5acd66ac40c246ff903baa431b5f83d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool boost::process::basic_pipeline&lt; Command_Line &gt;::entry::m_merge_out_err</definition>
+        <argsstring></argsstring>
+        <name>m_merge_out_err</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="64" bodyfile="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Data describing an entry in the pipeline. </para>    </briefdescription>
+    <detaileddescription>
+<para>This helper structure is used to describe a process in the pipeline. </para>    </detaileddescription>
+    <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="62" bodyfile="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" bodystart="61" bodyend="71"/>
+    <listofallmembers>
+      <member refid="structboost_1_1process_1_1basic__pipeline_1_1entry_1b61cb982028330485c404f179ff4fcc3" prot="public" virt="non-virtual"><scope>boost::process::basic_pipeline::entry</scope><name>entry</name></member>
+      <member refid="structboost_1_1process_1_1basic__pipeline_1_1entry_131a699b24926da74bb2b4f4ea6dbca12" prot="public" virt="non-virtual"><scope>boost::process::basic_pipeline::entry</scope><name>m_cl</name></member>
+      <member refid="structboost_1_1process_1_1basic__pipeline_1_1entry_1f5acd66ac40c246ff903baa431b5f83d" prot="public" virt="non-virtual"><scope>boost::process::basic_pipeline::entry</scope><name>m_merge_out_err</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

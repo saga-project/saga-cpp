@@ -1,0 +1,17 @@
+
+try the following:
+
+  # make
+  # ./managing_replica_locations
+  # ./managing_replica_metadata
+
+That should result in something like:
+
+  # ~.../09_-_using_the_replica_package : ./managing_replica_locations
+  replica: file://localhost//tmp/passwd
+  replica: file://localhost//etc/passwd
+
+  # ~.../09_-_using_the_replica_package : ./managing_replica_metadata 
+  ctime -> Wed Jul  2 14:44:33 2008 1881575044
+  utime -> Wed Jul  2 23:12:39 2008 939734872
+  

@@ -1,0 +1,153 @@
+//  Copyright (c) 2005-2007 Andre Merzky (andre@merzky.net)
+// 
+//  Distributed under the Boost Software License, Version 1.0. (See accompanying 
+//  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+// NOTE that this header contains only _global_ defines for
+// SAGA.  Local defines (e.g. for a specific adaptor, or
+// a specific compiler) should still be set via the Makefiles.
+
+#ifndef SAGA_CONFIG_HPP
+#define SAGA_CONFIG_HPP
+
+// we want to get included from saga-defs, to get the system defs consistent
+#ifndef SAGA_DEFS_HPP
+# error "include saga-defs.hpp instead of saga-config.hpp"
+#endif
+
+// flag that this build is configure based
+#define SAGA_HAVE_CONFIG 1
+
+
+// version defines
+#undef SAGA_VERSION
+#undef SAGA_VERSION_FULL
+
+#undef SAGA_VERSION_MAJOR
+#undef SAGA_VERSION_MINOR
+#undef SAGA_VERSION_SUBMINOR
+
+#undef SAGA_VERSION_DATE
+
+// define the platform we are running on.  Only one of the defs below will be
+// defined.  Note that SAGA_WINDOWS is defined in saga-defs.hpp
+#undef SAGA_OSTYPE
+#undef SAGA_APPLE
+#undef SAGA_LINUX
+
+// can gcc understand visibility directives?
+#undef SAGA_GCC_HAVE_VISIBILITY
+
+// sometime we need to know where we got installed to (see
+// below)
+#undef SAGA_LOCATION
+
+// define what packages are enabled
+#undef SAGA_HAVE_PACKAGE_JOB
+#undef SAGA_HAVE_PACKAGE_FILESYSTEM
+#undef SAGA_HAVE_PACKAGE_REPLICA
+#undef SAGA_HAVE_PACKAGE_NAMESPACE
+#undef SAGA_HAVE_PACKAGE_RPC
+#undef SAGA_HAVE_PACKAGE_STREAM
+#undef SAGA_HAVE_PACKAGE_SD
+#undef SAGA_HAVE_PACKAGE_ISN
+#undef SAGA_HAVE_PACKAGE_ADVERT
+#undef SAGA_HAVE_PACKAGE_CPR
+#undef SAGA_HAVE_PACKAGE_MESSAGE_BUS
+
+// we need to figure out if ssize_t and off_t are the same
+// - otherwise we get a duplicated explicit template
+// instantiation for task.get_result in the file package.  
+#undef SAGA_TYPE_LONG_IS_INT
+
+#undef SAGA_TYPE_LONGLONG_IS_INT
+#undef SAGA_TYPE_LONGLONG_IS_LONG
+
+#undef SAGA_TYPE_SIZE_IS_INT
+#undef SAGA_TYPE_SIZE_IS_LONG
+#undef SAGA_TYPE_SIZE_IS_LONGLONG
+
+#undef SAGA_TYPE_SSIZE_IS_INT
+#undef SAGA_TYPE_SSIZE_IS_LONG
+#undef SAGA_TYPE_SSIZE_IS_LONGLONG
+#undef SAGA_TYPE_SSIZE_IS_SIZE
+
+#undef SAGA_TYPE_OFF_IS_INT
+#undef SAGA_TYPE_OFF_IS_LONG
+#undef SAGA_TYPE_OFF_IS_LONGLONG
+#undef SAGA_TYPE_OFF_IS_SIZE
+#undef SAGA_TYPE_OFF_IS_SSIZE
+
+// we need the following define for dynamic loading in boost
+#define SAGA_BOOST_DYNA_LOAD 1
+
+// also, we are not dealing with wide character (which avoids
+// a lot of trouble with some compilers like icc)
+#ifndef  BOOST_NO_CWCHAR 
+# define BOOST_NO_CWCHAR 1
+#endif
+
+// ths define should not hurt any boost version
+#ifndef  BOOST_SPIRIT_USE_OLD_NAMESPACE
+# define BOOST_SPIRIT_USE_OLD_NAMESPACE 1
+#endif
+
+// we need to know the boost filesystem version, as that may differ from the
+// boost version we use (flesystem-1.34.1 is included in external to replace
+// that of older boost installations)
+#undef SAGA_BOOST_FILESYSTEM_VERSION
+
+// we need to know the boost iostreams version, as that may differ from the
+// boost version we use (iostreams-1.40.0 is included in external to replace
+// that of older boost installations)
+#undef SAGA_BOOST_IOSTREAMS_VERSION
+
+// do we have libreadline?
+#undef SAGA_HAVE_READLINE
+#undef SAGA_HAVE_HISTORY_LIST
+
+// do we build debug version?
+#undef SAGA_HAVE_DEBUG
+
+// do we allow deprecated API elements?
+#undef SAGA_ALLOW_DEPRECATED
+
+#ifndef SAGA_ALLOW_DEPRECATED
+# define SAGA_ADVERT_NO_DEPRECATED
+#endif
+
+
+// do we build lite version?
+#undef SAGA_HAVE_LITE
+
+
+// misc defines
+#undef SAGA_TEST_BIN_BC
+#undef SAGA_TEST_BIN_TRUE
+#undef SAGA_TEST_BIN_FALSE
+#undef SAGA_TEST_BIN_SLEEP
+
+// sqlite and soci config defs
+#undef SAGA_HAVE_SOCI
+#undef SAGA_HAVE_INTERNAL_SOCI
+#undef SAGA_HAVE_SOCI_SQLITE3
+#undef SAGA_HAVE_SOCI_POSTGRESQL
+#undef SAGA_HAVE_SOCI_MYSQL
+
+#if SAGA_HAVE_SOCI || SAGA_HAVE_INTERNAL_SOCI
+# if SAGA_HAVE_SOCI_SQLITE3
+#  define SAGA_DEFAULT_ADAPTORS_USE_SQLITE3
+# endif
+# if SAGA_HAVE_SOCI_POSTGRESQL
+#  define SAGA_DEFAULT_ADAPTORS_USE_POSTGRESQL
+# endif
+# if SAGA_HAVE_SOCI_MYSQL
+#  define SAGA_DEFAULT_ADAPTORS_USE_MYSQL
+# endif
+#endif
+
+// xmlrpc def to catch API changes
+#undef SAGA_XMLRPC_NEEDS_BOOL
+
+#endif // SAGA_CONFIG_HPP
+

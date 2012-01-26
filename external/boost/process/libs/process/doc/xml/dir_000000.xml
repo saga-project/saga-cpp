@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="dir_000000" kind="dir">
+    <compoundname>/tmp/process.016638aa/process/boost/</compoundname>
+    <innerdir refid="dir_000001">/tmp/process.016638aa/process/boost/process/</innerdir>
+    <innerfile refid="process_8hpp">process.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/process.016638aa/process/boost/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,72 @@
+
+ \subsection{Quick Introduction}
+
+  \subsubsection*{Monitorables and Metrics}
+
+  \X{fill in}
+
+
+  \subsubsection*{Notifications}
+
+  Closely related to monitorables and metrics are notifications; they
+  notify the application of certain events. For example, when a task
+  is done, when it changes its state, etc.  For those events, the
+  application can create and register custom callbacks:
+
+
+  \begin{mycode}[label=Notifications on task state changes]
+  #include <saga/saga.hpp>
+
+  class my_callback : public saga::callback
+  {
+    public:
+      // cb exits the program with appropriate error code
+      bool cb (saga::monitorable mt,
+               saga::metric      m,
+               saga::context     c)
+      {
+        if ( m.get_attribute ("state") == "Done" ) {
+          exit (0);
+        }
+
+        if ( m.get_attribute ("state") == "Failed" ) {
+          exit (-1);
+        }
+
+        // all other state changes are ignored
+        return true; // keep callback registered
+      }
+  }
+
+  int main (int argc, char** argv)
+  {
+    // run a file copy asynchronously
+    saga::url u (argv[1]);
+    saga::filesystem::file f (u);
+    saga::task t = f.copy <saga::task::Async> (saga::url (argv[2]));
+
+    // monitor the task state
+    my_callback cb;
+    t.add_callback ("state", cb);
+
+    // make sure the task finishes
+    t.wait ();
+  }
+  \end{mycode}
+
+  The example above registers a private callback to the |"state"|
+  metric of the task.  In fact, many SAGA objects (which implement the
+  monitoring interface, and are thus |monitorable|s) have several
+  metrics, which can be queried by |monitorable.list_metrics()|.
+
+  \HINT{The return value of the callback determines if the callback
+  stays registered (\T{true}) or not (\T{false}).  This allows for a
+  \I{call-once} semantics.}
+
+
+ \subsection{Reference}
+
+
+ \subsection{Details}
+
+

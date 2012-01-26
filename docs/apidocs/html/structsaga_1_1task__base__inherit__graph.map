@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classsaga_1_1task.html" title="Brief description starts here." alt="" coords="71,145,183,461"/>
+<area shape="rect" id="node5" href="$classsaga_1_1job_1_1job.html" title="The job provides the manageability interface to a job instance submitted to a resource manager..." alt="" coords="54,510,199,920"/>
+<area shape="rect" id="node7" title="The job is a saga::job with additional checkpoint and recovery related methods." alt="" coords="5,978,115,1068"/>
+<area shape="rect" id="node11" href="$classsaga_1_1job_1_1self.html" title="The job_self class is a job which represents the current application." alt="" coords="139,968,249,1077"/>
+<area shape="rect" id="node9" title="The job_self class is a job which represents the current application." alt="" coords="4,1126,115,1216"/>
+</map>

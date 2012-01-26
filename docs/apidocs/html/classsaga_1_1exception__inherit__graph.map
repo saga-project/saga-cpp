@@ -1,0 +1,17 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$classsaga_1_1no__success.html" title="{saga::no_success\n||+ no_success()\l+ no_success()\l+ no_success()\l}" alt="" coords="4,432,136,560"/>
+<area shape="rect" id="node7" href="$classsaga_1_1not__implemented.html" title="{saga::not_implemented\n||+ not_implemented()\l+ not_implemented()\l+ not_implemented()\l}" alt="" coords="160,432,332,560"/>
+<area shape="rect" id="node9" href="$classsaga_1_1parameter__exception.html" title="{saga::parameter_exception\n||# parameter_exception()\l# parameter_exception()\l# parameter_exception()\l}" alt="" coords="357,432,552,560"/>
+<area shape="rect" id="node15" href="$classsaga_1_1security__exception.html" title="{saga::security_exception\n||# security_exception()\l# security_exception()\l# security_exception()\l}" alt="" coords="626,432,805,560"/>
+<area shape="rect" id="node23" href="$classsaga_1_1state__exception.html" title="{saga::state_exception\n||# state_exception()\l# state_exception()\l# state_exception()\l}" alt="" coords="1310,432,1471,560"/>
+<area shape="rect" id="node2" title="STL class." alt="" coords="398,6,511,96"/>
+<area shape="rect" id="node11" href="$classsaga_1_1bad__parameter.html" title="{saga::bad_parameter\n||+ bad_parameter()\l+ bad_parameter()\l+ bad_parameter()\l}" alt="" coords="154,608,309,736"/>
+<area shape="rect" id="node13" href="$classsaga_1_1incorrect__url.html" title="{saga::incorrect_url\n||+ incorrect_url()\l+ incorrect_url()\l+ incorrect_url()\l}" alt="" coords="335,608,475,736"/>
+<area shape="rect" id="node17" href="$classsaga_1_1authentication__failed.html" title="{saga::authentication_failed\n||+ authentication_failed()\l+ authentication_failed()\l+ authentication_failed()\l}" alt="" coords="500,608,695,736"/>
+<area shape="rect" id="node19" href="$classsaga_1_1authorization__failed.html" title="{saga::authorization_failed\n||+ authorization_failed()\l+ authorization_failed()\l+ authorization_failed()\l}" alt="" coords="719,608,907,736"/>
+<area shape="rect" id="node21" href="$classsaga_1_1permission__denied.html" title="{saga::permission_denied\n||+ permission_denied()\l+ permission_denied()\l+ permission_denied()\l}" alt="" coords="932,608,1113,736"/>
+<area shape="rect" id="node25" href="$classsaga_1_1already__exists.html" title="{saga::already_exists\n||+ already_exists()\l+ already_exists()\l+ already_exists()\l}" alt="" coords="1138,608,1288,736"/>
+<area shape="rect" id="node27" href="$classsaga_1_1does__not__exist.html" title="{saga::does_not_exist\n||+ does_not_exist()\l+ does_not_exist()\l+ does_not_exist()\l}" alt="" coords="1312,608,1468,736"/>
+<area shape="rect" id="node29" href="$classsaga_1_1incorrect__state.html" title="{saga::incorrect_state\n||+ incorrect_state()\l+ incorrect_state()\l+ incorrect_state()\l}" alt="" coords="1493,608,1648,736"/>
+<area shape="rect" id="node31" href="$classsaga_1_1timeout.html" title="{saga::timeout\n||+ timeout()\l+ timeout()\l+ timeout()\l}" alt="" coords="1672,608,1781,736"/>
+</map>

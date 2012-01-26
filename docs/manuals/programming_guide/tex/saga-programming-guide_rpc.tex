@@ -1,0 +1,166 @@
+
+ \subsection{Quick Introduction}
+
+  Remote Procedure Calls are the second IPC mechanism provided in
+  SAGA.  The respective |saga::rpc| package is modeled after the
+  GridRPC standard \cite{gridrpc}.  The concept could not be simpler:
+  an rpc handle instance (|saga::rpc::rpc|) has a single method,
+  |call()|, which invokes the respective remote operation.  The call
+  accepts a stack of |In|, |Out|, and |InOut| parameters.
+
+% \begin{mycode}[label=rpc example]
+% #include <saga/saga.hpp>
+% #include <vector>
+%
+% char* mat_mult (char* A, char* B)
+% {
+%   // create and initialize parameters
+%   std::vector <saga::rpc::parameter> pars (2);
+%
+%   params[0].set_data    (A)
+%   params[0].set_io_mode (saga::rpc::In)
+%
+%   params[1].set_data    (B)
+%   params[1].set_io_mode (saga::rpc::In)
+%
+%   params[2].set_io_mode (saga::rpc::Out)
+%
+%   // initialize rpc handle
+%   saga::rpc::rpc handle (saga::url ("gridrpc://matmult.net/rpc_call");
+%
+%   // call remote operation
+%   handle.call (params);
+%
+%
+%   // return data from output parameter
+%   return (params[2].get_data ();
+% }
+% \end{mycode}
+
+
+
+ \subsection{Reference}
+
+ \begin{mycode}[label=Prototypes: saga::rpc]
+
+  namespace saga
+  {
+    namespace rpc 
+    {
+      enum io_mode
+      {
+        Unknown = -1,
+        In      =  1,
+        Out     =  2,
+        InOut   =  In | Out
+      };
+    
+      class parameter 
+          : public saga::mutable_buffer
+      {
+        public:
+          parameter (void         * data = 0, 
+                     saga::ssize_t  size = -1, 
+                     io_mode        mode = In,
+                     buffer_deleter cb   = default_buffer_deleter);
+    
+         ~parameter (void);
+    
+          io_mode get_mode() const;
+      }; 
+  
+      class rpc 
+          : public saga::object,
+            public saga::permissions
+      {
+        public:
+          rpc (saga::session const & s, 
+               saga::url             name = saga::url ());
+          rpc (std::string   const & name);
+          rpc (void);
+         ~rpc (void);
+  
+          void call  (std::vector <parameter> parameters);
+          void close (double timeout = 0.0);
+      }; 
+    }
+  }
+
+
+\end{mycode}
+
+
+\subsection{Details}
+
+  The rpc class constructor is used to initialize the remote
+  function handle.  Be aware that this process may involve
+  connection setup, service discovery, and other remote
+  interactions!  In the constructor, the remote procedure to be
+  invoked is specified by a URL, with the syntax:
+
+    \shift |gridrpc://server.net:1234/my_function|
+
+  with the elements responding to:
+
+  \begin{tabbing}
+    \shift XXXXXXXXX     \= --~~ XXXXX  \= --~~ \kill
+    \shift |gridrpc|     \> --~~ scheme \> --~~ identifying a grid rpc operation\\
+    \shift |server.net|  \> --~~ server \> --~~ server host serving the rpc call\\
+    \shift |1234|        \> --~~ port   \> --~~ contact point for the server\\
+    \shift |my_function| \> --~~ name   \> --~~ name of the remote method to invoke
+  \end{tabbing}
+  
+  All elements can be empty, which allows the implementation to
+  fall back to invoke a default remote method.
+  
+  Furthermore, the rpc class offers one method, |call()|, which
+  invokes the remote procedure, and returns the respective |Out|
+  and |InOut| parameters.
+
+  \begin{mycode}[label=Remote Procedure Call Example]
+  {
+    // initialize the rpc handle
+    saga::rpc::rpc rm(saga::url ("rpc://remote.host.net:31415/get_pi"));
+
+    // initialize the parameter stack
+    saga::rpc::parameter pi (NULL, -1, saga::rpc::Out);
+    std::vector <saga::rpc::parameter> parameters;
+    parameters.push_back (pi);
+
+    // invoke the remote procedure
+    rm.call (parameters);
+
+    // when completed, the output parameters are available
+    std::cout << "Pi equals " << pi.get_data () << std::endl;
+  }
+  \end{mycode}
+  
+  The argument and return value handling is very basic, and
+  reflects the traditional scheme for remote procedure calls,
+  that is, an array of structures act as a parameter stack. For
+  each element of the vector, the |parameter| struct describes
+  its data |buffer|, the |size| of that buffer, and its
+  input/output |mode|.
+  
+  The |mode| value has to be initialized for each |parameter|,
+  and the |size| and |buffer| values have to be initialized for each
+  |In| and |InOut| struct. For |Out| parameters, |size| may have
+  the value |0|, in which case the |buffer| must be un-allocated. The |buffer|
+  is to be created (e.g., allocated) by the SAGA
+  implementation upon arrival of the result data, with a size
+  that is sufficient to hold all result data.  The |size| value is then
+  set by the implementation to be equal to the allocated buffer size.  
+
+  \HINT{This argument handling scheme allows efficient
+  (copy-free) passing of parameters, because the parameter vector are
+  passed by reference.}
+
+  When an |Out| or |InOut| struct uses a pre-allocated buffer,
+  any returned data exceeding the buffer size are discarded.
+  The application is responsible for specifying correct buffer
+  sizes for pre-allocated buffers; otherwise, the behaviour is in
+  general undefined.  For more details on buffer management,
+  see Section~\ref{sec:buffers} about buffer management.
+
+  
+

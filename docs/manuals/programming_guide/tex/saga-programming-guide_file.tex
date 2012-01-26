@@ -1,0 +1,394 @@
+
+ \subsection{Quick Introduction}
+
+  The SAGA filesystem package provides an abstraction to remote
+  file systems.  It inherits the SAGA namespace package, so the
+  reader may want to study Section~\ref{sec:namespace} as well.
+
+  File systems provide more than just a namespace: they also provide
+  access to the \I{contents} of files:  the |saga::filesystem| package
+  extends the name space package by adding |read()|, |write()| and
+  |seek()| to the entries (i.e., to |saga::filesystem::file|):
+
+  \begin{mycode}[label=Accessing a file]
+  // allocate a 'large' buffer statically
+  char mem[1024];
+  saga::mutable_buffer buf (mem, 512);
+
+  // open a file
+  saga::url u ("/etc/passwd");
+  saga::filesystem::file f (u);
+
+  // read data into buffer - the first 512 bytes get fill
+  f.read (buf);
+
+  // seek file and buffer
+  buf.set_data (mem + 512, 512);
+  f.seek (123, saga::filesystem::Current);
+
+  // read again
+  f.read (buf);
+
+  // print what we got
+  std::cout << mem << std::endl;
+
+  return (0);
+  \end{mycode}
+
+  The |saga::buffer| class represents the memory the data are written
+  into.  The buffers' memory management can be controlled, but the above
+  example leaves everything to the SAGA implementation---for
+  details, see Section~\ref{sec:buffers}.
+
+  Note that there are more I/O methods available in the filesystem
+  package.  They are, however, mostly provided for optimization,  but
+  are really \I{required} to make remote file I/O operations useful.
+
+  Conceptually, the file remains a namespace entry with added read,
+  write and seek capabilities.  For more information, see the details
+  below, and also the section \I{''Namespaces''}
+  (Sec.~\ref{sec:namespace}).
+  
+ \subsection{Reference}
+
+  \begin{mycode}[label=saga::filesystem enums]
+  namespace saga
+  {
+    namespace filesystem 
+    {
+      enum flags 
+      {
+        Unknown         = /*  -1, */  saga::name_space::Unknown       ,
+        None            = /*   0, */  saga::name_space::None          ,
+        Overwrite       = /*   1, */  saga::name_space::Overwrite     ,
+        Recursive       = /*   2, */  saga::name_space::Recursive     ,
+        Dereference     = /*   4, */  saga::name_space::Dereference   ,
+        Create          = /*   8, */  saga::name_space::Create        ,
+        Exclusive       = /*  16, */  saga::name_space::Exclusive     ,
+        Lock            = /*  32, */  saga::name_space::Lock          ,
+        CreateParents   = /*  64, */  saga::name_space::CreateParents ,
+        Truncate        =    128, 
+        Append          =    256,
+        Read            = /* 512, */  saga::name_space::Read          ,
+        Write           = /*1024, */  saga::name_space::Write         ,
+        ReadWrite       = /*1536, */  saga::name_space::ReadWrite     ,
+        Binary          =   2048 
+      };       
+
+      enum seek_mode
+      {
+        Start   = 1,
+        Current = 2,
+        End     = 3
+      }; 
+    }
+  }
+  \end{mycode}
+    
+  \begin{mycode}[label=Prototype: saga::filesystem::iovec]
+  namespace saga
+  {
+    namespace filesystem 
+    {
+      class const_iovec 
+          : public saga::const_buffer
+      {
+        public:
+          const_iovec (void const  * data, 
+                       saga::ssize_t size, 
+                       saga::ssize_t len_in = -1);
+         ~const_iovec (void);
+  
+          saga::ssize_t get_len_in  (void) const;
+          saga::ssize_t get_len_out (void) const;
+  
+      };
+  
+      class iovec 
+          : public saga::mutable_buffer
+      {
+        public:
+          iovec (void *         data   = 0, 
+                 saga::ssize_t  size   = -1, 
+                 saga::ssize_t  len_in = -1, 
+                 buffer_deleter cb     = default_buffer_deleter);
+         ~iovec (void);
+  
+          void          set_len_in  (saga::ssize_t len_in);
+          saga::ssize_t get_len_in  (void) const;
+          saga::ssize_t get_len_out (void) const;
+      };
+    }
+  }
+  \end{mycode}
+
+  \begin{mycode}[label=Prototype: saga::filesystem::file]
+  namespace saga
+  {
+    namespace filesystem 
+    {
+      class file 
+        : public saga::name_space::entry
+      {
+        public:
+          file (saga::session const & s, 
+                saga::url             url, 
+                int                   mode = Read);
+          file (saga::url url, 
+                int                   mode = Read);
+          file (saga::object const &  o);
+          file (void);
+          ~file (void);
+  
+          file & operator= (saga::object const & o);
+  
+          saga::off_t   get_size (void);
+  
+          saga::ssize_t read     (saga::mutable_buffer buffer, 
+                                  saga::ssize_t        length = 0);
+          saga::ssize_t write    (saga::const_buffer   buffer, 
+                                  saga::ssize_t        length = 0);
+          saga::off_t   seek     (saga::off_t          offset, 
+                                  seek_mode            mode);
+  
+          void          read_v   (std::vector <iovec>  buffer_vec);
+          void          write_v  (std::vector <const_iovec> 
+                                  buffer_vec);
+  
+          saga::ssize_t size_p   (std::string          pattern);
+          saga::ssize_t read_p   (std::string          pattern, 
+                                  saga::mutable_buffer buffer);
+          saga::ssize_t write_p  (std::string          pattern, 
+                                  saga::const_buffer   buffer);
+  
+          std::vector <std::string> 
+            modes_e  (void);
+          saga::size_t  size_e   (std::string          ext_mode, 
+                                  std::string          specification);
+          saga::ssize_t read_e   (std::string          ext_mode, 
+                                  std::string          specification,
+                                  saga::mutable_buffer buffer);
+          saga::ssize_t write_e  (std::string          ext_mode, 
+                                  std::string          specification,
+                                  saga::const_buffer   buffer);
+      };
+    }
+  } 
+  \end{mycode}
+
+  \begin{mycode}[label=Prototype: saga::filesystem::directory]
+  namespace saga 
+  { 
+    namespace filesystem 
+    {
+      class directory 
+          : public saga::name_space::directory
+      {
+        public:
+          directory (saga::session const & s, 
+                     saga::url             url, 
+                     int                   mode = ReadWrite);
+          directory (saga::url             url, 
+                     int                   mode = ReadWrite);
+          directory (saga::object const &  o);
+          directory (void);
+         ~directory (void);
+  
+          directory & operator= (saga::object const & o);
+  
+          saga::off_t get_size (saga::url url);
+          bool        is_file  (saga::url url);
+          file        open     (saga::url url, 
+                                int       flags = Read);
+          directory   open_dir (saga::url url, 
+                                int       flags = ReadWrite);
+      }
+    }
+  }
+  \end{mycode}
+
+  %\subsection{Filesystem Details}
+%
+%   The described classes are syntactically and semantically
+%   POSIX-oriented~\cite{posix1,posix2,posix3}.  Executing large
+%   numbers of simple POSIX-like remote data access operations
+%   is, however, prone to latency-related performance problems.
+%   To allow for efficient implementations, the presented API
+%   borrows ideas from GridFTP and other specifications which are
+%   widely used for remote data access.  These extensions should
+%   be seen as just that: optimizations.  Be aware that the SAGA
+%   adaptors usually implement the POSIX-like |read()|, |write()|
+%   and |seek()| methods, and rarely implement the additional
+%   optimized methods (a 'NotImplemented' exception is thrown if
+%   these are not implemented).  The optimizations included here
+%   are:
+%
+%   \paragraph{Scattered I/O}
+%   
+%   Scattered I/O operations are already defined by POSIX, as
+%   |readv()| and |writev()|.  Essentially, these methods
+%   represent \B{v}ector versions of the standard POSIX
+%   |read()/write()| methods; the arguments are,
+%   basically,  vectors of instructions to
+%   execute, and buffers to operate upon.  In other
+%   words, |readv()| and |writev()| can be regarded as
+%   specialized bulk methods, which cluster multiple I/O
+%   operations into a single operation.  The advantages of such an
+%   approach are that it is easy to implement, it is very close to
+%   the original POSIX I/O in semantics, and, in some cases, it is even
+%   very fast.  The disadvantage is that for many small I/O
+%   operations (a common occurrence in SAGA use cases), the
+%   description of the I/O operations can be larger than the
+%   sent, returned or received data.
+%
+%   \paragraph{Pattern-Based I/O (FALLS)}
+%   
+%   One approach to address the bandwidth limitation of scattered
+%   I/O is to describe the required I/O operations at a more
+%   abstract level.  Regularly, repeating patterns of binary data
+%   can be described by the so-called 'FAmiLy of Line Segments'
+%   (FALLS)~\cite{falls}.  The pattern-based I/O routines in SAGA
+%   use such descriptions to reduce the bandwidth limitation of
+%   scattered I/O.  The advantage of such an approach is
+%   that it targets very common data access patterns (at least
+%   those commonly found in SAGA use cases).  The
+%   disadvantages are that FALLS is a paradigm not widely known
+%   or used, and that FALLS is by definition, limited to regular
+%   patterns of data, hence the inefficiency for more
+%   randomized data access.
+%
+%    \mywfig{r}{0.45}{falls}{\footnotesize The highlighted
+%    elements are defined by \T{"(0,17,36,6,(0,0,2,6))"}.}
+%
+%   FALLS was originally introduced
+%   for transformations in parallel computing. There is also a
+%   parallel filesystem which uses FALLS to describe the file
+%   layout. FALLS can be used to describe regular subsets of
+%   arrays with a very compact syntax.  
+%   
+%   FALLS patterns are formed as 5-tuples:
+%   |"(from,to,stride,rep,(pat))"|.  The |from| element defines
+%   the starting offset for the first pattern unit; |to| defines
+%   the finishing offset of the first pattern unit; |stride|
+%   defines the distance between consecutive pattern units (start
+%   to start); and |rep| defines the number of repetitions of the
+%   pattern units.  The optional 5th element, |pat|, allows to
+%   define nested patterns, where the internal pattern defines
+%   the unit the outer pattern is applied to (by default it is
+%   one byte).  As an example, the following FALLS describe the
+%   highlighted elements of the matrix in Fig.~\ref{fig:falls}:
+%   |"(0,17,36,6,(0,0,2,6))"|: the inner pattern describes a
+%   pattern unit of one byte length (from 0 to 0), with a
+%   distance of 2 to the next application, and 6 repetitions.
+%   These are the 6 bytes per line which are marked.  The outer
+%   pattern defines the repeated application of the inner
+%   pattern, starting at 0, ending at 17 (end of line), distance
+%   of 36 (to the beginning of next but one line), and repetition of 6.
+%
+%
+%   \paragraph{Extended I/O}
+%   
+%   GridFTP (which was designed for a similar target domain)
+%   introduced an additional remote I/O paradigm, that of
+%   Extended I/O operations.
+%   
+%   In essence, the Extended I/O paradigm allows the formulation
+%   of I/O requests using custom strings, which are not
+%   interpreted on the client, but on the server side; these can
+%   be expanded to arbitrarily complex sets of I/O operations.
+%   The type of I/O request encoded in the string is called
+%   |mode|.  A server may support one or many of these extended
+%   I/O modes.  Whereas the approach is very flexible and
+%   powerful and has proven its usability in GridFTP, a
+%   disadvantage is that it requires very specific infrastructure
+%   to function, i.e., it requires a remote server instance which
+%   can interpret opaque client requests.  Additionally, no
+%   client side checks or optimizations on the I/O requests are
+%   possible.  Also, the application programmer needs to estimate
+%   the size of the data to be returned in advance, which in some
+%   cases is very difficult.\\
+%   
+%   The three described operations have, if compared to each
+%   other, increasing semantic flexibility, and are increasingly
+%   powerful for specific use cases.  However, they are also
+%   increasingly difficult to implement and support in a generic
+%   fashion.  It is up to the SAGA adaptors and the specific use
+%   cases, to determine the level of I/O abstraction that serves
+%   the application best and that can be best supported in the
+%   target environment.
+
+
+ \subsubsection*{Enum \T{flags}}
+
+  The enum \T{flags} are inherited from the
+  \T{namespace} package.  A number of file specific flags are
+  added to it.  All added flags are used for the opening of
+  \T{file} and \T{directory} instances, and are not applicable
+  to the operations inherited from the \T{namespace} package.
+  
+    |Truncate|\\[0.3mm]
+    \begin{tabular}{cp{110mm}}
+      ~~ & Upon opening, the file is truncated to length 
+           \T{0}, i.e., a following \T{read()} operation will 
+           never find any data in the file.  That flag does not 
+           apply to directories.
+    \end{tabular}
+
+    |Append|\\[0.3mm]
+    \begin{tabular}{cp{110mm}}
+      ~~ & Upon opening, the file pointer is set to the 
+           end of the file, i.e., a following \T{write()} 
+           operation will extend the size of the file.  That 
+           flag does not apply to directories.
+    \end{tabular}
+
+    |Read|\\[0.3mm]
+    \begin{tabular}{cp{110mm}}
+      ~~ & The file or directory is opened for reading---that does not imply the ability to write to the 
+           file or directory.
+    \end{tabular}
+
+    |Write|\\[0.3mm]
+    \begin{tabular}{cp{110mm}}
+      ~~ & The file or directory is opened for writing---that does not imply the ability to read from the 
+           file or directory.
+    \end{tabular}
+
+    |ReadWrite|\\[0.3mm]
+    \begin{tabular}{cp{110mm}}
+      ~~ & The file or directory is opened for reading 
+           and writing.
+    \end{tabular}
+
+    |Binary|\\[0.3mm]
+    \begin{tabular}{cp{110mm}}
+      ~~ & Some operating systems (notably windows-based systems) distinguish between binary and 
+           non-binary modes---this flag mimics that behaviour.
+    \end{tabular}
+
+
+  \subsubsection*{Class \T{iovec}}
+
+    The \T{iovec} class inherits the \T{saga::buffer}
+    class, and three additional state attributes: \T{offset},
+    \T{len\_in} and \T{len\_out} (with the latter one being
+    read-only).  With that addition, the new class can be used
+    very much the same way as the \T{iovec} structure defined by
+    POSIX for \T{readv}/\T{writev}; the buffer \T{len\_in} is
+    being interpreted as the POSIX \T{iov\_len}, i.e., the
+    number of bytes to read/write.
+
+    If \T{len\_in} is not specified, that length is set
+    to the size of the buffer.  For
+    application-managed buffers, it is a \T{BadParameter} error
+    if \T{len\_in} is specified to be larger than size,  (see Section~\ref{ssec:buffer}
+    for details on buffer memory management).  Before an
+    \T{iovec} instance is used, its \T{len\_in} must be set to
+    a non-zero value; otherwise its use will cause a
+    \T{BadParameter} exception.
+
+    After a \T{read\_v()} or \T{write\_v()} operation
+    completes, \T{len\_out} will report the number of bytes
+    read or written.  Before completion, the SAGA implementation will
+    report \T{len\_out} to be \T{-1}.
+

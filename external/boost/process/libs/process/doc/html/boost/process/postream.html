@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Class postream</title>
+<link rel="stylesheet" href="../../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+<link rel="start" href="../../index.html" title="Boost.Process">
+<link rel="up" href="../../boost_process/reference.html#header.boost.process.postream.hpp" title="7.15. Header &lt;boost/process/postream.hpp&gt;">
+<link rel="prev" href="posix_status.html" title="Class posix_status">
+<link rel="next" href="status.html" title="Class status">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../.././boost.png"></td></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="posix_status.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../boost_process/reference.html#header.boost.process.postream.hpp"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="status.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+<div class="refentry" lang="en">
+<a name="boost.process.postream"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2><span class="refentrytitle">Class postream</span></h2>
+<p>boost::process::postream &#8212; Child process' input stream. </p>
+</div>
+<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
+<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis">
+<span class="bold"><strong>class</strong></span> postream {
+<span class="bold"><strong>public</strong></span>:
+  <span class="emphasis"><em>// <a href="postream.html#boost.process.postreamconstruct-copy-destruct">construct/copy/destruct</a></em></span>
+  <a href="postream.html#id2380822-bb">postream</a>(<span class="emphasis"><em>unspecified</em></span>);
+
+  <span class="emphasis"><em>// <a href="postream.html#id2380800-bb">public member functions</a></em></span>
+  <span class="type"><span class="bold"><strong>void</strong></span></span> <a href="postream.html#id2380803-bb">close</a>(<span class="bold"><strong>void</strong></span>) ;
+};</pre></div>
+<div class="refsect1" lang="en">
+<a name="id2716746"></a><h2>Description</h2>
+<p>The postream class represents an input communication channel with the child process. The child process reads data from this stream and the parent process can write to it through the postream object. In other words, from the child's point of view, the communication channel is an input one, but from the parent's point of view it is an output one; hence the confusing postream name.</p>
+<p>postream objects cannot be copied because they own the file handle they use to communicate with the child and because they buffer data that flows through the communication channel.</p>
+<p>A postream object behaves as a std::ostream stream in all senses. The class is only provided because it must provide a method to let the caller explicitly close the communication channel.</p>
+<p><span class="bold"><strong>Blocking remarks</strong></span>: Functions that write data to this stream can block if the associated file handle blocks during the write. As this class is used to communicate with child processes through anonymous pipes, the most typical blocking condition happens when the child is not processing the data in the pipe's system buffer. When this happens, the buffer eventually fills up and the system blocks until the reader consumes some data, leaving some new room. </p>
+<p>
+</p>
+<div class="refsect2" lang="en">
+<a name="id2716764"></a><h3>
+<a name="boost.process.postreamconstruct-copy-destruct"></a><code class="computeroutput">postream</code> construct/copy/destruct</h3>
+<div class="orderedlist"><ol type="1"><li>
+<pre class="literallayout"><a name="id2380822-bb"></a>postream(<span class="emphasis"><em>unspecified</em></span> fh);</pre>
+<p>Given a file handle, this constructor creates a new postream object that owns the given file handle fh. Ownership of fh is transferred to the created postream object.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td>
+<span class="term">Requires:</span></td>
+<td><p>fh is valid. </p></td>
+</tr>
+<tr>
+<td>
+<span class="term">Postconditions:</span></td>
+<td>
+<p>fh is invalid. </p>
+<p>The new postream object owns fh. </p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</li></ol></div>
+</div>
+<div class="refsect2" lang="en">
+<a name="id2716823"></a><h3>
+<a name="id2380800-bb"></a><code class="computeroutput">postream</code> public member functions</h3>
+<div class="orderedlist"><ol type="1"><li>
+<pre class="literallayout"><span class="type"><span class="bold"><strong>void</strong></span></span> <a name="id2380803-bb"></a>close(<span class="bold"><strong>void</strong></span> ) ;</pre>
+<p>Explicitly closes the file handle managed by this stream. This function can be used by the user to tell the child process there is no more data to send. </p>
+</li></ol></div>
+</div>
+</div>
+</div>
+<table width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2006 Julio M. Merino Vidal</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="posix_status.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../boost_process/reference.html#header.boost.process.postream.hpp"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="status.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

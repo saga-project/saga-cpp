@@ -1,0 +1,741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug Lib|Win32">
+      <Configuration>Debug Lib</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Lib|x64">
+      <Configuration>Debug Lib</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Lib|Win32">
+      <Configuration>Release Lib</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Lib|x64">
+      <Configuration>Release Lib</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{63EF2037-A85A-4F80-AEA1-0313E0AF2941}</ProjectGuid>
+    <RootNamespace>saga_engine</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Lib|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Lib|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\saga-lite.props" />
+    <Import Project="..\soci_postgresql.props" />
+    <Import Project="..\soci_sqlite3.props" />
+    <Import Project="..\xmlrpc.props" />
+    <Import Project="..\openssl.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\saga-lite.props" />
+    <Import Project="..\soci_postgresql.props" />
+    <Import Project="..\soci_sqlite3.props" />
+    <Import Project="..\xmlrpc.props" />
+    <Import Project="..\openssl.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\saga.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\saga.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Lib|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Lib|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\saga.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\saga.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30128.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug Lib|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'">$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release Lib|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">saga_cored</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">saga_core</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SAGA_SRC_ROOT)\external\u2nt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SAGA_ENGINE_EXPORTS;SAGA_LOCATION=SAGA_PREFIX;SAGA_DEFAULT_ADAPTOR_PATH=SAGA_LOCATION;SAGA_PACKAGE_NAME=saga_core;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/DLL  %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Ws2_32.lib;Netapi32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>saga_engine.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <EnableUAC>
+      </EnableUAC>
+      <UACExecutionLevel>
+      </UACExecutionLevel>
+      <UACUIAccess>
+      </UACUIAccess>
+      <OutputFile>$(OutDir)$(TargetName).dll</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;_DEBUG;_WINDOWS;_USRDLL;SAGA_ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;Netapi32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)d.dll</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>saga_engine.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SAGA_ENGINE_EXPORTS;SAGA_DEFAULT_INI_PATH="./share/saga";SAGA_PACKAGE_NAME=saga_core;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/DLL %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Ws2_32.lib;Netapi32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>saga_engine.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(TargetDir)\saga_engine.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <OutputFile>$(OutDir)$(TargetName).dll</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;NDEBUG;_WINDOWS;_USRDLL;SAGA_ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;Netapi32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)saga_engine.dll</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>saga_engine.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)saga_engine.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(TargetDir)\saga_engine.lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">
+    <CustomBuildStep>
+      <Command>xcopy /Y/F "$(TargetDir)\$(TargetName).pdb" "$(SAGA_LITE_LOCATION)"
+xcopy /Y/F "$(TargetDir)\$(TargetName).dll" "$(SAGA_LITE_LOCATION)"
+</Command>
+      <Outputs>$(SAGA_LITE_LOCATION)\$(TargetFileName);$(SAGA_LITE_LOCATION)\$(TargetName).lib;%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SAGA_SRC_ROOT)\external\u2nt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SAGA_ENGINE_EXPORTS;SAGA_DEFAULT_INI_PATH="./share/saga";BUILD_SAGA_LITE;SAGA_PACKAGE_NAME=engine;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ProgramDataBaseFileName>$(OutDir)$(ProjectName)d.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4661;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;Netapi32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)engined.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(SAGA_SQLITE3_ROOT)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>saga_engine.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(TargetDir)\saga_engined.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'">
+    <CustomBuildStep>
+      <Command>xcopy /Y/F "$(TargetDir)\$(TargetName).pdb" "$(SAGA_LITE_LOCATION)"
+xcopy /Y/F "$(TargetDir)\$(TargetName).dll" "$(SAGA_LITE_LOCATION)"
+</Command>
+      <Outputs>$(SAGA_LITE_LOCATION)\$(TargetFileName);$(SAGA_LITE_LOCATION)\$(TargetName).lib;%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SAGA_ENGINE_EXPORTS;SAGA_DEFAULT_INI_PATH="./share/saga";BUILD_SAGA_LITE;SAGA_PACKAGE_NAME=engine;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4661;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;Netapi32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)engine.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(SAGA_SQLITE3_ROOT)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>saga_engine.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\saga\impl\engine\io_service_pool.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\manage_workitems.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\workitem.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\filesystem.hpp" />
+    <ClInclude Include="..\..\..\saga\saga-defaults.hpp" />
+    <ClInclude Include="..\..\..\saga\saga-defs.hpp" />
+    <ClInclude Include="..\..\..\saga\saga.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\module_needs_logging.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\register_workitem.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\advert.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\async.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\attribute.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\autolink.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\base.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\buffer.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\call.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\context.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\module_needs_logging.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\error.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\exception.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\export_definitions.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\filesystem.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\impl_base.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\job.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\logicalfile.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\metric.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\monitorable.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\namespace.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\object.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\path_leaf.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\permissions.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\replica.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\rpc.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\sd.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\session.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\stream.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\task.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\task_base.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\task_container.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\types.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\url.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\util.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\uuid.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\version.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\attribute.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\attribute_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\call.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\dispatch_priv.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\hold_any.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\monitorable.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\monitorable_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\permissions.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\permissions_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\preferences.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\steerable.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\steerable_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\detail\task_get_result_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\adaptor.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\adaptor_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\attribute.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\attribute_cache_cpi.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\attribute_cpi.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\attribute_cpi_wrapper.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_container.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_container_base.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_container_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_strategy_base.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_strategy_simple_sort.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\bulk_strategy_try_exec.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\config.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\context_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\file_transfer_spec.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\instance_data_base.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\manage_threads.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\metric.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\permissions_cpi.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\serialization.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\task.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\task_declaration.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\task_declaration_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\task_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\url.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\url_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\advert_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\advert_directory_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\cpr_checkpoint_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\cpr_directory_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\cpr_job_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\cpr_job_service_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\directory_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\file_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\job_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\job_service_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\logical_directory_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\logical_file_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\namespace_dir_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\namespace_entry_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\rpc_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\stream_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\packages\stream_server_cpi_instance_data.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\is_local_address.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\utils.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\ini\ini.hpp" />
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\process\process.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\advert.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\attribute.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\buffer.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\call.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\config.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\context.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\context_cpi.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\context_serialization.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\exception.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\exception_list.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\job.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\metric.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\namespace.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\object.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\replica.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\rpc.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\runtime.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\sd.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\session.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\stream.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\task.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\url.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\url_cpi.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\adaptor_selector.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\adaptor_selector_state.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\attribute.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\attribute_cache.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\attribute_interface.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\buffer.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\bulk_analyser.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\bulk_analyser_impr.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\context_base.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\cpi.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\cpi_info.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\cpi_list.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\dummy_task.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\engine.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\init_ini_data.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\metric.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\monitorable.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\object.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\permissions.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\permissions_interface.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\preferences.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\proxy.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\register_members.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\run_mode_wrapper.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\run_mode_wrapper_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\session.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\static_adaptor_data.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\sync_async.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\sync_async_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\task.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\task_base.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\task_container.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\task_fwd.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\task_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\task_interface.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\url.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\url_grammar.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\url_proxy.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\uuid.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\wrapper_task.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\wrapper_task_impl.hpp" />
+    <ClInclude Include="..\..\..\saga\impl\engine\ini\ini.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="saga_engine.def" />
+    <None Include="..\..\..\config\static_adaptor.list" />
+    <CustomBuild Include="..\..\..\lite\static_adaptor_data.hpp.in">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">"$(SAGA_LOCATION)\create_static_adaptor_data.exe" "$(SAGA_SRC_ROOT)\config\static_adaptor.list" "$(SAGA_SRC_ROOT)\lite\static_adaptor_data.hpp.in" "$(SAGA_SRC_ROOT)\saga\impl\engine\static_adaptor_data.hpp"
+</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(SAGA_LOCATION)\create_static_adaptor_data.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(SAGA_SRC_ROOT)\saga\impl\engine\static_adaptor_data.hpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(SAGA_LOCATION)\create_static_adaptor_data.exe" "$(SAGA_SRC_ROOT)\config\static_adaptor.list" "$(SAGA_SRC_ROOT)\lite\static_adaptor_data.hpp.in" "$(SAGA_SRC_ROOT)\saga\impl\engine\static_adaptor_data.hpp"
+</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SAGA_LOCATION)\create_static_adaptor_data.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SAGA_SRC_ROOT)\saga\impl\engine\static_adaptor_data.hpp;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\saga\impl\engine\io_service_pool.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\manage_workitems.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\logging.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\register_workitem.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\attribute.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\buffer.cpp">
+      <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">
+      </AssemblerOutput>
+      <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AssemblerOutput>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\context.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">..\..\..\external\u2nt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\external\u2nt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\external\u2nt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\external\u2nt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\external\u2nt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\detail\module_needs_logging.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\detail\safe_getenv.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\exception.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release Lib|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release Lib|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\metric.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\monitorable.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\object.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\permissions.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\session.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\task.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\task_container.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\url.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\uuid.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\version.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\attribute.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\bulk_strategy_base.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\bulk_strategy_simple_sort.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\bulk_strategy_try_exec.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\file_transfer_spec.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\metric.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\serialization.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\url.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)2.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)2.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\utils\is_local_address.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\utils\utils.cpp" />
+    <ClCompile Include="..\..\..\saga\saga\adaptors\utils\ini\ini.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\adaptors\utils\process\process.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\exception.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\exception_list.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\runtime.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\adaptor_selector.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\attribute.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\attribute_cache.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\buffer.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\bulk_analyser.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\bulk_analyser_impr.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\context_base.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\cpi.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\engine.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\monitorable.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\object.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\permissions.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\proxy.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\serialization.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release Lib|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release Lib|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\session.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\task_base.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\task_container.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\url.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">BOOST_SPIRIT_THREADSAFE1;PHOENIX_THREADSAFE1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug Lib|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">BOOST_SPIRIT_THREADSAFE1;PHOENIX_THREADSAFE1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BOOST_SPIRIT_THREADSAFE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">BOOST_SPIRIT_THREADSAFE1;PHOENIX_THREADSAFE1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">BOOST_SPIRIT_THREADSAFE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\engine\url_proxy.cpp" />
+    <ClCompile Include="..\..\..\saga\impl\engine\ini\ini.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\create_static_adaptor_data\create_static_adaptor_data.vcxproj">
+      <Project>{22c343d0-7d06-4726-9cd0-dad0464e86e4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\u2nt\u2nt.vcxproj">
+      <Project>{3d1fb042-e12e-414e-8c93-1b164e07f267}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

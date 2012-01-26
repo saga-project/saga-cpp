@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="classboost_1_1process_1_1status" kind="class" prot="public">
+    <compoundname>boost::process::status</compoundname>
+    <derivedcompoundref refid="classboost_1_1process_1_1posix__status" prot="public" virt="non-virtual">boost::process::posix_status</derivedcompoundref>
+    <includes refid="status_8hpp" local="no">status.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1status_1546ba42f669e05e573b70f6d29d31584" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool boost::process::status::exited</definition>
+        <argsstring>(void) const </argsstring>
+        <name>exited</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns whether the process exited gracefully or not. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns whether the process exited gracefully or not. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/status.hpp" line="76" bodyfile="/tmp/process.016638aa/process/boost/process/status.hpp" bodystart="120" bodyend="128"/>
+        <references refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" compoundref="status_8hpp" startline="55">m_flags</references>
+        <referencedby refid="classboost_1_1process_1_1status_19db0b1ba1cbe99905af826182bf410ee" compoundref="status_8hpp" startline="134" endline="143">exit_status</referencedby>
+        <referencedby refid="classboost_1_1process_1_1children_1df89bcd65fde3339e6af82d556e215ce" compoundref="children_8hpp" startline="131" endline="150">boost::process::children::wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1status_19db0b1ba1cbe99905af826182bf410ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int boost::process::status::exit_status</definition>
+        <argsstring>(void) const </argsstring>
+        <name>exit_status</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>If exited, returns the exit code. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the process exited, returns the exit code it returned.</para><para><simplesect kind="pre"><para><ref refid="classboost_1_1process_1_1status_1546ba42f669e05e573b70f6d29d31584" kindref="member">exited()</ref> is true. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/status.hpp" line="85" bodyfile="/tmp/process.016638aa/process/boost/process/status.hpp" bodystart="134" bodyend="143"/>
+        <references refid="classboost_1_1process_1_1status_1546ba42f669e05e573b70f6d29d31584" compoundref="status_8hpp" startline="120" endline="128">exited</references>
+        <references refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" compoundref="status_8hpp" startline="55">m_flags</references>
+        <referencedby refid="classboost_1_1process_1_1children_1df89bcd65fde3339e6af82d556e215ce" compoundref="children_8hpp" startline="131" endline="150">boost::process::children::wait</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1status_1bf6cb3003da3a88b72a8baaf6630d909" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>boost::process::status::status</definition>
+        <argsstring>(int flags)</argsstring>
+        <name>status</name>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+<para>Creates a status object based on exit information. </para>        </briefdescription>
+        <detaileddescription>
+<para>Creates a new status object representing the exit status of a child process.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>In a POSIX system this parameter contains the flags returned by the waitpid() call. In a Win32 system it contains the exit code only. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/status.hpp" line="67" bodyfile="/tmp/process.016638aa/process/boost/process/status.hpp" bodystart="111" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int boost::process::status::m_flags</definition>
+        <argsstring></argsstring>
+        <name>m_flags</name>
+        <briefdescription>
+<para>OS-specific codification of exit status. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/status.hpp" line="55" bodyfile="/tmp/process.016638aa/process/boost/process/status.hpp" bodystart="55" bodyend="-1"/>
+        <referencedby refid="classboost_1_1process_1_1posix__status_1f6984a9532b581af03a70856c8f05fd7" compoundref="posix__status_8hpp" startline="143" endline="148">boost::process::posix_status::dumped_core</referencedby>
+        <referencedby refid="classboost_1_1process_1_1status_19db0b1ba1cbe99905af826182bf410ee" compoundref="status_8hpp" startline="134" endline="143">exit_status</referencedby>
+        <referencedby refid="classboost_1_1process_1_1status_1546ba42f669e05e573b70f6d29d31584" compoundref="status_8hpp" startline="120" endline="128">exited</referencedby>
+        <referencedby refid="classboost_1_1process_1_1posix__status_1daef0b37dd369100c2eabe6c9521003a" compoundref="posix__status_8hpp" startline="122" endline="126">boost::process::posix_status::signaled</referencedby>
+        <referencedby refid="classboost_1_1process_1_1posix__status_1b572b351fc6ef019ea00b935a03e366d" compoundref="posix__status_8hpp" startline="164" endline="169">boost::process::posix_status::stop_signal</referencedby>
+        <referencedby refid="classboost_1_1process_1_1posix__status_10ec78e5370b07a512725b1dcb582f082" compoundref="posix__status_8hpp" startline="154" endline="158">boost::process::posix_status::stopped</referencedby>
+        <referencedby refid="classboost_1_1process_1_1posix__status_1106011e5818f96594e935de2de939385" compoundref="posix__status_8hpp" startline="132" endline="137">boost::process::posix_status::term_signal</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classboost_1_1process_1_1status_1828a451198ad7eae745d6a46def47f77" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend <ref refid="classboost_1_1process_1_1status" kindref="compound">status</ref></type>
+        <definition>status create_status</definition>
+        <argsstring>(int flags)</argsstring>
+        <name>create_status</name>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new status object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Creates a new status object; see the class&apos; constructor for more details on the required parameters.</para><para>This free function is provided to allow the user to construct new status objects when implementing new Child classes while still keeping the class&apos; constructor private to avoid the accidental creation of these objects. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/status.hpp" line="68" bodyfile="/tmp/process.016638aa/process/boost/process/status.hpp" bodystart="103" bodyend="106"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Status returned by a finalized child process. </para>    </briefdescription>
+    <detaileddescription>
+<para>This class represents the status returned by a child process after it has terminated. It only provides that information available under all supported platforms.</para><para><simplesect kind="see"><para><ref refid="classboost_1_1process_1_1posix__status" kindref="compound">posix_status</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="35">
+        <label>boost::process::status</label>
+        <link refid="classboost_1_1process_1_1status"/>
+      </node>
+      <node id="36">
+        <label>boost::process::posix_status</label>
+        <link refid="classboost_1_1process_1_1posix__status"/>
+        <childnode refid="35" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/tmp/process.016638aa/process/boost/process/status.hpp" line="50" bodyfile="/tmp/process.016638aa/process/boost/process/status.hpp" bodystart="49" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classboost_1_1process_1_1status_1828a451198ad7eae745d6a46def47f77" prot="protected" virt="non-virtual"><scope>boost::process::status</scope><name>create_status</name></member>
+      <member refid="classboost_1_1process_1_1status_19db0b1ba1cbe99905af826182bf410ee" prot="public" virt="non-virtual"><scope>boost::process::status</scope><name>exit_status</name></member>
+      <member refid="classboost_1_1process_1_1status_1546ba42f669e05e573b70f6d29d31584" prot="public" virt="non-virtual"><scope>boost::process::status</scope><name>exited</name></member>
+      <member refid="classboost_1_1process_1_1status_1b65202eedbb8bbab7a2a507d444a5a8a" prot="protected" virt="non-virtual"><scope>boost::process::status</scope><name>m_flags</name></member>
+      <member refid="classboost_1_1process_1_1status_1bf6cb3003da3a88b72a8baaf6630d909" prot="protected" virt="non-virtual"><scope>boost::process::status</scope><name>status</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

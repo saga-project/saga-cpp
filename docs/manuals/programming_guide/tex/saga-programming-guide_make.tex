@@ -1,0 +1,201 @@
+
+\subsection{Building your Application}
+
+For Unix-like systems, a configure/make based build system is
+provided.  That system can also be used to compile your SAGA
+application, and is (briefly) described below.
+
+Furthermore, your SAGA installation offers a tool named
+|saga-config|, which can also be used to determine the relevant
+compile parameters.
+
+SAGA uses a gnu-make based build system.  It includes a number
+of makefiles throughout the source tree, and the
+|$SAGA_ROOT/make/| directory.  All these \I{make includes}\footnote{A make include is a makefile building block} get
+installed into |$SAGA_LOCATION/share/saga/make/|\footnote{For
+details on building and installing SAGA, please refer to the
+SAGA installation manual.}.
+
+When compiling your application, these make includes may provide
+an easy starting point.  All you need to do is to set
+|SAGA_LOCATION| to have it point to your SAGA installation
+root, and to include |saga.application.mk|, which will add all
+rules required to build a SAGA application.  The following
+Makefile stub should get you started:
+
+
+\begin{mycode}[label=Makefile for SAGA applications]
+  SAGA_SRC  = $(wildcard *.cpp)
+  SAGA_BIN  = $(SRC:%.cpp=%)
+
+  include $(SAGA_LOCATION)/share/saga/make/saga.application.mk
+\end{mycode}
+
+
+This stub loads the make rules, etc., needed to build the application.
+If the application needs additional include directories or libraries,
+use the following syntax \I{after} the make includes:
+
+
+ \begin{mycode}[label=Makefile: setting compiler/linker flags,
+                firstnumber=last]
+  SAGA_CPPFLAGS += -I/opt/super/include
+  SAGA_LDFLAGS  += -L/opt/super/lib -lsuper
+ \end{mycode}
+
+
+Of course it is possible to build SAGA applications with custom
+Makefiles.  The SAGA make includes can still, however, be used to
+obtain the SAGA specific compiler:
+
+
+ \begin{mycode}[label=Custom Makefile]
+  SRC      = $(wildcard *.cpp)
+  OBJ      = $(SRC:%.cpp=%.o)
+  BIN      = $(SRC:%.cpp=%)
+  
+  CXX      = g++
+  CXXFLAGS = -c -O3 -pthreads -I/opt/mpi/include
+  
+  LD       = $(CXX)
+  LDFLAGS  = -L/usr/lib/ -lc
+  
+  include $(SAGA_LOCATION)/share/saga/make/saga.engine.mk
+  include $(SAGA_LOCATION)/share/saga/make/saga.package.file.mk
+  
+  all: $(BIN)
+  
+  $(OBJ): %.o : %.cpp
+  	$(CXX) $(CXXFLAGS) $(SAGA_CXXFLAGS) -o $@ $<
+  
+  $(BIN): % : %.o
+  	$(LD)  $(LDFLAGS)  $(SAGA_LDFLAGS)  -o $@ $<
+ \end{mycode}
+ 
+
+|SAGA_CXXFLAGS| and |SAGA_LDFLAGS| contain only those options and settings
+which are required to use SAGA.  You may want to use
+|'make -n'| to print what the resulting make commands are, in order to
+debug eventual incompatibilities between the SAGA compiler and linker
+flags, and your own ones.
+
+Yet another option is to use the output of saga-config for makefiles:
+
+ \begin{mycode}[label=saga-config used in Makefile]
+  SRC       = $(wildcard *.cpp)
+  OBJ       = $(SRC:%.cpp=%.o)
+  BIN       = $(SRC:%.cpp=%)
+ 
+  CXX       = gcc
+  CPPFLAGS  = -I/opt/mpi/include
+  CXXFLAGS  = -c -O3 -pthreads
+ 
+  LD        = $(CXX)
+  LDFLAGS   = -L/opt/mpi/lib/ -lmpi
+ 
+  CPPFLAGS += $(shell $(SAGA_LOCATION)/bin/saga-config --cppflags)
+  CXXFLAGS += $(shell $(SAGA_LOCATION)/bin/saga-config --cxxflags)
+  LDFLAGSS += $(shell $(SAGA_LOCATION)/bin/saga-config --ldflags)
+ 
+  .default: $(BIN)
+ 
+  $(BIN): % : %.cpp
+ 
+  $(OBJ): %.o : %.cpp
+    $(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $<
+ 
+  $(BIN): % : %.o
+    $(LD)  $(LDFLAGS) -o $@ $<
+ \end{mycode}
+
+
+\subsubsection*{Linkage Options}
+
+ The SAGA libraries come in two flavours: \I{standard} and \I{lite}.
+ The standard version is what you have observed in the examples
+ above: your application is linked against the |libsaga_engine|, and
+ against the available/required packages (|libsaga_package_abc|).  The
+ adaptor libraries (|libsaga_adaptor_xyz|) are not linked to the
+ application, but are loaded at runtime.  
+ 
+ That standard version offers the most flexibility for your
+ application, and allows it to adapt linkage to a wide range of use
+ cases.  The runtime adaptor loading allows you to adapt your application
+ to Grid middleware variations at runtime. That comes at a cost: at
+ runtime, the shared library dependencies have to be resolved, and
+ SAGA has to be correctly configured to find the adaptor libraries at
+ runtime.  The former can be resolved by linking your application
+ statically, but the SAGA runtime configuration cannot be avoided.
+
+ That is the reason why we provide the second, 'lite' version of the
+ SAGA library: it is a \I{single} shared library which contains the
+ SAGA engine, all available packages, and a set of adaptors.  These
+ adaptors are thus \I{not} loaded at runtime, but are linked at
+ link-time.  Other adaptors can, however, still be loaded at runtime,
+ as before.
+ 
+ That way, no SAGA runtime configuration is required at all, as all
+ dependencies are resolved on link-time.  The SAGA installation manual
+ provides more information on the selection of adaptors to be included
+ into the (|libsaga_lite|).  Note that this comes at a cost as well:
+ your application binary will be larger, as all the adaptors are linked
+ against it, whether they are needed or not.
+
+ The SAGA make system supports linking against the (|libsaga_lite|)
+ like this:
+
+\begin{mycode}[label=Makefile for SAGA-Lite ]
+  SAGA_SRC  = $(wildcard *.cpp)
+  SAGA_BIN  = $(SRC:%.cpp=%)
+
+  SAGA_USE_LITE = yes
+
+  include $(SAGA_LOCATION)/share/saga/make/saga.application.mk
+\end{mycode}
+
+
+\subsection{Running your Application}
+
+ Your SAGA application should have only few runtime
+ dependencies.  First of all, it needs to find the shared
+ libraries you used, and the shared libraries your SAGA
+ installation is linked against.  That may include libraries
+ required by the SAGA adaptors, e.g., globus libraries, openssl,
+ etc.  Depending on your operating system, you may need to set
+ the environment variables |LD_LIBRARY_PATH|,
+ |DYLD_LIBRARYPATH|, or similar.
+
+ After starting, SAGA reads a couple of initialization
+ files to determine your specific set of adaptors, and several
+ configuration options for these adaptors.  In general, you
+ should not have the need to touch these ini files -- SAGA configuration
+ and installation is supposed to be performed by the system
+ administrator, not the end user.  In most cases, SAGA should be
+ able to find these ini files automatically (the installation
+ prefix is statically compiled into SAGA.  If that fails, SAGA
+ searches the following locations (in this order) for the main
+ saga.ini file:
+
+    \shift |/etc/saga.ini|\\
+    \shift |$SAGA_LOCATION/share/saga/saga.ini|\\
+    \shift |$HOME/.saga.ini|\\
+    \shift |$PWD/.saga.ini|\\
+    \shift |$SAGA_INI|
+ 
+ Those ini files point to the individual adaptor ini files,
+ which then allow SAGA to load these adaptors.
+
+ While running, the SAGA library can print log messages, of
+ varying verbosity.  That output is controlled by the
+ environment variable |SAGA_VERBOSE|.  The values are as
+ follows:
+
+   \shift |1: Critical|\\
+   \shift |2: Error   |\\
+   \shift |3: Warning |\\
+   \shift |4: Info    |\\
+   \shift |5: Debug   |\\
+   \shift |6: Blurb   |
+   
+ When |SAGA_VERBOSE| is not set, the library is silent.
+

@@ -1,0 +1,181 @@
+#
+# Boost.Process
+# Build script for tests.
+#
+# Copyright (c) 2006 Julio M. Merino Vidal.
+#
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at
+# http://www.boost.org/LICENSE_1_0.txt.)
+#
+
+using testing ;
+
+if ! $(BOOST_ROOT)
+{
+    BOOST_ROOT = [ modules.peek : BOOST_ROOT ] ;
+}
+
+project :
+    : requirements
+      <include>$(BOOST_ROOT)
+      <include>../../..
+
+      # XXX Workaround to fix build problems under Windows.
+      <define>BOOST_ALL_NO_LIB
+      <define>BOOST_FILESYSTEM_STATIC_LINK
+      <link>static
+      <runtime-link>static
+    ;
+
+exe helpers
+    : helpers.cpp
+    : <library>$(BOOST_ROOT)//filesystem
+    ;
+
+test-suite process :
+    [ compile include_basic_pipeline_test.cpp : : ]
+    [ compile include_child_test.cpp : : ]
+    [ compile include_children_test.cpp : : ]
+    [ compile include_command_line_test.cpp : : ]
+    [ compile include_detail_command_line_ops_test.cpp : : ]
+    [ compile include_detail_environment_test.cpp : : ]
+    [ compile include_detail_factories_test.cpp : : ]
+    [ compile include_detail_file_handle_test.cpp : : ]
+    [ compile include_detail_pipe_test.cpp : : ]
+    [ compile include_detail_systembuf_test.cpp : : ]
+    [ compile include_exceptions_test.cpp : : ]
+    [ compile include_forward_decls_test.cpp : : ]
+    [ compile include_launcher_test.cpp : : ]
+    [ compile include_pipeline_test.cpp : : ]
+    [ compile include_pistream_test.cpp : : ]
+    [ compile include_posix_child_test.cpp : : ]
+    [ compile include_posix_launcher_test.cpp : : ]
+    [ compile include_posix_status_test.cpp : : ]
+    [ compile include_postream_test.cpp : : ]
+    [ compile include_status_test.cpp : : ]
+    [ compile include_top_test.cpp : : ]
+    [ compile include_win32_child_test.cpp : : ]
+    [ compile include_win32_launcher_test.cpp : : ]
+
+    [ run command_line_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+          <library>$(BOOST_ROOT)//filesystem
+        ]
+
+    [ run detail_command_line_ops_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+          <library>$(BOOST_ROOT)//filesystem
+        ]
+
+    [ run detail_environment_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run detail_systembuf_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run detail_file_handle_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run detail_pipe_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run pistream_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run postream_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run child_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run launcher_test.cpp
+        : helpers
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+          <library>$(BOOST_ROOT)//filesystem
+        ]
+
+    [ run status_test.cpp
+        : helpers
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+          <library>$(BOOST_ROOT)//filesystem
+        ]
+
+    [ run pipeline_test.cpp
+        : helpers
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+          <library>$(BOOST_ROOT)//filesystem
+        ]
+
+    [ run posix_child_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run posix_launcher_test.cpp
+        : helpers
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+          <library>$(BOOST_ROOT)//filesystem
+        ]
+
+    [ run posix_status_test.cpp
+        : helpers
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+          <library>$(BOOST_ROOT)//filesystem
+        ]
+
+    [ run win32_child_test.cpp
+        :
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+        ]
+
+    [ run win32_launcher_test.cpp
+        : helpers
+        :
+        : <library>$(BOOST_ROOT)//unit_test_framework
+          <library>$(BOOST_ROOT)//filesystem
+        ]
+
+    [ compile ../example/command_lines.cpp : : ]
+    [ compile ../example/environment.cpp : : ]
+    [ compile ../example/generic.cpp : : ]
+    [ compile ../example/pipeline_tutorial.cpp : : ]
+    [ compile ../example/single_process_tutorial.cpp : : ]
+    [ compile ../example/posix_communication.cpp : : ]
+    [ compile ../example/posix_status.cpp : : ]
+    [ compile ../example/win32_child.cpp : : ]
+    [ compile ../example/win32_startup.cpp : : ]
+
+    ;

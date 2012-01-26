@@ -1,0 +1,10 @@
+PREFIX      = @SAGA_LOCATION@
+LIBDIR      = @SAGA_LIBDIR@
+
+Name:         saga
+Description:  Simple API for Grid Application, C++ implementation and Python bindings
+Requires:     saga_boost >= 1.33.1
+Version:      1.0.0
+Libs:         -L${LIBDIR} -lsaga_core @SAGA_PACKAGE_LDFLAGS@
+Cflags:       -I${PREFIX}/include/
+

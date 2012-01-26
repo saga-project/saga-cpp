@@ -1,0 +1,13 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{saga::rpc::rpc\n||+ rpc()\l+ rpc()\l+ rpc()\l+ ~rpc()\l+ call()\l+ close()\l+ create()\l+ create()\l+ create()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node2 [label="{saga::object\n||+ object()\l+ get_type()\l+ get_id()\l+ get_session()\l+ get_session()\l+ clone()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1object.html",tooltip="Brief description starts here."];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node3 [label="{saga::detail::permissions\< rpc \>\n||+ permissions_allow()\l+ permissions_deny()\l+ permissions_check()\l+ get_owner()\l+ get_group()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1permissions.html"];
+  Node4 -> Node3 [dir="back",color="orange",fontsize="10",style="solid",label=" \< rpc \>" ,fontname="FreeSans"];
+  Node4 [label="{saga::detail::permissions\< Derived \>\n||+ permissions_allow()\l+ permissions_deny()\l+ permissions_check()\l+ get_owner()\l+ get_group()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1permissions.html",tooltip="The SAGA permissions interface."];
+}

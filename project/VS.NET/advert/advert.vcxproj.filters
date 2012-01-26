@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Implementation Source Files">
+      <UniqueIdentifier>{ca2ce44f-33eb-49ca-b0d0-de80af542ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Implementation Header Files">
+      <UniqueIdentifier>{a831a043-b07d-4773-b74f-ba015b3ab118}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\saga\saga\packages\advert\advert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\advert\advert_directory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\advert\task_get_result.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\advert\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\advert\advert.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\advert\advert_directory.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\advert\advert_serialization.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\saga\saga\packages\advert\advert.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\advert\advert_directory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\advert\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\advert\version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\advert\advert.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\advert\advert_cpi.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\advert\advert_directory.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\advert\advert_directory_cpi.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\advert\advert_serialization.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="advert.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,7 @@
+
+SAGA_HAVE_PACKAGE_SD = @SAGA_HAVE_PACKAGE_SD@
+
+ifeq "$(SAGA_HAVE_PACKAGE_SD)" "yes"
+ SAGA_LDFLAGS  += -lsaga_package_sd
+endif
+

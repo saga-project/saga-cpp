@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="classboost_1_1process_1_1pistream" kind="class" prot="public">
+    <compoundname>boost::process::pistream</compoundname>
+    <includes refid="pistream_8hpp" local="no">pistream.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1pistream_1d4c694a4dce0bf4c27d32309425149dc" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>boost::process::pistream::pistream</definition>
+        <argsstring>(detail::file_handle &amp;fh)</argsstring>
+        <name>pistream</name>
+        <param>
+          <type>detail::file_handle &amp;</type>
+          <declname>fh</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new process&apos; output stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Given a file handle, this constructor creates a new pistream object that owns the given file handle <emphasis>fh</emphasis>. Ownership of <emphasis>fh</emphasis> is transferred to the created pistream object.</para><para><simplesect kind="pre"><para><emphasis>fh</emphasis> is valid. </para></simplesect>
+<simplesect kind="post"><para><emphasis>fh</emphasis> is invalid. </para><para>The new pistream object owns <emphasis>fh</emphasis>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/pistream.hpp" line="84" bodyfile="/tmp/process.016638aa/process/boost/process/pistream.hpp" bodystart="99" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1pistream_1caf04323abe8c52d4f14a270ff8227f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void boost::process::pistream::close</definition>
+        <argsstring>(void)</argsstring>
+        <name>close</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Closes the file handle managed by this stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Explicitly closes the file handle managed by this stream. This function can be used by the user to tell the child process it&apos;s not willing to receive more data. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/pistream.hpp" line="93" bodyfile="/tmp/process.016638aa/process/boost/process/pistream.hpp" bodystart="111" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classboost_1_1process_1_1pistream_17dd79aee9af0f0ca8ada94fcba945d0d" prot="private" static="no" mutable="no">
+        <type>detail::file_handle</type>
+        <definition>detail::file_handle boost::process::pistream::m_handle</definition>
+        <argsstring></argsstring>
+        <name>m_handle</name>
+        <briefdescription>
+<para>The file handle managed by this stream. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/pistream.hpp" line="65" bodyfile="/tmp/process.016638aa/process/boost/process/pistream.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classboost_1_1process_1_1pistream_1d2189cd2d2a5aab8312978201f78f057" prot="private" static="no" mutable="no">
+        <type>detail::systembuf</type>
+        <definition>detail::systembuf boost::process::pistream::m_systembuf</definition>
+        <argsstring></argsstring>
+        <name>m_systembuf</name>
+        <briefdescription>
+<para>The systembuf object used to manage this stream&apos;s data. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/pistream.hpp" line="70" bodyfile="/tmp/process.016638aa/process/boost/process/pistream.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Child process&apos; output stream. </para>    </briefdescription>
+    <detaileddescription>
+<para>The pistream class represents an output communication channel with the child process. The child process writes data to this stream and the parent process can read it through the pistream object. In other words, from the child&apos;s point of view, the communication channel is an output one, but from the parent&apos;s point of view it is an input one; hence the confusing pistream name.</para><para>pistream objects cannot be copied because they own the file handle they use to communicate with the child and because they buffer data that flows through the communication channel.</para><para>A pistream object behaves as a std::istream stream in all senses. The class is only provided because it must provide a method to let the caller explicitly close the communication channel.</para><para><simplesect kind="remark"><para><bold>Blocking remarks</bold>: Functions that read data from this stream can block if the associated file handle blocks during the read. As this class is used to communicate with child processes through anonymous pipes, the most typical blocking condition happens when the child has no more data to send to the pipe&apos;s system buffer. When this happens, the buffer eventually empties and the system blocks until the writer generates some data. </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/tmp/process.016638aa/process/boost/process/pistream.hpp" line="61" bodyfile="/tmp/process.016638aa/process/boost/process/pistream.hpp" bodystart="59" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classboost_1_1process_1_1pistream_1caf04323abe8c52d4f14a270ff8227f0" prot="public" virt="non-virtual"><scope>boost::process::pistream</scope><name>close</name></member>
+      <member refid="classboost_1_1process_1_1pistream_17dd79aee9af0f0ca8ada94fcba945d0d" prot="private" virt="non-virtual"><scope>boost::process::pistream</scope><name>m_handle</name></member>
+      <member refid="classboost_1_1process_1_1pistream_1d2189cd2d2a5aab8312978201f78f057" prot="private" virt="non-virtual"><scope>boost::process::pistream</scope><name>m_systembuf</name></member>
+      <member refid="classboost_1_1process_1_1pistream_1d4c694a4dce0bf4c27d32309425149dc" prot="public" virt="non-virtual"><scope>boost::process::pistream</scope><name>pistream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,252 @@
+
+
+ \subsection{Quick Introduction}
+
+  \B{(FIXME: english)}\\
+  Inter-process communication (IPC) is historically central to
+  parallel and distributed computing, and numerous approaches exist
+  for the wide variety of use cases.  Streams are amongst the most
+  well-known and most simple of these paradigms, and are also provided
+  by SAGA.  The concept is very close to that of BSD sockets: a
+  |stream_service| can be listened to (calling |serve()|), and a
+  connection client |stream| results in a |stream| instances on both
+  ends, upon which the application can call |read()| and |write()|:
+
+
+  \begin{mycode}[label=Stream server]
+  #include <saga/saga.hpp>
+
+  int main (int argc, char** argv)
+  {
+    // reusable io buffer
+    saga::buffer buf;
+
+    // create a stream_server and listen for clients
+    saga::stream::server ss (saga::url (argv[1]));
+
+    while ( 1 )
+    {
+      // wait for incoming client
+      saga::stream::client s = ss.serve ();
+      
+      // read data from client
+      s.read (buf);
+    }
+  }
+  \end{mycode}
+  \begin{mycode}[label=Stream client]
+  #include <saga/saga.hpp>
+
+  int main (int argc, char** argv)
+  {
+    // create client stream and connect to server
+    saga::stream::client s (saga::url (argv[1]));
+
+    s.connect ();
+
+    // send some data
+    s.write (saga::buffer ("Hello"));
+  }
+  \end{mycode}
+
+
+  Note that SAGA is silent about the used wire protocol.  In
+  particular, server and client are responsible for picking a compatible
+  transfer mechanism.  Also, the boostrapping mechanism is out of
+  scope in the SAGA stream package, i.e., both sides need to agree on
+  the URL for the server endpoint out-of-band.  Both issues will be
+  addressed in future SAGA API extensions (message API and advert API
+  extension).
+
+  In particular, for stream-based communication, asynchronous operations
+  and notifications are extremely useful programming paradigms.  Both
+  are provided within SAGA, more details can be found in the later
+  description of the SAGA \LF (|saga::monitoring| and |saga::task|
+  package).
+
+
+ \subsection{Reference}
+
+  \begin{mycode}[label=Prototypes: saga::stream]
+  namespace saga
+  {
+    namespace stream 
+    {
+      namespace attributes 
+      {
+        char const * const stream_bufsize       = "Bufsize";
+        char const * const stream_timeout       = "Timeout";
+        char const * const stream_blocking      = "Blocking";
+        char const * const stream_compression   = "Compression";
+        char const * const stream_nodelay       = "Nodelay";
+        char const * const stream_reliable      = "Reliable";
+      }
+
+      namespace metrics 
+      {
+        char const * const stream_state         = "stream.State";
+        char const * const stream_read          = "stream.Read";
+        char const * const stream_write         = "stream.Write";
+        char const * const stream_exception     = "stream.Exception";
+        char const * const stream_dropped       = "stream.Dropped";
+
+        char const * const server_clientconnect = "server.ClientConnect";
+      }
+
+      enum state
+      {
+        Unknown      = -1,
+        New          =  1,
+        Open         =  2,
+        Closed       =  3,
+        Dropped      =  4,
+        Error        =  5
+      };
+
+      enum activity
+      {
+        Read         =  1,
+        Write        =  2,
+        Exception    =  4
+      };
+
+      class stream 
+          : public saga::object,
+            public saga::attributes,
+            public saga::monitorable
+      {
+        public:
+          stream (saga::session const & s, 
+                  saga::url             url = saga::url ());
+          stream (saga::url             url);
+          stream (void);
+          stream (saga::object const  & o);
+         ~stream (void);
+
+          stream & operator= (saga::object const & o);
+
+          saga::url     get_url     (void) const;
+          saga::context get_context (void) const;
+
+          saga::context connect     (void);
+
+          std::vector <activity>
+                        wait        (activity       what, 
+                                     double         timeout = -1.0);
+          void          close       (double         timeout =  0.0);
+
+          saga::ssize_t read        (saga::mutable_buffer buffer, 
+                                     saga::ssize_t        length  = 0);
+          saga::ssize_t write       (saga::const_buffer   buffer, 
+                                     saga::ssize_t        length  = 0);
+      };
+
+      class server 
+          : public saga::object,
+            public saga::monitorable,
+            public saga::permissions
+      {
+        public:
+        server (saga::session const & s, 
+                saga::url            url = saga::url ());
+        server (saga::url            url);
+        server (void);
+        server (saga::object const & o);
+       ~server (void);
+
+        server & operator= (saga::object const & o);
+
+        saga::url            get_url (void) const;
+        saga::stream::stream serve   (double timeout = 0.0);
+        void                 close   (double timeout = 0.0);
+      };
+    }
+  }
+\end{mycode}
+
+
+ \subsection{Stream Details}
+
+  The SAGA streams package allows establishing the simplest
+  possible authenticated socket connection, with hooks to
+  support application level authorization, and encryption
+  schemes.  The stream API has the following characteristics:
+
+  \begin{enumerate}
+
+    \item It is not performance-oriented:  If performance is
+    required, then it is better to program directly against the
+    API's existing performance-oriented protocols like GridFTP
+    or XIO.  
+
+    \item It does not attempt to create a programming paradigm
+    that diverges very far from baseline BSD sockets, Winsock,
+    or Java Sockets.
+
+  \end{enumerate}
+
+  This API greatly reduces the complexity of establishing
+  authenticated socket connections in order to communicate with
+  remotely located components.  However, it provides very
+  limited functionality and is thus suitable for applications
+  that do not have very sophisticated requirements (as per 80-20
+  rule).  It is envisaged that as applications become
+  progressively more sophisticated, they will gradually move to
+  more sophisticated native APIs in order to support those
+  needs.  Later SAGA versions may offer higher level
+  communication abstractions, such as messages.
+
+  \subsubsection{Endpoint URLs}
+
+   The SAGA stream API uses URLs to specify connection
+   endpoints.  These URLs are supposed to allow SAGA
+   implementations to be interoperable.  For example, the URL
+
+      \shift |tcp://remote.host.net:1234/|
+
+   is supposed to signal that a standard |tcp| connection can be
+   established with host |remote.host.net| on port |1234|.  No
+   matter what the specified URL scheme is, the SAGA stream API
+   implementation MUST have the same semantics on an API level, i.e.,
+   behave like a reliable byte-oriented data stream.
+
+  \subsubsection{Usage}
+
+   Just as for BSD sockets, a stream communication channel is
+   established by creating a serving part (BSD: listening
+   socket), and a client party (BSD: connecting socket).  After
+   connecting both parties, reading and writing on the stream
+   allows to exchange data.
+
+  \begin{mycode}[label=Stream example - server side]
+  { 
+    // set up the serving endpoint on port 1234
+    saga::stream::server server (saga::url ("tcp://localhost:1234"));
+
+    // wait for incoming connections
+    saga::stream stream = server.serve ();
+
+    // if one arrived, greet the client
+    stream.write (saga::buffer ("Hello World!", 13));
+  }
+  \end{mycode}
+
+  \begin{mycode}[label=Stream example - client side]
+  { 
+    // setup stream for the server endpoint
+    saga::stream::stream (saga::url ("tcp://remotehost:1234"));
+
+    // connect to the server
+    stream.connect ();
+
+    // read the greeting message
+    saga::buffer buf (13);
+    stream.read (buf);
+
+    // print it
+    std::cout << buf.get_data () << std::endl;
+  }
+  \end{mycode}
+
+  % \X{add details about async ops, and AAA}
+

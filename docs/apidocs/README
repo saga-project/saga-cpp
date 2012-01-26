@@ -1,0 +1,6 @@
+To (re-)generate the C++ API documentation:
+  
+  make sure that you have Doxygen installed
+ 
+  call `make apidoc` 
+

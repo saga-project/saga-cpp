@@ -1,0 +1,13 @@
+EXPORTS
+    ?attribute_is_removablepriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?attribute_is_vectorpriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?attribute_is_writablepriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?attribute_is_readonlypriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?attribute_existspriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?find_attributespriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?list_attributespriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@@Z
+    ?remove_attributepriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@AAVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?set_vector_attributepriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@AAVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@8@@Z
+    ?get_vector_attributepriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?set_attributepriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@AAVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@1@Z
+    ?get_attributepriv@?$attribute_priv@Vdirectory@advert@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVdirectory@advert@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z

@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsaga_1_1name__space_1_1entry.html" title="An RNS entry that interconnects a reference to an existing resource into the hierarchical name space..." alt="" coords="182,645,361,1150"/>
+<area shape="rect" id="node4" href="$classsaga_1_1object.html" title="Brief description starts here." alt="" coords="5,372,125,556"/>
+<area shape="rect" id="node6" href="$structsaga_1_1detail_1_1monitorable.html" title="{saga::detail::monitorable\&lt; entry \&gt;\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}" alt="" coords="149,391,393,537"/>
+<area shape="rect" id="node8" href="$structsaga_1_1detail_1_1monitorable.html" title="The SAGA monitorable interface." alt="" coords="137,63,399,209"/>
+<area shape="rect" id="node10" href="$structsaga_1_1detail_1_1permissions.html" title="{saga::detail::permissions\&lt; entry \&gt;\n||+ permissions_allow()\l+ permissions_deny()\l+ permissions_check()\l+ get_owner()\l+ get_group()\l&#45; permissions_allowpriv()\l&#45; permissions_denypriv()\l&#45; permissions_checkpriv()\l&#45; get_ownerpriv()\l&#45; get_grouppriv()\l}" alt="" coords="427,334,671,594"/>
+<area shape="rect" id="node12" href="$structsaga_1_1detail_1_1permissions.html" title="The SAGA permissions interface." alt="" coords="423,6,683,266"/>
+</map>

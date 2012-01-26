@@ -1,0 +1,44 @@
+
+::SAGA DOCUMENTATION FILE::
+
+:ADAPTOR NAME:
+
+  Default File Adaptor
+  
+:AUTHORS:
+
+  Copyright (c) 2006-2009 Hartmut Kaiser (hkaiser@cct.lsu.edu)
+ 
+:LICENSE:
+
+  Distributed under the Boost Software License, Version 1.0.
+  
+:ADAPTOR LIBRARY NAME:
+  
+  libsaga_adaptor_default_file.so (dylib)
+
+:IMPLEMENTS PACKAGE:
+ 
+  - saga_package_file
+  - saga_package_namespace
+
+:DESCRIPTION:
+
+  The adaptor provides access to the local filesystem.
+
+:URL SCHEMES:
+
+  - file://
+
+
+:CONFIGURE OPTIONS:
+
+  none
+
+:INI OPTIONS:
+
+  none
+
+:KNOWN ISSUES:
+
+

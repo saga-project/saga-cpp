@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$structsaga_1_1detail_1_1permissions.html" title="{saga::detail::permissions\&lt; permissions \&gt;\n||+ permissions_allow()\l+ permissions_deny()\l+ permissions_check()\l+ get_owner()\l+ get_group()\l&#45; permissions_allowpriv()\l&#45; permissions_denypriv()\l&#45; permissions_checkpriv()\l&#45; get_ownerpriv()\l&#45; get_grouppriv()\l}" alt="" coords="4,334,293,594"/>
+<area shape="rect" id="node4" href="$structsaga_1_1detail_1_1permissions.html" title="The SAGA permissions interface." alt="" coords="19,6,279,266"/>
+</map>

@@ -1,0 +1,23 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{saga::replica::logical_file\n||+ logical_file()\l+ logical_file()\l+ logical_file()\l+ logical_file()\l+ ~logical_file()\l+ operator=()\l+ add_location()\l+ remove_location()\l+ update_location()\l+ list_locations()\l+ replicate()\l+ create()\l+ create()\l+ create()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node2 [label="{saga::name_space::entry\n||+ entry()\l+ entry()\l+ entry()\l+ entry()\l+ ~entry()\l+ operator=()\l+ get_url()\l+ get_cwd()\l+ get_name()\l+ read_link()\l+ is_dir()\l+ is_entry()\l+ is_link()\l+ copy()\l+ link()\l+ move()\l+ remove()\l+ close()\l+ permissions_allow()\l+ permissions_deny()\l+ create()\l+ create()\l+ create()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1name__space_1_1entry.html",tooltip="An RNS entry that interconnects a reference to an existing resource into the hierarchical name space..."];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node3 [label="{saga::object\n||+ object()\l+ get_type()\l+ get_id()\l+ get_session()\l+ get_session()\l+ clone()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1object.html",tooltip="Brief description starts here."];
+  Node4 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node4 [label="{saga::detail::monitorable\< entry \>\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1monitorable.html"];
+  Node5 -> Node4 [dir="back",color="orange",fontsize="10",style="solid",label=" \< entry \>" ,fontname="FreeSans"];
+  Node5 [label="{saga::detail::monitorable\< Derived \>\n||+ list_metrics()\l+ get_metric()\l+ add_callback()\l+ remove_callback()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1monitorable.html",tooltip="The SAGA monitorable interface."];
+  Node6 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node6 [label="{saga::detail::permissions\< entry \>\n||+ permissions_allow()\l+ permissions_deny()\l+ permissions_check()\l+ get_owner()\l+ get_group()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1permissions.html"];
+  Node7 -> Node6 [dir="back",color="orange",fontsize="10",style="solid",label=" \< entry \>" ,fontname="FreeSans"];
+  Node7 [label="{saga::detail::permissions\< Derived \>\n||+ permissions_allow()\l+ permissions_deny()\l+ permissions_check()\l+ get_owner()\l+ get_group()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1permissions.html",tooltip="The SAGA permissions interface."];
+  Node8 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+  Node8 [label="{saga::detail::attribute\< logical_file \>\n||+ get_attribute()\l+ set_attribute()\l+ get_vector_attribute()\l+ set_vector_attribute()\l+ remove_attribute()\l+ list_attributes()\l+ find_attributes()\l+ attribute_exists()\l+ attribute_is_readonly()\l+ attribute_is_writable()\l+ attribute_is_vector()\l+ attribute_is_removable()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1attribute.html"];
+  Node9 -> Node8 [dir="back",color="orange",fontsize="10",style="solid",label=" \< logical_file \>" ,fontname="FreeSans"];
+  Node9 [label="{saga::detail::attribute\< Derived \>\n||+ get_attribute()\l+ set_attribute()\l+ get_vector_attribute()\l+ set_vector_attribute()\l+ remove_attribute()\l+ list_attributes()\l+ find_attributes()\l+ attribute_exists()\l+ attribute_is_readonly()\l+ attribute_is_writable()\l+ attribute_is_vector()\l+ attribute_is_removable()\l}",height=0.2,width=0.4,color="black",URL="$structsaga_1_1detail_1_1attribute.html",tooltip="The SAGA attribute interface."];
+}

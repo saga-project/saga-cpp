@@ -1,0 +1,101 @@
+
+ \subsection{Quick Introduction}
+
+ \subsection{Reference}
+
+  \begin{mycode}[label=Prototypes: saga::advert]
+  namespace saga
+  {
+    namespace advert 
+    {
+      namespace metrics 
+      {
+        char const * const advert_modified          
+                   =      "advert.Modified";
+        char const * const advert_deleted           
+                   =      "advert.Deleted";
+  
+        char const * const directory_created_entry  
+                   =      "directory.CreatedEntry";
+        char const * const directory_modified_entry 
+                   =      "directory.ModifiedEntry";
+        char const * const directory_deleted_entry  
+                   =      "directory.DeletedEntry";
+      };
+      
+      enum flags 
+      {
+        Unknown         = /*  -1, */  saga::name_space::Unknown, 
+        None            = /*   0, */  saga::name_space::None, 
+        Overwrite       = /*   1, */  saga::name_space::Overwrite, 
+        Recursive       = /*   2, */  saga::name_space::Recursive, 
+        Dereference     = /*   4, */  saga::name_space::Dereference, 
+        Create          = /*   8, */  saga::name_space::Create, 
+        Exclusive       = /*  16, */  saga::name_space::Exclusive, 
+        Lock            = /*  32, */  saga::name_space::Lock, 
+        CreateParents   = /*  64, */  saga::name_space::CreateParents, 
+                          // 256,          reserved for Truncate
+                          // 512,          reserved for Append 
+        Read            =    512, 
+        Write           =   1024, 
+        ReadWrite       =   1536,
+                          //2048,          reserved for Binary
+      }; 
+  
+      class entry 
+          : public saga::name_space::entry,
+            public saga::attributes
+      {
+        public:
+          entry (saga::session const & s, 
+                 saga::url             url,
+                 int                   mode = Read);
+          entry (saga::url             url,
+                 int                   mode = Read);
+          entry (saga::object const &  other);
+          entry (void);
+         ~entry (void);
+  
+          entry & operator= (saga::object const & object);
+  
+          void         store_object    (saga::object object);
+          saga::object retrieve_object (void);
+          saga::object retrieve_object (saga::session const & s);
+  
+          void         store_string    (std::string str);
+          std::string  retrieve_string (void);
+      };
+  
+      class directory 
+          : public saga::name_space::directory, 
+            public saga::attributes
+      {
+        public:
+          directory (saga::session const & s, 
+                     saga::url             url, 
+                     int                   mode = ReadWrite);
+          directory (saga::url url, 
+                     int                   mode = ReadWrite);
+          directory (saga::object const & other);
+          directory (void);
+         ~directory (void);
+  
+          directory & operator= (saga::object const & o);                                                      
+  
+          advert::entry     open     (saga::url   url, 
+                                      int         mode = Read);
+          advert::directory open_dir (saga::url   url, 
+                                      int         mode = Read);
+          std::vector <saga::url> 
+                            find     (std::string name, 
+                                      std::vector <std::string> pattern, 
+                                      int        flags = None)
+      };
+    }
+  }
+
+\end{mycode}
+
+\subsection{Details}
+
+

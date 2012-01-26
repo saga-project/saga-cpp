@@ -1,0 +1,142 @@
+
+ - this file contains a number of shell command lines which can
+   be used for demoing (a) the SAGA implementation, and (b) the
+   shell features
+
+ - before running the shell, set the following environment
+   variables (you may need different values ;-)
+
+   setenv  SAGA_SHELL_HOME     file://localhost//home/merzky/links/saga/svn/
+   setenv  SAGA_SHELL_CONTACT  fork://localhost/
+
+
+ - run the following commands
+  // check where we start
+  # pwd
+    file://localhost//home/merzky/links/saga
+  
+  // navigate the namespace tree
+  # cd docs
+  # ls
+    doxygen/
+    manual/
+    .svn/
+  # cd manual/programming_handbook/tex
+   
+  // manipulate entries
+  # cp saga-a-manual.tex /tmp/test.tex
+  # cd /tmp
+  
+  // access the contents of an antry
+  # cat test.tex
+    [...]
+  
+  // test move
+  # mv test.tex test2.tex
+  # cat test.tex
+    Ooops!
+    No such file: test.tex
+  
+  # cat test2.tex
+    [...]
+  
+  // test remove
+  # rm [test2.tex]
+  # cat test.tex
+    Ooops!
+    No such file: test.tex
+  
+  
+  // lets try to work in a replica namespace
+  # cd lfn://localhost/
+  
+  // all namespace calls should still work (ls, cp, mv, ln, ...)
+  # ls
+  
+  // create a new logical file
+  # touch          test
+  # rep_list       test
+    no replica locations
+  
+  // add a new replica location.  Or two ;-)
+  # rep_add        test ftp://remote.host.net/replica/location/1
+  # rep_add        test ftp://remote.host.net/replica/location/2
+  # rep_list       test
+    ftp://remote.host.net/replica/location/1
+    ftp://remote.host.net/replica/location/2
+  
+  // remove a replica location
+  # rep_remove     test ftp://remote.host.net/replica/location/1
+  # rep_list       test
+    ftp://remote.host.net/replica/location/2
+  
+  // change (== update) a replica location
+  # rep_update     update ftp://remote.host.net/replica/location/2 \
+                          ftp://remote.host.net/replica/location/3
+  # rep_list       test
+    ftp://remote.host.net/replica/location/3
+  
+  // replicate the file to a new location
+  # rep_replicate  test ftp://remote.host.net/replica/location/4
+  # rep_list       test
+    ftp://remote.host.net/replica/location/3
+    ftp://remote.host.net/replica/location/4
+  
+  // go to the physical location of the last (new) replica
+  # cd ftp://remote.host.net/replica/location/
+  # cat 4
+    [...]
+  
+  
+  
+  // job related demo
+
+  // run a simple command
+  # run /bin/date
+    Tue Jan 29 02:07:24 CET 2008
+
+  // run something in the background - get pid and job-id
+  # run /bin/sleep 10 &
+    [1] /bin/sleep 10 [posix://koks.merzky.net]-[23798]
+  # ps
+    [1] [posix://koks.merzky.net]-[23798]   [Running  ]   /bin/sleep 10
+
+  // suspend something
+  # suspend 1
+  # ps
+    [1] [posix://koks.merzky.net]-[23798]   [Suspended]   /bin/sleep 10
+
+  // resume it
+  # resume 1
+  # ps
+    [1] [posix://koks.merzky.net]-[23798]   [Running  ]   /bin/sleep 10
+
+  // check if its done
+  # ps
+    [1] [posix://koks.merzky.net]-[23798]   [Done     ]   /bin/sleep 10
+
+  // Done jobs are purged from the shells job list
+  # ps
+  #
+  
+  // run and cancel a job
+  # run /bin/sleep 10 &
+    [3] /bin/sleep 10
+    [posix://koks.merzky.net]-[23914]
+  # cancel 3
+  # kill 3
+  # ps
+    [3] [posix://koks.merzky.net]-[23914]   [Canceled ]   /bin/sleep 10
+
+
+  // task for reader: 
+  //
+  //   - run /bin/sleep in the shell
+  //   - suspend it via the linux system konsole (killall -STOP sleep)
+  //   - check the status in the shell
+  //   - resume it via the linux system konsole (killall -CONT sleep)
+  //   - check the status in the shell
+  //   - cancel it via the linux system konsole (killall -KILL sleep)
+  //   - check the status in the shell
+
+  

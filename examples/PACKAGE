@@ -1,0 +1,11 @@
+
+DIRS:
+  adaptors/
+  packages/
+  programming_guide/
+  tutorial/
+
+FILES:
+  Makefile
+  PACKAGE
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="saga_application"
+	InheritedPropertySheets=".\saga.vsprops"
+	>
+	<Tool
+		Name="VCCustomBuildTool"
+		CommandLine="if not exist &quot;$(SAGA_LOCATION)&quot; mkdir &quot;$(SAGA_LOCATION)&quot;&#x0D;&#x0A;xcopy /Y/F &quot;$(TargetPath)&quot; &quot;$(SAGA_LOCATION)&quot;&#x0D;&#x0A;xcopy /Y/F &quot;$(TargetDir)\$(TargetName).pdb&quot; &quot;$(SAGA_LOCATION)&quot;&#x0D;&#x0A;"
+		Outputs="&quot;$(SAGA_LOCATION)\$(TargetFileName)&quot;"
+	/>
+</VisualStudioPropertySheet>

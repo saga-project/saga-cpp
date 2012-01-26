@@ -1,0 +1,16 @@
+
+try the following:
+
+  # touch /tmp/test_0
+  # export SAGA_LOCATION=/path/to/your/saga/installation/ 
+  # make 
+  # ./file_copy       /tmp/test_0 /tmp/test_1
+  # ./file_copy_async /tmp/test_0 /tmp/test_2
+  
+You should end up with 
+
+  # ls /tmp/test_*
+    /tmp/test_0
+    /tmp/test_1
+    /tmp/test_2
+

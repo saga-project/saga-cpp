@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="classboost_1_1process_1_1basic__pipeline" kind="class" prot="public">
+    <compoundname>boost::process::basic_pipeline</compoundname>
+    <includes refid="basic__pipeline_8hpp" local="no">basic_pipeline.hpp</includes>
+    <innerclass refid="structboost_1_1process_1_1basic__pipeline_1_1entry" prot="private">boost::process::basic_pipeline::entry</innerclass>
+    <templateparamlist>
+      <param>
+        <type>class</type>
+        <declname>Command_Line</declname>
+        <defname>Command_Line</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1process_1_1basic__pipeline_164228af446ded778742ed3a277b3378a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1basic__pipeline" kindref="compound">basic_pipeline</ref>&lt; Command_Line &gt; &amp;</type>
+        <definition>basic_pipeline&lt; Command_Line &gt; &amp; boost::process::basic_pipeline&lt; Command_Line &gt;::add</definition>
+        <argsstring>(const Command_Line &amp;cl, bool merge_out_err=false)</argsstring>
+        <name>add</name>
+        <param>
+          <type>const Command_Line &amp;</type>
+          <declname>cl</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>merge_out_err</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Adds a new stage to the pipeline. </para>        </briefdescription>
+        <detaileddescription>
+<para>Prepares a new process that will be part of the pipeline. This new process is described by its command line and a flag that indicates whether its stderr should be merged on its stdout. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="87" bodyfile="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" bodystart="111" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1process_1_1basic__pipeline_119b3a16217f8350dcede3df85ffb7878" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1process_1_1children" kindref="compound">children</ref></type>
+        <definition>children boost::process::basic_pipeline&lt; Command_Line &gt;::start</definition>
+        <argsstring>(void)</argsstring>
+        <name>start</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Starts the pipeline. </para>        </briefdescription>
+        <detaileddescription>
+<para>Spawns all processes that form the pipeline, connecting them appropriately to share the data flows.</para><para><simplesect kind="remark"><para><bold>Blocking remarks</bold>: This function may block if the device holding the executable of one of the command lines blocks when loading the image. This might happen if, e.g., the binary is being loaded from a network share.</para></simplesect>
+<simplesect kind="return"><para>An object that holds the status of all the processes related to the pipeline. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="103" bodyfile="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" bodystart="123" bodyend="342"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classboost_1_1process_1_1basic__pipeline_116c6403cf66d86e5642270812f5c6672" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; entry &gt;</type>
+        <definition>std::vector&lt; entry &gt; boost::process::basic_pipeline&lt; Command_Line &gt;::m_entries</definition>
+        <argsstring></argsstring>
+        <name>m_entries</name>
+        <briefdescription>
+<para>Information about the processes that compose the pipeline. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="76" bodyfile="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Pipelined implementation of the Launcher concept. </para>    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="classboost_1_1process_1_1basic__pipeline" kindref="compound">basic_pipeline</ref> template implements the Launcher concept allowing for the construction of process pipelines. This class is operating system independent. </para>    </detaileddescription>
+    <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="54" bodyfile="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" bodystart="52" bodyend="104"/>
+    <listofallmembers>
+      <member refid="classboost_1_1process_1_1basic__pipeline_164228af446ded778742ed3a277b3378a" prot="public" virt="non-virtual"><scope>boost::process::basic_pipeline</scope><name>add</name></member>
+      <member refid="classboost_1_1process_1_1basic__pipeline_116c6403cf66d86e5642270812f5c6672" prot="private" virt="non-virtual"><scope>boost::process::basic_pipeline</scope><name>m_entries</name></member>
+      <member refid="classboost_1_1process_1_1basic__pipeline_119b3a16217f8350dcede3df85ffb7878" prot="public" virt="non-virtual"><scope>boost::process::basic_pipeline</scope><name>start</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="pistream_8hpp" kind="file">
+    <compoundname>pistream.hpp</compoundname>
+    <includes local="no">istream</includes>
+    <includes local="no">boost/noncopyable.hpp</includes>
+    <includes local="no">boost/process/detail/file_handle.hpp</includes>
+    <includes local="no">boost/process/detail/systembuf.hpp</includes>
+    <includedby refid="process_8hpp" local="no">/tmp/process.016638aa/process/boost/process.hpp</includedby>
+    <includedby refid="posix__child_8hpp" local="no">/tmp/process.016638aa/process/boost/process/posix_child.hpp</includedby>
+    <includedby refid="child_8hpp" local="no">/tmp/process.016638aa/process/boost/process/child.hpp</includedby>
+    <includedby refid="children_8hpp" local="no">/tmp/process.016638aa/process/boost/process/children.hpp</includedby>
+    <incdepgraph>
+      <node id="202">
+        <label>/tmp/process.016638aa/process/boost/process/pistream.hpp</label>
+        <link refid="pistream.hpp"/>
+        <childnode refid="203" relation="include">
+        </childnode>
+        <childnode refid="204" relation="include">
+        </childnode>
+        <childnode refid="205" relation="include">
+        </childnode>
+        <childnode refid="206" relation="include">
+        </childnode>
+      </node>
+      <node id="204">
+        <label>boost/noncopyable.hpp</label>
+      </node>
+      <node id="205">
+        <label>boost/process/detail/file_handle.hpp</label>
+      </node>
+      <node id="206">
+        <label>boost/process/detail/systembuf.hpp</label>
+      </node>
+      <node id="203">
+        <label>istream</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="212">
+        <label>/tmp/process.016638aa/process/boost/process/launcher.hpp</label>
+        <link refid="launcher_8hpp"/>
+        <childnode refid="208" relation="include">
+        </childnode>
+        <childnode refid="210" relation="include">
+        </childnode>
+        <childnode refid="213" relation="include">
+        </childnode>
+      </node>
+      <node id="208">
+        <label>/tmp/process.016638aa/process/boost/process.hpp</label>
+        <link refid="process_8hpp"/>
+      </node>
+      <node id="211">
+        <label>/tmp/process.016638aa/process/boost/process/child.hpp</label>
+        <link refid="child_8hpp"/>
+        <childnode refid="208" relation="include">
+        </childnode>
+        <childnode refid="209" relation="include">
+        </childnode>
+        <childnode refid="212" relation="include">
+        </childnode>
+        <childnode refid="214" relation="include">
+        </childnode>
+        <childnode refid="215" relation="include">
+        </childnode>
+      </node>
+      <node id="207">
+        <label>/tmp/process.016638aa/process/boost/process/pistream.hpp</label>
+        <link refid="pistream.hpp"/>
+        <childnode refid="208" relation="include">
+        </childnode>
+        <childnode refid="209" relation="include">
+        </childnode>
+        <childnode refid="211" relation="include">
+        </childnode>
+        <childnode refid="215" relation="include">
+        </childnode>
+      </node>
+      <node id="210">
+        <label>/tmp/process.016638aa/process/boost/process/posix_launcher.hpp</label>
+        <link refid="posix__launcher_8hpp"/>
+      </node>
+      <node id="215">
+        <label>/tmp/process.016638aa/process/boost/process/children.hpp</label>
+        <link refid="children_8hpp"/>
+        <childnode refid="208" relation="include">
+        </childnode>
+        <childnode refid="216" relation="include">
+        </childnode>
+      </node>
+      <node id="216">
+        <label>/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp</label>
+        <link refid="basic__pipeline_8hpp"/>
+        <childnode refid="208" relation="include">
+        </childnode>
+        <childnode refid="217" relation="include">
+        </childnode>
+      </node>
+      <node id="213">
+        <label>/tmp/process.016638aa/process/boost/process/win32_launcher.hpp</label>
+        <link refid="win32__launcher_8hpp"/>
+      </node>
+      <node id="217">
+        <label>/tmp/process.016638aa/process/boost/process/pipeline.hpp</label>
+        <link refid="pipeline_8hpp"/>
+        <childnode refid="208" relation="include">
+        </childnode>
+      </node>
+      <node id="209">
+        <label>/tmp/process.016638aa/process/boost/process/posix_child.hpp</label>
+        <link refid="posix__child_8hpp"/>
+        <childnode refid="210" relation="include">
+        </childnode>
+      </node>
+      <node id="214">
+        <label>/tmp/process.016638aa/process/boost/process/win32_child.hpp</label>
+        <link refid="win32__child_8hpp"/>
+        <childnode refid="213" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classboost_1_1process_1_1pistream" prot="public">boost::process::pistream</innerclass>
+    <innernamespace refid="namespaceboost">boost</innernamespace>
+    <innernamespace refid="namespaceboost_1_1process">boost::process</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Includes the declaration of the pistream class. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Boost.Process</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2006<sp/>Julio<sp/>M.<sp/>Merino<sp/>Vidal.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Distributed<sp/>under<sp/>the<sp/>Boost<sp/>Software<sp/>License,<sp/>Version<sp/>1.0.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>(See<sp/>accompanying<sp/>file<sp/>LICENSE_1_0.txt<sp/>or<sp/>copy<sp/>at</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>http://www.boost.org/LICENSE_1_0.txt.)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(BOOST_PROCESS_PISTREAM_HPP)</highlight></codeline>
+<codeline lineno="18"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor">#define<sp/>BOOST_PROCESS_PISTREAM_HPP</highlight></codeline>
+<codeline lineno="20"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor">#include<sp/>&lt;istream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/noncopyable.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/process/detail/file_handle.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/process/detail/systembuf.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">boost<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">process<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="classboost_1_1process_1_1pistream" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classboost_1_1process_1_1pistream" kindref="compound">pistream</ref><sp/>:</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>std::istream,<sp/>boost::noncopyable</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::file_handle<sp/>m_handle;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>detail::systembuf<sp/>m_systembuf;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classboost_1_1process_1_1pistream_1d4c694a4dce0bf4c27d32309425149dc" kindref="member">pistream</ref>(detail::file_handle&amp;<sp/>fh);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classboost_1_1process_1_1pistream_1caf04323abe8c52d4f14a270ff8227f0" kindref="member">close</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="classboost_1_1process_1_1pistream_1d4c694a4dce0bf4c27d32309425149dc" refkind="member"><highlight class="normal"><ref refid="classboost_1_1process_1_1pistream_1d4c694a4dce0bf4c27d32309425149dc" kindref="member">pistream::pistream</ref>(detail::file_handle&amp;<sp/>fh)<sp/>:</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>std::istream(NULL),</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>m_handle(fh),</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>m_systembuf(m_handle.get())</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>rdbuf(&amp;m_systembuf);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="classboost_1_1process_1_1pistream_1caf04323abe8c52d4f14a270ff8227f0" refkind="member"><highlight class="normal"><ref refid="classboost_1_1process_1_1pistream_1caf04323abe8c52d4f14a270ff8227f0" kindref="member">pistream::close</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>m_handle.close();</highlight></codeline>
+<codeline lineno="114"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>process</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>boost</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>!defined(BOOST_PROCESS_PISTREAM_HPP)</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/process.016638aa/process/boost/process/pistream.hpp"/>
+  </compounddef>
+</doxygen>

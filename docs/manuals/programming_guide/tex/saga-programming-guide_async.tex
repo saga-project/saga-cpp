@@ -1,0 +1,102 @@
+
+ \subsection{Quick Introduction}
+
+  All functional SAGA API calls come in three flavours:
+  synchronous, asynchronous, and task versions.  The easiest way to
+  understand the relations and differences between them is to
+  consider that \I{all} functional API calls are represented by
+  stateful |tasks| (e.g., a |file.copy()| API call is a task which
+  can be in |Running| or |Done| state).
+
+  \myfig{task_states}{\footnotesize The SAGA task state model.}
+
+  Figure~\ref{fig:task_states} shows the available task states, and the various possible state transitions.  The different
+  SAGA API call invocations are simply representing ways to create the
+  respective tasks in different states: Synchronous calls create tasks
+  in a final state (|Done| or |Failed|); Asynchronous operations
+  create tasks which are |Running|; and the Task version of the calls
+  creates tasks which are |New|, and need to be |run()| to do anything
+  at all:
+
+
+  \begin{mycode}[label=Asynchronous operations]
+  int main (int argc, char** argv)
+  {
+    // create a file instance
+    saga::url u (argv[1]);
+    saga::filesystem::file f (u);
+
+    // target dir to copy file to
+    saga::url tgt ("file://localhost/tmp");
+
+    // run file copy in three flavours
+    saga::task t_1 = f.copy <saga::task::Sync>  (tgt);
+    saga::task t_2 = f.copy <saga::task::Async> (tgt);
+    saga::task t_3 = f.copy <saga::task::Task>  (tgt);
+
+    // the three tasks do the same, but t_1 is already done at
+    // this point, t_2 could still be running, and t_3 did not yet
+    // start.
+
+    // let's get the async version done:
+    t_2.wait ();
+
+    // now, run and finish the Task version:
+    t_3.run ();
+    t_3.wait ();
+
+    // all three copies are done here.
+  }
+  \end{mycode}
+
+  For convenience, the synchronous version is provided simply as:
+
+   \shift |f.copy (tgt);|
+
+  Now, what about the return values?  For those, the tasks provide a typed
+  member method, |get_result()|, which can only be called when a task
+  is in a final state:
+  
+  \begin{mycode}[label=Return values for asynchronous operations]
+  int main (int argc, char** argv)
+  {
+    // create a file instance
+    saga::url u (argv[1]);
+    saga::filesystem::file f (u);
+
+    // run method in three flavours
+    saga::task t_1 = f.get_size <saga::task::Sync>  ();
+    saga::task t_2 = f.get_size <saga::task::Async> ();
+    saga::task t_3 = f.get_size <saga::task::Task>  ();
+
+    // let's get the async version done:
+    t_2.wait ();
+
+    // now, run and finish the Task version:
+    t_3.run ();
+    t_3.wait ();
+
+    // all three calls are done here.
+
+    ssize_t size;
+    size = t_1.get_result <ssize_t> ();
+    size = t_2.get_result <ssize_t> ();
+    size = t_3.get_result <ssize_t> ();
+
+    
+  }
+  \end{mycode}
+  
+  The convenience of the synchronous version
+  above is that it returns the return value immediately:
+
+   \shift |ssize_t size = f.get_size ();|
+  
+
+ \subsection{Reference}
+
+
+
+ \subsection{Details}
+
+

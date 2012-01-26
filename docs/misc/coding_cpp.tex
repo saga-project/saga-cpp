@@ -1,0 +1,1140 @@
+
+\documentclass{article}
+
+\usepackage{ifpdf}
+\usepackage{subfigure}
+
+\ifpdf
+  \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex]{hyperref}
+  \graphicspath{{Pics/}}
+  \DeclareGraphicsExtensions{.pdf, .png, .jpg}
+\else
+  \usepackage{graphicx}
+  \usepackage[hypertex]{hyperref}
+  \graphicspath{{Pics/}}
+  \DeclareGraphicsExtensions{.ps, .eps}
+\fi
+
+\usepackage{srcltx}
+\usepackage{wrapfig}
+
+\newcommand{\I}{\textit}
+\newcommand{\B}{\textbf}
+\newcommand{\T}{\texttt}
+
+\newcommand{\F}[1]{\B{FIXME: #1}}
+
+\begin{document}
+
+\title{C++ Coding Guidlines for the SAGA C++ Reference Implementation
+       'SAGA-A'}
+\author{Andre Merzky and Hartmut Kaiser\footnotemark}
+\maketitle
+
+\footnotetext{based on the GridLab style Guide by Tom Goodale}
+
+\begin{abstract}
+
+  This Documents presents the C++ coding conventions as used by the
+  SAGA C++ Reference Implementation.  They should be followed by
+  \textbf{all} contributing parties.
+
+\end{abstract}
+
+\tableofcontents
+
+\section{C++}
+
+These coding conventions are from the GridLab Coding conventions. See
+\url{http://www.gridlab.org/WorkPackages/techboard/Docs/coding_cpp.pdf/}.
+
+\subsection{File Organization}
+
+A file consists of sections that should be separated by blank lines
+and an optional comment identifying each section.
+
+\subsection{File Names}
+
+File names should be all lowercase, with the extension \texttt{.hpp}
+for include files, and \texttt{.cpp} for source files. The file
+names should reflect the functionality defined/implemented in that
+file.  Files with logical connection (e.g. pairs of header and source
+files) should reflect that connection in their names wherever
+possible.  Files belonging to the same moduleshould reflect that
+dependency by a short uniq prefix to the filename, followed by an
+underscore.  Following examples illustrate this convention:
+
+\begin{quote}
+\begin{verbatim}
+ Makefile                  io_base.cpp
+ server.cpp                io_base.hpp
+ server_ioplug.hpp         io_file.hpp
+ server_ioplug.c           io_file.cpp
+ io_cwrapper.hpp           io_stream.hpp
+ io_cwrapper.c             io_stream.cpp
+\end{verbatim}
+\end{quote}
+
+
+\subsection{Source Files}
+
+C++ source files have the following ordering: 
+
+\begin{itemize}
+  \item Beginning comments (see ``Beginning Comments'' on
+        \pageref{sec:cguide:beginning_comments}) 
+  \item \#include statements
+  \item \#defines.
+  \item local data type definitions.
+  \item local (static) function prototypes.
+  \item local (static) data.
+  \item externally visible functions.
+  \item local (static) functions.
+\end{itemize}
+
+\paragraph{Beginning Comments}
+\label{sec:cguide:beginning_comments}
+
+All source files should begin with a comment that describes the file
+and its contents, and a copyright statement.  The \T{LICENSE} line in the
+example below is a placeholder for an automatically inserted license
+text.  That insertion is performed while packaging the code for
+distribution.
+
+\begin{quote}
+\begin{verbatim}
+/** 
+ *
+ * Brief description of contents of file.
+ * 
+ * Long description
+ * 
+ * Copyright notice.
+ */
+
+ /*** LICENSE ***/
+
+\end{verbatim}
+\end{quote}
+
+\textbf{Note:}
+This is a documentation comment -- see section
+\ref{sec:cguide:doc_comments} for details.
+
+\subsection{Header Files}
+
+All header files should begin with a comment that describes the file
+and its contents, and a copyright statement.
+
+\begin{quote}
+\begin{verbatim}
+/** 
+ * Brief description of contents of file.
+ * 
+ * Long description
+ * 
+ * Copyright notice.
+ */
+
+ /*** LICENSE ***/
+
+\end{verbatim}
+\end{quote}
+
+\textbf{Note:}
+This is a documentation comment -- see section
+\ref{sec:cguide:doc_comments} for details.
+
+To protect against multiple inclusion of headers, the contents of a
+header file should be protected by a \#ifndef ... \#endif pair.
+
+\begin{quote}
+\begin{verbatim}
+#ifndef NAME_OF_HEADER_FILE_IN_CAPITALS_HPP
+#define NAME_OF_HEADER_FILE_IN_CAPITALS_HPP
+
+...body of header file...
+
+#endif // NAME_OF_HEADER_FILE_IN_CAPITALS_HPP
+
+\end{verbatim}
+\end{quote}
+
+
+\subsection{Indentation}
+
+Two spaces should be used as the unit of indentation.  Tabs should not
+be used as inconsistent use of tabs and spaces leads to difficulties
+when using ``diff'' or other tools to compare files.
+
+\subsubsection{Line Length}
+
+Avoid lines longer than 80 characters, since they're not handled well
+by many terminals and tools.
+ 
+
+\subsubsection{Wrapping Lines}
+
+When an expression will not fit on a single line, break it according
+to these general principles:
+
+\begin{itemize}
+\item Break after a comma.  
+\item Break before an operator.  
+\item Prefer higher-level breaks to lower-level breaks.  
+\item Align the new line with the beginning of the expression at the same
+      level on the previous line.
+\item If the above rules lead to confusing code or to code that's squished
+      up against the right margin, just indent 8 spaces instead.
+\end{itemize}
+
+Here are some examples of breaking function calls:
+
+\begin{quote}
+\begin{verbatim}
+Function (longExpression1, longExpression2, longExpression3, 
+          longExpression4, longExpression5);
+ 
+var = Function (longExpression1,
+                Function2 (longExpression2,
+                           longExpression3)); 
+\end{verbatim}
+\end{quote}
+
+Following are two examples of breaking an arithmetic expression. The
+first is preferred, since the break occurs outside the parenthesised
+expression, which is at a higher level.
+
+\begin{quote}
+\begin{verbatim}
+LongName1 = LongName2 * (LongName3 + LongName4 - LongName5)
+            + 4 * LongName6; /* PREFER */
+
+LongName1 = LongName2 * (LongName3 + LongName4
+                         - LongName5) + 4 * LongName6; /* AVOID */
+\end{verbatim}
+\end{quote}
+
+Following are two examples of indenting function declarations. The
+first is the conventional case. The second would shift the second and
+third lines to the far right if it used conventional indentation, so
+instead it indents only 8 spaces.  Recommended is the third variant.
+
+\begin{quote}
+\begin{verbatim}
+/* CONVENTIONAL INDENTATION */
+Function (int AnArg, double AnotherArg, char *YetAnotherArg,
+          int *AndStillAnother) 
+{
+    ...
+}
+
+/*INDENT 8 SPACES TO AVOID VERY DEEP INDENTS */
+static ReallyLongFunctionName (int AnArg,
+        double anotherArg, char *YetAnotherArg,
+        int *AndStillAnother) 
+{
+    ...
+}
+
+/* PREFERRED: PUT EACH ARG ON OWN LINE   */
+static ReallyLongFunctionName (int      AnArg,
+                               double   anotherArg, 
+                               char   * YetAnotherArg,
+                               int    * AndStillAnother) 
+{
+    ...
+}
+\end{verbatim}
+\end{quote}
+
+Here are three acceptable ways to format ternary expressions:
+
+\begin{quote}
+\begin{verbatim}
+alpha = (aLongBooleanExpression) ? beta : gamma;  
+
+alpha = (aLongBooleanExpression) ? beta
+                                 : gamma;  
+
+alpha = (aLongBooleanExpression)
+      ? beta 
+      : gamma;  
+\end{verbatim}
+\end{quote}
+
+
+\subsection{Comments}
+\label{sec:cguide:comments}
+
+Programs can have two kinds of comments: implementation comments
+and documentation comments. Implementation comments are those 
+delimited by /*...*/, or single lines comments starting with //. 
+Documentation comments are delimited by
+/**...*/, and can be extracted to HTML files using the
+doxygen tool.
+
+Implementation comments are mean for commenting out code or for
+comments about the particular implementation. Doc comments are meant
+to describe the specification of the code, from an implementation-free
+perspective, to be read by developers who might not necessarily have
+the source code at hand.
+
+Comments should be used to give overviews of code and provide
+additional information that is not readily available in the code
+itself. Comments should contain only information that is relevant to
+reading and understanding the program. For example, information about
+how a corresponding package is built or in what directory it resides
+should not be included as a comment.
+
+Discussion of nontrivial or nonobvious design decisions is
+appropriate, but avoid duplicating information that is present in (and
+clear from) the code. It is too easy for redundant comments to get out
+of date. In general, avoid any comments that are likely to get out of
+date as the code evolves.
+
+\textbf{Note:}
+
+The frequency of comments sometimes reflects poor quality of
+code. When you feel compelled to add a comment, consider rewriting the
+code to make it clearer.
+
+Comments should not be enclosed in large boxes drawn with asterisks or
+other characters. Comments should never include special characters
+such as form-feed and backspace.
+
+\subsubsection{Implementation Comment Formats}
+
+Programs can have four styles of implementation comments: block,
+single-line, trailing, and end-of-line. 
+
+\paragraph{Block Comments}
+\label{sec:cguide:block_comments}
+
+Block comments are used to provide descriptions of files, methods,
+data structures and algorithms. Block comments may be used at the
+beginning of each file and before each method. They can also be used
+in other places, such as within functions. Block comments inside a
+function should be indented to the same level as the code
+they describe.
+
+A block comment should be preceded by a blank line to set it apart
+from the rest of the code.
+
+\begin{quote}
+\begin{verbatim}
+/*
+ * Here is a block comment (prefferred).
+ * Here is a block comment (prefferred).
+ * Here is a block comment (prefferred).
+ */
+
+// Here is anmother block comment.
+// Here is anmother block comment.
+// Here is anmother block comment.
+
+\end{verbatim}
+\end{quote}
+
+See also ``Documentation Comments'' on page \pageref{sec:cguide:doc_comments}. 
+
+\paragraph{Single-Line Comments}
+\label{sec:cguide:sline_comments}
+
+Short comments can appear on a single line indented to the level of
+the code that follows. If a comment can't be written in a single line,
+it should follow the block comment format (see section
+\ref{sec:cguide:block_comments}). A single-line comment should be preceded by
+a blank line. Here's an example of a single-line comment in C code
+(also see ``Documentation Comments'' on page
+\pageref{sec:cguide:doc_comments}):
+
+\begin{quote}
+\begin{verbatim}
+if (condition) 
+{
+  // Handle the condition. 
+  ...
+}
+\end{verbatim}
+\end{quote}
+
+\paragraph{Trailing Comments}
+\label{sec:cguide:trailing_comments}
+
+Very short comments can appear on the same line as the code they
+describe, but should be shifted far enough to separate them from the
+statements. If more than one short comment appears in a chunk of code,
+they should all be indented to the same tab setting.
+
+Here's an example of a trailing comment in C code: 
+
+\begin{quote}
+\begin{verbatim}
+  if ( a == 2 ) 
+  {
+    a = TRUE;          // special case
+  } 
+  else 
+  {
+    a = isPrime (a);   // works only for odd a
+  }
+\end{verbatim}
+
+\end{quote}
+
+\subsubsection{Documentation Comments }
+\label{sec:cguide:doc_comments} 
+
+For further details, see ``The Doxygen Manual''
+which includes information on the doc comment tags (@return, @param,
+@see):
+
+\begin{quote}
+\url{http://www.doxygen.org}
+\end{quote}
+
+Doxygen comments describe C functions, structures, enums, unions,
+etc. Each doc comment is set inside the comment delimiters /**...*/,
+with one comment per class, interface, or member. This comment should
+appear just before the declaration:
+
+\begin{quote}
+\begin{verbatim}
+/**
+ * The Example function provides ...
+ */
+void Example (void)
+{ ...
+
+\end{verbatim}
+\end{quote}
+
+The first line of doc comment (/**) is not indented relative to the
+surrounding block; subsequent doc comment lines each have 1
+space of indentation (to vertically align the asterisks).
+
+If you need to give information that isn't appropriate for
+documentation, use an implementation block comment (see section
+\ref{sec:cguide:block_comments}) or single-line (see section
+\ref{sec:cguide:sline_comments}) comment immediately
+\emph{before} the declaration. For example, details about the
+implementation of a function should go in in such an implementation
+block comment \emph{following} the doc comment for the function, not
+in the function doc comment.
+
+
+\subsection{Declarations}
+
+\subsubsection{Number Per Line}
+
+One declaration per line is recommended since it encourages commenting. In other words, 
+
+\begin{quote}
+\begin{verbatim}
+int level;   // indentation level
+int size;    // size of table 
+\end{verbatim}
+\end{quote}
+
+is preferred over 
+
+\begin{quote}
+\begin{verbatim}
+int level, size;
+\end{verbatim}
+\end{quote}
+
+Do not put different types on the same line. Example: 
+
+\begin{quote}
+\begin{verbatim}
+int foo,  fooarray[SIZE]; // WRONG!
+\end{verbatim}
+\end{quote}
+ 
+\textbf{Note:}
+
+The examples above use one space between the type and the identifier.
+Groups of declarations and comments should be lined up where possible
+(with spaces, not tabs), e.g.:
+
+\begin{quote}
+\begin{verbatim}
+
+int     level;	      // indentation level              
+int     size;	        // size of table                  
+Object  currentEntry;	// currently selected table entry 
+
+\end{verbatim}
+\end{quote}
+ 
+
+\subsubsection{Initialisation}
+
+Variables should not be left un-initialized, or only as short as
+possible.
+
+
+\subsubsection{Placement}
+
+Put declarations only at the beginning of blocks. (A block is any code
+surrounded by curly braces ``\{`` and ``\}''.) Don't wait to declare
+variables until their first use; it can confuse the unwary programmer
+and hamper code portability within the scope.
+
+\begin{quote}
+\begin{verbatim}
+void MyFunction(...) 
+{
+  int int1 = 0;   // beginning of block
+
+  if ( condition ) 
+  {
+    int int2 = 0; // beginning of "if" block
+    ...
+  }
+}
+
+\end{verbatim}
+\end{quote}
+
+The one exception to the rule is indices of for loops in C++, which 
+can be declared in the for statement:
+
+\begin{quote}
+\begin{verbatim}
+
+for (int i = 0; i < MaxLoops; i++) 
+{ 
+  ... 
+}
+
+\end{verbatim}
+\end{quote}
+
+Avoid local declarations that hide declarations at higher levels. For
+example, do not declare the same variable name in an inner block:
+
+\begin{quote}
+\begin{verbatim}
+int MyFunction (...) 
+{
+  int count;
+  
+  if ( condition ) 
+  {
+    int count; // AVOID!
+    ...
+  }
+
+  ...
+}
+\end{verbatim}
+\end{quote}
+
+\subsubsection{Public versus Private Declarations}
+
+When defining inheritance, class members and class methods, the
+minimal possible set should be public, the minimal possible set should
+be protected, and the maximal possible set should be private.  Always
+use the keywords public, protected and private explicitely, and don't
+rely on the defaults.
+
+
+\subsubsection{Function Declarations}
+
+When coding functions the following formatting rules should be
+followed:
+
+\begin{itemize}
+\item All functions should be preceded by a documentation comment
+      describing the function, its arguments and return code(s).
+\item Open brace ``\{`` appears at the beginning of the line following
+      the declaration statement  
+\item Closing brace ``\}'' starts a line by itself.
+\end{itemize}
+
+\begin{quote}
+\begin{verbatim}
+
+/** The sample function.
+ *  This function calculates the sample thingy.
+ *  Some more description.
+ *
+ * @param i The first argument.
+ * @param j the second argument.
+ * 
+ * @return The sample value.
+ */
+int sample (int i, int j) 
+{
+  return (i + j);
+}
+
+\end{verbatim}
+\end{quote}
+
+\subsection{Statements}
+\subsubsection{Simple Statements}
+
+Each line should contain at most one statement. Example: 
+
+\begin{quote}
+\begin{verbatim}
+
+argv++;           // Correct 
+argc--;           // Correct 
+argv++; argc--;   // AVOID! 
+
+\end{verbatim}
+\end{quote}
+
+
+\subsubsection{Compound Statements}
+
+Compound statements are statements that contain lists of statements
+enclosed in braces ``\{ statements \}``. See the following sections
+for examples.
+
+
+\begin{itemize}
+\item The enclosed statements should be indented one more level than
+      the compound statement.  
+
+\item The opening brace should be on a line by itself following the
+      line that begins the compound statement, indented to the same
+      level as that line; the closing brace should begin a line and be
+      indented to the beginning of the compound statement.
+
+\item Braces are used around all statements, even single statements,
+      when they are part of a control structure, such as a if-else or
+      for statement. This makes it easier to add statements without
+      accidentally introducing bugs due to forgetting to add braces.
+
+\end{itemize}
+ 
+\begin{quote}
+\begin{verbatim}
+
+void sample (int t)
+{
+  for ( int i = 0; i < t; i++ )
+  {
+    if ( 3 == t )
+    {
+      return;
+    }
+  }
+
+  return;
+}
+
+\end{verbatim}
+\end{quote}
+
+\subsubsection{return Statements}
+
+Unless a return value is a single word expression, the return
+statement should use parentheses to make the return value more
+obvious. Example:
+
+\begin{quote}
+\begin{verbatim}
+return;
+
+return size;
+
+return (fix_size (size));
+
+return (size ? size : defaultSize);
+
+\end{verbatim}
+\end{quote}
+
+
+\subsubsection{if, if-else, if else-if else Statements}
+
+The if-else class of statements should have the following form: 
+
+\begin{quote}
+\begin{verbatim}
+if ( condition ) 
+{
+  statements;
+}
+
+if ( condition ) 
+{
+  statements;
+} 
+else 
+{
+  statements;
+}
+
+if ( condition ) 
+{
+  statements;
+} 
+else if ( condition ) 
+{
+  statements;
+} 
+else
+{
+  statements;
+}
+\end{verbatim}
+\end{quote}
+
+\textbf{Note:}
+
+if statements always use braces \{\}. Avoid the following error-prone
+form: 
+
+\begin{quote}
+\begin{verbatim}
+if ( condition ) // AVOID!
+    statement;
+\end{verbatim}
+\end{quote}
+ 
+\subsubsection{for Statements}
+
+A for statement should have the following form: 
+
+\begin{quote}
+\begin{verbatim}
+for ( initialization; condition; update ) 
+{
+  statements;
+}
+\end{verbatim}
+\end{quote}
+
+An empty for statement (one in which all the work is done in the
+initialization, condition, and update clauses) should have the
+following form, which makes its purpose more obvious:
+
+\begin{quote}
+\begin{verbatim}
+for ( initialization; condition; update ) ;
+\end{verbatim}
+\end{quote}
+
+When using the comma operator in the initialization or update clause
+of a for statement, avoid the complexity of using more than three
+variables. If needed, use separate statements before the for loop (for
+the initialization clause) or at the end of the loop (for the update
+clause).
+
+\subsubsection{while Statements}
+
+A while statement should have the following form: 
+
+\begin{quote}
+\begin{verbatim}
+while ( condition ) 
+{
+  statements;
+}
+
+\end{verbatim}
+\end{quote}
+
+An empty while statement should have the following form: 
+
+\begin{quote}
+\begin{verbatim}
+while ( condition ) ;
+\end{verbatim}
+\end{quote}
+
+\subsubsection{do-while Statements}
+
+A do-while statement should have the following form: 
+
+\begin{quote}
+\begin{verbatim}
+do 
+{
+  statements;
+} while ( condition );
+\end{verbatim}
+\end{quote}
+
+\subsubsection{switch Statements}
+
+A switch statement should have the following form: 
+
+\begin{quote}
+\begin{verbatim}
+switch ( condition ) 
+{
+  case ABC:
+    statements;
+    // falls through
+
+  case DEF:
+    statements;
+    break;
+
+  case XYZ:
+    statements;
+    break;
+
+  default:
+    statements;
+    break;
+}
+\end{verbatim}
+\end{quote}
+
+Every time a case falls through (doesn't include a break statement),
+add a comment where the break statement would normally be. This is
+shown in the preceding code example with the /* falls through */
+comment.
+
+Every switch statement should include a default case. The break in the
+default case is redundant, but it prevents a fall-through error if
+later the default is changed to a specific case and a new default is
+introduced.
+
+For longer code blocks, brackets can be used for the indivudual cases,
+as in the following example, but should be used always or not at all
+in a single case block:
+
+\begin{quote}
+\begin{verbatim}
+switch ( condition ) 
+{
+  case ABC:
+  {
+    statements;
+    statements;
+    statements;
+    // falls through
+  }
+
+  case DEF:
+  {
+    statements;
+    break;
+  }
+
+  case XYZ:
+  {
+    statements;
+    break;
+  }
+
+  default:
+  {
+    statements;
+    break;
+  }
+}
+\end{verbatim}
+\end{quote}
+\subsection{White Space}
+
+\subsubsection{Blank Lines}
+
+Blank lines improve readability by setting off sections of code that
+are logically related. 
+
+Two blank lines should always be used in the following circumstances: 
+
+\begin{itemize}
+\item Between sections and functions of a source file  
+\end{itemize}
+
+One blank line should always be used in the following circumstances: 
+
+\begin{itemize}
+\item Between the local variable declarations in a block and its first statement  
+\item Before a block (see section \ref{sec:cguide:block_comments}) or single-line
+      (see section \ref{sec:cguide:sline_comments}) comment
+\item Between logical sections inside a function to improve readability 
+\end{itemize}
+ 
+\subsubsection{Blank Spaces}
+
+Blank spaces should be used in the following circumstances: 
+
+\begin{itemize}
+\item A blank space should appear after commas in argument lists.  
+\item All binary operators should be separated from their
+      operands by spaces. Blank spaces should never separate unary
+      operators such as unary minus, increment (``\T{++}''), and decrement
+      (``\T{--}'') from their operands. Example: \T{a + b; i++;}.
+\item brackets of if, for, while, and do operators should have leading
+      and trailing blanks (``\T{if ( 3 == i )}'', not ``\T{if (3 == i)}''). 
+
+\end{itemize}
+\begin{quote}
+\begin{verbatim}
+
+    a +=  c + d;
+    a  = (a + b) / (c * d);
+    
+    while ( d++ = s++ ) 
+    {
+      n++;
+    }
+\end{verbatim}
+\end{quote}
+
+
+\begin{itemize}
+\item The expressions in a for statement should be separated by blank spaces. Example: 
+\end{itemize}
+
+\begin{quote}
+\begin{verbatim}
+
+    for ( expr1; expr2; expr3 )
+
+\end{verbatim}
+\end{quote}
+
+\begin{itemize}
+\item Casts should be followed by a blank space. Examples: 
+\end{itemize}
+
+\begin{quote}
+\begin{verbatim}
+    MyFunction1 ((char) aNum, (double) x);
+    MyFunction2 ((int) (cp + 5), ((int) (i + 3) + 1);
+\end{verbatim}
+\end{quote}
+
+\begin{itemize}
+\item Template brackets should be separated by a blank space. Examples: 
+\end{itemize}
+
+\begin{quote}
+\begin{verbatim}
+    template <class T> MyFunction (void);
+    std::vector <std::pair <std::string, std::string> > map;
+\end{verbatim}
+\end{quote}
+
+\begin{itemize}
+\item Function invokations should have a blank before their brackets.
+Example:
+\end{itemize}
+
+\begin{quote}
+\begin{verbatim}
+    a = get_a(b, c);  // AVOID
+    a = get_a (b, c); // PREFER
+\end{verbatim}
+\end{quote}
+
+\subsection{Naming Conventions}
+
+Naming conventions make programs more understandable by making them
+easier to read.
+
+\begin{tabular}{|l|p{42ex}|}
+\hline
+  Externally visible functions and classes
+& 
+  if no namespaces are used, they should have a short prefix uniquely
+  identifying the module, followed by an underscore, followed by the
+  rest of the identifier which should consist of words, separated by
+  underscores, e.g. \emph{saga\_find\_resource}.
+\tabularnewline
+\hline
+  Static functions and classes
+&
+  should follow the same convention as externally visible functions,
+  but need not to have the prefix.
+\tabularnewline
+\hline
+  Variable names 
+&   
+  should be short yet meaningful. The choice of a variable name should
+  be mnemonic -- that is, designed to indicate to the casual observer
+  the intent of its use.  One-character variable names should be
+  avoided except for temporary ``throwaway'' variables. Common names
+  for temporary variables are i, j, k, m, and n for integers; c, d,
+  and e for characters. 
+\tabularnewline
+\hline
+  Private and protected class members
+&   
+  should have a trailing underscore, like \T{my\_state\_}.
+\tabularnewline
+\hline
+  \#defines
+&
+  should be all uppercase.
+\tabularnewline
+\hline
+\end{tabular}
+
+\subsection{Programming Practices}
+
+\subsubsection{Adherence to Standards}
+
+All code should adhere to the ISO C++ standards.
+The presence or absence of library functions not specified by the
+Posix standard on a particular platform should be detected by use of
+Autoconf and appropriate logic emplaced to either work around the
+absence or provide a good error message.
+
+\subsubsection{Use typedef in preference to \#defines}
+
+New types should be introduced via typedefs rather than by \#defines
+-- these types are then visible in debuggers and the compiler can do
+stronger type-checking.
+
+\subsubsection{Use of const qualifier}
+
+Where possible pointers should be passed using the const qualifier.
+This is especially important for strings.
+
+\subsubsection{Global and Static variables}
+
+Don't make any variable global or static without good
+reason.  Access to module level statics in other files can often
+be granted via a function call rather than by making the variable global.
+
+\subsubsection{Constants}
+
+Numerical constants (literals) should not be coded directly, except
+for -1, 0, and 1, or other numbers in loop counters.
+
+\subsubsection{Variable Assignments}
+
+Avoid assigning several variables to the same value in a single
+statement. It is hard to read. Example:
+
+\begin{quote}
+\begin{verbatim}
+fchar = lchar = 'c'; /* AVOID! */
+\end{verbatim}
+\end{quote}
+
+Do not use the assignment operator in a place where it can be easily
+confused with the equality operator. Example:
+
+\begin{quote}
+\begin{verbatim}
+if (file = fopen(...)) 
+{        /* AVOID! */
+  ...
+}
+
+\end{verbatim}
+\end{quote}
+
+should be written as 
+
+\begin{quote}
+\begin{verbatim}
+if ( NULL != (file = fopen (...)) ) 
+{
+  ...
+}
+
+\end{verbatim}
+
+\end{quote}
+
+Do not use embedded assignments in an attempt to improve run-time
+performance. This is the job of the compiler. Example:
+
+\begin{quote}
+\begin{verbatim}
+
+d = (a = b + c) + r;  /* AVOID! */
+
+\end{verbatim}
+\end{quote}
+
+should be written as 
+
+\begin{quote}
+\begin{verbatim}
+
+a = b + c;
+d = a + r;
+
+\end{verbatim}
+
+\end{quote}
+
+\subsubsection{Miscellaneous Practices}
+
+\paragraph{Parentheses}
+
+It is generally a good idea to use parentheses liberally in
+expressions involving mixed operators to avoid operator precedence
+problems. Even if the operator precedence seems clear to you, it might
+not be to others-you shouldn't assume that other programmers know
+precedence as well as you do.
+
+\begin{quote}
+\begin{verbatim}
+if ( a == b && c == d )     /* AVOID! */
+if ( (a == b) && (c == d) ) /* RIGHT */
+\end{verbatim}
+\end{quote}
+ 
+\paragraph{Returning Values}
+
+Try to make the structure of your program match the intent. Example:
+
+\begin{quote}
+\begin{verbatim}
+if ( booleanExpression ) 
+{
+  return true;
+} 
+else 
+{
+  return false;
+}
+\end{verbatim}
+\end{quote}
+
+should instead be written as 
+
+\begin{quote}
+\begin{verbatim}
+
+return booleanExpression;
+
+\end{verbatim}
+\end{quote}
+
+\paragraph{Expressions before `?' in the Conditional Operator }
+
+If an expression containing a binary operator appears before the ? in
+the ternary ?: operator, it should be parenthesised. Example:
+
+\begin{quote}
+\begin{verbatim}
+(x >= 0) ? x : -x;
+
+\end{verbatim}
+\end{quote}
+
+\paragraph{Special Comments}
+
+Use TODO in a comment to flag something that is bogus but works, or
+missing pices. Use FIXME to flag something that is bogus and broken.
+
+\paragraph{Compilation with warnings enabled}
+
+It is recommended that developers compile with all warnings enabled.
+Compiler warnings often flag dubious practices and common coding
+errors.
+
+\end{document}
+

@@ -1,0 +1,155 @@
+
+\subsection{Quick Introduction}
+
+ URLs (and URIs, see below) are a dominant concept for referencing
+ application-external resources.  As such, they are also widely used in
+ the Grid world, and in SAGA.  The |saga::url| class helps to manage
+ such URLs.
+
+\subsection{Reference}
+
+ \begin{mycode}[label=Prototype: saga::url]
+  namespace saga 
+  {
+    class url 
+        : public saga::object
+    {
+      public:
+        url  (void);
+        url  (std::string const & urlstr);
+
+        ~url (void);
+
+        url & operator= (std::string const & urlstr);
+
+        std::string get_string   (void) const;
+
+        std::string get_url      (void) const;
+        void        set_url      (std::string const & url);
+
+        std::string get_scheme   (void) const;
+        void        set_scheme   (std::string const & scheme);
+
+        std::string get_host     (void) const;
+        void        set_host     (std::string const & host);
+
+        int         get_port     (void) const;
+        void        set_port     (int port);
+
+        std::string get_fragment (void) const;
+        void        set_fragment (std::string const & fragment);
+
+        std::string get_path     (void) const;
+        void        set_path     (std::string const & path);
+
+        std::string get_userinfo (void) const;
+        void        set_userinfo (std::string const & userinfo);
+
+        saga::url translate    (std::string const & proto);
+    };
+
+  
+    std::ostream& operator<< (std::ostream       & os, 
+                              saga::url    const & u);
+    std::istream& operator>> (std::istream       & is, 
+                              saga::url          & u);
+    bool          operator== (saga::url    const & lhs, 
+                              saga::url    const & rhs);
+    bool          operator<  (saga::url    const & lhs, 
+                              saga::url    const & rhs);
+  }
+ \end{mycode}
+
+\subsection{Details}
+
+ In the time of the Internet, there are probably only few people
+ in the first and second world who are not aware of the concept
+ of URLs.  However, many miss the finer details of the 
+ \I{Uniform Resource Locators}, and for a good reason: URLs are
+ \I{designed} to hide a number of complexities from the user.  In
+ order to make efficient use of the SAGA API, and of many Grid
+ concepts in general, we will need a basic understanding of
+ several key elements of URLs\footnote{Technically, a URL is a
+ URI that, \I{``in addition to identifying a resource,
+ [provides] a means of locating the resource by describing its
+ primary access mechanism (e.g., its network ‘location’).''}
+ (\I{''Cool URLs don't change''},
+ \T{http://www.w3.org/Provider/Style/URI})  This document,
+ however, uses the terms URL and URI interchangeably.}.
+
+ \subsubsection{The Structure of URLs}
+
+
+  RFC 3986\cite{rfc-3986} defines the generic syntax for URIs (and thus
+  for URLs).  A URL consists of four parts:
+
+  \sshift \T{<scheme> : <hierarchical part> [ ? <query> ] [ \# <fragment> ]}
+
+  The \T{scheme} defines how the other parts of the URL are
+  interpreted.  The remaining parts define what resource the URL
+  points to, and possibly how to access that resource.
+
+  The \T{hierarchical part} usually contains the following
+  information: \T{userinfo}, \T{host}, \T{port}, and \T{path}.  This
+  information specifies \B{where} the resource is to be
+  found.
+
+  The \T{saga::url} class defines setters and getters for most of
+  these individual URL elements.  When setting one of these
+  elements, SAGA will make sure that the result is a valid URL---otherwise the setter will decline the operation with a
+  \T{BadParameter} exception:
+
+  \begin{mycode}
+  saga::url u  ("ftp://remote.host.net:1234/data/old.dat");
+
+  u.set_host   ("local.host/net");
+  u.set_path   ("/data/new.dat");
+  \end{mycode}
+
+  Line 3 would result in a \T{BadParameter} exception, as the
+  host contains an invalid character.  Line 4 in the example above would
+  change the URL to
+
+   \shift \T{ftp://remote.host.net:1234/data/new.dat}
+
+
+
+
+ \subsubsection{URLs in Grids}
+
+  Now, in Grids we face the problem that different URLs may
+  point to the same resource. For example, the following two URLs
+  may refer to the same file:
+
+   \shift \T{http://data.silo.net/data/joe\_doe/recent/abc.dat}\\
+   \shift \T{ftp://data.silo.net/pub/joe\_doe/recent/abc.dat}
+
+  How can the SAGA API handle these differences transparently?
+  In short: it can't\footnote{For a detailed discussion see
+  section 2.11 of the SAGA specification \cite{ogf-gfd-90}.}, however, it  can help.  For example, it allows to translate URLs
+  from one scheme to the other.  The code snippet below \I{may}
+  be able to repeat the printout from above\footnote{Please note that,
+  at the moment, no adaptor implements \T{url::translate()}.}:
+
+  % FIXME: the saga-a prototype seems wrong?
+  \begin{mycode}
+  // Translating URLs
+  saga::url in("http://data.silo.net/data/joe_doe/recent/abc.dat");
+  saga::url out = in.translate ("ftp://");
+
+  std::cout <<  in.get_string () << std::endl;
+  std::cout << out.get_string () << std::endl;
+  \end{mycode}
+
+  Also, SAGA allows you to use the special scheme \T{any://} as
+  a placeholder.  If specified, the SAGA implementation tries to
+  guess the correct scheme, and does the potentially required
+  URL translation in the backround.
+
+  \HINT{Please note that URL translation is a non-trivial and
+  error prone process, so it is not a good idea to rely on it
+  if you want to keep your application portable (which is a MUST
+  in Grids!).  Wherever possible stick to the known schemes, and
+  keep your transactions inside a single scheme and name space.}
+
+

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$classsaga_1_1authentication__failed.html" title="{saga::authentication_failed\n||+ authentication_failed()\l+ authentication_failed()\l+ authentication_failed()\l}" alt="" coords="5,608,200,736"/>
+<area shape="rect" id="node9" href="$classsaga_1_1authorization__failed.html" title="{saga::authorization_failed\n||+ authorization_failed()\l+ authorization_failed()\l+ authorization_failed()\l}" alt="" coords="224,608,412,736"/>
+<area shape="rect" id="node11" href="$classsaga_1_1permission__denied.html" title="{saga::permission_denied\n||+ permission_denied()\l+ permission_denied()\l+ permission_denied()\l}" alt="" coords="437,608,619,736"/>
+<area shape="rect" id="node2" href="$classsaga_1_1exception.html" title="{saga::exception\n|+ m\l+ e\l+ l\l|+ ~exception()\l+ what()\l+ get_message()\l+ get_error()\l+ get_object()\l+ get_all_exceptions()\l+ get_all_messages()\l}" alt="" coords="237,144,400,384"/>
+<area shape="rect" id="node4" title="STL class." alt="" coords="262,6,375,96"/>
+</map>

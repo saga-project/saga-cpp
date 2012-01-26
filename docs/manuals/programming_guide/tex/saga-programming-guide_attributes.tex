@@ -1,0 +1,127 @@
+
+\subsection{Quick Introduction}
+
+ Attributes in SAGA are handled via the \T{saga::attribute} interface
+ shown above.  That interface allows to set, query, and to inspect
+ specific attributes on those SAGA objects that implement the
+ interface.  
+ 
+
+\subsection{Reference}
+
+ \begin{mycode}[label=Prototype: saga::attribute]
+  namespace saga
+  {
+    namespace attributes
+    {
+      // common attribute values
+      char const * const common_true  = "True";
+      char const * const common_false = "False";
+    }
+    
+    class attribute 
+    {
+      public:
+        typedef std::vector <std::string>              strvec_type;
+        typedef std::map    <std::string, std::string> strmap_type;
+  
+        std::string  get_attribute          (std::string key)  const;
+        void         set_attribute          (std::string key, 
+                                             std::string val);
+
+        strvec_type  get_vector_attribute   (std::string key)  const;
+        void         set_vector_attribute   (std::string key, 
+                                             strvec_type val);
+
+        void         remove_attribute       (std::string key);
+
+        strvec_type  list_attributes        (void) const;
+        strvec_type  find_attributes        (std::string pat)  const;
+
+        bool         attribute_exists       (std::string key)  const;
+        bool         attribute_is_readonly  (std::string key)  const;
+        bool         attribute_is_writable  (std::string key)  const;
+        bool         attribute_is_vector    (std::string key)  const;
+        bool         attribute_is_removable (std::string key)  const;
+    };
+  }
+ \end{mycode}
+
+
+\subsection{Details}
+
+ A prominent example is the \T{saga::job::description}
+ class:
+
+ \begin{mycode}
+  saga::job::description jobdef;
+
+  std::vector <std::string> args;
+  args.push_back ("2");
+  
+  jobdef.set_attribute        ("Executable", "/bin/sleep");
+  jobdef.set_vector_attribute ("Arguments",  args);
+
+ 
+  saga::job job = js.create_job (jobdef);
+ \end{mycode}
+
+ That example, as simple as it is, already shows most of what
+ the attribute interface offers---that interface is really simple! 
+ For some classes, the set of available attributes is fixed, and
+ will never change.  That is also the case for the job
+ description from the example above.  For other classes, such as for
+ logical files (\T{saga::logical\_file}), the application programmer can
+ specify arbitrary attributes -- their interpretations are, of
+ course, up to the application again.
+
+ Note that SAGA defines the known available attributes as static
+ strings.  Thus, the above example is more safely written as:
+
+
+ \begin{mycode}
+  saga::job::description jobdef;
+
+  std::vector <std::string> args;
+  args.push_back ("2");
+  
+  namespace sja = saga::job::attributes;
+
+  jobdef.set_attribute       (sja::description_executable,"/bin/sleep");
+  jobdef.set_vector_attribute(sja::description_arguments, args);
+ 
+  saga::job job = js.create_job (jobdef);
+ \end{mycode}
+ \subsubsection{Attribute Types}
+
+  Although all attributes in SAGA are string-based, we distinguish
+  between different types of attributes.  The available types and the
+  prescribed formatting for the attribute values are summarized in
+  Table~\ref{tab:attr-types}.  
+
+   \UndefineShortVerb{\|}
+
+\begin{table}
+   \begin{tabular}{|l|l|l|}
+    \hline
+    \B{Type} & \B{Format} & \B{Example} \\
+    \hline
+    \T{String} & as in \T{printf ("\%s",   val);} & \T{Hello World} \\
+    \T{Int}    & as in \T{printf ("\%lld", val);} & \T{123} \\
+    \T{Float}  & as in \T{printf ("\%lld", val);} & \T{1.234E-4} \\
+    \T{Time}   & as in \T{printf ("\%lld", val);} & \T{Mon Oct 20 11:31:54 1952} \\
+    \T{Bool}   & \T{True} or \T{False}            & \T{True} \\
+    \T{Enum}   & literal value of the enum        & \T{Done} \\
+    \hline
+  \end{tabular}
+  \caption{Available types and the prescribed formatting for the attribute value}
+  \label{tab:attr-types}
+\end{table}
+
+  \DefineShortVerb{\|}
+
+  Trying to set an attribute which is, for its type, incorrectly
+  formatted, will result in a 'BadParameter' exception.
+
+  
+

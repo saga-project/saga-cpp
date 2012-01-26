@@ -1,0 +1,348 @@
+#  Copyright (c) 2005-2007 Andre Merzky (andre@merzky.net)
+# 
+#  Distributed under the Boost Software License, Version 1.0. (See accompanying
+#  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+ifndef SAGA_MK_INC_CONF_C
+       SAGA_MK_INC_CONF_C = yes
+
+###########################################################
+#
+# version
+#
+SAGA_VERSION               = @SAGA_VERSION@
+SAGA_VERSION_FULL          = @SAGA_VERSION_FULL@
+SAGA_VERSION_MAJOR         = @SAGA_VERSION_MAJOR@
+SAGA_VERSION_MINOR         = @SAGA_VERSION_MINOR@
+SAGA_VERSION_SUBMINOR      = @SAGA_VERSION_SUBMINOR@
+SAGA_VERSION_DATE          = @SAGA_VERSION_DATE@
+#
+###########################################################
+
+###########################################################
+#
+# paths
+#
+ifndef SAGA_LOCATION
+ SAGA_LOCATION             = @SAGA_LOCATION@
+endif
+
+SAGA_CONFIGURE_OK          = @SAGA_CONFIGURE_OK@
+
+SAGA_BIN_ROOT              = @SAGA_BIN_ROOT@
+SAGA_SHS_ROOT              = @SAGA_BIN_ROOT@
+SAGA_LIB_ROOT              = @SAGA_LIB_ROOT@
+SAGA_HDR_ROOT              = @SAGA_INC_ROOT@
+SAGA_DAT_ROOT              = @SAGA_DAT_ROOT@
+SAGA_INI_ROOT              = @SAGA_DAT_ROOT@
+SAGA_MAN_ROOT              = @SAGA_MAN_ROOT@
+SAGA_MAK_ROOT              = @SAGA_DAT_ROOT@/make
+SAGA_M4_ROOT               = @SAGA_DAT_ROOT@/config
+
+SAGA_EXT_ROOT              = $(SAGA_ROOT)/external
+
+ifdef SAGA_ROOT
+SAGA_CONFDIR               = @CONFDIR@
+endif
+#
+###########################################################
+
+###########################################################
+#
+# Tools
+#
+BC                         = @SAGA_BC@
+CP                         = @SAGA_CP@ -f
+LN                         = @SAGA_LN@ -s
+LS                         = @SAGA_LS@
+MV                         = @SAGA_MV@ -f
+RM                         = @SAGA_RM@ -f
+SH                         = @SAGA_SH@
+TR                         = @SAGA_TR@
+AWK                        = @SAGA_AWK@
+CAT                        = @SAGA_CAT@
+CUT                        = @SAGA_CUT@
+ENV                        = @SAGA_ENV@
+RPM                        = @SAGA_RPM@
+RPMBUILD                   = @SAGA_RPMBUILD@
+PWD                        = @SAGA_PWD@
+SED                        = @SAGA_SED@
+SCP                        = @SAGA_SCP@
+SSH                        = @SAGA_SSH@
+TAR                        = @SAGA_TAR@
+DATE                       = @SAGA_DATE@
+DPKG                       = @SAGA_DPKG@
+GREP                       = @SAGA_GREP@
+GZIP                       = @SAGA_GZIP@
+ECHO                       = @SAGA_ECHO@
+FIND                       = @SAGA_FIND@
+GZIP                       = @SAGA_GZIP@
+SORT                       = @SAGA_SORT@
+TEST                       = @SAGA_TEST@
+TRUE                       = @SAGA_TRUE@
+UNIQ                       = @SAGA_UNIQ@
+EGREP                      = @EGREP@
+MKDIR                      = @SAGA_MKDIR@ -p
+TOUCH                      = @SAGA_TOUCH@
+FALSE                      = @SAGA_FALSE@
+SLEEP                      = @SAGA_SLEEP@
+XARGS                      = @SAGA_XARGS@
+PDFLATEX                   = @SAGA_PDFLATEX@
+BIBTEX                     = @SAGA_BIBTEX@
+HTLATEX                    = @SAGA_HTLATEX@
+DOXYGEN                    = @SAGA_DOXYGEN@
+EPYDOC                     = @SAGA_EPYDOC@
+DEVNULL                    = @SAGA_DEVNULL@
+
+MAKE                      += --no-print-directory
+#
+############################################################
+
+###########################################################
+#
+# Compiler
+#
+SAGA_CPP                   = @SAGA_CPP@
+SAGA_CPPFLAGS             += @SAGA_CPPFLAGS@
+SAGA_CPPINCS              += @SAGA_CPPINCS@
+SAGA_CPPINCS_SYS          += @SAGA_CPPINCS_SYS@
+
+SAGA_CC                    = @SAGA_CC@
+ifneq "$(SAGA_DEBUG_MAKE)" "yes"
+SAGA_CCFLAGS              += @SAGA_CCFLAGS@
+else
+SAGA_CCFLAGS              += $(filter-out -O%,@SAGA_CCFLAGS@)
+endif
+
+SAGA_CXX                   = @SAGA_CXX@
+ifneq "$(SAGA_DEBUG_MAKE)" "yes"
+SAGA_CXXFLAGS             += @SAGA_CXXFLAGS@
+else
+SAGA_CXXFLAGS             += $(filter-out -O%,@SAGA_CXXFLAGS@)
+endif
+
+SAGA_GCC_VISIBILITY        = @SAGA_GCC_VISIBILITY@
+
+SAGA_LD                    = @SAGA_CXX@
+SAGA_LD_BIN                = @SAGA_CXX@
+SAGA_LD_LIB                = @SAGA_CXX@
+SAGA_LDFLAGS              += @LDFLAGS@
+SAGA_LDFLAGS_SYS          += @SAGA_LDFLAGS_SYS@
+
+SAGA_LDFLAGS_READLINE      = @SAGA_LDFLAGS_READLINE@
+
+SAGA_AR                    = @SAGA_AR@
+SAGA_ARFLAGS              += @SAGA_ARFLAGS@
+
+SAGA_LDFLAGS_PROFILER      = @SAGA_LDFLAGS_GOOGLE_PROFILER@
+SAGA_CCACHE                = @SAGA_CCACHE@
+
+SAGA_OSTYPE                = @SAGA_OSTYPE@
+SAGA_ARCH                  = @SAGA_ARCH@
+SAGA_DEB_ARCH              = @SAGA_DEB_ARCH@
+SAGA_RPM_ARCH              = @SAGA_RPM_ARCH@
+
+SAGA_BUILD_LIB_STATIC      = @SAGA_BUILD_LIB_STATIC@
+SAGA_BUILD_LIB_DYNAMIC     = @SAGA_BUILD_LIB_DYNAMIC@
+
+# always add libdl
+SAGA_LDFLAGS_SYS          += @LIBADD_DL@
+
+# honor user provided flags
+SAGA_CPPINCS              += $(SAGA_INC_FLAGS)
+SAGA_CPPINCS_SYS          += $(SAGA_INC_FLAGS_SYS)
+SAGA_ARFLAGS_SYS          += $(SAGA_AR_FLAGS)
+
+#
+###########################################################
+
+
+
+###########################################################
+#
+# external dependencies (non-boost)
+#
+SAGA_HAVE_SOCI                = @HAVE_SOCI@
+SAGA_HAVE_SOCI_SQLITE3        = @HAVE_SOCI_SQLITE3@
+SAGA_HAVE_SOCI_POSTGRESQL     = @HAVE_SOCI_POSTGRESQL@
+SAGA_HAVE_SOCI_ORACLE         = @HAVE_SOCI_ORACLE@
+SAGA_HAVE_SOCI_MYSQL          = @HAVE_SOCI_MYSQL@
+SAGA_HAVE_SOCI_ODBC           = @HAVE_SOCI_ODBC@
+SAGA_HAVE_SOCI_FIREBIRD       = @HAVE_SOCI_FIREBIRD@
+
+SAGA_HAVE_INTERNAL_SOCI       = @HAVE_INTERNAL_SOCI@
+
+SAGA_HAVE_SQLITE3             = @HAVE_SQLITE3@
+HAVE_SQLITE3_DTOR_TYPE        = @HAVE_SQLITE3_DTOR_TYPE@
+
+SAGA_HAVE_POSTGRESQL          = @HAVE_POSTGRESQL@
+
+SAGA_HAVE_XMLRPC              = @HAVE_XMLRPC@
+SAGA_HAVE_OPENSSL             = @HAVE_OPENSSL@
+#
+###########################################################
+
+###########################################################
+#
+# external package dependencies
+#
+SAGA_DEP_FILES                = @SAGA_DEP_FILES@
+#
+###########################################################
+
+###########################################################
+#
+# MacOS X specific compiler settings
+#
+ifeq "$(SAGA_OSTYPE)" "SAGA_APPLE"
+
+  SAGA_LEXT                = dylib
+  SAGA_AEXT                = a
+
+ifneq "$(SAGA_DEBUG_MAKE)" "yes"
+# SAGA_CXXFLAGS           += -Os
+endif
+
+  SAGA_CXXFLAGS           += -pipe -Wall -ansi -std=c++98
+  SAGA_CXXFLAGS           += -Wno-trigraphs
+  SAGA_CXXFLAGS_INT       += -fvisibility-inlines-hidden
+  SAGA_LD_LIB             += -dynamiclib
+
+  SAGA_CPPDEFS            += -D_FILE_OFFSET_BITS=64
+
+endif
+#
+###########################################################
+
+###########################################################
+#
+# IBM AIX 5 specific compiler settings
+#
+ifeq "$(SAGA_OSTYPE)" "SAGA_AIX"
+
+  SAGA_LEXT                = so
+  SAGA_AEXT                = a
+
+  ifeq "$(findstring gcc, $(SAGA_CC))" "gcc"  
+    SAGA_LD_LIB           += -shared
+    SAGA_LDFLAGS_SYS      += -pthread -Wl,-G -Wl,-brtl 
+    SAGA_LDFLAGS_SYS      += -Wl,-binitfini:_GLOBAL__DI:_GLOBAL__DD
+  endif
+   
+  ifeq "$(findstring xlc, $(SAGA_CC))" "xlc"  
+    SAGA_LDFLAGS_SYS      += -L/usr/lib/threads -G -brtl -bnoentry -lpthread -lc_r
+    SAGA_CPPDEFS          += -D_THREAD_SAFE
+    SAGA_CXXFLAGS         += -bnoentry
+    SAGA_CCFLAGS          += -bnoentry
+  endif
+   
+endif
+#
+###########################################################
+
+###########################################################
+#
+# SunOS (Solaris)  specific compiler settings
+#
+ifeq "$(SAGA_OSTYPE)" "SAGA_SunOS"
+
+  SAGA_LEXT                = so
+  SAGA_AEXT                = a
+
+  SAGA_LD_LIB           += -shared
+  SAGA_LDFLAGS_SYS      += -pthread -lsocket
+
+  ifeq "$(findstring gcc, $(SAGA_CC))" "gcc"
+    SAGA_CCFLAGS          += -pipe -fPIC
+    SAGA_CCFLAGS          += -Wall -Wno-unknown-pragmas -ansi -std=c99
+    SAGA_CXXFLAGS         += -fno-strict-aliasing -Wall -Wno-unknown-pragmas
+  endif
+
+  ifeq "$(findstring g++, $(SAGA_CXX))" "g++"
+    SAGA_CXXFLAGS         += -pipe -fPIC
+    SAGA_CXXFLAGS         += $(SAGA_GCC_VISIBILITY) -Wall -Wno-unknown-pragmas
+    SAGA_CXXFLAGS         += -fno-strict-aliasing -ansi -std=c++98
+  endif
+
+endif
+#
+###########################################################
+
+
+###########################################################
+# 
+# Linux specific compiler settings
+#
+ifeq "$(SAGA_OSTYPE)" "SAGA_LINUX"
+
+  SAGA_LEXT                = so
+  SAGA_AEXT                = a
+
+  SAGA_LD_LIB             += -shared
+
+  SAGA_CPPDEFS            += -D_FILE_OFFSET_BITS=64
+
+  ifeq "$(findstring gcc, $(SAGA_CC))" "gcc"
+    SAGA_CCFLAGS          += -pipe -fPIC
+    SAGA_CCFLAGS          += -Wall -Wno-unknown-pragmas -ansi -std=c99
+    SAGA_CXXFLAGS         += -fno-strict-aliasing -Wall -Wno-unknown-pragmas
+  endif
+
+  ifeq "$(findstring g++, $(SAGA_CXX))" "g++"
+    SAGA_CXXFLAGS         += -pipe -fPIC
+    SAGA_CXXFLAGS         += $(SAGA_GCC_VISIBILITY) -Wall -Wno-unknown-pragmas
+    SAGA_CXXFLAGS         += -fno-strict-aliasing -ansi -std=c++98
+  endif
+
+  ifeq "$(findstring g++, $(SAGA_LD))" "g++"
+    SAGA_USE_SONAME        = yes
+  endif
+
+  ifeq "$(findstring icc, $(SAGA_CC))" "icc"
+    SAGA_CCFLAGS          += -w1 -fpic -wd1125  
+  endif
+
+  ifeq "$(findstring icpc, $(SAGA_CXX))" "icpc"
+    SAGA_CXXFLAGS         += -w1 -fpic -wd1125
+  endif
+
+  ifeq "$(findstring icpc, $(SAGA_LD))" "icpc"
+    SAGA_LDFLAGS_SYS      += -static-libcxa -cxxlib-icc
+  endif
+
+
+endif
+#
+###########################################################
+
+###########################################################
+#
+# well, we always need boost
+#
+ifeq "$(filter clean distclean confclean,$(MAKECMDGOALS))" ""
+  ifdef SAGA_ROOT
+    include $(SAGA_ROOT)/make/saga.config.boost.c.mk
+  else
+    include $(SAGA_LOCATION)/share/saga/make/saga.config.boost.c.mk
+  endif
+endif
+#
+###########################################################
+
+
+###########################################################
+#
+# we also load any configuration checks we may know about
+#
+ifeq "$(filter clean distclean confclean,$(MAKECMDGOALS))" ""
+  ifdef SAGA_ROOT
+    include $(SAGA_ROOT)/make/saga.config.check.c.mk
+  else
+    include $(SAGA_LOCATION)/share/saga/make/saga.config.check.c.mk
+  endif
+endif
+#
+###########################################################
+
+endif # guard
+

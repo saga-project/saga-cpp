@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='iso-8859-1' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.4.7">
+  <compounddef id="namespaceboost" kind="namespace">
+    <compoundname>boost</compoundname>
+    <innernamespace refid="namespaceboost_1_1process">boost::process</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/process.016638aa/process/boost/process/basic_pipeline.hpp" line="39"/>
+  </compounddef>
+</doxygen>

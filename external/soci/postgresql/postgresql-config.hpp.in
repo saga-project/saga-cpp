@@ -1,0 +1,20 @@
+//  Copyright (c) 2005-2007 Andre Merzky (andre@merzky.net)
+// 
+//  Distributed under the Boost Software License, Version 1.0. (See accompanying 
+//  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+#ifndef SAGA_ADAPTOR_DEFAULT_CONFIG_HPP
+#define SAGA_ADAPTOR_DEFAULT_CONFIG_HPP
+
+// include only if needed
+#if !defined(SAGA_SKIP_CONFIG_HPP)
+
+// we have two postgres defines which help to compile against 
+// older versions.
+#undef SOCI_PGSQL_NOPARAMS
+#undef SOCI_PGSQL_NOPREPARE
+
+#endif // SAGA_SKIP_CONFIG_HPP
+
+#endif // SAGA_ADAPTOR_DEFAULT_CONFIG_HPP
+

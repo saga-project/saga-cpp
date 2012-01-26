@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Implementation Source Files">
+      <UniqueIdentifier>{38638026-1239-4829-ab18-2610b2b88df2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Adaptors">
+      <UniqueIdentifier>{d03aa133-d0b6-4de9-b31c-ba645864503a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Implementation Header Files">
+      <UniqueIdentifier>{89b60824-da0b-45ee-b0ee-190812130e44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Adaptors">
+      <UniqueIdentifier>{9db2f2c0-c31e-425a-9ff2-d5c6a7ecaf92}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\istream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\job.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\job_description.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\job_self.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\job_service.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\ostream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\task_get_result.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\job\job.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\job\job_description.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\job\job_runtime.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\job\job_serialization.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\impl\packages\job\job_service.cpp">
+      <Filter>Source Files\Implementation Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\adaptors\job.cpp">
+      <Filter>Source Files\Adaptors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\saga\saga\packages\job\adaptors\job_self.cpp">
+      <Filter>Source Files\Adaptors</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="job.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\istream.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\job.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\job_description.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\job_self.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\job_service.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\ostream.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\istream.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\job.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\job_cpi.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\job_description.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\job_runtime.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\job_serialization.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\job_service.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\job_service_cpi.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\impl\packages\job\ostream.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\adaptors\utils\utils.hpp">
+      <Filter>Header Files\Implementation Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\adaptors\job.hpp">
+      <Filter>Header Files\Adaptors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\saga\saga\packages\job\adaptors\job_self.hpp">
+      <Filter>Header Files\Adaptors</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

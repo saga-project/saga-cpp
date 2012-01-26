@@ -1,0 +1,28 @@
+#  Copyright (c) 2005-2006 Andre Merzky (andre@merzky.net)
+# 
+#  Use, modification and distribution is subject to the Boost Software
+#  License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+#  http://www.boost.org/LICENSE_1_0.txt)
+
+
+SRC      = $(wildcard *.cpp)
+OBJ      = $(SRC:%.cpp=%.o)
+BIN      = $(SRC:%.cpp=%)
+
+CXX      = g++
+CXXFLAGS = -c -O3 -pthreads -I/opt/mpi/include
+
+LD       = $(CXX)
+LDFLAGS  = -L/usr/lib/ -lc
+
+include $(SAGA_LOCATION)/share/saga/make/saga.engine.mk
+include $(SAGA_LOCATION)/share/saga/make/saga.package.file.mk
+
+all: $(BIN)
+
+$(OBJ): %.o : %.cpp
+	$(CXX) $(CXXFLAGS) $(SAGA_CXXFLAGS) -o $@ $<
+
+$(BIN): % : %.o
+	$(LD)  $(LDFLAGS)  $(SAGA_LDFLAGS)  -o $@ $<
+

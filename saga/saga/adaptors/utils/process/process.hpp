@@ -95,6 +95,8 @@ namespace saga
           bool        done     (void) { return done_; }
           bool        fail     (void) { return fail_; }
           std::string msg      (void) { return msg_;  }
+
+          std::string dump     (void);
       };
 
     } // namespace utils

@@ -326,6 +326,26 @@ namespace saga
       {
         err_v_.clear ();
       }
+
+      std::string process::dump (void)
+      {
+        std::string out;
+
+        std::map <std::string, std::string> :: iterator it;
+        for ( it = env_.begin (); it != env_.end (); it++ )
+        {
+          out += (*it).first + "=" + (*it).second + " ";
+        }
+
+        out += cmd_ + " ";
+
+        for ( unsigned int i = 0; i < args_.size (); i++ )
+        {
+          out += args_[i] + " ";
+        }
+
+        return out;
+      }
       ///////////////////////////////////////////////////////////////////////////////
 
     } // namespace utils

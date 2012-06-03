@@ -167,7 +167,6 @@ namespace saga
 
           if ( cmd_ == "")
           {
-            std::cout << " === no cmd\n";
             fail_ = true;
             msg_  = "no command to run";
 

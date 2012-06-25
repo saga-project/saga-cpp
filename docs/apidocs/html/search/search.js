@@ -281,7 +281,7 @@ function SearchBox(name, resultsPath, inFrame, label)
         }
         else
         {
-          node.innerHTML='&#160;';
+          node.innerHTML='&nbsp;';
         }
         j++;
       }

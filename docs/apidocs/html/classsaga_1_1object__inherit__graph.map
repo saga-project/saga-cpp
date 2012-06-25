@@ -1,39 +1,39 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classsaga_1_1const__buffer.html" title="Encapsulates I/O operations." alt="" coords="142,577,281,743"/>
-<area shape="rect" id="node13" href="$classsaga_1_1context.html" title="The saga::context class provides the functionality of a security information container." alt="" coords="306,587,416,733"/>
-<area shape="rect" id="node15" href="$classsaga_1_1isn_1_1entity__data.html" title="{saga::isn::entity_data\n||+ entity_data()\l+ entity_data()\l+ ~entity_data()\l+ operator=()\l# entity_data()\l}" alt="" coords="441,577,599,743"/>
-<area shape="rect" id="node17" href="$classsaga_1_1isn_1_1entity__data__set.html" title="{saga::isn::entity_data_set\n||+ entity_data_set()\l+ entity_data_set()\l+ entity_data_set()\l+ ~entity_data_set()\l+ get_data()\l+ get_related_entities()\l+ list_related_entity_names()\l+ get_information_system_url()\l+ get_entity_count()\l# entity_data_set()\l# get_impl()\l}" alt="" coords="622,521,847,799"/>
-<area shape="rect" id="node19" href="$classsaga_1_1job_1_1description.html" title="This object encapsulates all the attributes which define a job to be run." alt="" coords="871,587,1032,733"/>
-<area shape="rect" id="node23" href="$classsaga_1_1job_1_1service.html" title="The job_service represents a resource management backend, and as such allows to create and submit job..." alt="" coords="1056,483,1189,837"/>
-<area shape="rect" id="node27" href="$classsaga_1_1metric.html" title="Brief description starts here." alt="" coords="1214,549,1364,771"/>
-<area shape="rect" id="node29" href="$classsaga_1_1name__space_1_1entry.html" title="An RNS entry that interconnects a reference to an existing resource into the hierarchical name space..." alt="" coords="1389,408,1568,912"/>
-<area shape="rect" id="node49" href="$classsaga_1_1rpc_1_1rpc.html" title="This class represents a remote function handle, which can be called (repeatedly), and returns the res..." alt="" coords="1593,540,1703,780"/>
-<area shape="rect" id="node51" href="$classsaga_1_1sd_1_1discoverer.html" title="{saga::sd::discoverer\n||+ discoverer()\l+ discoverer()\l+ ~discoverer()\l+ operator=()\l+ list_services()\l+ list_services()\l+ create()\l+ create()\l+ create()\l# get_impl_sp()\l# get_impl()\l# discoverer()\l}" alt="" coords="1726,511,1876,809"/>
-<area shape="rect" id="node53" href="$classsaga_1_1sd_1_1service__data.html" title="{saga::sd::service_data\n||+ service_data()\l+ service_data()\l+ ~service_data()\l+ operator=()\l# service_data()\l}" alt="" coords="1900,577,2063,743"/>
-<area shape="rect" id="node55" href="$classsaga_1_1sd_1_1service__description.html" title="{saga::sd::service_description\n||+ ~service_description()\l+ operator=()\l+ get_url()\l+ get_related_services()\l+ get_data()\l# service_description()\l# set_session()\l# set_data()\l# service_description()\l# service_description()\l}" alt="" coords="2087,530,2293,790"/>
-<area shape="rect" id="node57" href="$classsaga_1_1session.html" title="Almost all SAGA objects are created in a SAGA session, and are associated with this (and only this) s..." alt="" coords="2318,540,2465,780"/>
-<area shape="rect" id="node59" href="$classsaga_1_1stream_1_1server.html" title="The stream_server object establishes a listening/server object that waits for client connections..." alt="" coords="2491,493,2641,827"/>
-<area shape="rect" id="node61" href="$classsaga_1_1stream_1_1stream.html" title="This is the ob ject that encapsulates all client stream ob jects." alt="" coords="2667,455,2823,865"/>
-<area shape="rect" id="node63" href="$classsaga_1_1task.html" title="Brief description starts here." alt="" coords="2848,502,2960,818"/>
-<area shape="rect" id="node73" href="$classsaga_1_1task__container.html" title="Handles a large number of asynchronous operations." alt="" coords="2984,540,3137,780"/>
-<area shape="rect" id="node75" href="$classsaga_1_1url.html" title="SAGA&#39;s implementation of an RFC 1630 compliant URL Class." alt="" coords="3163,238,3371,1082"/>
-<area shape="rect" id="node5" href="$classsaga_1_1filesystem_1_1const__iovec.html" title="Brief description starts here." alt="" coords="5,1471,213,1617"/>
-<area shape="rect" id="node7" href="$classsaga_1_1mutable__buffer.html" title="Brief description starts here." alt="" coords="237,1443,395,1645"/>
-<area shape="rect" id="node9" href="$classsaga_1_1filesystem_1_1iovec.html" title="The iovec class inherits the saga::buffer class, and three additional state attributes: offset..." alt="" coords="139,2081,305,2247"/>
-<area shape="rect" id="node11" href="$classsaga_1_1rpc_1_1parameter.html" title="The parameter class inherits the saga::buffer class." alt="" coords="330,2100,485,2228"/>
-<area shape="rect" id="node21" title="This object encapsulates all the attributes which define a job to be run." alt="" coords="846,1499,1007,1589"/>
-<area shape="rect" id="node25" title="The cpr::service, as a job::service, represents a resource management backend, which additionally off..." alt="" coords="1031,1499,1164,1589"/>
-<area shape="rect" id="node31" href="$classsaga_1_1advert_1_1entry.html" title="The advert class represents an entry in a saga::advert::directory. An advert directory is a meta data..." alt="" coords="1188,1348,1373,1740"/>
-<area shape="rect" id="node33" title="The saga::replica class implements the saga::attributes interface." alt="" coords="1399,1499,1557,1589"/>
-<area shape="rect" id="node35" href="$classsaga_1_1filesystem_1_1file.html" title="The SAGA file package file API." alt="" coords="1582,1301,1735,1787"/>
-<area shape="rect" id="node37" href="$classsaga_1_1name__space_1_1directory.html" title="A &quot;Virtual Directory&quot;, an RNS entry that is represented as a non&#45;leaf node in the hierarchical name s..." alt="" coords="1759,1132,1963,1956"/>
-<area shape="rect" id="node47" href="$classsaga_1_1replica_1_1logical__file.html" title="The saga::replica class implements the saga::attributes interface." alt="" coords="1987,1377,2167,1711"/>
-<area shape="rect" id="node39" href="$classsaga_1_1advert_1_1directory.html" title="The directory class represents a directory within a meta data directory with a hierarchical namespace..." alt="" coords="1502,2015,1668,2313"/>
-<area shape="rect" id="node41" title="A checkpoint directory contains, you guess it, checkpoints." alt="" coords="1692,2119,1837,2209"/>
-<area shape="rect" id="node43" href="$classsaga_1_1filesystem_1_1directory.html" title="The SAGA file package directory API." alt="" coords="1862,2006,2052,2322"/>
-<area shape="rect" id="node45" href="$classsaga_1_1replica_1_1logical__directory.html" title="A logical directory represents a directory entry in the name space of logical files." alt="" coords="2076,2006,2293,2322"/>
-<area shape="rect" id="node65" href="$classsaga_1_1job_1_1job.html" title="The job provides the manageability interface to a job instance submitted to a resource manager..." alt="" coords="2832,1339,2976,1749"/>
-<area shape="rect" id="node67" title="The job is a saga::job with additional checkpoint and recovery related methods." alt="" coords="2781,2119,2891,2209"/>
-<area shape="rect" id="node71" href="$classsaga_1_1job_1_1self.html" title="The job_self class is a job which represents the current application." alt="" coords="2915,2110,3025,2218"/>
-<area shape="rect" id="node69" title="The job_self class is a job which represents the current application." alt="" coords="2780,2371,2891,2461"/>
+<area shape="rect" id="node3" href="$classsaga_1_1const__buffer.html" title="Encapsulates I/O operations." alt="" coords="133,574,264,738"/>
+<area shape="rect" id="node13" href="$classsaga_1_1context.html" title="The saga::context class provides the functionality of a security information container." alt="" coords="288,583,389,729"/>
+<area shape="rect" id="node15" href="$classsaga_1_1isn_1_1entity__data.html" title="{saga::isn::entity_data\n||+ entity_data()\l+ entity_data()\l+ ~entity_data()\l+ operator=()\l# entity_data()\l}" alt="" coords="413,574,560,738"/>
+<area shape="rect" id="node17" href="$classsaga_1_1isn_1_1entity__data__set.html" title="{saga::isn::entity_data_set\n||+ entity_data_set()\l+ entity_data_set()\l+ entity_data_set()\l+ ~entity_data_set()\l+ get_data()\l+ get_related_entities()\l+ list_related_entity_names()\l+ get_information_system_url()\l+ get_entity_count()\l# entity_data_set()\l# get_impl()\l}" alt="" coords="584,518,787,794"/>
+<area shape="rect" id="node19" href="$classsaga_1_1job_1_1description.html" title="This object encapsulates all the attributes which define a job to be run." alt="" coords="811,583,957,729"/>
+<area shape="rect" id="node23" href="$classsaga_1_1job_1_1service.html" title="The job_service represents a resource management backend, and as such allows to create and submit job..." alt="" coords="981,481,1107,831"/>
+<area shape="rect" id="node27" href="$classsaga_1_1metric.html" title="Brief description starts here." alt="" coords="1131,546,1269,766"/>
+<area shape="rect" id="node29" href="$classsaga_1_1name__space_1_1entry.html" title="An RNS entry that interconnects a reference to an existing resource into the hierarchical name space..." alt="" coords="1293,406,1461,906"/>
+<area shape="rect" id="node49" href="$classsaga_1_1rpc_1_1rpc.html" title="This class represents a remote function handle, which can be called (repeatedly), and returns the res..." alt="" coords="1485,537,1587,775"/>
+<area shape="rect" id="node51" href="$classsaga_1_1sd_1_1discoverer.html" title="{saga::sd::discoverer\n||+ discoverer()\l+ discoverer()\l+ ~discoverer()\l+ operator=()\l+ list_services()\l+ list_services()\l+ create()\l+ create()\l+ create()\l# get_impl_sp()\l# get_impl()\l# discoverer()\l}" alt="" coords="1611,509,1749,803"/>
+<area shape="rect" id="node53" href="$classsaga_1_1sd_1_1service__data.html" title="{saga::sd::service_data\n||+ service_data()\l+ service_data()\l+ ~service_data()\l+ operator=()\l# service_data()\l}" alt="" coords="1773,574,1928,738"/>
+<area shape="rect" id="node55" href="$classsaga_1_1sd_1_1service__description.html" title="{saga::sd::service_description\n||+ ~service_description()\l+ operator=()\l+ get_url()\l+ get_related_services()\l+ get_data()\l# service_description()\l# set_session()\l# set_data()\l# service_description()\l# service_description()\l}" alt="" coords="1952,527,2144,785"/>
+<area shape="rect" id="node57" href="$classsaga_1_1session.html" title="Almost all SAGA objects are created in a SAGA session, and are associated with this (and only this) s..." alt="" coords="2168,537,2301,775"/>
+<area shape="rect" id="node59" href="$classsaga_1_1stream_1_1server.html" title="The stream_server object establishes a listening/server object that waits for client connections..." alt="" coords="2325,490,2467,822"/>
+<area shape="rect" id="node61" href="$classsaga_1_1stream_1_1stream.html" title="This is the ob ject that encapsulates all client stream ob jects." alt="" coords="2491,453,2637,859"/>
+<area shape="rect" id="node63" href="$classsaga_1_1task.html" title="Brief description starts here." alt="" coords="2661,499,2763,813"/>
+<area shape="rect" id="node73" href="$classsaga_1_1task__container.html" title="Handles a large number of asynchronous operations." alt="" coords="2787,537,2928,775"/>
+<area shape="rect" id="node75" href="$classsaga_1_1url.html" title="SAGA&#39;s implementation of an RFC 1630 compliant URL Class." alt="" coords="2952,238,3147,1074"/>
+<area shape="rect" id="node5" href="$classsaga_1_1filesystem_1_1const__iovec.html" title="Brief description starts here." alt="" coords="5,1459,200,1605"/>
+<area shape="rect" id="node7" href="$classsaga_1_1mutable__buffer.html" title="Brief description starts here." alt="" coords="224,1431,368,1633"/>
+<area shape="rect" id="node9" href="$classsaga_1_1filesystem_1_1iovec.html" title="The iovec class inherits the saga::buffer class, and three additional state attributes: offset..." alt="" coords="131,2065,288,2229"/>
+<area shape="rect" id="node11" href="$classsaga_1_1rpc_1_1parameter.html" title="The parameter class inherits the saga::buffer class." alt="" coords="312,2083,453,2210"/>
+<area shape="rect" id="node21" title="This object encapsulates all the attributes which define a job to be run." alt="" coords="795,1487,941,1577"/>
+<area shape="rect" id="node25" title="The cpr::service, as a job::service, represents a resource management backend, which additionally off..." alt="" coords="965,1487,1091,1577"/>
+<area shape="rect" id="node31" href="$classsaga_1_1advert_1_1entry.html" title="The advert class represents an entry in a saga::advert::directory. An advert directory is a meta data..." alt="" coords="1115,1338,1280,1726"/>
+<area shape="rect" id="node33" title="The saga::replica class implements the saga::attributes interface." alt="" coords="1304,1487,1451,1577"/>
+<area shape="rect" id="node35" href="$classsaga_1_1filesystem_1_1file.html" title="The SAGA file package file API." alt="" coords="1475,1291,1616,1773"/>
+<area shape="rect" id="node37" href="$classsaga_1_1name__space_1_1directory.html" title="A &quot;Virtual Directory&quot;, an RNS entry that is represented as a non&#45;leaf node in the hierarchi..." alt="" coords="1640,1123,1829,1941"/>
+<area shape="rect" id="node47" href="$classsaga_1_1replica_1_1logical__file.html" title="The saga::replica class implements the saga::attributes interface." alt="" coords="1853,1366,2019,1698"/>
+<area shape="rect" id="node39" href="$classsaga_1_1advert_1_1directory.html" title="The directory class represents a directory within a meta data directory with a hierarchical namespace..." alt="" coords="1403,1999,1555,2294"/>
+<area shape="rect" id="node41" title="A checkpoint directory contains, you guess it, checkpoints." alt="" coords="1579,2102,1712,2191"/>
+<area shape="rect" id="node43" href="$classsaga_1_1filesystem_1_1directory.html" title="The SAGA file package directory API." alt="" coords="1736,1990,1912,2303"/>
+<area shape="rect" id="node45" href="$classsaga_1_1replica_1_1logical__directory.html" title="A logical directory represents a directory entry in the name space of logical files." alt="" coords="1936,1990,2133,2303"/>
+<area shape="rect" id="node65" href="$classsaga_1_1job_1_1job.html" title="The job provides the manageability interface to a job instance submitted to a resource manager..." alt="" coords="2647,1329,2777,1735"/>
+<area shape="rect" id="node67" title="The job is a saga::job with additional checkpoint and recovery related methods." alt="" coords="2597,2102,2699,2191"/>
+<area shape="rect" id="node71" href="$classsaga_1_1job_1_1self.html" title="The job_self class is a job which represents the current application." alt="" coords="2723,2093,2827,2201"/>
+<area shape="rect" id="node69" title="The job_self class is a job which represents the current application." alt="" coords="2596,2353,2700,2442"/>
 </map>

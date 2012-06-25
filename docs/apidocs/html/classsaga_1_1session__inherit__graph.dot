@@ -1,9 +1,0 @@
-digraph G
-{
-  bgcolor="transparent";
-  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
-  node [fontname="FreeSans",fontsize="10",shape=record];
-  Node1 [label="{saga::session\n||+ session()\l+ session()\l+ ~session()\l+ operator=()\l+ add_context()\l+ remove_context()\l+ list_contexts()\l+ close()\l# session()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
-  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
-  Node2 [label="{saga::object\n||+ object()\l+ get_type()\l+ get_id()\l+ get_session()\l+ get_session()\l+ clone()\l}",height=0.2,width=0.4,color="black",URL="$classsaga_1_1object.html",tooltip="Brief description starts here."];
-}

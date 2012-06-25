@@ -1,9 +1,0 @@
-
-SAGA_HAVE_PACKAGE_ADVERT = @SAGA_HAVE_PACKAGE_ADVERT@
-
-ifeq "x$(SAGA_HAVE_PACKAGE_ADVERT)" "xyes"
- SAGA_LDFLAGS  += -lsaga_package_advert
-endif
-
-include $(SAGA_LOCATION)/share/saga/make/saga.package.namespace.mk
-

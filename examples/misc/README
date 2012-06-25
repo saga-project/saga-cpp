@@ -1,7 +1,0 @@
-
-The examples in this directory are neither supposed to be
-portable (hard coded URLs...), nor are they representing clean
-SAGA application codes.  Instead, they represent a loose
-collection of code snippets, which are mostly used for
-development testing.
-

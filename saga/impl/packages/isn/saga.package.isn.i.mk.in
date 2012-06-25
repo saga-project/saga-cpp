@@ -1,8 +1,0 @@
-
-SAGA_HAVE_PACKAGE_ISN = @SAGA_HAVE_PACKAGE_ISN@
-
-ifeq "x$(SAGA_HAVE_PACKAGE_ISN)" "xyes"
- SAGA_LDFLAGS  += -L$(SAGA_ROOT)/saga/impl/packages/isn
- SAGA_LDFLAGS  += -lsaga_package_isn
-endif
-

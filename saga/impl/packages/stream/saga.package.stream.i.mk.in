@@ -1,8 +1,0 @@
-
-SAGA_HAVE_PACKAGE_STREAM = @SAGA_HAVE_PACKAGE_STREAM@
-
-ifeq "x$(SAGA_HAVE_PACKAGE_STREAM)" "xyes"
- SAGA_LDFLAGS  += -L$(SAGA_ROOT)/saga/impl/packages/stream
- SAGA_LDFLAGS  += -lsaga_package_stream
-endif
-

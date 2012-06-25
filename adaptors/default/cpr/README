@@ -1,6 +1,0 @@
-Default logical file adaptor
-
-The default cpr implements the cpr CPI's on top of the local job and advert
-adaptor.  Please check the documentation of these adaptors for more details, in
-particular for configuration (job) and database initialization (advert).
-

@@ -1,7 +1,0 @@
-
-# set in saga.mk
-# SAGA_CPPINCS  += -I$(SAGA_ROOT)/
-
-SAGA_LDFLAGS  += -L$(SAGA_ROOT)/saga/impl/engine
-SAGA_LDFLAGS  += -lsaga_core
-

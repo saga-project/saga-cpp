@@ -1,8 +1,0 @@
-
-SAGA_HAVE_PACKAGE_RPC = @SAGA_HAVE_PACKAGE_RPC@
-
-ifeq "x$(SAGA_HAVE_PACKAGE_RPC)" "xyes"
- SAGA_LDFLAGS  += -L$(SAGA_ROOT)/saga/impl/packages/rpc
- SAGA_LDFLAGS  += -lsaga_package_rpc
-endif
-

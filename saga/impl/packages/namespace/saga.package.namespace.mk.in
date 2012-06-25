@@ -1,7 +1,0 @@
-
-SAGA_HAVE_PACKAGE_NAMESPACE = @SAGA_HAVE_PACKAGE_NAMESPACE@
-
-ifeq "x$(SAGA_HAVE_PACKAGE_NAMESPACE)" "xyes"
- SAGA_LDFLAGS  += -lsaga_package_namespace
-endif
-

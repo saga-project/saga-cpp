@@ -1,9 +1,0 @@
-EXPORTS
-    ?attribute_is_removablepriv@?$attribute_priv@Vservice_description@sd@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVservice_description@sd@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    ?attribute_is_vectorpriv@?$attribute_priv@Vservice_description@sd@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVservice_description@sd@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    ?attribute_is_writablepriv@?$attribute_priv@Vservice_description@sd@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVservice_description@sd@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    ?attribute_is_readonlypriv@?$attribute_priv@Vservice_description@sd@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVservice_description@sd@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    ?attribute_existspriv@?$attribute_priv@Vservice_description@sd@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVservice_description@sd@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    ?find_attributespriv@?$attribute_priv@Vservice_description@sd@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVservice_description@sd@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    ?list_attributespriv@?$attribute_priv@Vservice_description@sd@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVservice_description@sd@3@@Z
-    ?get_vector_attributepriv@?$attribute_priv@Vservice_description@sd@saga@@USync@task_base@3@@detail@saga@@SA?AVtask@3@ABVservice_description@sd@3@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z

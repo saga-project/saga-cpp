@@ -214,6 +214,12 @@ void shell::run (int argc, char* argv[], char* envp[])
     std::vector <std::string> args;
     for ( int i = 1; i < argc; ++i )
     {
+      if ( std::string (argv[i]) == "-h" ||
+           std::string (argv[i]) == "-h" )
+      {
+        std::cout << "\n\tUsage: saga-shell\n\n\tThis is an interactive shell, writting in SAGA.  Type 'help' on command prompt for further information.\n\n";
+        exit (0);
+      }
       args.push_back (argv[i]);
     }
 

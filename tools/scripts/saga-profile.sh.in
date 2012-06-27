@@ -5,6 +5,22 @@
 # run a saga application under the google profiler, and create a pdf of the
 # smapled and weighted call graph.
 
+if test "x$1" = "x"; then
+  echo ""
+  echo "This script runs a SAGA application under google profiler.  "
+  echo "It is used by SAGA scripts and unit tests, and should not be called manually."
+  echo ""
+  exit 0
+fi
+
+if test "x$1" = "x-h"; then
+  echo ""
+  echo "This script runs a SAGA application under google profiler.  "
+  echo "It is used by SAGA scripts and unit tests, and should not be called manually."
+  echo ""
+  exit 0
+fi
+
 env=@SAGA_ENV@
 bin=`which $1`
 sto=/tmp/saga.profile.`basename $1`.$$.sto

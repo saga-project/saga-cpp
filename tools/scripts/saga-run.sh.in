@@ -88,6 +88,10 @@ usage()
 
   Usage: saga-run.sh <program> [arguments ...]
 
+  This script sets the environment so that 'program' can load SAGA successfully.
+  It is used by SAGA unit tests, and should not be run manually -- instead, make
+  please sure that environment is set up correctly as documented.
+
 EOF
   exit $1
 }

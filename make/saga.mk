@@ -42,6 +42,11 @@ ifneq "x$(TMP_MAKE_INCLUDES)" "x"
 endif
 
 
+ifndef SAGA_PACKAGE
+ SAGA_PACKAGE = saga
+endif
+
+
 ###########################################################
 #
 # saga related compiler flags etc
@@ -209,9 +214,18 @@ endif
 
 SAGA_CONF_IN  = $(wildcard configure.in)
 SAGA_CONF     = $(wildcard configure)
+SAGA_META    += $(wildcard CHANGES)
+SAGA_META    += $(wildcard LICENSE)
+SAGA_META    += $(wildcard config.summary)
 SAGA_M4      += $(wildcard *.m4)
 SAGA_M4_DEP  += $(wildcard $(SAGA_ROOT)/config/*.m4) 
 SAGA_M4_DEP  += $(wildcard config/*.m4) 
+
+SAGA_CONF_IN := $(strip $(SAGA_CONF_IN))
+SAGA_CONF    := $(strip $(SAGA_CONF))
+SAGA_META    := $(strip $(SAGA_META))
+SAGA_M4      := $(strip $(SAGA_M4))
+SAGA_M4_DEP  := $(strip $(SAGA_M4_DEP))
 
 
 
@@ -306,12 +320,12 @@ ifdef SAGA_VERSION
 endif
 
 # allow makefiles ot overwrite SAGA_VERSION for specific libs
-ifdef SAGA_PACKAGE_VERSION
-  INSTVER = -v $(SAGA_PACKAGE_VERSION)
+ifdef SAGA_MODULE_VERSION
+  INSTVER = -v $(SAGA_MODULE_VERSION)
 else
  ifdef SAGA_LIB_VERSION
 	# DEPRECATED!
-	$(warning SAGA_LIB_VERSION is DEPRECATED - use SAGA_PACKAGE_VERSION)
+	$(warning SAGA_LIB_VERSION is DEPRECATED - use SAGA_MODULE_VERSION)
   INSTVER = -v $(SAGA_LIB_VERSION)
  endif
 endif
@@ -346,6 +360,12 @@ install:: all
   ifneq "$(SAGA_INI)" ""
 	 @$(ECHO) "      installing   inis"
 	 @$(INSTALL)     $(SAGA_INI)     $(SAGA_INI_ROOT)
+  endif
+  ifneq "$(SAGA_META)" ""
+	 @$(ECHO) "      installing   meta data"
+	 @for f in $(SAGA_META); do \
+	   $(INSTALL)   -f $$f $(SAGA_DAT_ROOT)/$$f.$(SAGA_MODULE_NAME); \
+	   done
   endif
   ifneq "$(SAGA_MAK)" ""
 	 @$(ECHO) "      installing   makefiles"
@@ -477,8 +497,8 @@ else
 endif
 
 ifdef SAGA_USE_SONAME
- ifdef SAGA_PACKAGE_VERSION
-  saga_soname_flag = -Wl,-soname,$1.$(SAGA_PACKAGE_VERSION)
+ ifdef SAGA_MODULE_VERSION
+  saga_soname_flag = -Wl,-soname,$1.$(SAGA_MODULE_VERSION)
  else
   saga_soname_flag = -Wl,-soname,$1.$(SAGA_VERSION_MAJOR).$(SAGA_VERSION_MINOR)
  endif

@@ -94,7 +94,6 @@ endif
 	@$(ECHO)  "      ======================================================"
 
 install::
-	@$(INSTALL)    config.summary $(SAGA_DAT_ROOT)/
 	@$(ECHO)  "      ======================================================"
 	@$(ECHO)  "      === make install to $(SAGA_LOCATION) was successful" 
 	@$(ECHO)  "      ======================================================"
@@ -108,4 +107,5 @@ test:     adaptors
 examples: adaptors
 tools:    adaptors
 docs:     adaptors
+
 

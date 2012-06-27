@@ -7,6 +7,15 @@ BEGIN {
   sub parse_pkg_file (;$);
 }
 
+
+if ( scalar (@ARGV) )
+{
+  print "\n\tUsaga: $0\n\n\tCreates a source package (tgz) by evaluating PACKAGE files.\n";
+  print "\tThis script is called by other scripts, and should not be ran manually\n\n";
+  exit 0;
+}
+
+
 my $PACKAGE = "PACKAGE";
 my $VERSION = "VERSION";
 my @FILES   = ();

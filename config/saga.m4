@@ -16,13 +16,14 @@
 #   SAGA_VERSION_MAJOR
 #   SAGA_VERSION_MINOR
 #   SAGA_VERSION_SUBMINOR
-#   SAGA_PACKAGE_VERSION   # = `grep 'Version' PACKAGE`
+#   SAGA_MODULE_VERSION    # = `grep 'VERSION' PACKAGE`
+#   SAGA_MODULE_NAME       # = `grep 'PACKAGE' PACKAGE`
 #
 # This macro stays backward compatible to old versions, by defining
 #   
 #   SAGA_MAKE_INLUDE_ROOT  # = $SAGA_MAKE_DIR
 #   TMP_SAGA_LOCATION      # = $SAGA_LOCATION
-#   SAGA_LIB_VERSION       # = $SAGA_PACKAGE_VERSION
+#   SAGA_LIB_VERSION       # = $SAGA_MODULE_VERSION
 #
 # Thos vars are deprecated though, and may disappear in future versions.
 # 
@@ -117,27 +118,26 @@ AC_DEFUN([AX_SAGA_CONFIG],
   fi
 
 
-  # We set SAGA_PACKAGE_VERSION to SAGA_VERSION by default.  If a local PACKAGE file is
-  # present though, for example for an adaptor, we use its version info instead.  
+  # We set SAGA_MOODULE_NAME, SAGA_MODULE_VERSION to SAGA_VERSION by default.  If a 
+  # local PACKAGE file is present though, for example for an adaptor, we use its 
+  # version info instead.  
 
-  AC_MSG_CHECKING([saga package version])
-  SAGA_PACKAGE_VERSION=$SAGA_VERSION
-  test -f PACKAGE && SAGA_PACKAGE_VERSION=` grep -e '^VERSION:'  PACKAGE | sed -e 's/^VERSION: *//'`
-  test -f PACKAGE && SAGA_PACKAGE_REVISION=`grep -e '^REVISION:' PACKAGE | cut -sf 2 -d '$' | cut -sf 2 -d ' '`
-  AC_MSG_RESULT([$SAGA_PACKAGE_VERSION (r$SAGA_PACKAGE_REVISION)])
+  AC_MSG_CHECKING([saga package name and version])
+  SAGA_MODULE_NAME=UnknownModuleName
+  test -f PACKAGE && SAGA_MODULE_NAME=` grep -e '^PACKAGE:'  PACKAGE | sed -e 's/^PACKAGE: *//'`
+
+  SAGA_MODULE_VERSION=$SAGA_VERSION
+  test -f PACKAGE && SAGA_MODULE_VERSION=` grep -e '^VERSION:'  PACKAGE | sed -e 's/^VERSION: *//'`
+  test -f PACKAGE && SAGA_MODULE_REVISION=`grep -e '^REVISION:' PACKAGE | cut -sf 2 -d '$' | cut -sf 2 -d ' '`
+  AC_MSG_RESULT([$SAGA_MODULE_NAME($SAGA_MODULE_VERSION / r$SAGA_MODULE_REVISION)])
+  AC_MSG_RESULT([$SAGA_MODULE_VERSION ()])
 
   # svn info supercedes the revision info from the PACKAGE file
   svnrevision=`svn info 2>&1 | grep Revision | cut -sf 2 -d ' '`
 
   if ! test "$svnrevision" = ""; then
-    SAGA_PACKAGE_REVISION=$svnrevision
+    SAGA_MODULE_REVISION=$svnrevision
   fi
-
-  AC_SUBST(SAGA_PACKAGE_VERSION)
-  export  SAGA_PACKAGE_VERSION
-  AC_SUBST(SAGA_PACKAGE_REVISION)
-  export  SAGA_PACKAGE_REVISION
-
 
 
   # we set SAGA_LOCATION, and a couple of other vars
@@ -162,6 +162,9 @@ AC_DEFUN([AX_SAGA_CONFIG],
   export SAGA_INI_DIR
   export SAGA_CONFIG
   export SAGA_VERSION
+  export SAGA_MODULE_NAME
+  export SAGA_MODULE_VERSION
+  export SAGA_MODULE_REVISION
 
   AC_SUBST(HAVE_SAGA)
   AC_SUBST(SAGA_LOCATION)
@@ -173,6 +176,9 @@ AC_DEFUN([AX_SAGA_CONFIG],
   AC_SUBST(SAGA_INI_DIR)
   AC_SUBST(SAGA_CONFIG)
   AC_SUBST(SAGA_VERSION)
+  AC_SUBST(SAGA_MODULE_NAME)
+  AC_SUBST(SAGA_MODULE_VERSION)
+  AC_SUBST(SAGA_MODULE_REVISION)
 
 
   # the adaptor and binding config files depend on the earlier findings of
@@ -194,7 +200,7 @@ AC_DEFUN([AX_SAGA_CONFIG],
   export SAGA_MAKE_INCLUDE_DIR
   AC_SUBST(SAGA_MAKE_INCLUDE_DIR)
 
-  SAGA_LIB_VERSION=$SAGA_PACKAGE_VERSION
+  SAGA_LIB_VERSION=$SAGA_MODULE_VERSION
   export SAGA_LIB_VERSION
   AC_SUBST(SAGA_LIB_VERSION)
 

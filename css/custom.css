@@ -7,6 +7,9 @@ h1 {
   text-shadow:     2px 2px 10px rgba(0,0,0,0.55);
 }
 
+h1.fontface {
+  font:            60px/68px 'DancingScriptOTRegular', Arial, sans-serif;letter-spacing: 0;
+}
 #subtitle {
   color:           #a1804c;
 }

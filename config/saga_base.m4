@@ -12,10 +12,11 @@ AC_DEFUN([AX_SAGA_CHECK_BASE],
   export CONFDIR
   AC_SUBST(CONFDIR)
 
-  AC_MSG_CHECKING([SAGA Version])
+  AC_MSG_CHECKING([SAGA Package])
   # get version
-  test -f PACKAGE && SAGA_VERSION=` grep -e '^VERSION:'  PACKAGE | sed -e 's/^VERSION: *//'`
-  test -f PACKAGE && SAGA_REVISION=`grep -e '^REVISION:' PACKAGE | cut -f 2 -d '$' | cut -f 2 -d ' '`
+  test -f PACKAGE && SAGA_MODULE_NAME=` grep -e '^PACKAGE:'  PACKAGE | sed -e 's/^PACKAGE: *//'`
+  test -f PACKAGE && SAGA_VERSION=`     grep -e '^VERSION:'  PACKAGE | sed -e 's/^VERSION: *//'`
+  test -f PACKAGE && SAGA_REVISION=`    grep -e '^REVISION:' PACKAGE | cut -f 2 -d '$' | cut -f 2 -d ' '`
   
   # svn info supercedes the revision info from the PACKAGE file
   svnrevision=`svn info 2>&1 | grep Revision | cut -f 2 -d ' '`
@@ -54,6 +55,7 @@ AC_DEFUN([AX_SAGA_CHECK_BASE],
 
   SAGA_VERSION_DATE=`date "+%Y%m%d"`
 
+  AC_SUBST(SAGA_MODULE_NAME)
   AC_SUBST(SAGA_VERSION)
   AC_SUBST(SAGA_REVISION)
   AC_SUBST(SAGA_VERSION_MAJOR)
@@ -62,6 +64,7 @@ AC_DEFUN([AX_SAGA_CHECK_BASE],
   AC_SUBST(SAGA_VERSION_FULL)
   AC_SUBST(SAGA_VERSION_DATE)
 
+  AC_DEFINE_UNQUOTED([SAGA_MODULE_NAME]     , ["$SAGA_MODULE_NAME"])
   AC_DEFINE_UNQUOTED([SAGA_VERSION]         , ["$SAGA_VERSION"])
   AC_DEFINE_UNQUOTED([SAGA_REVISION]        , [$SAGA_REVISION])
   AC_DEFINE_UNQUOTED([SAGA_VERSION_MAJOR]   , [$SAGA_VERSION_MAJOR])
@@ -70,7 +73,7 @@ AC_DEFUN([AX_SAGA_CHECK_BASE],
   AC_DEFINE_UNQUOTED([SAGA_VERSION_FULL]    , [$SAGA_VERSION_FULL])
   AC_DEFINE_UNQUOTED([SAGA_VERSION_DATE]    , [$SAGA_VERSION_DATE])
 
-  AC_MSG_RESULT([$SAGA_VERSION (r$SAGA_REVISION)])
+  AC_MSG_RESULT([$SAGA_MODULE_NAME $SAGA_VERSION (r$SAGA_REVISION)])
 
 
   AC_MSG_CHECKING([operating system type])

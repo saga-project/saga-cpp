@@ -8,6 +8,16 @@ ifndef SAGA_MK_INC_CONF_C
 
 ###########################################################
 #
+# SAGA Module: can be overwritten by makefiles
+#
+ifndef SAGA_MODULE_NAME
+  SAGA_MODULE_NAME         = @SAGA_MODULE_NAME@
+endif 
+#
+###########################################################
+
+###########################################################
+#
 # version
 #
 SAGA_VERSION               = @SAGA_VERSION@

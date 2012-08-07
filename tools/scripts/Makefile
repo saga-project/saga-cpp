@@ -10,8 +10,8 @@ SAGA_SHS        += saga-install.sh
 SAGA_SHS        += saga-install.pl
 SAGA_SHS        += saga-mksrcdist.pl
 SAGA_SHS        += saga-mkbindist.pl
-SAGA_SHS        += saga-profile.sh
-SAGA_SHS        += saga-run-test.sh
+# SAGA_SHS        += saga-profile.sh
+# SAGA_SHS        += saga-run-test.sh
 SAGA_SHS        += saga-run.sh
 
 include $(SAGA_ROOT)/make/saga.application.mk

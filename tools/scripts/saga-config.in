@@ -125,7 +125,17 @@ fi
 # check saga location
 #
 
-if ! test -f "$saga_prefix/share/saga/config.summary"; then
+summary=""
+
+if test -f "$saga_prefix/share/saga/config.summary"; then
+  summary="$saga_prefix/share/saga/config.summary"
+fi
+
+if test -f "$saga_prefix/share/saga/config.summary.saga-core"; then
+  summary="$saga_prefix/share/saga/config.summary.saga-core"
+fi
+
+if test "x$summary" = "x"; then
   echo "Error: SAGA_LOCATION ($saga_prefix) seems invalid"
   exit 1
 fi

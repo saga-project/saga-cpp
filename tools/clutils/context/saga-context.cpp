@@ -55,6 +55,13 @@ int main (int argc, char* argv[])
     type = argv[1];
   }
 
+  if ( type == "-h"     ||
+       type == "--help" )
+  {
+    std::cout << "\n\tUsage: saga-context <type>\n\n \tprints information about the respectively found contexts of that type\n\n";
+    exit (0);
+  }
+
   try 
   {
     int n = 0;

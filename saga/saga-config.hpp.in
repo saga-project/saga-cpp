@@ -102,6 +102,14 @@
 // that of older boost installations)
 #undef SAGA_BOOST_IOSTREAMS_VERSION
 
+#if BOOST_VERSION >= 105000
+namespace boost
+{
+  #define TIME_UTC TIME_UTC_
+}
+#endif
+
+
 // do we have libreadline?
 #undef SAGA_HAVE_READLINE
 #undef SAGA_HAVE_HISTORY_LIST

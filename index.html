@@ -1,23 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title> SAGA-C++ - a SAGA implementation </title>
+  <title> SAGA-C++ - a SAGA implementation in C++</title>
+  <!-- SAGA, Distributed, Cloud -->
   
-  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
-  <meta name="title"              content="SAGA-C++ - a SAGA implementation " />
   <meta name="description"        content="SAGA-C++ - a SAGA implementation " />
-  <meta name="keywords"           content="SAGA,Grid Computing,Cloud Computing,API,Distributed Computing" />
+  <meta name="keywords"           content="SAGA,API, Grid Computing,Cloud Computing,Distributed Computing" />
   <meta name="author"             content="SAGA-C++ team" />
   <meta name="robots"             content="index, follow" />
   <meta name="revisit-after"      content="1 month" />
+  <meta name="title"              content="SAGA-C++ - a SAGA implementation " />
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <link rel="shortcut icon"                                   href="./images/A_48.ico" />
-  <link rel="apple-touch-icon"                                href="./images/A_114.png" />
-  <link rel="stylesheet"       type="text/css" media="screen" href="../css/screen.css" />
-  <link rel="stylesheet"       type="text/css" media="screen" href="./css/fonts/stylesheet.css" />
-  <link rel="stylesheet"       type="text/css" media="screen" href="../css/lightbox.css" />
-  <link rel="stylesheet"       type="text/css" media="screen" href="./css/custom.css" />
+  <link rel="shortcut icon"    href="./images/A_48.ico" />
+  <link rel="apple-touch-icon" href="./images/A_114.png" />
+
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/screen.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/custom.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/fonts/ballpark/ballpark_weiner_webfont.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/lightbox.css" />
 
   <script type="text/javascript" src="../js/prototype.js">                          </script>
   <script type="text/javascript" src="../js/scriptaculous.js?load=effects,builder"> </script>
@@ -31,12 +34,12 @@
        _gaq.push(['_trackPageview']);
 
    (function() {
-     var ga       = document.createElement('script'); 
-         ga.type  = 'text/javascript'; 
-         ga.async = true;
-         ga.src   = ('https:' == document.location.protocol ? 'https://ssl' 
+     var ga   = document.createElement('script'); 
+     ga.type  = 'text/javascript'; 
+     ga.async = true;
+     ga.src   = ('https:' == document.location.protocol ? 'https://ssl' 
                                                             : 'http://www') + '.google-analytics.com/ga.js';
-     var s        = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     var s    = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
    })();
    //]]>
   </script>
@@ -44,9 +47,10 @@
   <style type="text/css">
     /*<![CDATA[*/
     img.c2  {position: absolute; top: 0; right: 0; border: 0;}
-    span.c1 {color: #aaaaaa;}
+    span.c1 {color: #e3d796;}
     /*]]>*/
   </style>
+
   <style type="text/css">
     /*<![CDATA[*/
     p.c3 {text-align: justify; font-size: 14px;}
@@ -61,11 +65,11 @@
     <div id="header">
       <h1>SAGA-C++</h1>
 
-      <!-- p id="subtitle">
+      <!--p id="subtitle">
         <strong>
-          <br/>a SAGA implementation
+          <br/>A SAGA implementation in C++
         </strong>
-      </p --!>
+      </p--!>
     </div>
 
     <div id="informations">

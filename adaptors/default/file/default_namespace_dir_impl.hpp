@@ -758,7 +758,7 @@ namespace_dir_cpi_impl<Base>::sync_remove (saga::impl::void_t & ret, int flags)
     namespace fs = boost::filesystem;
 
     instance_data data (this);
-    check_if_open ("namespace_dir_cpi_impl<Base>::sync_remove", data->location_);
+    this->check_if_open ("namespace_dir_cpi_impl<Base>::sync_remove", data->location_);
 
     // verify current working directory is local
     saga::url url(data->location_);
